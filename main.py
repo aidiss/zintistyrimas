@@ -36,26 +36,83 @@ curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="ugis"] {
+           .bk-widget input[name$="rytas1"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="krut"] {
+           .bk-widget input[name$="pietus1"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="juos"] {
+           .bk-widget input[name$="vakaras1"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="klub"] {
+           .bk-widget input[name$="rytas2"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="mase"] {
+           .bk-widget input[name$="pietus2"] {
              min-width: 25px !important;
              width: 25px !important;
            }
+           .bk-widget input[name$="vakaras2"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="rytas3"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus3"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras3"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+
+
+
+.foo {
+  float: left;
+  width: 20px;
+  height: 20px;
+  margin: 5px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.blue {
+  background: #13b4ff;
+}
+
+.purple {
+  background: #ab3fdd;
+}
+
+.wine {
+  background: #ae163e;
+}
+
+
+
+
+
+table {
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid #c6c7cc;
+  padding: 10px 15px;
+}
+th {
+  font-weight: bold;
+}
+
+
+
 .overlay {
   position: fixed;
   top: 0;
@@ -93,7 +150,7 @@ curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
   position: absolute;
   top: 20px;
   right: 30px;
-  transition: all 200ms;
+  transition: all 20ms;
   font-size: 30px;
   font-weight: bold;
   text-decoration: none;
@@ -176,6 +233,9 @@ def pav1():
 organizme vykstančius procesus, todėl tinkamas pasirengimas tyrimui yra labai svarbus
 tikrajai Jūsų organizmo būklei nustatyti:""", width=780)
 
+def pav7():
+    return Div(text="""<b>Šlapimo parametrų matavimas:</b>""", width=780)
+
 def pav6():
     return Div(text="""<b>ORGANIZMO BŪKLĖS TYRIMO EIGA</b>
 <br><br>Organizmo būklės nustatymo tikslumui lemiamos įtakos turi tikslūs organizmo parametrų išmatavimai. Šiuos parametrus stipriai veikia tiriamojo psichologinė būklė tyrimo metu, taip pat matavimų eilės tvarka. Svarbu, kad organizmo būklės tyrimas būtų vykdomas griežtai pagal nurodytą seką. Taip pat rekomenduotina kelias dienas iki tyrimo pasipraktikuoti jį atlikti, kad tyrimo dieną viskas vyktų sklandžiai. Tyrimo trukmė apie 45 minutės. Pamatuoti duomenys rašomi į <b>„Organizmo būklės tyrimo formos“</b> skiltį <b><i>„Tyrimo protokolas“</i></b>.
@@ -193,7 +253,7 @@ def pav6():
 <br>•Minkštas metras
 <br><br><b>TYRIMO EIGA:</b>
 <br>1. 2 valandos iki tyrimo <b><i>nevalgyti</b></i>, jei norisi, <b><i>galima gerti negazuoto vandens</b></i>.
-<br>2. 30 minučių iki tyrimo <b><i>nieko negerti ir nekramtyti</b></i>""", width=780)
+<br>2. 30 minučių iki tyrimo <b><i>nieko negerti ir nekramtyti</b></i>.""", width=780)
 
 aprugis = Div(text = "<br>Ūgis (Stovint išsitiesus, centimetrais)" , width=250)
 inugis = TextInput(name = "ugis", value="", width=220, height=None)
@@ -209,6 +269,7 @@ inklub= TextInput(name = "klub", value="", width=220, height=None)
 
 aprmase = Div(text = "<br>Masė (Ryte, išsituštinus, pasišlapinus, nusirengus, kg)", width=250)
 inmase= TextInput(name = "mase", value="", width=220, height=None)
+
 
 def pav2():
     return Div(text="""
@@ -338,7 +399,145 @@ atitinkančias rekomendacijas.</b>
 </div>
     """)
 
-# pav2 = Div(text = "<b>Šlapimo parametrai</b>", width=550, height=None)
+def aprsrugs():
+    return Div(text="""
+<div class="box">
+	<a class="button" href="#popup5"><br>Rūgštingumas (rodmuo ekrane arba pagal spalvos skalę)</a>
+</div>
+
+<div id="popup5" class="overlay">
+	<div class="popup">
+		<h2>Rūgštingumas</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+Jei turimas rūgštingumo matuoklis, matuojama pagal jo instrukcijas.
+Sukalibruoto matuoklio daviklis merkiamas į šlapimą, lengvai pamaišoma ir laukiama, kol
+nusistovės rodmuo. Vertė įrašoma eilutėje 2.1 „Rūgštingumas (matuokliu), U-pH 1 “. Atlikus
+matavimą, matuoklio daviklis nuplaunamas pamaišant stiklinėje su čiaupo vandeniu, po
+to su distiliuotu vandeniu ir nusausinamas, priglaudus (bet netrinant) švelnia servetėlė.
+<i>Jei naudojamos tik rūgštingumo matavimo juostelės, šis punktas praleidžiamas</i>.
+<br>Rūgštingumo matavimo juostelės naudojamos pagal jų instrukcijas, nurodytas ant
+dėžutės. Juostelės spalvinės zonos merkiamos į šlapimą, pamaišoma, ištraukiama,
+padedama ant popierinio rankšluosčio spalvinėmis zonomis į viršų ir paleidžiamas
+chronometras. Po instrukcijoje nurodyto laiko stebimi spalvinių zonų atspalviai, jie
+lyginami su skale ant dėžutės. Vertė įrašoma eilutėje 2.2 „Rūgštingumas (juostele),
+U-pH 2 “. <i>Jei naudojamas tik matuoklis, šis punktas praleidžiamas</i>.
+		</div>
+	</div>
+</div>
+    """, width = 350)
+
+srrytas = TextInput(name = "rytas1", value="", title = "Rytas", width = 100)
+srpietus = TextInput(name = "pietus1", value="", title = "Pietūs", width = 100)
+srvakaras = TextInput(name = "vakaras1", value="", title = "Vakaras", width = 100)
+
+def aprssvies():
+    return Div(text="""
+<div class="box">
+	<a class="button" href="#popup6"><br>Šviesumas (skaičius pagal skalę)</a> 
+</div>
+
+<div id="popup6" class="overlay">
+	<div class="popup">
+		<h2>Šviesumas</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+Šlapimo mėginys įpilamas į matavimo cilindrą iki atitinkamos ribos, kad
+įmerktas areometras galėtų pilnai panirti ir šlapimas neišsilietų. Matavimo cilindras
+pastatomas gerai apžviestoje vietoje be tiesioginių spindulių baltame fone (rašomojo
+popieriaus lapo), stebimas ir vertinamas vizualiai. Eilutėje 2.4 „Šviesumas, U-šv“ nurodomas šlapimo šviesumas pagal žemiau pateiktoje skalėje šlapimo spalvą
+atitinkančio stulpelio numerį:
+<table>
+    <tr>
+      <th scope="col"><b>Vertė</b></th>
+      <th scope="col"><b>Spalva</b></th>
+      <th scope="col"><b>Aprašymas</b></th>
+    </tr>
+    <tr>
+      <td>+4</td>
+      <td><div class="foo blue"></div></td>
+      <td>Ruda, artima pieniškam šokoladui arba obuolių kompotui</td>
+    </tr>
+    <tr>
+      <td>+3</td>
+      <td><div class="foo purle"></div></td>
+      <td>Ruda kaip stipri žalioji arbata</td>
+    </tr>
+    <tr>
+      <td>+2</td>
+      <td><div class="foo wine"></div></td>
+      <td>Rusva kaip silpna žalioji arbata arba šviesus alus</td>
+    </tr>
+    <tr>
+      <td>+1</td>
+      <td><div class="foo blue"></div></td>
+      <td>Geltona, bet nešvyti</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td><div class="foo purle"></div></td>
+      <td>Ryški ir švytinti geltona</td>
+    </tr>
+    <tr>
+      <td>-1</td>
+      <td><div class="foo wine"></div></td>
+      <td>Geltona, šiek tiek švyti, kaip baltas vynas</td>
+    </tr>
+    r>
+      <td>-2</td>
+      <td><div class="foo blue"></div></td>
+      <td>Gelsva, nešvyti</td>
+    </tr>
+    r>
+      <td>-3</td>
+      <td><div class="foo purle"></div></td>
+      <td>Spalva labai silpna, bet regima</td>
+    </tr>
+    r>
+      <td>-4</td>
+      <td><div class="foo wine"></div></td>
+      <td>Visiškai bespalvė, beveik kaip vanduo</td>
+    </tr>
+</table>
+		</div>
+	</div>
+</div>
+    """, width = 350)
+
+ssrytas = TextInput(name = "rytas2", value="", title = "Rytas", width = 100)
+sspietus = TextInput(name = "pietus2", value="", title = "Pietūs", width = 100)
+ssvakaras = TextInput(name = "vakaras2", value="", title = "Vakaras", width = 100)
+
+def aprstank():
+    return Div(text="""
+<div class="box">
+	<a class="button" href="#popup7"><br>Tankis (rodmuo, g/ml)</a>
+</div>
+
+<div id="popup7" class="overlay">
+	<div class="popup">
+		<h2>Tankis</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+Matavimo cilindras su šlapimu pastatomas ant tvirto pagrindo ir į jį
+įmerkiamas areometras. Kai aerometras nustoja svyruoti, jis labai lengvai stumtelimas iš
+viršau, kad dar susvyruotų. Nusistovėjus skalės rodmuo atskaitomas ties menisko
+(įgaubto vandens paviršiaus) apačia ir įrašoma eilutėje 2.3 „Tankis, d“. Jei areometras
+pritraukiamas prie matavimo cilindro sienelės, reikia jį ištraukti, nuplauti, nusausinti ir
+matavimą pakartoti..
+		</div>
+	</div>
+</div>
+    """, width = 350)
+
+strytas = TextInput(name = "rytas3", value="", title = "Rytas", width = 100)
+stpietus = TextInput(name = "pietus3", value="", title = "Pietūs", width = 100)
+stvakaras = TextInput(name = "vakaras3", value="", title = "Vakaras", width = 100)
+
+
+
+
+
 
 input = TextInput(name = "input", value="", title = "Ivesk ph")
 input1 = TextInput(name = "input1", value="", title = "Ivesk seiliu ph")
@@ -390,7 +589,17 @@ l = layout(children=[[pav(), invard , inpavard, lytis, inamz],
 	[pav4()],
 	[pav5()],
 	[pav6()],
-	# [aprmase, inmase],
+	[pav7()],
+	[aprsrugs(), srrytas, srpietus, srvakaras],
+	[aprssvies(), ssrytas, sspietus, ssvakaras],
+	[aprstank(), strytas, stpietus, stvakaras],
+
+
+
+
+
+
+
 	# [input2],
 	])
 
