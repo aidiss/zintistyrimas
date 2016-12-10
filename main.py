@@ -72,6 +72,56 @@ curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
              min-width: 25px !important;
              width: 25px !important;
            }
+           .bk-widget input[name$="rytas4"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus4"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras4"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="rytas5"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus5"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras5"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="rytas6"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus6"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras6"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="rytas7"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus7"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras7"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+
+
 
 
 
@@ -120,7 +170,7 @@ th {
   left: 0;
   right: 0;
   background: rgba(1, 0, 0, 0.8);
-  transition: opacity 500ms;
+  transition: opacity 1ms;
   visibility: hidden;
   opacity: 1;
   overflow-y:scroll;
@@ -183,6 +233,22 @@ th {
 </html>
 ''')
 
+aprugis = Div(text = "<br>Ūgis (Stovint išsitiesus, centimetrais)" , width=250)
+inugis = TextInput(name = "ugis", value="", width=220, height=None)
+
+aprkrut = Div(text = "<br>Krūtinės ląstos apimtis (Pažąstų aukštyje, nuleidus rankas, centimetrais)", width=250)
+inkrut = TextInput(name = "krut", value="", width=220, height=None)
+
+aprjuos = Div(text = "<br>Juosmens apimtis (Per siauriausią vietą, centimetrais)", width=250)
+injuos = TextInput(name = "juos", value="", width=220, height=None)
+
+aprklub = Div(text = "<br>Klubų apimtis (Per plačiausią vietą, maždaug genitalijų aukštyje, centimetrais)", width=250)
+inklub= TextInput(name = "klub", value="", width=220, height=None)
+
+aprmase = Div(text = "<br>Masė (Ryte, išsituštinus, pasišlapinus, nusirengus, kg)", width=250)
+inmase= TextInput(name = "mase", value="", width=220, height=None)
+
+
 factors = ["a", "b", "c", "d", "e", "f", "g", "h"]
 
 source = ColumnDataSource(data=dict(x=[], y=[]))
@@ -219,7 +285,7 @@ ds1 = r1.data_source
 ds2 = r2.data_source
 
 # create some widgets
-def pav():
+def protok():
     return Div(text="""<br><b>ORGANIZMO BŪKLĖS TYRIMO PROTOKOLAS</b>""", width=330, height=None)
 
 invard = TextInput(name = "vard", value="", title = "Vardas", width = 130)
@@ -228,15 +294,12 @@ lytis = Select(title="Lytis:", value="", options=["Vyras", "Moteris"], width = 1
 inamz = TextInput(name = "amz", value="", title = "Amžius", width = 80) 
 # indata = TextInput(value="", title = "Data")
 
-def pav1():
+def tikslus():
     return Div(text="""Tikslūs organizmo tyrimo metu atliekamų testų rezultatai padeda geriau suprasti
 organizme vykstančius procesus, todėl tinkamas pasirengimas tyrimui yra labai svarbus
 tikrajai Jūsų organizmo būklei nustatyti:""", width=780)
 
-def pav7():
-    return Div(text="""<b>Šlapimo parametrų matavimas:</b>""", width=780)
-
-def pav6():
+def eiga():
     return Div(text="""<b>ORGANIZMO BŪKLĖS TYRIMO EIGA</b>
 <br><br>Organizmo būklės nustatymo tikslumui lemiamos įtakos turi tikslūs organizmo parametrų išmatavimai. Šiuos parametrus stipriai veikia tiriamojo psichologinė būklė tyrimo metu, taip pat matavimų eilės tvarka. Svarbu, kad organizmo būklės tyrimas būtų vykdomas griežtai pagal nurodytą seką. Taip pat rekomenduotina kelias dienas iki tyrimo pasipraktikuoti jį atlikti, kad tyrimo dieną viskas vyktų sklandžiai. Tyrimo trukmė apie 45 minutės. Pamatuoti duomenys rašomi į <b>„Organizmo būklės tyrimo formos“</b> skiltį <b><i>„Tyrimo protokolas“</i></b>.
 <br><br><b>PRIEMONĖS</b>:
@@ -252,26 +315,28 @@ def pav6():
 <br>•Valgomasis šaukštas
 <br>•Minkštas metras
 <br><br><b>TYRIMO EIGA:</b>
-<br>1. 2 valandos iki tyrimo <b><i>nevalgyti</b></i>, jei norisi, <b><i>galima gerti negazuoto vandens</b></i>.
-<br>2. 30 minučių iki tyrimo <b><i>nieko negerti ir nekramtyti</b></i>.""", width=780)
+<br><b>1.</b> 2 valandos iki tyrimo <b><i>nevalgyti</b></i>, jei norisi, <b><i>galima gerti negazuoto vandens</b></i>.
+<br><b>2.</b> 30 minučių iki tyrimo <b><i>nieko negerti ir nekramtyti</b></i>.""", width=780)
 
-aprugis = Div(text = "<br>Ūgis (Stovint išsitiesus, centimetrais)" , width=250)
-inugis = TextInput(name = "ugis", value="", width=220, height=None)
+def slapimo():
+    return Div(text="""<b>3. Šlapimo parametrų matavimas:</b>""", width=780)
 
-aprkrut = Div(text = "<br>Krūtinės ląstos apimtis (Pažąstų aukštyje, nuleidus rankas, centimetrais)", width=250)
-inkrut = TextInput(name = "krut", value="", width=220, height=None)
+def prikseil():
+    return Div(text="""<b>4.</b><i>Tiriamojo paprašoma prikaupti seilių ir įspjauti į valgomąjį šaukštą. Seilių turi būti
+maždaug mažojo piršto galinio narelio dydžio lašas.</i>""", width=780)
 
-aprjuos = Div(text = "<br>Juosmens apimtis (Per siauriausią vietą, centimetrais)", width=250)
-injuos = TextInput(name = "juos", value="", width=220, height=None)
+def seiliu():
+    return Div(text="""<b>5. Seilių parametrų matavimas:</b>""", width=780)
 
-aprklub = Div(text = "<br>Klubų apimtis (Per plačiausią vietą, maždaug genitalijų aukštyje, centimetrais)", width=250)
-inklub= TextInput(name = "klub", value="", width=220, height=None)
+def tiriam():
+    return Div(text="""<b>6.</b><i>Tiriamojo paprašoma atsisėsti ant sofos arba lovos per vidurį.</i>""", width=780)
 
-aprmase = Div(text = "<br>Masė (Ryte, išsituštinus, pasišlapinus, nusirengus, kg)", width=250)
-inmase= TextInput(name = "mase", value="", width=220, height=None)
+def kraujot():
+    return Div(text="""<b>7. Kraujotakos parametrų matavimas:</b>""", width=780)
 
 
-def pav2():
+
+def pav1():
     return Div(text="""
 <div class="box">
 	<a class="button" href="#popup1">3 - 2 SAVAITĖS IKI TYRIMŲ DIENOS</a>
@@ -326,7 +391,7 @@ gabaliukais, nekaitintus baltus sūrius, papildomai nekaitintą varškę.</i>
 </div>
     """)
 
-def pav3():
+def pav2():
     return Div(text="""
 <div class="box">
 	<a class="button" href="#popup2">MAŽIAUSIAI 2 DIENOS IKI TYRIMŲ DIENOS</a>
@@ -347,7 +412,7 @@ nevartoti bent 1 dieną prieš tyrimą)</b>. <i>GALIMA VARTOTI žolelių arbatas
 </div>
     """)
 
-def pav4():
+def pav3():
     return Div(text="""
 <div class="box">
 	<a class="button" href="#popup3">TYRIMŲ DIENOS IŠVAKARĖSE</a>
@@ -372,7 +437,7 @@ tyrimų dieną.</b>
 </div>
     """)
 
-def pav5():
+def pav4():
     return Div(text="""
 <div class="box">
 	<a class="button" href="#popup4">TYRIMŲ DIENĄ</a>
@@ -402,7 +467,7 @@ atitinkančias rekomendacijas.</b>
 def aprsrugs():
     return Div(text="""
 <div class="box">
-	<a class="button" href="#popup5"><br>Rūgštingumas (rodmuo ekrane arba pagal spalvos skalę)</a>
+	<a class="button" href="#popup5"><br>Rūgštingumas<br>(rodmuo ekrane arba pagal spalvos skalę)</a>
 </div>
 
 <div id="popup5" class="overlay">
@@ -425,16 +490,16 @@ U-pH 2 “. <i>Jei naudojamas tik matuoklis, šis punktas praleidžiamas</i>.
 		</div>
 	</div>
 </div>
-    """, width = 350)
+    """, width = 250)
 
-srrytas = TextInput(name = "rytas1", value="", title = "Rytas", width = 100)
-srpietus = TextInput(name = "pietus1", value="", title = "Pietūs", width = 100)
-srvakaras = TextInput(name = "vakaras1", value="", title = "Vakaras", width = 100)
+srrytas = TextInput(name = "rytas1", value="", title = "Rytas", width = 60)
+srpietus = TextInput(name = "pietus1", value="", title = "Pietūs", width = 60)
+srvakaras = TextInput(name = "vakaras1", value="", title = "Vakaras", width = 60)
 
 def aprssvies():
     return Div(text="""
 <div class="box">
-	<a class="button" href="#popup6"><br>Šviesumas (skaičius pagal skalę)</a> 
+	<a class="button" href="#popup6"><br>Šviesumas<br>(skaičius pagal skalę)</a> 
 </div>
 
 <div id="popup6" class="overlay">
@@ -502,16 +567,16 @@ atitinkančio stulpelio numerį:
 		</div>
 	</div>
 </div>
-    """, width = 350)
+    """, width = 250)
 
-ssrytas = TextInput(name = "rytas2", value="", title = "Rytas", width = 100)
-sspietus = TextInput(name = "pietus2", value="", title = "Pietūs", width = 100)
-ssvakaras = TextInput(name = "vakaras2", value="", title = "Vakaras", width = 100)
+ssrytas = TextInput(name = "rytas2", value="", title = "Rytas", width = 60)
+sspietus = TextInput(name = "pietus2", value="", title = "Pietūs", width = 60)
+ssvakaras = TextInput(name = "vakaras2", value="", title = "Vakaras", width = 60)
 
 def aprstank():
     return Div(text="""
 <div class="box">
-	<a class="button" href="#popup7"><br>Tankis (rodmuo, g/ml)</a>
+	<a class="button" href="#popup7"><br>Tankis<br>(rodmuo, g/ml)</a>
 </div>
 
 <div id="popup7" class="overlay">
@@ -524,17 +589,184 @@ Matavimo cilindras su šlapimu pastatomas ant tvirto pagrindo ir į jį
 viršau, kad dar susvyruotų. Nusistovėjus skalės rodmuo atskaitomas ties menisko
 (įgaubto vandens paviršiaus) apačia ir įrašoma eilutėje 2.3 „Tankis, d“. Jei areometras
 pritraukiamas prie matavimo cilindro sienelės, reikia jį ištraukti, nuplauti, nusausinti ir
-matavimą pakartoti..
+matavimą pakartoti.
 		</div>
 	</div>
 </div>
-    """, width = 350)
+    """, width = 250)
 
-strytas = TextInput(name = "rytas3", value="", title = "Rytas", width = 100)
-stpietus = TextInput(name = "pietus3", value="", title = "Pietūs", width = 100)
-stvakaras = TextInput(name = "vakaras3", value="", title = "Vakaras", width = 100)
+strytas = TextInput(name = "rytas3", value="", title = "Rytas", width = 60)
+stpietus = TextInput(name = "pietus3", value="", title = "Pietūs", width = 60)
+stvakaras = TextInput(name = "vakaras3", value="", title = "Vakaras", width = 60)
 
+def aprsputo():
+    return Div(text="""
+<div class="box">
+	<a class="button" href="#popup8"><br>Putojimas<br>(skaičius pagal skalę)</a> 
+</div>
 
+<div id="popup8" class="overlay">
+	<div class="popup">
+		<h2>Putojimas</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+Šlapimo mėginys supilamas atgal į indelį, tvirtai užsukamas ir plakamas
+10 sekundžių. Po to pastatomas ant popierinio rankšluosčio, iškart atsukamas ir
+paleidžiamas chronometras. Stebima, kada centre prasiskirs putos. Vertinama pagal
+skalę ir įrašoma eilutėje 2.5 „Putojimas, U-put“:
+<table>
+    <tr>
+      <th scope="col"><b>Vertė</b></th>
+      <th scope="col"><b>Aprašymas</b></th>
+    </tr>
+    <tr>
+      <td>+3</td>
+      <td>putos prasiskiria per daugiau nei 15 min.</td>
+    </tr>
+    <tr>
+      <td>+2</td>
+      <td>putos prasiskiria per 15 min.</td>
+    </tr>
+    <tr>
+      <td>+1</td>
+      <td>putos prasiskiria per 5 min.</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td><b>putos prasiskiria per 1 min.>/b></td>
+    </tr>
+    <tr>
+      <td>-1</td>
+      <td>atsukus putos jau prasiskyrusios</td>
+    </tr>
+</table>
+		</div>
+	</div>
+</div>
+    """, width = 250)
+
+sprytas = TextInput(name = "rytas4", value="", title = "Rytas", width = 60)
+sppietus = TextInput(name = "pietus4", value="", title = "Pietūs", width = 60)
+spvakaras = TextInput(name = "vakaras4", value="", title = "Vakaras", width = 60)
+
+def aprserugst():
+    return Div(text="""
+<div class="box">
+	<a class="button" href="#popup9"><br>Rūgštingumas<br>(rodmuo ekrane arba skaičius pagal skalę)</a>
+</div>
+
+<div id="popup9" class="overlay">
+	<div class="popup">
+		<h2>Rūgštingumas</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+Jei turimas rūgštingumo matuoklis, matuojama pagal jo instrukcijas.
+Sukalibruoto matuoklio daviklis merkiamas į seiles ir laukiama, kol nusistovės rodmuo (jei
+daviklis ne stiklinis, tuomet seilių lašas užlašinamas ant jautrios zonos). Vertė įrašoma
+eilutėje 3.1 „Rūgštingumas (matuokliu), S-pH 1 “. Atlikus matavimą, matuoklio daviklis
+nuplaunamas pamaišant stiklinėje su čiaupo vandeniu, po to su distiliuotu vandeniu ir
+nusausinamas, priglaudus (bet netrinant) švelnia servetėlė. Jei naudojamos tik
+rūgštingumo matavimo juostelės, šis punktas praleidžiamas.
+<br>Rūgštingumo matavimo juostelės naudojamos pagal jų instrukcijas, nurodytas ant
+dėžutės. Juostelės spalvinėmis zonos žemyn merkiamos į seiles, pamaišoma,
+ištraukiama, padedama ant popierinio rankšluosčio spalvinėmis zonomis į viršų ir
+paleidžiamas chronometras. Po instrukcijoje nurodyto laiko seilių perteklius
+nusausinamas į servetėlę nebraukiant, stebimi spalvinių zonų atspalviai, jie lyginami su
+skale ant dėžutės. Vertė įrašoma eilutėje 2.2 „Rūgštingumas (juostele), S-pH 2 “. <i>Jei
+naudojamas tik matuoklis, šis punktas praleidžiamas</i>.
+		</div>
+	</div>
+</div>
+    """, width = 250)
+
+serrytas = TextInput(name = "rytas5", value="", title = "Rytas", width = 60)
+serpietus = TextInput(name = "pietus5", value="", title = "Pietūs", width = 60)
+servakaras = TextInput(name = "vakaras5", value="", title = "Vakaras", width = 60)
+
+def aprseklamp():
+    return Div(text="""
+<div class="box">
+	<a class="button" href="#popup10"><br>Klampumas<br>(skaičius pagal skalę)</a> 
+</div>
+
+<div id="popup10" class="overlay">
+	<div class="popup">
+		<h2>Klampumas</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+Kol laukiama rūgštingumo duomenų, valgomasis šaukštas su likusiu
+seilių mėginiu pavartomas, kad pagal jų tekėjimą vizualiai būtų galima įvertinti jų
+klampumą. Klampumas vertinamas pagal skalę ir vertė įrašoma į eilutę 3.3 “Klampumas,
+S-kl”:
+<table>
+    <tr>
+      <th scope="col"><b>Vertė</b></th>
+      <th scope="col"><b>Aprašymas</b></th>
+    </tr>
+    <tr>
+      <td>+2</td>
+      <td>tirštos, daug putų, neteka</td>
+    </tr>
+    <tr>
+      <td>+1</td>
+      <td>Labai klampios, kaip sirupas, teka lėt</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td><b>vidutiniškai klampios, kaip žalias kiaušinio baltymas</b></td>
+    </tr>
+    <tr>
+      <td>-1</td>
+      <td>skystos, bet klampesnės už vandenį, kaip liesas kefyras</td>
+    </tr>
+    <tr>
+      <td>-2</td>
+      <td>visiškai skystos, kaip vanduo</td>
+    </tr>
+</table>
+		</div>
+	</div>
+</div>
+    """, width = 250)
+
+sekrytas = TextInput(name = "rytas6", value="", title = "Rytas", width = 60)
+sekpietus = TextInput(name = "pietus6", value="", title = "Pietūs", width = 60)
+sekvakaras = TextInput(name = "vakaras6", value="", title = "Vakaras", width = 60)
+
+def aprpulsed():
+    return Div(text="""
+<div class="box">
+	<a class="button" href="#popup11"><br>Pulsas sėdint</a>
+</div>
+
+<div id="popup11" class="overlay">
+	<div class="popup">
+		<h2>Pulsas sėdint</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+Užčiuopiamas pulsas ant tiriamojo riešo, tai geriausia padaryti trimis
+pirštais, sudėtais greta – šoninius pirštus spaudžiant prie kaulo šiek tiek stipriau nei
+vidurinį tam tikru metu pradedamas justi tvinkčiojimas. Jei tvinkčiojimas matavimo metu
+silpnėja, reikia keisti atskirų pirštų spaudimą, kol vėl pajuntamas tvinkčiojimas.
+<br>Užčiuopus pulsą, 5-10 dūžių stebima, ar pulsas tolygus, ar nėra aritmijos, ar
+tiriamasis nusiraminęs. Tada su dūžiu paleidžiamas chronometras ir 15 sekundžių
+skaičiuojami širdies dūžiai. Jei laikas baigėsi anksčiau, nei įvyko paskutinis širdies dūžis,
+prie pilnų dūžių skaičiaus dar pridedama 0,5. Gautą skaičių padauginus iš 4 gauname
+pulsą sėdint, šis skaičius įrašomas eilutėje 5.1 „Pulsas sėdint, P sėd “.
+<br><font size="1"><i>Pvz: Jei chronometras rodo 0:14 , o Jūs mintyse esate suskaičiavęs 18 dūžių, 19-tą dūžį
+pajuntate tuo pat metu, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašote
+skaičių „19”, o pulsas bus P sėd = 4×19 = 76.
+Jei chronometras rodo 0:14 , o Jūs mintyse esate suskaičiavęs 18 dūžių, tačiau 19-tą dūžį
+pajuntate po to, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašote skaičių
+„18,5”, o pulsas bus P sėd = 4×18,5 = 74.</i></font>
+		</div>
+	</div>
+</div>
+    """, width = 250)
+
+psrytas = TextInput(name = "rytas7", value="", title = "Rytas", width = 60)
+pspietus = TextInput(name = "pietus7", value="", title = "Pietūs", width = 60)
+psvakaras = TextInput(name = "vakaras7", value="", title = "Vakaras", width = 60)
 
 
 
@@ -582,21 +814,25 @@ input2.on_change("value", update2)
 # layout1 = column(output, bendr)
 
 
-l = layout(children=[[pav(), invard , inpavard, lytis, inamz],
-	[pav1()], 
+l = layout(children=[[protok(), invard , inpavard, lytis, inamz],
+	[tikslus()], 
+	[pav1()],
 	[pav2()],
 	[pav3()],
 	[pav4()],
-	[pav5()],
-	[pav6()],
-	[pav7()],
+	[eiga()],
+	[slapimo()],
 	[aprsrugs(), srrytas, srpietus, srvakaras],
 	[aprssvies(), ssrytas, sspietus, ssvakaras],
 	[aprstank(), strytas, stpietus, stvakaras],
-
-
-
-
+	[aprsputo(), sprytas, sppietus, spvakaras],
+	[prikseil()],
+	[seiliu()],
+	[aprserugst(), serrytas, serpietus, servakaras],
+	[aprseklamp(), sekrytas, sekpietus, sekvakaras],
+	[tiriam()],
+	[kraujot()],
+	[aprpulsed(), psrytas, pspietus, psvakaras],
 
 
 
