@@ -120,6 +120,30 @@ curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
              min-width: 25px !important;
              width: 25px !important;
            }
+           .bk-widget input[name$="rytas8"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus8"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras8"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="rytas9"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus9"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras9"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
 
 
 
@@ -333,6 +357,10 @@ def tiriam():
 
 def kraujot():
     return Div(text="""<b>7. Kraujotakos parametrų matavimas:</b>""", width=780)
+
+def refleksu():
+    return Div(text="""<b>8. Refleksų tyrimas:</b>""", width=780)
+
 
 
 
@@ -709,7 +737,7 @@ S-kl”:
     </tr>
     <tr>
       <td>+1</td>
-      <td>Labai klampios, kaip sirupas, teka lėt</td>
+      <td>Labai klampios, kaip sirupas, teka lėtai</td>
     </tr>
     <tr>
       <td>0</td>
@@ -767,6 +795,97 @@ pajuntate po to, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašo
 psrytas = TextInput(name = "rytas7", value="", title = "Rytas", width = 60)
 pspietus = TextInput(name = "pietus7", value="", title = "Pietūs", width = 60)
 psvakaras = TextInput(name = "vakaras7", value="", title = "Vakaras", width = 60)
+
+def kunotemp():
+    return Div(text="""
+<div class="box">
+	<a class="button" href="#popup12"><br>Kūno temperatūra</a>
+</div>
+
+<div id="popup12" class="overlay">
+	<div class="popup">
+		<h2>Kūno temperatūra</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+Kūno termometras naudojamas pagal jo naudojimo instrukciją.
+<br>Jei matuojama infraraudonųjų spindulių (IR) termometru, matuojama ausies angos
+vidaus temperatūra.
+<br>Jei matuojama skaitmeniniu kontaktiniu termometru, matuojama burnos gleivinės
+temperatūra po liežuviu.
+<br>Jei matuojama skystiniu termometru (gyvsidabriniu, spiritiniu), prieš tai jis
+nupurtomas iki 35,5 °C rodmens ir tada tiriamojo paprašoma jį įsidėti į kairės rankos
+pažastį, matuojama 5-7 minutes. Temperatūros rodmuo Celsijaus laipsniais su vienu
+skaičiumi po kablelio įrašomas eilutėje 4.1 „Kūno temperatūra, Temp“.
+		</div>
+	</div>
+</div>
+    """, width = 250)
+
+ktrytas = TextInput(name = "rytas8", value="", title = "Rytas", width = 60)
+ktpietus = TextInput(name = "pietus8", value="", title = "Pietūs", width = 60)
+ktvakaras = TextInput(name = "vakaras8", value="", title = "Vakaras", width = 60)
+
+def aprdermoref():
+    return Div(text="""
+<div class="box">
+	<a class="button" href="#popup13"><br>Dermografinis refleksas<br>(skaičius pagal skalę)</a> 
+</div>
+
+<div id="popup13" class="overlay">
+	<div class="popup">
+		<h2>Dermografinis refleksas</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+Tiriamojo paprašoma atsiraitoti dešinės rankos rankovę,
+atidengiant bicepsą. Žinomo pločio, neaštriu, bet neužapvalintu daiktu (pavyzdžiui,
+įtrauktu tušinuku, bambukine valgymo lazdele ir pan.) ne per stipriai brėžiamos
+besikryžiuojančios linijos ant paciento dešinės rankos vidinės pusės per 3 pirštus nuo
+linkio vietos. Pirma ant dilbio, po to ant žasto. Paleidžiamas chronometras. Stebima
+paciento reakcija po 1 min. ir po 6 min. Vertinama pagal skalę ir įrašoma eilutėje 4.2
+„Dermografizmas, Dermo“:
+<table>
+    <tr>
+      <th scope="col"><b>Vertė</b></th>
+      <th scope="col"><b>Aprašymas</b></th>
+    </tr>
+    <tr>
+      <td>+4</td>
+      <td>po 1 minutės paraudimas su iškilumais arba daugiau nei 2 cm pločio paraudimas</td>
+    </tr>
+    <tr>
+      <td>+3</td>
+      <td>po 6 minučių paraudimas su iškilumais arba daugiau nei 2 cm pločio paraudimas</td>
+    </tr>
+    <tr>
+      <td>+2</td>
+      <td>po 6 minučių raudonos linijos ant žasto ir ant dilbio platesnės nei brėžiklis</td>
+    </tr>
+    <tr>
+      <td>+1</td>
+      <td>po 6 minučių raudonos linijos ant žasto ir ant dilbio</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td><b>po 6 minučių raudonos linijos ant žasto, bet jokio paraudimo ant dilbio</b></td>
+    </tr>
+    <tr>
+      <td>-1</td>
+      <td>po 6 minučių jokio paraudimo</td>
+    </tr>
+    <tr>
+      <td>-2</td>
+      <td>po 1 minutės jokio paraudimo</td>
+    </tr>
+</table>
+		</div>
+	</div>
+</div>
+    """, width = 250)
+
+drrytas = TextInput(name = "rytas9", value="", title = "Rytas", width = 60)
+drpietus = TextInput(name = "pietus9", value="", title = "Pietūs", width = 60)
+drvakaras = TextInput(name = "vakaras9", value="", title = "Vakaras", width = 60)
+
 
 
 
@@ -833,6 +952,8 @@ l = layout(children=[[protok(), invard , inpavard, lytis, inamz],
 	[tiriam()],
 	[kraujot()],
 	[aprpulsed(), psrytas, pspietus, psvakaras],
+	[refleksu()],
+	[aprdermoref(), drrytas, drpietus, drvakaras],
 
 
 
