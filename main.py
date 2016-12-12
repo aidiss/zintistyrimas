@@ -158,26 +158,35 @@ curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
            }
 
 
-.outer {
-    width:40px;
-    height:40px;
-    background:white;
-    border: 1px solid;
-    border-radius:50%;
-    position:relative;
-    top:50;
-    left:50;
-    }
-
-.inner {
-    width:20px;
-    height:20px;
-    background:black;
-    border-radius:50%;
-    position:relative;
-    top:25;
-    left:35;
-    }
+ #outer-circle {
+   background: white;
+   border-radius: 50%;
+   border: 1px solid;
+   height: 40px;
+   width: 40px;
+   position: relative;
+   /* 
+    Child elements with absolute positioning will be 
+    positioned relative to this div 
+   */
+ }
+ #inner-circle {
+   position: absolute;
+   background: black;
+   border-radius: 50%;
+   height: 25px;
+   width: 25px;
+   /*
+    Put top edge and left edge in the center
+   */
+   top: 19%;
+   left: 19%;
+   margin: 50x 50px 50px 50x;
+   /* 
+    Offset the position correctly with
+    minus half of the width and minus half of the height 
+   */
+ }
 
 
 
@@ -973,23 +982,29 @@ skalę ir įrašoma eilutėje 4.3 „Vasomotorinis, Vaso“:
     </tr>
     <tr>
       <td>-4</td>
-      <td><div class="outer">
-            <div class="inner">
-                </div>
-                    </div></td>
+      <td>plaštaka labai stipriai šaltesnė už žastą</td>
     </tr>
+
 </table>
         </div>
     </div>
 </div>
     """, width = 250)
 
-# plaštaka labai stipriai šaltesnė už žastą
+# 
 vrrytas = TextInput(name = "rytas10", value="", title = "Rytas", width = 60)
 vrpietus = TextInput(name = "pietus10", value="", title = "Pietūs", width = 60)
 vrvakaras = TextInput(name = "vakaras10", value="", title = "Vakaras", width = 60)
 
 
+# tr>
+#       <td>-4</td>
+#       <td><div id="outer-circle">
+#             <div id="inner-circle">
+#               </div>
+#                     </div></td>
+#     </tr>
+    
 
 
 
