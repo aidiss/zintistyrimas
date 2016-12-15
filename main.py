@@ -156,6 +156,42 @@ curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
              min-width: 25px !important;
              width: 25px !important;
            }
+           .bk-widget input[name$="rytas11"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus11"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras11"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="rytas12"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus12"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras12"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="rytas13"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus13"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras13"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
 
 
  #outer-circle {
@@ -165,31 +201,161 @@ curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
    height: 40px;
    width: 40px;
    position: relative;
-   /* 
-    Child elements with absolute positioning will be 
-    positioned relative to this div 
-   */
  }
  #inner-circle {
    position: absolute;
    background: black;
    border-radius: 50%;
-   height: 25px;
-   width: 25px;
-   /*
-    Put top edge and left edge in the center
-   */
-   top: 19%;
-   left: 19%;
+   height: 24px;
+   width: 24px;
+   top: 20%;
+   left: 20%;
    margin: 50x 50px 50px 50x;
-   /* 
-    Offset the position correctly with
-    minus half of the width and minus half of the height 
-   */
  }
-
-
-
+ #outer-circle1 {
+   background: white;
+   border-radius: 50%;
+   border: 1px solid;
+   height: 40px;
+   width: 40px;
+   position: relative;
+ }
+ #inner-circle1 {
+   position: absolute;
+   background: black;
+   border-radius: 50%;
+   height: 22px;
+   width: 22px;
+   top: 22%;
+   left: 22%;
+   margin: 50x 50px 50px 50x;
+ }
+#outer-circle2 {
+   background: white;
+   border-radius: 50%;
+   border: 1px solid;
+   height: 40px;
+   width: 40px;
+   position: relative;
+ }
+ #inner-circle2 {
+   position: absolute;
+   background: black;
+   border-radius: 50%;
+   height: 20px;
+   width: 20px;
+   top: 24%;
+   left: 24%;
+   margin: 50x 50px 50px 50x;
+ }
+#outer-circle3 {
+   background: white;
+   border-radius: 50%;
+   border: 1px solid;
+   height: 40px;
+   width: 40px;
+   position: relative;
+ }
+ #inner-circle3 {
+   position: absolute;
+   background: black;
+   border-radius: 50%;
+   height: 18px;
+   width: 18px;
+   top: 26%;
+   left: 26%;
+   margin: 50x 50px 50px 50x;
+ }
+ #outer-circle4 {
+   background: white;
+   border-radius: 50%;
+   border: 1px solid;
+   height: 40px;
+   width: 40px;
+   position: relative;
+ }
+ #inner-circle4 {
+   position: absolute;
+   background: black;
+   border-radius: 50%;
+   height: 16px;
+   width: 16px;
+   top: 28%;
+   left: 28%;
+   margin: 50x 50px 50px 50x;
+ }
+ #outer-circle5 {
+   background: white;
+   border-radius: 50%;
+   border: 1px solid;
+   height: 40px;
+   width: 40px;
+   position: relative;
+ }
+ #inner-circle5 {
+   position: absolute;
+   background: black;
+   border-radius: 50%;
+   height: 14px;
+   width: 14px;
+   top: 30%;
+   left: 30%;
+   margin: 50x 50px 50px 50x;
+ }
+#outer-circle6 {
+   background: white;
+   border-radius: 50%;
+   border: 1px solid;
+   height: 40px;
+   width: 40px;
+   position: relative;
+ }
+ #inner-circle6 {
+   position: absolute;
+   background: black;
+   border-radius: 50%;
+   height: 12px;
+   width: 12px;
+   top: 32%;
+   left: 32%;
+   margin: 50x 50px 50px 50x;
+ }
+ #outer-circle7 {
+   background: white;
+   border-radius: 50%;
+   border: 1px solid;
+   height: 40px;
+   width: 40px;
+   position: relative;
+ }
+ #inner-circle7 {
+   position: absolute;
+   background: black;
+   border-radius: 50%;
+   height: 10px;
+   width: 10px;
+   top: 34%;
+   left: 34%;
+   margin: 50x 50px 50px 50x;
+ }
+ #outer-circle8{
+   background: white;
+   border-radius: 50%;
+   border: 1px solid;
+   height: 40px;
+   width: 40px;
+   position: relative;
+ }
+ #inner-circle8 {
+   position: absolute;
+   background: black;
+   border-radius: 50%;
+   height: 8px;
+   width: 8px;
+   top: 38%;
+   left: 38%;
+   margin: 50x 50px 50px 50x;
+ }
 
 
 .foo {
@@ -240,7 +406,7 @@ th {
   visibility: hidden;
   opacity: 1;
   overflow-y:scroll;
-  z-index: 10;
+  z-index: 2;
 }
 .overlay:target {
   visibility: visible;
@@ -402,8 +568,12 @@ def kraujot():
 
 def refleksu():
     return Div(text="""<b>8. Refleksų tyrimas:</b>""", width=780)
-
-
+def tiriam1():
+    return Div(text="""<i>Tiriamojo paprašoma atsigulti ant sofos ar lovos ant kurios sėdi. Gulamasi
+ištiestomis kojomis, galvą dedant taip, kad prie sofos ar lovos krašto būtų tiriamojo kairė
+pusė. Paliekamas toks tarpas nuo sofos ar lovos krašto, kad tiriamojo kairė ranka laisvai
+gulėtų šalia delnu į viršų. Paprašoma atsipalaiduoti, nekalbėti ir nusiraminti. Taip
+tiriamasis turi pagulėti daugiau nei 1 minutę,</i>""", width=780)
 
 
 def pav1():
@@ -991,12 +1161,244 @@ skalę ir įrašoma eilutėje 4.3 „Vasomotorinis, Vaso“:
 </div>
     """, width = 250)
 
-# 
+
 vrrytas = TextInput(name = "rytas10", value="", title = "Rytas", width = 60)
 vrpietus = TextInput(name = "pietus10", value="", title = "Pietūs", width = 60)
 vrvakaras = TextInput(name = "vakaras10", value="", title = "Vakaras", width = 60)
 
+def aprvyzdyd():
+    return Div(text="""
+<div class="box">
+    <a class="button" href="#popup15"><br>Vyzdžio dydis<br>(skaičius pagal skalę)</a> 
+</div>
 
+<div id="popup15" class="overlay">
+    <div class="popup">
+        <h2>Vyzdžio dydis</h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+Tiriamojo regos lauke neturi būti ryškios šviesos (lempos ar lango),
+geriausia, kad jis sėdėtų priešais šviesios spalvos sieną. Pakeliamas pirštas prieš
+tiriamojo akis maždaug per dilbio ilgio atstumą nuo veido. Paprašoma žvilgsnį
+sufokusuoti į pirštą, kai vyzdžio dydis nusistovi paprašoma žvilgsnį sufokusuoti į sieną
+priešais tiriamąjį, ir vėl laukiama, kol vyzdžio dydis nusistovi. Taip kartojama kelis kartus,
+stebima, apie kokį plotį svyruoja vyzdys. Vertinama pagal skalę ir įrašoma eilutėje 4.4
+„Vyzdžio dydis, Vyzd“:
+<table>
+    <tr>
+      <th scope="col"><b>Vertė</b></th>
+      <th scope="col"><b>Vaizdas</b></th>
+      <th scope="col"><b>Aprašymas</b></th>
+    </tr>
+    <tr>
+      <td>+4</td>
+      <td><div id="outer-circle">
+             <div id="inner-circle">
+               </div>
+                     </div></td>
+      <td>Vyzdys 2 kartus didesnis už rainelės plotį tarp vyzdžio ir krašto</td>
+    </tr>
+    <tr>
+      <td>+3</td>
+      <td><div id="outer-circle1">
+             <div id="inner-circle1">
+               </div>
+                     </div></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>+2</td>
+      <td><div id="outer-circle2">
+             <div id="inner-circle2">
+               </div>
+                     </div></td>
+      <td>Vyzdys 1,5 karto didesnis už rainelės plotį tarp vyzdžio ir krašto</td>
+    </tr>
+    <tr>
+      <td>+1</td>
+      <td><div id="outer-circle3">
+             <div id="inner-circle3">
+               </div>
+                     </div></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td><div id="outer-circle4">
+             <div id="inner-circle4">
+               </div>
+                     </div></td>
+      <td><b>Vyzdžio dydis toks pat, kaip rainelės plotis tarp vyzdžio ir krašto</b></td>
+    </tr>
+    <tr>
+      <td>-1</td>
+      <td><div id="outer-circle5">
+             <div id="inner-circle5">
+               </div>
+                     </div></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>-2</td>
+      <td><div id="outer-circle6">
+             <div id="inner-circle6">
+               </div>
+                     </div></td>
+      <td>Vyzdys 1,5 karto mažesnis už rainelės plotį tarp vyzdžio ir krašto</td>
+    </tr>
+     <tr>
+      <td>-3</td>
+      <td><div id="outer-circle7">
+             <div id="inner-circle7">
+               </div>
+                     </div></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>-4</td>
+      <td><div id="outer-circle8">
+             <div id="inner-circle8">
+               </div>
+                     </div></td>
+      <td>Vyzdys 2 kartus mažesnis už rainelės plotį tarp vyzdžio ir krašto</td>
+    </tr>
+
+</table>
+        </div>
+    </div>
+</div>
+    """, width = 250)
+
+
+vdrytas = TextInput(name = "rytas11", value="", title = "Rytas", width = 60)
+vdpietus = TextInput(name = "pietus11", value="", title = "Pietūs", width = 60)
+vdvakaras = TextInput(name = "vakaras11", value="", title = "Vakaras", width = 60)
+
+def aprtremoref():
+    return Div(text="""
+<div class="box">
+    <a class="button" href="#popup16"><br>Tremoro (drebulio) refleksas<br>(skaičius pagal skalę)</a> 
+</div>
+
+<div id="popup16" class="overlay">
+    <div class="popup">
+        <h2>Tremoro (drebulio) refleksas</h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+Tiriamojo paprašoma išsižioti ir iškišti liežuvį tiesiai į
+priekį. Stebimas liežuvio judesys ir raumenų drebulys. Jei reikia, patikrinamas ir galūnių
+drebulys, padedant popieriaus lapą ant į šoną ištiestos iš delnu į viršų pasuktos
+plaštakos, kai tiriamasis žiūri tiesiai. Vertinama pagal skalę ir įrašoma eilutėje 4.5
+„Tremoras (drebulys), Trem“:
+<table>
+    <tr>
+      <th scope="col"><b>Vertė</b></th>
+      <th scope="col"><b>Aprašymas</b></th>
+    </tr>
+    <tr>
+      <td>+4</td>
+      <td>ypatingai didelis liežuvio ir galūnių drebulys</td>
+    </tr>
+    <tr>
+      <td>+3</td>
+      <td>didelis liežuvio drebulys ir pastebimas galūnių drebulys</td>
+    </tr>
+    <tr>
+      <td>+2</td>
+      <td>vidutinis liežuvio drebulys ir stiprus judesys (negali išlaikyti vietoje)</td>
+    </tr>
+    <tr>
+      <td>+1</td>
+      <td>lengvas liežuvio drebulys ir judesys</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td><b>jokio liežuvio drebulio ir lengvas liežuvio judesys</b></td>
+    </tr>
+    <tr>
+      <td>-1</td>
+      <td>jokio liežuvio drebulio ir labai mažas liežuvio judesys</td>
+    </tr>
+    <tr>
+      <td>-2</td>
+      <td>absoliučiai jokio liežuvio drebulio ir judesio</td>
+    </tr>
+</table>
+        </div>
+    </div>
+</div>
+    """, width = 250)
+
+trrytas = TextInput(name = "rytas12", value="", title = "Rytas", width = 60)
+trpietus = TextInput(name = "pietus12", value="", title = "Pietūs", width = 60)
+trvakaras = TextInput(name = "vakaras12", value="", title = "Vakaras", width = 60)
+
+def aprsneruzgu():
+    return Div(text="""
+<div class="box">
+    <a class="button" href="#popup17"><br>Šnervių užgulimas<br>(skaičius pagal skalę)</a> 
+</div>
+
+<div id="popup17" class="overlay">
+    <div class="popup">
+        <h2>Šnervių užgulimas</h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+Tiriamojo paprašoma pirštu užspausti dešiniąją šnervę ir kelis
+kartus įkvėpti bei iškvėpti per kairiąją, po to paprašoma tą patį padaryti su kita šnerve.
+Tiriamojo paprašoma apibūdinti kvėpavimo lengvumą. Vertinama pagal skalę ir įrašoma į
+eilutę 4.6 „Šnervių užgulimas, Nos“:
+<table>
+    <tr>
+      <th scope="col"><b>Vertė</b></th>
+      <th scope="col"><b>Aprašymas</b></th>
+    </tr>
+    <tr>
+      <td>+4</td>
+      <td>Dešinė šnervė visiškai užgulta, pro kairę kvėpuojama lengviau.</td>
+    </tr>
+    <tr>
+      <td>+3</td>
+      <td>Dešinė šnervė užgulta labiau nei kairė, bet orą su jėga galima prapūsti.</td>
+    </tr>
+    <tr>
+      <td>+2</td>
+      <td>Pro dešinę šnervę kvėpuojama, bet reikia pridėti papildomos jėgos (ilgaikvėpuojant pavargstama), pro kairę kvėpuojama lengviau.</td>
+    </tr>
+    <tr>
+      <td>+1</td>
+      <td>Pro dešinę šnervę kvėpuojama laisvai, bet jaučiamas švilpimas, kairėje švilpimas nejaučiamas.</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td><b>Pro abi šnerves kvėpuojama laisvai be jokio pasipriešinimo ar švilpimo.</b></td>
+    </tr>
+    <tr>
+      <td>-1</td>
+      <td>Pro kairę šnervę kvėpuojama laisvai, bet jaučiamas švilpimas, dešinėje švilpimas nejaučiamas.</td>
+    </tr>
+    <tr>
+      <td>-2</td>
+      <td>Pro kairę šnervę kvėpuojama, bet reikia pridėti papildomos jėgos (ilgai kvėpuojant pavargstama), pro dešinę kvėpuojama lengviau.</td>
+    </tr>
+     <tr>
+      <td>-3</td>
+      <td>Kairė šnervė užgulta labiau nei dešinė, bet orą su jėga galima prapūsti.</td>
+    </tr>
+    <tr>
+      <td>-4</td>
+      <td>Kairė šnervė visiškai užgulta, pro dešinę kvėpuojama lengviau.</td>
+    </tr>
+
+</table>
+        </div>
+    </div>
+</div>
+    """, width = 250)
+
+surytas = TextInput(name = "rytas13", value="", title = "Rytas", width = 60)
+supietus = TextInput(name = "pietus13", value="", title = "Pietūs", width = 60)
+suvakaras = TextInput(name = "vakaras13", value="", title = "Vakaras", width = 60)
 # tr>
 #       <td>-4</td>
 #       <td><div id="outer-circle">
@@ -1073,7 +1475,10 @@ l = layout(children=[[protok(), invard , inpavard, lytis, inamz],
     [refleksu()],
     [aprdermoref(), drrytas, drpietus, drvakaras],
     [aprvasomref(), vrrytas, vrpietus, vrvakaras],
-
+    [aprvyzdyd(), vdrytas, vdpietus, vdvakaras],
+    [aprtremoref(), trrytas, trpietus, trvakaras],
+    [aprsneruzgu(), surytas, supietus, suvakaras],
+    [tiriam1()],
 
 
     # [input2],
