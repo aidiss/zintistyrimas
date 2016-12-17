@@ -534,7 +534,7 @@ th {
   left: 0;
   right: 0;
   background: rgba(1, 0, 0, 0.8);
-  transition: opacity 1ms;
+  transition: opacity 0ms;
   visibility: hidden;
   opacity: 1;
   overflow-y:scroll;
@@ -552,12 +552,12 @@ th {
   border-radius: 5px;
   width: 30%;
   position: relative;
-  transition: all 5s ease-in-out;
 }
 
 .popup h2 {
-  margin-top: 0;
+  margin-rigth: 30px;
   color: #333;
+  padding: 
   font-family: Verdana, Arial, sans-serif;
 }
 .popup .close {
@@ -574,18 +574,18 @@ th {
   color: #06D85F;
 }
 .popup .content {
-  max-height: 30%;
+  max-height: 50%;
   overflow: auto;
   text-align: justify;
   text-justify: inter-word;
 }
 
-@media screen and (max-width: 1000px){
+@media screen and (max-width: 100%){
   .box{
-    width: 80%;
+    width: 20%;
   }
   .popup{
-    width: 80%;
+    width: 20%;
   }
 }
            </style>
