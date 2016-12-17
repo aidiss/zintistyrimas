@@ -252,6 +252,78 @@ curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
              min-width: 25px !important;
              width: 25px !important;
            }
+           .bk-widget input[name$="rytas19"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus19"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras19"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="rytas20"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus20"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras20"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="rytas21"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus21"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras21"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="rytas22"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus22"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras22"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="rytas23"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus23"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras23"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="rytas24"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="pietus24"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
+           .bk-widget input[name$="vakaras24"] {
+             min-width: 25px !important;
+             width: 25px !important;
+           }
 
 
  #outer-circle {
@@ -525,20 +597,20 @@ th {
 </html>
 ''')
 
-aprugis = Div(text = "<br>Ūgis (Stovint išsitiesus, centimetrais)" , width=250)
-inugis = TextInput(name = "ugis", value="", width=220, height=None)
+# aprugis = Div(text = "<br>Ūgis (Stovint išsitiesus, centimetrais)" , width=250)
+# inugis = TextInput(name = "ugis", value="", width=220, height=None)
 
-aprkrut = Div(text = "<br>Krūtinės ląstos apimtis (Pažąstų aukštyje, nuleidus rankas, centimetrais)", width=250)
-inkrut = TextInput(name = "krut", value="", width=220, height=None)
+# aprkrut = Div(text = "<br>Krūtinės ląstos apimtis (Pažąstų aukštyje, nuleidus rankas, centimetrais)", width=250)
+# inkrut = TextInput(name = "krut", value="", width=220, height=None)
 
-aprjuos = Div(text = "<br>Juosmens apimtis (Per siauriausią vietą, centimetrais)", width=250)
-injuos = TextInput(name = "juos", value="", width=220, height=None)
+# aprjuos = Div(text = "<br>Juosmens apimtis (Per siauriausią vietą, centimetrais)", width=250)
+# injuos = TextInput(name = "juos", value="", width=220, height=None)
 
-aprklub = Div(text = "<br>Klubų apimtis (Per plačiausią vietą, maždaug genitalijų aukštyje, centimetrais)", width=250)
-inklub= TextInput(name = "klub", value="", width=220, height=None)
+# aprklub = Div(text = "<br>Klubų apimtis (Per plačiausią vietą, maždaug genitalijų aukštyje, centimetrais)", width=250)
+# inklub= TextInput(name = "klub", value="", width=220, height=None)
 
-aprmase = Div(text = "<br>Masė (Ryte, išsituštinus, pasišlapinus, nusirengus, kg)", width=250)
-inmase= TextInput(name = "mase", value="", width=220, height=None)
+# aprmase = Div(text = "<br>Masė (Ryte, išsituštinus, pasišlapinus, nusirengus, kg)", width=250)
+# inmase= TextInput(name = "mase", value="", width=220, height=None)
 
 
 factors = ["a", "b", "c", "d", "e", "f", "g", "h"]
@@ -649,6 +721,42 @@ def tiriam3():
 def kraujparmat():
     return Div(text="""<b>12. Kraujotakos parametrų matavimas:</b>""", width=780)
 
+def ortatest():
+    return Div(text="""<b>Ortostatinis testas.</b> Tiriamajam atsistojus, kraujospūdžio matuoklio žarnelė neturi
+būti tempiama, todėl matuoklį reikia <i>padėti ant paaukštinimo, pritvirtinti prie manžetės
+arba duoti laikyti tiriamajam laisvoje rankoje</i>.
+<br>• Tiriamajam pranešama, kad paprašius reikės RAMIAI atsistoti šalia ir atsisėsti
+TIK LEIDUS.
+<br>• Įjungiamas kraujospūdžio matuoklis ir jo pompa paimama dešinės rankos
+mažyliu, bevardžiu ir didžiuoju pirštais, taip pat į dešinę ranką paimamas
+chronometras ir laikomas taip, kad smiliumi arba nykščiu būtų galima lengvai
+nuspausti paleidimo mygtuką.
+<br>• Kaire ranka užčiuopiamas tiriamojo pulsas kairėje rankoje taip, kaip nurodyta 8
+punkte. Riešą reikia apminti patogiai, kad pirštai testo metu nenuslystų, ir tam,
+kad būtų galima testo metu lengvai koreguoti jų padėtį.
+<br>• <i>Tiriamojo paprašoma atsistoti</i>. Jo kairė ranka laikoma sulenkta stačiu kampu.
+Tiriamajam besistojant, Jūs turite likti sėdėti.""", width=780)
+
+def atsist():
+    return Div(text="""<br>Atsistojus<br>(dūžių skaičius per pirmas 15 s,×4)""", width=300)
+
+def po15():
+    return Div(text="""<br>Po 15 s.<br>(dūžių skaičius tarp 15-tos ir 45-tos sekundės,×2)""", width=300)
+
+def siskraujatsi():
+    return Div(text="""<br>Sistolinis kraujospūdis atsistojus<br>(rodmuo ekrane ties „SYS“ po 45 s)""", width=300)
+
+def diaskraujatsi():
+    return Div(text="""<br>Diastolinis kraujospūdis atsistojus<br>(rodmuo ekrane ties „DIA“)""", width=300)
+
+def pulsatsi45():
+    return Div(text="""<br>Pulsas atsistojus po 45 s<br>(rodmuo ekrane ties „PULS“)""", width=300)
+
+def tiriam4():
+    return Div(text="""<b>13.</b><i> Nuimama manžetė nuo tiriamojo žasto.</i>""", width=780)
+
+def kvepparmat():
+    return Div(text="""<b>14. Kvėpavimo parametrų matavimas:</b>""", width=780)
 
 
 
@@ -1648,7 +1756,105 @@ dkgrytas = TextInput(name = "rytas18", value="", title = "Rytas", width = 60)
 dkgpietus = TextInput(name = "pietus18", value="", title = "Pietūs", width = 60)
 dkgvakaras = TextInput(name = "vakaras18", value="", title = "Vakaras", width = 60)
 
+def aprpulsatsi15():
+    return Div(text="""
+<div class="box">
+    <a class="button" href="#popup23">• Pulsas tik ką atsistojus ir po 15 s:</a>
+</div>
 
+<div id="popup23" class="overlay">
+    <div class="popup">
+        <h2>Pulsas tik ką atsistojus ir po 15 s</h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+Tiriamajam pilnai atsistojus paleidžiamas
+chronometras ir pradedami skaičiuoti širdies dūžiai kaip ir 8 punkte.
+Skaičiuojama 15 sekundžių, skaičius įsimenamas arba garsiai pasakomas
+asistentui, nestabdant chronometro, iškart pradedamas skaičiuoti antras pulsas,
+skaičiuojama dar 30 sekundžių, t.y. kol chronometras rodys 0:45, skaičius taip
+pat įsimenamas arba garsiai pasakomas asistentui:
+        </div>
+    </div>
+</div>
+    """, width = 250)
+
+parytas = TextInput(name = "rytas19", value="", title = "Rytas", width = 60)
+papietus = TextInput(name = "pietus19", value="", title = "Pietūs", width = 60)
+pavakaras = TextInput(name = "vakaras19", value="", title = "Vakaras", width = 60)
+
+p15rytas = TextInput(name = "rytas20", value="", title = "Rytas", width = 60)
+p15pietus = TextInput(name = "pietus20", value="", title = "Pietūs", width = 60)
+p15vakaras = TextInput(name = "vakaras20", value="", title = "Vakaras", width = 60)
+
+def aprkraujpulsatsi45():
+    return Div(text="""
+<div class="box">
+    <a class="button" href="#popup24">• Kraujospūdis ir pulsas atsistojus po 45 s:</a>
+</div>
+
+<div id="popup24" class="overlay">
+    <div class="popup">
+        <h2>Kraujospūdis ir pulsas atsistojus po 45 s</h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+<i>Triamojo paprašoma atpalaiduoti
+ranką bei stovėti ramiai</i>. Tuomet kairė tiriamojo ranka nuleidžiama, pripučiama
+kraujospūdžio matuoklio manžetė ir pamatuojamas kraujospūdis (automatiškai
+pamatuojamas ir pulsas).
+<br>Tiriamojo paprašoma atsisėsti. Išleidžiamas oras iš manžetės. Juodraštyje
+užsirašomi abu įsiminti skaičiai iš eilės. Pirmąjį skaičių padauginę iš 4 gauname
+pulsą iškart atsistojus, jis įrašomas eilutėje 5.5 „Puslas tik ką atsistojus, P 2 ”.
+Antrąjį skaičių padauginę iš 2, gauname antrąjį pulsą atsistojus, jis įrašomas
+eilutėje „Pulsas atsistojus po 15 s, P 3 ”. Užsirašomi kraujospūdžio matuoklio
+ekrane rodomi skaičiai: sistolinis kraujospūdis (didesnis rodmuo ties užrašu
+„SYS“) įrašomas eilutėje 5.7 „Sistolinis kraujospūdis atsistojus, Sis 2 “, diastolinis
+kraujospūdis (mažesnis rodmuo ties užrašu „DIA“) įrašomas eilutėje 5.8
+„Diastolinis kraujospūdis atsistojus, Dia 2 “, o ekrane rodomas pulsas – eilutėje 5.9
+„Pulsas atsistojus po 45 s, P 4 ”.
+        </div>
+    </div>
+</div>
+    """, width = 250)
+
+skarytas = TextInput(name = "rytas21", value="", title = "Rytas", width = 60)
+skapietus = TextInput(name = "pietus21", value="", title = "Pietūs", width = 60)
+skavakaras = TextInput(name = "vakaras21", value="", title = "Vakaras", width = 60)
+
+dkarytas = TextInput(name = "rytas22", value="", title = "Rytas", width = 60)
+dkapietus = TextInput(name = "pietus22", value="", title = "Pietūs", width = 60)
+dkavakaras = TextInput(name = "vakaras22", value="", title = "Vakaras", width = 60)
+
+pa45rytas = TextInput(name = "rytas23", value="", title = "Rytas", width = 60)
+pa45pietus = TextInput(name = "pietus23", value="", title = "Pietūs", width = 60)
+pa45vakaras = TextInput(name = "vakaras23", value="", title = "Vakaras", width = 60)
+
+def aprkvepsu():
+    return Div(text="""
+<div class="box">
+    <a class="button" href="#popup25"><br>Kvėpavimo sulaikymas įkvėpus</a>
+</div>
+
+<div id="popup25" class="overlay">
+    <div class="popup">
+        <h2>Kvėpavimo sulaikymas įkvėpus</h2>
+        <a class="close" href="#">&times;</a>
+        <div class="content">
+Įsitikinama, kad tiriamasis sėdi tiesia nugara.
+Tiriamojo paprašoma pajausti savo kvėpavimą kelis kartus įkvėpiant ir iškvėpiant, tuomet
+įkvėpti, bet IŠLAIKYTI TIESIĄ NUGARĄ, nekelti pečių ar kitaip nepersitempti, sulaikius
+kvėpavimą duoti ženklą linktelint galvą. Kvėpavimą sulaikyti kiek įmanoma ilgiau, iškvėpti
+tik kai jau visiškai neįmanoma sulaikyti kvėpavimo nė sekundės ilgiau, tačiau nesimuistyti
+ar kitaip nebandyti užtęsti laiko. Tiriamajam įkvėpus ir linktelėjus galvą, paleidžiamas
+chronometras, jam pilnai iškvėpus, chronometras stabdomas. Chronometro ekrane
+rodomas laikas sekundėmis įrašomas eilutėje 6.2 „Kvėpavimo sulaikymas įkvėpus, t“.
+        </div>
+    </div>
+</div>
+    """, width = 250)
+
+ksirytas = TextInput(name = "rytas24", value="", title = "Rytas", width = 60)
+ksipietus = TextInput(name = "pietus24", value="", title = "Pietūs", width = 60)
+ksivakaras = TextInput(name = "vakaras24", value="", title = "Vakaras", width = 60)
 
 # tr>
 #       <td>-4</td>
@@ -1739,6 +1945,17 @@ l = layout(children=[[protok(), invard , inpavard, lytis, inamz],
     [aprpulgul(), pgrytas, pgpietus, pgvakaras],
     [aprsiskraujgul(), skgrytas, skgpietus, skgvakaras],
     [aprdiakraujgul(), dkgrytas, dkgpietus, dkgvakaras],
+    [ortatest()],
+    [aprpulsatsi15()],
+    [atsist(), parytas, papietus, pavakaras],
+    [po15(), p15rytas, p15pietus, p15vakaras],
+    [aprkraujpulsatsi45()],
+    [siskraujatsi(), skarytas, skapietus, skavakaras],
+    [diaskraujatsi(), dkarytas, dkapietus, dkavakaras],
+    [pulsatsi45(), pa45rytas, pa45pietus, pa45vakaras],
+    [tiriam4()],
+    [kvepparmat()],
+    [aprkvepsu(), ksirytas, ksipietus, ksivakaras],
 
 
     # [input2],
