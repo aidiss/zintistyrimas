@@ -555,15 +555,14 @@ th {
 }
 
 .popup h2 {
-  margin-rigth: 30px;
   color: #333;
   padding: 
   font-family: Verdana, Arial, sans-serif;
 }
 .popup .close {
   position: absolute;
-  top: 20px;
-  right: 30px;
+  right: 20px;
+  bottom:0px;
   transition: all 0ms;
   font-size: 30px;
   font-weight: bold;
@@ -582,10 +581,10 @@ th {
 
 @media screen and (max-width: 100%){
   .box{
-    width: 20%;
+    width: 80%;
   }
   .popup{
-    width: 20%;
+    width: 80%;
   }
 }
            </style>
@@ -763,13 +762,13 @@ def kvepparmat():
 def pav1():
     return Div(text="""
 <div class="box">
-    <a class="button" href="#popup1">3 - 2 SAVAITĖS IKI TYRIMŲ DIENOS</a>
+    <a class="button" href="#popup1">3-2 SAVAITĖS IKI TYRIMŲ DIENOS</a>
 </div>
 
 <div id="popup1" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>3-2 SAVAITĖS IKI TYRIMŲ DIENOS</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Jei tai pirmasis tyrimas, pradedama keisti mityba, jei tai pakartotinis tyrimas, toliau
 maitinamasi pagal ankstesnio tyrimo metu pateiktas rekomendacijas. Mitybos keitimas
@@ -822,9 +821,9 @@ def pav2():
 </div>
 
 <div id="popup2" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>MAŽIAUSIAI 2 DIENOS IKI TYRIMŲ DIENOS</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Nuo ryto nustojamos vartoti šios medžiagos:
 <br><b>Kava, arbata, kakava, šokoladas, energiniai gėrimai, rūkalai, alkoholis, gazuoti
@@ -843,9 +842,9 @@ def pav3():
 </div>
 
 <div id="popup3" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>TYRIMŲ DIENOS IŠVAKARĖSE</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Jei kitą dieną matavimus atliks sutartu metu atvykęs asmuo, nuo pietų pradedami rinkti 3
 šlapimo mėginiai:
@@ -868,9 +867,9 @@ def pav4():
 </div>
 
 <div id="popup4" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>TYRIMŲ DIENĄ</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup"">&times;</a>
         <div class="content">
 Tyrimų dieną galima valgyti, bet vis dar laikantis ankstesnių mitybos nurodymų. Iki tyrimo
 reikia būti bent 2 val. nevalgius ir bent 30 min. iki tyrimo nieko nekramtyti, tačiau galima
@@ -895,9 +894,9 @@ def aprsrugs():
 </div>
 
 <div id="popup5" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Rūgštingumas</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup"">&times;</a>
         <div class="content">
 Jei turimas rūgštingumo matuoklis, matuojama pagal jo instrukcijas.
 Sukalibruoto matuoklio daviklis merkiamas į šlapimą, lengvai pamaišoma ir laukiama, kol
@@ -927,9 +926,9 @@ def aprssvies():
 </div>
 
 <div id="popup6" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Šviesumas</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup"">&times;</a>
         <div class="content">
 Šlapimo mėginys įpilamas į matavimo cilindrą iki atitinkamos ribos, kad
 įmerktas areometras galėtų pilnai panirti ir šlapimas neišsilietų. Matavimo cilindras
@@ -1004,9 +1003,9 @@ def aprstank():
 </div>
 
 <div id="popup7" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Tankis</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup"">&times;</a>
         <div class="content">
 Matavimo cilindras su šlapimu pastatomas ant tvirto pagrindo ir į jį
 įmerkiamas areometras. Kai aerometras nustoja svyruoti, jis labai lengvai stumtelimas iš
@@ -1030,9 +1029,9 @@ def aprsputo():
 </div>
 
 <div id="popup8" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Putojimas</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup"">&times;</a>
         <div class="content">
 Šlapimo mėginys supilamas atgal į indelį, tvirtai užsukamas ir plakamas
 10 sekundžių. Po to pastatomas ant popierinio rankšluosčio, iškart atsukamas ir
@@ -1057,7 +1056,7 @@ skalę ir įrašoma eilutėje 2.5 „Putojimas, U-put“:
     </tr>
     <tr>
       <td>0</td>
-      <td><b>putos prasiskiria per 1 min.>/b></td>
+      <td><b>putos prasiskiria per 1 min.</b></td>
     </tr>
     <tr>
       <td>-1</td>
@@ -1080,9 +1079,9 @@ def aprserugst():
 </div>
 
 <div id="popup9" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Rūgštingumas</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup"">&times;</a>
         <div class="content">
 Jei turimas rūgštingumo matuoklis, matuojama pagal jo instrukcijas.
 Sukalibruoto matuoklio daviklis merkiamas į seiles ir laukiama, kol nusistovės rodmuo (jei
@@ -1116,7 +1115,7 @@ def aprseklamp():
 <div id="popup10" class="overlay">
     <div class="popup">
         <h2>Klampumas</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup"">&times;</a>
         <div class="content">
 Kol laukiama rūgštingumo duomenų, valgomasis šaukštas su likusiu
 seilių mėginiu pavartomas, kad pagal jų tekėjimą vizualiai būtų galima įvertinti jų
@@ -1164,9 +1163,9 @@ def aprpulsed():
 </div>
 
 <div id="popup11" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Pulsas sėdint</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup"">&times;</a>
         <div class="content">
 Užčiuopiamas pulsas ant tiriamojo riešo, tai geriausia padaryti trimis
 pirštais, sudėtais greta – šoninius pirštus spaudžiant prie kaulo šiek tiek stipriau nei
@@ -1199,9 +1198,9 @@ def kunotemp():
 </div>
 
 <div id="popup12" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Kūno temperatūra</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Kūno termometras naudojamas pagal jo naudojimo instrukciją.
 <br>Jei matuojama infraraudonųjų spindulių (IR) termometru, matuojama ausies angos
@@ -1228,9 +1227,9 @@ def aprdermoref():
 </div>
 
 <div id="popup13" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Dermografinis refleksas</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Tiriamojo paprašoma atsiraitoti dešinės rankos rankovę,
 atidengiant bicepsą. Žinomo pločio, neaštriu, bet neužapvalintu daiktu (pavyzdžiui,
@@ -1289,9 +1288,9 @@ def aprvasomref():
 </div>
 
 <div id="popup14" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Vasomotorinis refleksas</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Vienos rankos delnu lieskite tiriamojo tricepsą (žasto
 nugarinę dalį), o kitos rankos delnu – tiriamojo plaštakos išorinę pusę. Kelis kartus
@@ -1357,9 +1356,9 @@ def aprvyzdyd():
 </div>
 
 <div id="popup15" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Vyzdžio dydis</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Tiriamojo regos lauke neturi būti ryškios šviesos (lempos ar lango),
 geriausia, kad jis sėdėtų priešais šviesios spalvos sieną. Pakeliamas pirštas prieš
@@ -1465,9 +1464,9 @@ def aprtremoref():
 </div>
 
 <div id="popup16" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Tremoro (drebulio) refleksas</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Tiriamojo paprašoma išsižioti ir iškišti liežuvį tiesiai į
 priekį. Stebimas liežuvio judesys ir raumenų drebulys. Jei reikia, patikrinamas ir galūnių
@@ -1524,9 +1523,9 @@ def aprsneruzgu():
 </div>
 
 <div id="popup17" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Šnervių užgulimas</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Tiriamojo paprašoma pirštu užspausti dešiniąją šnervę ir kelis
 kartus įkvėpti bei iškvėpti per kairiąją, po to paprašoma tą patį padaryti su kita šnerve.
@@ -1591,9 +1590,9 @@ def aprsarglinref():
 </div>
 
 <div id="popup18" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Sargento linijos refleksas</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Tiriamojo paprašoma atidengti pilvą nuo bambos iki
 krūtinkaulio. Žinomo pločio, neaštriu daiktu (pavyzdžiui, įtrauktu tušinuku, bambukine
@@ -1642,9 +1641,9 @@ def aprkvepdaz():
 </div>
 
 <div id="popup19" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Kvėpavimo dažnis</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Tiriamojo kairėje rankoje užčiuopiamas pulsas (kad tiriamasis
 nežinotų, jog stebimas jo kvėpavimas) ir akies kampu stebimas pilvo ir krūtinės
@@ -1682,9 +1681,9 @@ def aprpulgul():
 </div>
 
 <div id="popup20" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Pulsas gulint</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Užčiuopiamas pulsas ant tiriamojo riešo, tai geriausia padaryti trimis
 pirštais, sudėtais greta – šoninius pirštus spaudžiant prie kaulo šiek tiek stipriau nei
@@ -1717,9 +1716,9 @@ def aprsiskraujgul():
 </div>
 
 <div id="popup21" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Sistolinis kraujospūdis gulint</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Manžetė pripumpuojama oro iki slėgio 180-200 mmHg ir
 pamatuojamas kraujospūdis. Sistolinis kraujospūdis (didesnis rodmuo ties užrašu „SYS“)
@@ -1740,9 +1739,9 @@ def aprdiakraujgul():
 </div>
 
 <div id="popup22" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Diastolinis kraujospūdis gulint</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Manžetė pripumpuojama oro iki slėgio 180-200 mmHg ir
 pamatuojamas kraujospūdis. Diastolinis kraujospūdis (mažesnis rodmuo ties užrašu „DIA“ ) įrašomas eilutėje 5.4 „Diastolinis kraujospūdis
@@ -1763,9 +1762,9 @@ def aprpulsatsi15():
 </div>
 
 <div id="popup23" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Pulsas tik ką atsistojus ir po 15 s</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Tiriamajam pilnai atsistojus paleidžiamas
 chronometras ir pradedami skaičiuoti širdies dūžiai kaip ir 8 punkte.
@@ -1793,9 +1792,9 @@ def aprkraujpulsatsi45():
 </div>
 
 <div id="popup24" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Kraujospūdis ir pulsas atsistojus po 45 s</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 <i>Triamojo paprašoma atpalaiduoti
 ranką bei stovėti ramiai</i>. Tuomet kairė tiriamojo ranka nuleidžiama, pripučiama
@@ -1835,9 +1834,9 @@ def aprkvepsu():
 </div>
 
 <div id="popup25" class="overlay">
-    <div class="popup">
+    <div class="popup" id="showpopup">
         <h2>Kvėpavimo sulaikymas įkvėpus</h2>
-        <a class="close" href="#">&times;</a>
+        <a class="close" href="#showpopup">&times;</a>
         <div class="content">
 Įsitikinama, kad tiriamasis sėdi tiesia nugara.
 Tiriamojo paprašoma pajausti savo kvėpavimą kelis kartus įkvėpiant ir iškvėpiant, tuomet
