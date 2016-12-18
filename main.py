@@ -516,6 +516,7 @@ curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
 
 table {
   border-collapse: collapse;
+  margin-bottom:3%;
 }
 th,td {
   border: 1px solid #c6c7cc;
@@ -563,6 +564,7 @@ th {
   position: absolute;
   right: 20px;
   bottom:0px;
+  padding: 0 20 20 0:
   transition: all 0ms;
   font-size: 30px;
   font-weight: bold;
