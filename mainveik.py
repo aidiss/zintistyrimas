@@ -539,7 +539,7 @@ th {
   visibility: hidden;
   opacity: 1;
   overflow-y:scroll;
-  z-index: 2;
+  z-index: 99;
 }
 .overlay:target {
   visibility: visible;
@@ -598,21 +598,6 @@ th {
 </html>
 ''')
 
-# aprugis = Div(text = "<br>Ūgis (Stovint išsitiesus, centimetrais)" , width=250)
-# inugis = TextInput(name = "ugis", value="", width=220, height=None)
-
-# aprkrut = Div(text = "<br>Krūtinės ląstos apimtis (Pažąstų aukštyje, nuleidus rankas, centimetrais)", width=250)
-# inkrut = TextInput(name = "krut", value="", width=220, height=None)
-
-# aprjuos = Div(text = "<br>Juosmens apimtis (Per siauriausią vietą, centimetrais)", width=250)
-# injuos = TextInput(name = "juos", value="", width=220, height=None)
-
-# aprklub = Div(text = "<br>Klubų apimtis (Per plačiausią vietą, maždaug genitalijų aukštyje, centimetrais)", width=250)
-# inklub= TextInput(name = "klub", value="", width=220, height=None)
-
-# aprmase = Div(text = "<br>Masė (Ryte, išsituštinus, pasišlapinus, nusirengus, kg)", width=250)
-# inmase= TextInput(name = "mase", value="", width=220, height=None)
-
 
 factors = ["a", "b", "c", "d", "e", "f", "g", "h"]
 
@@ -628,10 +613,10 @@ p.yaxis.visible =False
 p.xaxis.visible =False
 
 p2 = figure(x_axis_label='kh', y_axis_label='ph', x_range = [-60, 60], y_range = factors, height = 420, toolbar_location = None)
-p.title.text = "<-Katabolizmas|Anabolizmas->"
-p.title.align = "center"
-p.yaxis.visible =False
-p.xaxis.visible =False
+p2.title.text = "<-Katabolizmas|Anabolizmas->"
+p2.title.align = "center"
+p2.yaxis.visible =False
+p2.xaxis.visible =False
 
 p3 = figure(x_axis_label='kh', y_axis_label='ph', x_range = [-60, 60], y_range = factors, height = 420, toolbar_location = None)
 p.title.text = "<-Katabolizmas|Anabolizmas->"
@@ -794,6 +779,8 @@ def tiriam4():
 def kvepparmat():
     return Div(text="""<b>14. Kvėpavimo parametrų matavimas:</b>""", width=780)
 
+def kataanab():
+    return Div(text="""<b><span id="tab">KATABOLIZMAS|ANABOLIZMAS</span></b>""", width=780)
 
 
 def pav1():
@@ -1892,48 +1879,28 @@ ksirytas = TextInput(name = "rytas24", value="", title = "Rytas", width = 60)
 ksipietus = TextInput(name = "pietus24", value="", title = "Pietūs", width = 60)
 ksivakaras = TextInput(name = "vakaras24", value="", title = "Vakaras", width = 60)
 
-# tr>
-#       <td>-4</td>
-#       <td><div id="outer-circle">
-#             <div id="inner-circle">
-#               </div>
-#                     </div></td>
-#     </tr>
-    
-
-
-
-input = TextInput(name = "input", value="", title = "Ivesk ph")
-input1 = TextInput(name = "input1", value="", title = "Ivesk seiliu ph")
-input2 = TextInput(name = "input2", value="", title = "Ivesk")
-# input3= TextInput(value="", title = "Ivesk ph")
-# input4 = TextInput(value="", title = "Ivesk seiliu ph")
-# input5 = TextInput(value="", title = "Ivesk")
-
-# add a callback to a widget
-
 def t_update(attr, old, new):
-    b = float(input.value)
-    t_new_data={'x':[0,b],'y':[1,1]}
+    b = float(srrytas.value)
+    t_new_data={'x':[0,b],'y':[8,8]}
     sourcet.data.update(t_new_data)
-input.on_change("value", t_update)
+srrytas.on_change("value", t_update)
 
 
 def update1(attr, old, new):
-    b1 = float(input1.value)
+    b1 = float(srpietus.value)
     new_data1={'x':[0, b1*1.5],'y':[2, 2]}
     source1.data.update(new_data1)
-input1.on_change("value", update1)
+srpietus.on_change("value", update1)
 
 def update2(attr, old, new):
-    b2 = float(input2.value)
+    b2 = float(srvakaras.value)
     if b2 < 50:
         new_data2={'x':[0, b2*-1.5],'y':[3, 3]}
         source2.data.update(new_data2)
     else:
         new_data2={'x':[0, b2*1.5],'y':[3, 3]}
         source2.data.update(new_data2)
-input2.on_change("value", update2)
+srvakaras.on_change("value", update2)
 
 # create a layout for everything
 # varpavdata = row(invard, inpavard, indata)
@@ -1996,7 +1963,7 @@ l = layout([protok(), invard , inpavard, lytis, inamz],
 
     # [input2],
     )
-l2= column(p, p2, p3, p4, p5, p6, p7)
+l2= column(kataanab(),p, p2, p3, p4, p5, p6, p7)
 l1 = row(l, l2)
 # add the layout to curdoc
 curdoc().add_root(l1)
