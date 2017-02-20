@@ -599,16 +599,18 @@ th {
 ''')
 
 
-factors = ["a", "b", "c", "d", "e", "f", "g", "h"]
+factors = ["a", "b", "c", "d", "e", "f", "g", "h", "j", "k"]
 
 source = ColumnDataSource(data=dict(x=[], y=[]))
 source1 = ColumnDataSource(data=dict(x=[], y=[]))
 source2 = ColumnDataSource(data=dict(x=[], y=[]))
 sourcet = ColumnDataSource(data=dict(x=[], y=[]))
 
-p = figure(x_axis_label='kh', y_axis_label='ph', x_range = [-60, 60], y_range = factors, height = 420, toolbar_location = None)
+p = figure(x_axis_label='kh', y_axis_label='ph', x_range = [-60, 60], y_range = factors, height = 150, toolbar_location = None)
 p.title.text = "<-Katabolizmas|Anabolizmas->"
 p.title.align = "center"
+p.text(x=[-19,1], y =[9,9], text = ["<-Simpatinis", "Parasimpatinis->"])
+# p.text_font_size = "8pt"
 p.yaxis.visible =False
 p.xaxis.visible =False
 
@@ -619,34 +621,34 @@ p2.yaxis.visible =False
 p2.xaxis.visible =False
 
 p3 = figure(x_axis_label='kh', y_axis_label='ph', x_range = [-60, 60], y_range = factors, height = 420, toolbar_location = None)
-p.title.text = "<-Katabolizmas|Anabolizmas->"
-p.title.align = "center"
-p.yaxis.visible =False
-p.xaxis.visible =False
+p3.title.text = "<-Katabolizmas|Anabolizmas->"
+p3.title.align = "center"
+p3.yaxis.visible =False
+p3.xaxis.visible =False
 
 p4 = figure(x_axis_label='kh', y_axis_label='ph', x_range = [-60, 60], y_range = factors, height = 420, toolbar_location = None)
-p.title.text = "<-Katabolizmas|Anabolizmas->"
-p.title.align = "center"
-p.yaxis.visible =False
-p.xaxis.visible =False
+p4.title.text = "<-Katabolizmas|Anabolizmas->"
+p4.title.align = "center"
+p4.yaxis.visible =False
+p4.xaxis.visible =False
 
 p5 = figure(x_axis_label='kh', y_axis_label='ph', x_range = [-60, 60], y_range = factors, height = 420, toolbar_location = None)
-p.title.text = "<-Katabolizmas|Anabolizmas->"
-p.title.align = "center"
-p.yaxis.visible =False
-p.xaxis.visible =False
+p5.title.text = "<-Katabolizmas|Anabolizmas->"
+p5.title.align = "center"
+p5.yaxis.visible =False
+p5.xaxis.visible =False
 
 p6 = figure(x_axis_label='kh', y_axis_label='ph', x_range = [-60, 60], y_range = factors, height = 420, toolbar_location = None)
-p.title.text = "<-Katabolizmas|Anabolizmas->"
-p.title.align = "center"
-p.yaxis.visible =False
-p.xaxis.visible =False
+p6.title.text = "<-Katabolizmas|Anabolizmas->"
+p6.title.align = "center"
+p6.yaxis.visible =False
+p6.xaxis.visible =False
 
 p7 = figure(x_axis_label='kh', y_axis_label='ph', x_range = [-60, 60], y_range = factors, height = 420, toolbar_location = None)
-p.title.text = "<-Katabolizmas|Anabolizmas->"
-p.title.align = "center"
-p.yaxis.visible =False
-p.xaxis.visible =False
+p7.title.text = "<-Katabolizmas|Anabolizmas->"
+p7.title.align = "center"
+p7.yaxis.visible =False
+p7.xaxis.visible =False
 
 p.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
 p.add_layout(BoxAnnotation(right = 0, left=15, fill_alpha=0.5, fill_color='green'))
@@ -780,7 +782,7 @@ def kvepparmat():
     return Div(text="""<b>14. Kvėpavimo parametrų matavimas:</b>""", width=780)
 
 def kataanab():
-    return Div(text="""<b><span id="tab">KATABOLIZMAS|ANABOLIZMAS</span></b>""", width=780)
+    return Div(text="""<b>KATABOLIZMAS|ANABOLIZMAS</b>""", width=780)
 
 
 def pav1():
@@ -1045,6 +1047,8 @@ matavimą pakartoti.
 strytas = TextInput(name = "rytas3", value="", title = "Rytas", width = 60)
 stpietus = TextInput(name = "pietus3", value="", title = "Pietūs", width = 60)
 stvakaras = TextInput(name = "vakaras3", value="", title = "Vakaras", width = 60)
+
+
 
 def aprsputo():
     return Div(text="""
@@ -1902,16 +1906,6 @@ def update2(attr, old, new):
         source2.data.update(new_data2)
 srvakaras.on_change("value", update2)
 
-# create a layout for everything
-# varpavdata = row(invard, inpavard, indata)
-# lytamzugis = row(inlyt, inamz, inugis)
-# pav1 = column(output1, lytamzugis)
-# krutjuosklub = row(inpkrut, injuos, inklub)
-# layout = row(input, input1, input2)
-# out = row(layout, p, )
-# bendr = column(varpavdata, pav1, krutjuosklub, inmase, output2, out)
-# layout1 = column(output, bendr)
-
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
@@ -1963,7 +1957,7 @@ l = layout([protok(), invard , inpavard, lytis, inamz],
 
     # [input2],
     )
-l2= column(kataanab(),p, p2, p3, p4, p5, p6, p7)
+l2= column(p, p2, p3, p4, p5, p6, p7)
 l1 = row(l, l2)
 # add the layout to curdoc
 curdoc().add_root(l1)
