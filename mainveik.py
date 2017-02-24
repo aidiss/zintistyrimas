@@ -613,6 +613,9 @@ p.title.text = "<-Katabolizmas|Anabolizmas->"
 p.title.align = "center"
 p.text(x=[-16.5,1], y =[(count-2),(count-2)], text = ["<-Simpatinis", "Parasimpatinis->"], text_font_size='10pt', text_font_style = "bold")
 p.text(x=[-40], y =[(count-5)], text = ["Rytas>"], text_font_size='10pt', text_font_style = "bold")
+p.x_range.bounds = 'auto'
+p.y_range.bounds = 'auto'
+
 p.yaxis.visible =False
 p.xaxis.visible =False
 
