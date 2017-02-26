@@ -634,22 +634,22 @@ source2 = ColumnDataSource(data=dict(x=[], y=[]))
 sourcet = ColumnDataSource(data=dict(x=[], y=[]))
 
 count = len(factors)
-formatter1 = FuncTickFormatter(code="""
-    data = {5: 'norma', 15: 'mazas', 25: 'didelis', 35: 'vidutinis', 45: '40-50', 55: '50+'}
-    return data[tick]
-""")
 
-
-p = figure(x_range = [-60, 60], y_range = factors, height = 250, toolbar_location = None)
+p = figure(x_range = [-65, 65], y_range = factors, height = 250, toolbar_location = None)
 p.title.text = "<-Katabolizmas|Anabolizmas->"
 p.title.align = "center"
 p.text(x=[-16.5,1], y =[(count-1),(count-1)], text = ["<-Simpatinis", "Parasimpatinis->"], text_font_size='10pt', text_font_style = "bold")
-p.text(x=[-40], y =[(count-5)], text = ["Rytas>"], text_font_size='10pt', text_font_style = "bold")
+p.text(x=[-40], y =[(count-5)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold")
 p.x_range.bounds = 'auto'
 p.y_range.bounds = 'auto'
-p.xaxis.axis_label = 'Simpatinis|simpatinis'
+p.xaxis.axis_label = 'Simpatinis|Parasimpatinis'
 p.yaxis.visible =False
-p.xaxis[0].formatter = formatter1
+p.xaxis.ticker = FixedTicker(ticks=[15,30,45,60])
+p.xaxis.formatter = FuncTickFormatter(code="""
+    data = {15: 'norma', 30: 'mazas', 45: 'vidutinis', 60: 'didelis'}
+    return data[tick]
+""")
+
 # p.xaxis.visible =False
 
 p2 = figure(x_axis_label='kh', y_axis_label='ph', x_range = [-60, 60], y_range = factors, height = 420, toolbar_location = None)
