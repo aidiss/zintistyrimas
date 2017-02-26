@@ -2,8 +2,35 @@ from bokeh.io import curdoc, set_curdoc
 from bokeh.plotting import figure, output_file, ColumnDataSource
 from bokeh.layouts import column, row, widgetbox, layout
 from bokeh.models.widgets import TextInput, Paragraph, Div, Select
-from bokeh.models import Span, BoxAnnotation, Title
+from bokeh.core.properties import Dict, Int, String
+from bokeh.models import Span, BoxAnnotation, Title, ColorBar, LinearColorMapper, Plot, Range1d, LinearAxis, FixedTicker, FuncTickFormatter
+from bokeh.util.compiler import CoffeeScript
 import jinja2
+
+# class FixedTickFormatter(TickFormatter):
+#     """
+#     Class used to allow custom axis tick labels on a bokeh chart
+#     Extends bokeh.model.formatters.TickFormatter
+#     """
+
+#     COFFEESCRIPT =  """
+#         import {Model} from "model"
+#         import * as p from "core/properties"
+#         export class FixedTickFormatter extends Model
+#           type: 'FixedTickFormatter'
+#           doFormat: (ticks) ->
+#             labels = @get("labels")
+#             return (labels[tick] ? "" for tick in ticks)
+#           @define {
+#             labels: [ p.Any ]
+#           }
+#     """
+
+#     labels = Dict(Int, String, help="""
+#     A mapping of integer ticks values to their labels.
+#     """)
+
+#     __implementation__ = CoffeeScript(COFFEESCRIPT)
 
 curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
 <html lang="en">
@@ -607,17 +634,23 @@ source2 = ColumnDataSource(data=dict(x=[], y=[]))
 sourcet = ColumnDataSource(data=dict(x=[], y=[]))
 
 count = len(factors)
+formatter1 = FuncTickFormatter(code="""
+    data = {5: 'norma', 15: 'mazas', 25: 'didelis', 35: 'vidutinis', 45: '40-50', 55: '50+'}
+    return data[tick]
+""")
 
-p = figure(x_range = [-60, 60], y_range = factors, height = 150, toolbar_location = None)
+
+p = figure(x_range = [-60, 60], y_range = factors, height = 250, toolbar_location = None)
 p.title.text = "<-Katabolizmas|Anabolizmas->"
 p.title.align = "center"
-p.text(x=[-16.5,1], y =[(count-2),(count-2)], text = ["<-Simpatinis", "Parasimpatinis->"], text_font_size='10pt', text_font_style = "bold")
+p.text(x=[-16.5,1], y =[(count-1),(count-1)], text = ["<-Simpatinis", "Parasimpatinis->"], text_font_size='10pt', text_font_style = "bold")
 p.text(x=[-40], y =[(count-5)], text = ["Rytas>"], text_font_size='10pt', text_font_style = "bold")
 p.x_range.bounds = 'auto'
 p.y_range.bounds = 'auto'
-
+p.xaxis.axis_label = 'Simpatinis|simpatinis'
 p.yaxis.visible =False
-p.xaxis.visible =False
+p.xaxis[0].formatter = formatter1
+# p.xaxis.visible =False
 
 p2 = figure(x_axis_label='kh', y_axis_label='ph', x_range = [-60, 60], y_range = factors, height = 420, toolbar_location = None)
 p2.title.text = "<-Katabolizmas|Anabolizmas->"
@@ -667,9 +700,9 @@ p.add_layout(BoxAnnotation(left=-45, right=-60, fill_alpha=0.6, fill_color='Dark
 
 # add a line renderer with legend and line thickness
 r = p.circle('x', 'y', source = source, fill_color="orange", line_color="green", line_width=11)
-t = p.line('x', 'y', source = sourcet, line_color = "black", line_width = 10)
-r1 = p.line('x', 'y', source = source1, line_color = "black", line_width = 10)
-r2 = p.line('x', 'y', source = source2, line_color = "black", line_width = 10)
+t = p.line('x', 'y', source = sourcet, line_color = "black", line_width = 5)
+r1 = p.line('x', 'y', source = source1, line_color = "orange", line_width = 5)
+r2 = p.line('x', 'y', source = source2, line_color = "blue", line_width = 5)
 
 dt = t.data_source
 ds = r.data_source
@@ -1890,7 +1923,7 @@ ksivakaras = TextInput(name = "vakaras24", value="", title = "Vakaras", width = 
 
 def t_update(attr, old, new):
     b = float(srrytas.value)
-    t_new_data={'x':[0,b],'y':[3,3]}
+    t_new_data={'x':[0,b],'y':["a","a"]}
     sourcet.data.update(t_new_data)
 srrytas.on_change("value", t_update)
 
@@ -1903,7 +1936,7 @@ srpietus.on_change("value", update1)
 
 def update2(attr, old, new):
     b2 = float(srvakaras.value)
-    if b2 < 50:
+    if b2 < 20:
         new_data2={'x':[0, b2*-1.5],'y':[2, 2]}
         source2.data.update(new_data2)
     else:
