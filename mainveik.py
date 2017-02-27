@@ -642,15 +642,15 @@ p.text(x=[-16.5,1], y =[(count-1),(count-1)], text = ["<-Simpatinis", "Parasimpa
 p.text(x=[-40], y =[(count-5)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold")
 p.x_range.bounds = 'auto'
 p.y_range.bounds = 'auto'
-p.xaxis.axis_label = 'Simpatinis|Parasimpatinis'
+p.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
 p.yaxis.visible =False
-p.xaxis.ticker = FixedTicker(ticks=[15,30,45,60])
+p.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
 p.xaxis.formatter = FuncTickFormatter(code="""
-    data = {15: 'norma', 30: 'mazas', 45: 'vidutinis', 60: 'didelis'}
+    data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
     return data[tick]
 """)
 
-# p.xaxis.visible =False
+# p-60, -45, -30, -xax60.visDidelis=, ax45.visible =, axis.visible =False
 
 p2 = figure(x_axis_label='kh', y_axis_label='ph', x_range = [-60, 60], y_range = factors, height = 420, toolbar_location = None)
 p2.title.text = "<-Katabolizmas|Anabolizmas->"
