@@ -629,6 +629,25 @@ th {
 factors = ["ar", "ap", "av", "br", "bp", "bv", "cr", "cp", "cv", "dr", "dp", "dv", "er", "ep", "ev", "fr", "fp", "fv", "gr", "gp", "gv", "hr", "hp", "hv",
 "jr", "jp", "jv", "kr", "kp", "kv", "lr", "lp", "lv", "mr", "mp", "mv"]
 
+#duomnys simpatinis/parasminpatinis
+normakps1 = -2
+normaaps1 = 0
+balanps1 = (normaaps1+normakps1)/2
+def kryptis():
+	if normakps1-balanps1 < -5:
+		return 1
+	else:
+		return-1
+kryptis()
+
+balanps1 =
+balanps1 =
+balanps1 =
+balanps1 =
+balanps1 =
+balanps1 =
+balanps1 =
+
 source = ColumnDataSource(data=dict(x=[], y=[]))
 source1 = ColumnDataSource(data=dict(x=[], y=[]))
 source2 = ColumnDataSource(data=dict(x=[], y=[]))
