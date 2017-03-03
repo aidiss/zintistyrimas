@@ -6,6 +6,7 @@ from bokeh.core.properties import Dict, Int, String
 from bokeh.models import Span, BoxAnnotation, Title, ColorBar, LinearColorMapper, Plot, Range1d, LinearAxis, FixedTicker, FuncTickFormatter
 from bokeh.util.compiler import CoffeeScript
 import jinja2
+import statistics
 
 # class FixedTickFormatter(TickFormatter):
 #     """
@@ -629,24 +630,24 @@ th {
 factors = ["ar", "ap", "av", "br", "bp", "bv", "cr", "cp", "cv", "dr", "dp", "dv", "er", "ep", "ev", "fr", "fp", "fv", "gr", "gp", "gv", "hr", "hp", "hv",
 "jr", "jp", "jv", "kr", "kp", "kv", "lr", "lp", "lv", "mr", "mp", "mv"]
 
-#duomnys simpatinis/parasminpatinis
+#duomenys simpatinis/parasminpatinis
 normakps1 = -2
 normaaps1 = 0
 balanps1 = (normaaps1+normakps1)/2
 def kryptis():
-	if normakps1-balanps1 < -5:
+	if normakps1-balanps1 < 0:
 		return 1
 	else:
 		return-1
 kryptis()
-
-balanps1 =
-balanps1 =
-balanps1 =
-balanps1 =
-balanps1 =
-balanps1 =
-balanps1 =
+pagrps1 = 2
+# balanps1 =
+# balanps1 =
+# balanps1 =
+# balanps1 =
+# balanps1 =
+# balanps1 =
+# balanps1 =
 
 source = ColumnDataSource(data=dict(x=[], y=[]))
 source1 = ColumnDataSource(data=dict(x=[], y=[]))
@@ -711,15 +712,15 @@ p7.xaxis.visible =False
 p.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
 p.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=30, dimension='height', line_color='yellow', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=-30, dimension='height', line_color='yellow', line_dash='dashed', line_width=4))
+p.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+p.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='blue'))
-p.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='blue'))
-p.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='blue'))
+p.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
+p.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
+p.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
 # p.add_layout(BoxAnnotation(right=45, left=60, fill_alpha=0.6, fill_color='DarkRed'))
 # p.add_layout(BoxAnnotation(right=0, left=-15, fill_alpha=0.4, fill_color='green'))
 # p.add_layout(BoxAnnotation(left=-15, right=-30, fill_alpha=0.4, fill_color='red'))
@@ -727,13 +728,12 @@ p.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='blue'))
 # p.add_layout(BoxAnnotation(left=-45, right=-60, fill_alpha=0.6, fill_color='DarkRed'))
 
 # add a line renderer with legend and line thickness
-r = p.circle('x', 'y', source = source, fill_color="orange", line_color="green", line_width=11)
 t = p.line('x', 'y', source = sourcet, line_color = "black", line_width = 5)
 r1 = p.line('x', 'y', source = source1, line_color = "orange", line_width = 5)
 r2 = p.line('x', 'y', source = source2, line_color = "blue", line_width = 5)
 
 dt = t.data_source
-ds = r.data_source
+# ds = r.data_source
 ds1 = r1.data_source
 ds2 = r2.data_source
 
