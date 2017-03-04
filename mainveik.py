@@ -6,7 +6,6 @@ from bokeh.core.properties import Dict, Int, String
 from bokeh.models import Span, BoxAnnotation, Title, ColorBar, LinearColorMapper, Plot, Range1d, LinearAxis, FixedTicker, FuncTickFormatter
 from bokeh.util.compiler import CoffeeScript
 import jinja2
-import statistics
 
 # class FixedTickFormatter(TickFormatter):
 #     """
@@ -626,20 +625,12 @@ th {
 </html>
 ''')
 
-
 factors = ["ar", "ap", "av", "br", "bp", "bv", "cr", "cp", "cv", "dr", "dp", "dv", "er", "ep", "ev", "fr", "fp", "fv", "gr", "gp", "gv", "hr", "hp", "hv",
-"jr", "jp", "jv", "kr", "kp", "kv", "lr", "lp", "lv", "mr", "mp", "mv"]
-
-
-
-source = ColumnDataSource(data=dict(x=[], y=[]))
-source1 = ColumnDataSource(data=dict(x=[], y=[]))
-source2 = ColumnDataSource(data=dict(x=[], y=[]))
-sourcet = ColumnDataSource(data=dict(x=[], y=[]))
+"jr", "jp", "jv", "kr", "kp", "kv", "lr", "lp", "lv", "mr", "mp", "ps1r"]
 
 count = len(factors)
 
-p = figure(x_range = [-65, 65], y_range = factors, height = 350, toolbar_location = None)
+p = figure(x_range = [-1, 1], y_range = factors, height = 350, toolbar_location = None)
 p.title.text = "<-Katabolizmas|Anabolizmas->"
 p.title.align = "center"
 p.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
@@ -842,15 +833,8 @@ p6.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
 p6.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
 p6.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
 
-# add a line renderer with legend and line thickness
-t = p.line('x', 'y', source = sourcet, line_color = "black", line_width = 5)
-r1 = p.line('x', 'y', source = source1, line_color = "orange", line_width = 5)
-r2 = p.line('x', 'y', source = source2, line_color = "blue", line_width = 5)
+# add a line renderer
 
-dt = t.data_source
-# ds = r.data_source
-ds1 = r1.data_source
-ds2 = r2.data_source
 
 # create some widgets
 def protok():
@@ -2064,6 +2048,16 @@ ksirytas = TextInput(name = "rytas24", value="", title = "Rytas", width = 60)
 ksipietus = TextInput(name = "pietus24", value="", title = "Pietūs", width = 60)
 ksivakaras = TextInput(name = "vakaras24", value="", title = "Vakaras", width = 60)
 
+
+sourceps1 = ColumnDataSource(data=dict(x=[], y=[]))
+source1 = ColumnDataSource(data=dict(x=[], y=[]))
+source2 = ColumnDataSource(data=dict(x=[], y=[]))
+sourcet = ColumnDataSource(data=dict(x=[], y=[]))
+
+lps1 = p.line('x', 'y', source = sourceps1, line_color = "indigo", line_width = 5)
+r1 = p.line('x', 'y', source = source1, line_color = "blue", line_width = 5)
+r2 = p.line('x', 'y', source = source2, line_color = "blue", line_width = 5)
+
 #duomenys simpatinis/parasminpatinis
 normakps1 = -2
 normaaps1 = 0
@@ -2083,12 +2077,14 @@ pagrps1 = 2
 # balanps1 =
 # balanps1 =
 
-def t_update(attr, old, new):
-    b = float(srrytas.value)
-    t_new_data={'x':[0,b],'y':["ar","ar"]}
-    sourcet.data.update(t_new_data)
-srrytas.on_change("value", t_update)
-
+def ps1_update(attr, old, new):
+    psr = float(psrytas.value.replace(",", "."))
+    pgr = float(pgrytas.value.replace(",", "."))
+    ps1 = psr-pgr
+    ps1new_data={'x':[0,ps1],'y':["ps1r","ps1r"]}
+    sourceps1.data.update(ps1new_data)
+psrytas.on_change("value", ps1_update)
+pgrytas.on_change("value", ps1_update)
 
 def update1(attr, old, new):
     b1 = float(srpietus.value)
