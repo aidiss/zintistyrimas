@@ -630,7 +630,7 @@ factors = ["ar", "ap", "av", "br", "bp", "bv", "cr", "cp", "cv", "dr", "dp", "dv
 
 count = len(factors)
 
-p = figure(x_range = [-1, 1], y_range = factors, height = 350, toolbar_location = None)
+p = figure(x_range = [-4, 4], y_range = factors, height = 350, toolbar_location = None)
 p.title.text = "<-Katabolizmas|Anabolizmas->"
 p.title.align = "center"
 p.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
@@ -2054,21 +2054,12 @@ source1 = ColumnDataSource(data=dict(x=[], y=[]))
 source2 = ColumnDataSource(data=dict(x=[], y=[]))
 sourcet = ColumnDataSource(data=dict(x=[], y=[]))
 
-lps1 = p.line('x', 'y', source = sourceps1, line_color = "indigo", line_width = 5)
+lps1r = p.line('x', 'y', source = sourceps1r, line_color = "indigo", line_width = 5)
 r1 = p.line('x', 'y', source = source1, line_color = "blue", line_width = 5)
 r2 = p.line('x', 'y', source = source2, line_color = "blue", line_width = 5)
 
 #duomenys simpatinis/parasminpatinis
-normakps1 = -2
-normaaps1 = 0
-balanps1 = (normaaps1+normakps1)/2
-def kryptis():
-	if normakps1-balanps1 < 0:
-		return 1
-	else:
-		return-1
-kryptis()
-pagrps1 = 2
+
 # balanps1 =
 # balanps1 =
 # balanps1 =
@@ -2077,14 +2068,47 @@ pagrps1 = 2
 # balanps1 =
 # balanps1 =
 
-def ps1_update(attr, old, new):
-    psr = float(psrytas.value.replace(",", "."))
-    pgr = float(pgrytas.value.replace(",", "."))
-    ps1 = psr-pgr
-    ps1new_data={'x':[0,ps1],'y':["ps1r","ps1r"]}
-    sourceps1.data.update(ps1new_data)
-psrytas.on_change("value", ps1_update)
-pgrytas.on_change("value", ps1_update)
+def ps1r_update(attr, old, new):
+    def h4zenklasps1r (): IF((G4-$D4)*$E4>=0,1,-1)
+    	b4normakps1 = -2
+		c4normaaps1 = 0
+		d4balanps1 = (normaaps1+normakps1)/2
+		def e4kryptisps1r(IF(B4-D4<0,1,-1):
+			if b4normakps1-d4balanps1 < 0:
+				return 1
+			else:
+				return-1
+		e4kryptisps1r()
+		f4pagrps1 = 2
+    	psr = float(psrytas.value.replace(",", "."))
+    	pgr = float(pgrytas.value.replace(",", "."))
+    	g4verteps1 = psr-pgr
+    	if (g4verteps1-d4balasps1)*e4kryptisps1r()>=0:
+    		return 1
+    	else:
+    		return -1
+    def alfaps1r():
+    	f4pagrps1 = 2
+    	b4normakps1 = -2
+    	c4normaaps1 = 0
+    	d4balanps1 = (b4normakps1-c4normaaps1)/2
+    	if h4zenklasps1r()>0:
+        	return (1-f4pagrps1)/(d4balanps1-c4normaaps1)
+    	else:
+        	return (1-f4pagrps1)/(d4balanps1-b4normakps1)
+    def betaps1r():=IF(H4>0,($F4*$D4-$C4)/($D4-$C4),($F4*$D4-$B4)/($D4-$B4))
+    	f4pagrps1 = 2
+    	b4normakps1 = -2
+    	c4normaaps1 = 0
+    	d4balanps1 = (b4normakps1-c4normaaps1)/2
+    	if h4zenklasps1r()>0:
+        	return (f4pagrps1*d4balanps1-c4normaaps1)/(d4balanps1-c4normaaps1)
+    	else:
+        	return (f4pagrps1*d4balanps1-b4normakps1)/(d4balanps1-b4normakps1)
+    ps1rnew_data={'x':[0,verteps1],'y':["ps1r","ps1r"]}
+    sourceps1r.data.update(ps1rnew_data)
+psrytas.on_change("value", ps1r_update)
+pgrytas.on_change("value", ps1r_update)
 
 def update1(attr, old, new):
     b1 = float(srpietus.value)
