@@ -6,6 +6,7 @@ from bokeh.core.properties import Dict, Int, String
 from bokeh.models import Span, BoxAnnotation, Title, ColorBar, LinearColorMapper, Plot, Range1d, LinearAxis, FixedTicker, FuncTickFormatter
 from bokeh.util.compiler import CoffeeScript
 import jinja2
+import math
 
 # class FixedTickFormatter(TickFormatter):
 #     """
@@ -2069,18 +2070,18 @@ r2 = p.line('x', 'y', source = source2, line_color = "blue", line_width = 5)
 # balanps1 =
 
 def ps1r_update(attr, old, new):
+    b4normakps1 = -2
+	c4normaaps1 = 0
+	d4balanps1 = (normaaps1+normakps1)/2
+	f4pagrps1 = 2
     def h4zenklasps1r (): IF((G4-$D4)*$E4>=0,1,-1)
-    	b4normakps1 = -2
-		c4normaaps1 = 0
-		d4balanps1 = (normaaps1+normakps1)/2
-		def e4kryptisps1r(IF(B4-D4<0,1,-1):
+    	def e4kryptisps1r(IF(B4-D4<0,1,-1):
 			if b4normakps1-d4balanps1 < 0:
 				return 1
 			else:
 				return-1
 		e4kryptisps1r()
-		f4pagrps1 = 2
-    	psr = float(psrytas.value.replace(",", "."))
+		psr = float(psrytas.value.replace(",", "."))
     	pgr = float(pgrytas.value.replace(",", "."))
     	g4verteps1 = psr-pgr
     	if (g4verteps1-d4balasps1)*e4kryptisps1r()>=0:
@@ -2088,24 +2089,24 @@ def ps1r_update(attr, old, new):
     	else:
     		return -1
     def alfaps1r():
-    	f4pagrps1 = 2
-    	b4normakps1 = -2
-    	c4normaaps1 = 0
-    	d4balanps1 = (b4normakps1-c4normaaps1)/2
     	if h4zenklasps1r()>0:
         	return (1-f4pagrps1)/(d4balanps1-c4normaaps1)
     	else:
         	return (1-f4pagrps1)/(d4balanps1-b4normakps1)
     def betaps1r():=IF(H4>0,($F4*$D4-$C4)/($D4-$C4),($F4*$D4-$B4)/($D4-$B4))
-    	f4pagrps1 = 2
-    	b4normakps1 = -2
-    	c4normaaps1 = 0
-    	d4balanps1 = (b4normakps1-c4normaaps1)/2
     	if h4zenklasps1r()>0:
         	return (f4pagrps1*d4balanps1-c4normaaps1)/(d4balanps1-c4normaaps1)
     	else:
         	return (f4pagrps1*d4balanps1-b4normakps1)/(d4balanps1-b4normakps1)
-    ps1rnew_data={'x':[0,verteps1],'y':["ps1r","ps1r"]}
+    def karareiksme():
+    	psr = float(psrytas.value.replace(",", "."))
+    	pgr = float(pgrytas.value.replace(",", "."))
+    	g4verteps1 = psr-pgrs
+    	if h4zenklasps1r()<0:IF(H4<0,H4*LOG(I4*G4+J4,$F4),0)
+    		return h4zenklasps1r()*math.log(alfaps1r()*g4verteps1+betaps1r(), f4pagrps1)
+    	else:
+    		h4zenklasps1r()*math.log(alfaps1r()*g4verteps1+betaps1r(), f4pagrps1)
+    ps1rnew_data={'x':[0,karareiksme()],'y':["ps1r","ps1r"]}
     sourceps1r.data.update(ps1rnew_data)
 psrytas.on_change("value", ps1r_update)
 pgrytas.on_change("value", ps1r_update)
