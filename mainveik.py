@@ -631,19 +631,19 @@ factors = ["ar", "ap", "av", "br", "bp", "bv", "cr", "cp", "cv", "dr", "dp", "dv
 
 count = len(factors)
 
-p = figure(x_range = [-4, 4], y_range = factors, height = 350, toolbar_location = None)
+p = figure(x_range = [-5, 5], y_range = factors, height = 350, toolbar_location = None)
 p.title.text = "<-Katabolizmas|Anabolizmas->"
 p.title.align = "center"
-p.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+p.text(x=[-4.7], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
+p.text(x=[-4.7], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
+p.text(x=[-4.7], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
 p.x_range.bounds = 'auto'
 p.y_range.bounds = 'auto'
 p.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
 p.yaxis.visible =False
-p.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
+p.xaxis.ticker = FixedTicker(ticks=[-4, -3, -2, -1, 1, 2, 3, 4])
 p.xaxis.formatter = FuncTickFormatter(code="""
-    data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
+    data = {"-4": "Didelis", "-3": "Vidutinis", "-2": 'Mažas', "-1": "Norma", 1: 'Norma', 2: 'Mažas', 3: 'Vidutinis', 4: 'Didelis'}
     return data[tick]
 """)
 
@@ -744,14 +744,14 @@ p6.xaxis.formatter = FuncTickFormatter(code="""
 """)
 
 p.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-p.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+p.add_layout(Span(location=1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+p.add_layout(Span(location=-1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+p.add_layout(Span(location=2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+p.add_layout(Span(location=-2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+p.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
 p.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
 p.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
 p.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
@@ -2050,7 +2050,7 @@ ksipietus = TextInput(name = "pietus24", value="", title = "Pietūs", width = 60
 ksivakaras = TextInput(name = "vakaras24", value="", title = "Vakaras", width = 60)
 
 
-sourceps1 = ColumnDataSource(data=dict(x=[], y=[]))
+sourceps1r = ColumnDataSource(data=dict(x=[], y=[]))
 source1 = ColumnDataSource(data=dict(x=[], y=[]))
 source2 = ColumnDataSource(data=dict(x=[], y=[]))
 sourcet = ColumnDataSource(data=dict(x=[], y=[]))
@@ -2070,43 +2070,43 @@ r2 = p.line('x', 'y', source = source2, line_color = "blue", line_width = 5)
 # balanps1 =
 
 def ps1r_update(attr, old, new):
-    b4normakps1 = -2
-	c4normaaps1 = 0
-	d4balanps1 = (normaaps1+normakps1)/2
-	f4pagrps1 = 2
-    def h4zenklasps1r (): IF((G4-$D4)*$E4>=0,1,-1)
-    	def e4kryptisps1r(IF(B4-D4<0,1,-1):
-			if b4normakps1-d4balanps1 < 0:
-				return 1
-			else:
-				return-1
-		e4kryptisps1r()
-		psr = float(psrytas.value.replace(",", "."))
+    normakps1 = -2
+    normaaps1 = 0
+    balanps1 = (normaaps1+normakps1)/2
+    pagrps1 = 2
+    def zenklasps1r ():
+    	def kryptisps1r():
+    		if normakps1-balanps1 < 0:
+    			return 1
+    		else:
+    			return-1
+    	kryptisps1r()
+    	psr = float(psrytas.value.replace(",", "."))
     	pgr = float(pgrytas.value.replace(",", "."))
-    	g4verteps1 = psr-pgr
-    	if (g4verteps1-d4balasps1)*e4kryptisps1r()>=0:
+    	verteps1r = psr-pgr
+    	if (verteps1r-balanps1)*kryptisps1r()>=0:
     		return 1
     	else:
     		return -1
     def alfaps1r():
-    	if h4zenklasps1r()>0:
-        	return (1-f4pagrps1)/(d4balanps1-c4normaaps1)
+    	if zenklasps1r()>0:
+    		return (1-pagrps1)/(balanps1-normaaps1)
     	else:
-        	return (1-f4pagrps1)/(d4balanps1-b4normakps1)
-    def betaps1r():=IF(H4>0,($F4*$D4-$C4)/($D4-$C4),($F4*$D4-$B4)/($D4-$B4))
-    	if h4zenklasps1r()>0:
-        	return (f4pagrps1*d4balanps1-c4normaaps1)/(d4balanps1-c4normaaps1)
+    		return (1-pagrps1)/(balanps1-normakps1)
+    def betaps1r():
+    	if zenklasps1r()>0:
+    		return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
     	else:
-        	return (f4pagrps1*d4balanps1-b4normakps1)/(d4balanps1-b4normakps1)
-    def karareiksme():
+    		return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
+    def karareiksmer():
     	psr = float(psrytas.value.replace(",", "."))
     	pgr = float(pgrytas.value.replace(",", "."))
-    	g4verteps1 = psr-pgrs
-    	if h4zenklasps1r()<0:IF(H4<0,H4*LOG(I4*G4+J4,$F4),0)
-    		return h4zenklasps1r()*math.log(alfaps1r()*g4verteps1+betaps1r(), f4pagrps1)
+    	verteps1 = psr-pgr
+    	if zenklasps1r()<0:
+    		return zenklasps1r()*math.log(alfaps1r()*verteps1+betaps1r(), pagrps1)
     	else:
-    		h4zenklasps1r()*math.log(alfaps1r()*g4verteps1+betaps1r(), f4pagrps1)
-    ps1rnew_data={'x':[0,karareiksme()],'y':["ps1r","ps1r"]}
+    		return zenklasps1r()*math.log(alfaps1r()*verteps1+betaps1r(), pagrps1)
+    ps1rnew_data={'x':[0,karareiksmer()],'y':["ps1r","ps1r"]}
     sourceps1r.data.update(ps1rnew_data)
 psrytas.on_change("value", ps1r_update)
 pgrytas.on_change("value", ps1r_update)
