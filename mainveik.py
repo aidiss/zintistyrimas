@@ -2100,7 +2100,7 @@ def ps1r_update(attr, old, new):
     	else:
     		return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
     print(betaps1r())
-    def karareiksmer():
+    def karareiksmeps1r():
     	psr = float(psrytas.value.replace(",", "."))
     	pgr = float(pgrytas.value.replace(",", "."))
     	verteps1 = psr-pgr
@@ -2108,8 +2108,9 @@ def ps1r_update(attr, old, new):
     		return zenklasps1r()*math.log(alfaps1r()*verteps1+betaps1r(), pagrps1)
     	else:
     		return zenklasps1r()*math.log(alfaps1r()*verteps1+betaps1r(), pagrps1)
-    ps1rnew_data={'x':[0,karareiksmer()],'y':["ps1r","ps1r"]}
+    ps1rnew_data={'x':[0,karareiksmeps1r()],'y':["ps1r","ps1r"]}
     sourceps1r.data.update(ps1rnew_data)
+    print(karareiksmeps1r())
 psrytas.on_change("value", ps1r_update)
 pgrytas.on_change("value", ps1r_update)
 
