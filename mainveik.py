@@ -2069,11 +2069,12 @@ r2 = p.line('x', 'y', source = source2, line_color = "blue", line_width = 5)
 # balanps1 =
 # balanps1 =
 
+normakps1 = -2
+normaaps1 = 0
+balanps1 = (normaaps1+normakps1)/2
+pagrps1 = 2
 def ps1r_update(attr, old, new):
-    normakps1 = -2
-    normaaps1 = 0
-    balanps1 = (normaaps1+normakps1)/2
-    pagrps1 = 2
+    
     def zenklasps1r ():
     	def kryptisps1r():
     		if normakps1-balanps1 < 0:
