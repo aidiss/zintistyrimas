@@ -2074,8 +2074,7 @@ normaaps1 = 0
 balanps1 = (normaaps1+normakps1)/2
 pagrps1 = 2
 def ps1r_update(attr, old, new):
-    
-    def zenklasps1r ():
+    def zenklasps1r():
     	def kryptisps1r():
     		if normakps1-balanps1 < 0:
     			return 1
@@ -2089,11 +2088,13 @@ def ps1r_update(attr, old, new):
     		return 1
     	else:
     		return -1
+    print(zenklasps1r())
     def alfaps1r():
     	if zenklasps1r()>0:
     		return (1-pagrps1)/(balanps1-normaaps1)
     	else:
     		return (1-pagrps1)/(balanps1-normakps1)
+    print(alfaps1r())
     def betaps1r():
     	if zenklasps1r()>0:
     		return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
