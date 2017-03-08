@@ -2080,7 +2080,6 @@ def ps1r_update(attr, old, new):
     			return 1
     		else:
     			return-1
-    	kryptisps1r()
     	psr = float(psrytas.value.replace(",", "."))
     	pgr = float(pgrytas.value.replace(",", "."))
     	verteps1r = psr-pgr
@@ -2100,6 +2099,7 @@ def ps1r_update(attr, old, new):
     		return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
     	else:
     		return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
+    print(betaps1r())
     def karareiksmer():
     	psr = float(psrytas.value.replace(",", "."))
     	pgr = float(pgrytas.value.replace(",", "."))
