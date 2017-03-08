@@ -626,12 +626,12 @@ th {
 </html>
 ''')
 
-factors = ["ar", "ap", "av", "br", "bp", "bv", "cr", "cp", "cv", "dr", "dp", "dv", "er", "ep", "ev", "fr", "fp", "fv", "gr", "gp", "gv", "hr", "hp", "hv",
-"jr", "jp", "jv", "kr", "kp", "kv", "lr", "lp", "lv", "mr", "mp", "ps1r"]
+factorssp = ["sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "ppv", "sdv", "ps1v", "sklp", "sargp", "nosp", "tremp", "vyzdp",
+"vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r"]
 
-count = len(factors)
+count = len(factorssp)
 
-p = figure(x_range = [-5, 5], y_range = factors, height = 350, toolbar_location = None)
+p = figure(x_range = [-5, 5], y_range = factorssp, height = 350, toolbar_location = None)
 p.title.text = "<-Katabolizmas|Anabolizmas->"
 p.title.align = "center"
 p.text(x=[-4.7], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
@@ -647,7 +647,7 @@ p.xaxis.formatter = FuncTickFormatter(code="""
     return data[tick]
 """)
 
-p1 = figure(x_range = [-65, 65], y_range = factors, height = 350, toolbar_location = None)
+p1 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
 p1.title.text = "<-Katabolizmas|Anabolizmas->"
 p1.title.align = "center"
 p1.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
@@ -663,7 +663,7 @@ p1.xaxis.formatter = FuncTickFormatter(code="""
     return data[tick]
 """)
 
-p2 = figure(x_range = [-65, 65], y_range = factors, height = 350, toolbar_location = None)
+p2 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
 p2.title.text = "<-Katabolizmas|Anabolizmas->"
 p2.title.align = "center"
 p2.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
@@ -679,7 +679,7 @@ p2.xaxis.formatter = FuncTickFormatter(code="""
     return data[tick]
 """)
 
-p3 = figure(x_range = [-65, 65], y_range = factors, height = 350, toolbar_location = None)
+p3 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
 p3.title.text = "<-Katabolizmas|Anabolizmas->"
 p3.title.align = "center"
 p3.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
@@ -695,7 +695,7 @@ p3.xaxis.formatter = FuncTickFormatter(code="""
     return data[tick]
 """)
 
-p4 = figure(x_range = [-65, 65], y_range = factors, height = 350, toolbar_location = None)
+p4 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
 p4.title.text = "<-Katabolizmas|Anabolizmas->"
 p4.title.align = "center"
 p4.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
@@ -711,7 +711,7 @@ p4.xaxis.formatter = FuncTickFormatter(code="""
     return data[tick]
 """)
 
-p5 = figure(x_range = [-65, 65], y_range = factors, height = 350, toolbar_location = None)
+p5 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
 p5.title.text = "<-Katabolizmas|Anabolizmas->"
 p5.title.align = "center"
 p5.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
@@ -727,7 +727,7 @@ p5.xaxis.formatter = FuncTickFormatter(code="""
     return data[tick]
 """)
 
-p6 = figure(x_range = [-65, 65], y_range = factors, height = 350, toolbar_location = None)
+p6 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
 p6.title.text = "<-Katabolizmas|Anabolizmas->"
 p6.title.align = "center"
 p6.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
@@ -2051,23 +2051,13 @@ ksivakaras = TextInput(name = "vakaras24", value="", title = "Vakaras", width = 
 
 
 sourceps1r = ColumnDataSource(data=dict(x=[], y=[]))
-source1 = ColumnDataSource(data=dict(x=[], y=[]))
-source2 = ColumnDataSource(data=dict(x=[], y=[]))
+sourceps1p = ColumnDataSource(data=dict(x=[], y=[]))
+sourceps1v = ColumnDataSource(data=dict(x=[], y=[]))
 sourcet = ColumnDataSource(data=dict(x=[], y=[]))
 
-lps1r = p.line('x', 'y', source = sourceps1r, line_color = "indigo", line_width = 5)
-r1 = p.line('x', 'y', source = source1, line_color = "blue", line_width = 5)
-r2 = p.line('x', 'y', source = source2, line_color = "blue", line_width = 5)
-
-#duomenys simpatinis/parasminpatinis
-
-# balanps1 =
-# balanps1 =
-# balanps1 =
-# balanps1 =
-# balanps1 =
-# balanps1 =
-# balanps1 =
+p.line('x', 'y', source = sourceps1r, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourceps1p, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourceps1v, line_color = "blue", line_width = 5)
 
 normakps1 = -2
 normaaps1 = 0
@@ -2114,21 +2104,46 @@ def ps1r_update(attr, old, new):
 psrytas.on_change("value", ps1r_update)
 pgrytas.on_change("value", ps1r_update)
 
-def update1(attr, old, new):
-    b1 = float(srpietus.value)
-    new_data1={'x':[0, b1*1.5],'y':["dr", "dr"]}
-    source1.data.update(new_data1)
-srpietus.on_change("value", update1)
-
-def update2(attr, old, new):
-    b2 = float(srvakaras.value)
-    if b2 < 20:
-        new_data2={'x':[0, b2*-1.5],'y':[2, 2]}
-        source2.data.update(new_data2)
-    else:
-        new_data2={'x':[0, b2*1.5],'y':[2, 2]}
-        source2.data.update(new_data2)
-srvakaras.on_change("value", update2)
+def ps1p_update(attr, old, new):
+    def zenklasps1p():
+    	def kryptisps1p():
+    		if normakps1-balanps1 < 0:
+    			return 1
+    		else:
+    			return-1
+    	psp = float(pspietus.value.replace(",", "."))
+    	pgp = float(pgpietus.value.replace(",", "."))
+    	verteps1p = psp-pgp
+    	if (verteps1p-balanps1)*kryptisps1p()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasps1p())
+    def alfaps1p():
+    	if zenklasps1p()>0:
+    		return (1-pagrps1)/(balanps1-normaaps1)
+    	else:
+    		return (1-pagrps1)/(balanps1-normakps1)
+    print(alfaps1p())
+    def betaps1p():
+    	if zenklasps1p()>0:
+    		return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
+    	else:
+    		return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
+    print(betaps1p())
+    def karareiksmeps1p():
+    	psv = float(pspietus.value.replace(",", "."))
+    	pgv = float(pgpietus.value.replace(",", "."))
+    	verteps1 = psv-pgv
+    	if zenklasps1p()<0:
+    		return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
+    	else:
+    		return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
+    ps1pnew_data={'x':[0,karareiksmeps1p()],'y':["ps1p","ps1p"]}
+    sourceps1p.data.update(ps1pnew_data)
+    print(karareiksmeps1p())
+pspietus.on_change("value", ps1p_update)
+pgpietus.on_change("value", ps1p_update)
 
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
