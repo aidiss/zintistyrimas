@@ -2055,11 +2055,26 @@ ksivakaras = TextInput(name = "vakaras24", value="", title = "Vakaras", width = 
 sourceps1r = ColumnDataSource(data=dict(x=[], y=[]))
 sourceps1p = ColumnDataSource(data=dict(x=[], y=[]))
 sourceps1v = ColumnDataSource(data=dict(x=[], y=[]))
-sourcet = ColumnDataSource(data=dict(x=[], y=[]))
 
 p.line('x', 'y', source = sourceps1r, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourceps1p, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourceps1v, line_color = "blue", line_width = 5)
+
+sourcesdr = ColumnDataSource(data=dict(x=[], y=[]))
+sourcesdp = ColumnDataSource(data=dict(x=[], y=[]))
+sourcesdv = ColumnDataSource(data=dict(x=[], y=[]))
+
+p.line('x', 'y', source = sourcesdr, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcesdp, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcesdv, line_color = "blue", line_width = 5)
+
+
+
+
+
+
+
+
 
 normakps1 = -2
 normaaps1 = 0
@@ -2154,8 +2169,8 @@ def ps1v_update(attr, old, new):
     			return 1
     		else:
     			return-1
-    	psv = float(pspietus.value.replace(",", "."))
-    	pgv = float(pgpietus.value.replace(",", "."))
+    	psv = float(psvakaras.value.replace(",", "."))
+    	pgv = float(pgvakaras.value.replace(",", "."))
     	verteps1v = psv-pgv
     	if (verteps1v-balanps1)*kryptisps1v()>=0:
     		return 1
@@ -2175,8 +2190,8 @@ def ps1v_update(attr, old, new):
     		return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
     print(betaps1v())
     def karareiksmeps1v():
-    	psv = float(pspietus.value.replace(",", "."))
-    	pgv = float(pgpietus.value.replace(",", "."))
+    	psv = float(psvakaras.value.replace(",", "."))
+    	pgv = float(pgvakaras.value.replace(",", "."))
     	verteps1 = psv-pgv
     	if zenklasps1v()<0:
     		return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
@@ -2188,6 +2203,50 @@ def ps1v_update(attr, old, new):
 psvakaras.on_change("value", ps1v_update)
 pgvakaras.on_change("value", ps1v_update)
 
+normaksd = -2
+normaasd = 0
+balansd = (normaasd+normaksd)/2
+pagrsd = 2
+def psdr_update(attr, old, new):
+    def zenklassdr():
+    	def kryptissdr():
+    		if normakps1-balanps1 < 0:
+    			return 1
+    		else:
+    			return-1
+    	psv = float(pspietus.value.replace(",", "."))
+    	pgv = float(pgpietus.value.replace(",", "."))
+    	vertesdr = psv-pgv
+    	if (vertesdr-balanps1)*kryptissdr()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklassdr())
+    def alfasdr():
+    	if zenklassdr()>0:
+    		return (1-pagrps1)/(balanps1-normaaps1)
+    	else:
+    		return (1-pagrps1)/(balanps1-normakps1)
+    print(alfasdr())
+    def betasdr():
+    	if zenklassdr()>0:
+    		return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
+    	else:
+    		return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
+    print(betasdr())
+    def karareiksmesdr():
+    	psv = float(pspietus.value.replace(",", "."))
+    	pgv = float(pgpietus.value.replace(",", "."))
+    	verteps1 = psv-pgv
+    	if zenklassdr()<0:
+    		return zenklassdr()*math.log(alfasdr()*verteps1+betasdr(), pagrps1)
+    	else:
+    		return zenklassdr()*math.log(alfasdr()*verteps1+betasdr(), pagrps1)
+    sdrnew_data={'x':[0,karareiksmesdr()],'y':["sdr","sdr"]}
+    sourcesdr.data.update(sdrnew_data)
+    print(karareiksmesdr())
+psvakaras.on_change("value", sdr_update)
+pgvakaras.on_change("value", sdr_update)
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
