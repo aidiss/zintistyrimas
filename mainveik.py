@@ -3,7 +3,7 @@ from bokeh.plotting import figure, output_file, ColumnDataSource
 from bokeh.layouts import column, row, widgetbox, layout
 from bokeh.models.widgets import TextInput, Paragraph, Div, Select
 from bokeh.core.properties import Dict, Int, String
-from bokeh.models import Span, BoxAnnotation, Title, ColorBar, LinearColorMapper, Plot, Range1d, LinearAxis, FixedTicker, FuncTickFormatter
+from bokeh.models import Span, BoxAnnotation, Title, ColorBar, LinearColorMapper, Plot, Range1d, LinearAxis, FixedTicker, FuncTickFormatter, NumeralTickFormatter
 from bokeh.util.compiler import CoffeeScript
 import jinja2
 import math
@@ -646,6 +646,7 @@ p.xaxis.formatter = FuncTickFormatter(code="""
     data = {"-4": "Didelis", "-3": "Vidutinis", "-2": 'Mažas', "-1": "Norma", 1: 'Norma', 2: 'Mažas', 3: 'Vidutinis', 4: 'Didelis'}
     return data[tick]
 """)
+p.yaxis.formatter = NumeralTickFormatter(format="0,0")
 
 p1 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
 p1.title.text = "<-Katabolizmas|Anabolizmas->"
@@ -752,8 +753,8 @@ p.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='d
 p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
-p.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
+p.add_layout(BoxAnnotation(top = 12, fill_alpha=0.1, fill_color='grey'))
+p.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.1, fill_color='cyan'))
 p.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
 
 p1.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
@@ -2132,9 +2133,9 @@ def ps1p_update(attr, old, new):
     		return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
     print(betaps1p())
     def karareiksmeps1p():
-    	psv = float(pspietus.value.replace(",", "."))
-    	pgv = float(pgpietus.value.replace(",", "."))
-    	verteps1 = psv-pgv
+    	psp = float(pspietus.value.replace(",", "."))
+    	pgp = float(pgpietus.value.replace(",", "."))
+    	verteps1 = psp-pgp
     	if zenklasps1p()<0:
     		return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
     	else:
@@ -2144,6 +2145,47 @@ def ps1p_update(attr, old, new):
     print(karareiksmeps1p())
 pspietus.on_change("value", ps1p_update)
 pgpietus.on_change("value", ps1p_update)
+
+def ps1v_update(attr, old, new):
+    def zenklasps1v():
+    	def kryptisps1v():
+    		if normakps1-balanps1 < 0:
+    			return 1
+    		else:
+    			return-1
+    	psv = float(pspietus.value.replace(",", "."))
+    	pgv = float(pgpietus.value.replace(",", "."))
+    	verteps1v = psv-pgv
+    	if (verteps1v-balanps1)*kryptisps1v()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasps1v())
+    def alfaps1v():
+    	if zenklasps1v()>0:
+    		return (1-pagrps1)/(balanps1-normaaps1)
+    	else:
+    		return (1-pagrps1)/(balanps1-normakps1)
+    print(alfaps1v())
+    def betaps1v():
+    	if zenklasps1v()>0:
+    		return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
+    	else:
+    		return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
+    print(betaps1v())
+    def karareiksmeps1v():
+    	psv = float(pspietus.value.replace(",", "."))
+    	pgv = float(pgpietus.value.replace(",", "."))
+    	verteps1 = psv-pgv
+    	if zenklasps1v()<0:
+    		return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
+    	else:
+    		return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
+    ps1vnew_data={'x':[0,karareiksmeps1v()],'y':["ps1v","ps1v"]}
+    sourceps1v.data.update(ps1vnew_data)
+    print(karareiksmeps1v())
+psvakaras.on_change("value", ps1v_update)
+pgvakaras.on_change("value", ps1v_update)
 
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
