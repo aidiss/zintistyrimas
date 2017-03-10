@@ -2203,50 +2203,56 @@ def ps1v_update(attr, old, new):
 psvakaras.on_change("value", ps1v_update)
 pgvakaras.on_change("value", ps1v_update)
 
-normaksd = -2
-normaasd = 0
+normaksd = 11
+normaasd = 6
 balansd = (normaasd+normaksd)/2
 pagrsd = 2
-def psdr_update(attr, old, new):
+def sdr_update(attr, old, new):
     def zenklassdr():
     	def kryptissdr():
-    		if normakps1-balanps1 < 0:
+    		if normaksd-balansd < 0:
     			return 1
     		else:
     			return-1
-    	psv = float(pspietus.value.replace(",", "."))
-    	pgv = float(pgpietus.value.replace(",", "."))
-    	vertesdr = psv-pgv
-    	if (vertesdr-balanps1)*kryptissdr()>=0:
+    	skar = float(skarytas.value.replace(",", "."))
+    	skgr = float(skgrytas.value.replace(",", "."))
+    	dkar = float(dkarytas.value.replace(",", "."))
+    	dkgr = float(dkarytas.value.replace(",", "."))
+    	vertesd = skar-skgr+dkar-dkgr
+    	if (vertesd-balansd)*kryptissdr()>=0:
     		return 1
     	else:
     		return -1
     print(zenklassdr())
     def alfasdr():
     	if zenklassdr()>0:
-    		return (1-pagrps1)/(balanps1-normaaps1)
+    		return (1-pagrsd)/(balansd-normaasd)
     	else:
-    		return (1-pagrps1)/(balanps1-normakps1)
+    		return (1-pagrsd)/(balansd-normaksd)
     print(alfasdr())
     def betasdr():
     	if zenklassdr()>0:
-    		return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
+    		return (pagrsd*balansd-normaasd)/(balansd-normaasd)
     	else:
-    		return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
+    		return (pagrsd*balansd-normaksd)/(balansd-normaksd)
     print(betasdr())
     def karareiksmesdr():
-    	psv = float(pspietus.value.replace(",", "."))
-    	pgv = float(pgpietus.value.replace(",", "."))
-    	verteps1 = psv-pgv
+    	skar = float(skarytas.value.replace(",", "."))
+    	skgr = float(skgrytas.value.replace(",", "."))
+    	dkar = float(dkarytas.value.replace(",", "."))
+    	dkgr = float(dkarytas.value.replace(",", "."))
+    	vertesd = skar-skgr+dkar-dkgr
     	if zenklassdr()<0:
-    		return zenklassdr()*math.log(alfasdr()*verteps1+betasdr(), pagrps1)
+    		return zenklassdr()*math.log(alfasdr()*vertesd+betasdr(), pagrsd)
     	else:
-    		return zenklassdr()*math.log(alfasdr()*verteps1+betasdr(), pagrps1)
+    		return zenklassdr()*math.log(alfasdr()*vertesd+betasdr(), pagrsd)
     sdrnew_data={'x':[0,karareiksmesdr()],'y':["sdr","sdr"]}
     sourcesdr.data.update(sdrnew_data)
     print(karareiksmesdr())
-psvakaras.on_change("value", sdr_update)
-pgvakaras.on_change("value", sdr_update)
+skarytas.on_change("value", sdr_update)
+skgrytas.on_change("value", sdr_update)
+dkarytas.on_change("value", sdr_update)
+dkgrytas.on_change("value", sdr_update)
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
