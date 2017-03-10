@@ -627,7 +627,8 @@ th {
 ''')
 
 factorssp = ["sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "ppv", "sdv", "ps1v", "sklp", "sargp", "nosp", "tremp", "vyzdp",
-"vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r"]
+"vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", 
+"blaaa"]
 
 count = len(factorssp)
 
@@ -753,9 +754,9 @@ p.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='d
 p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p.add_layout(BoxAnnotation(top = 12, fill_alpha=0.1, fill_color='grey'))
-p.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.1, fill_color='cyan'))
-p.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
+p.add_layout(BoxAnnotation(top = 13, fill_alpha=0.1, fill_color='grey'))
+p.add_layout(BoxAnnotation(bottom = 13, top = 25, fill_alpha=0.1, fill_color='cyan'))
+p.add_layout(BoxAnnotation(top=37, fill_alpha=0.1, fill_color='yellow'))
 
 p1.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
 p1.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
