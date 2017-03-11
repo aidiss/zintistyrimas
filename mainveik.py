@@ -5,33 +5,9 @@ from bokeh.models.widgets import TextInput, Paragraph, Div, Select
 from bokeh.core.properties import Dict, Int, String
 from bokeh.models import Span, BoxAnnotation, Title, ColorBar, LinearColorMapper, Plot, Range1d, LinearAxis, FixedTicker, FuncTickFormatter, NumeralTickFormatter
 from bokeh.util.compiler import CoffeeScript
+from bokeh.models.ranges import DataRange1d, FactorRange
 import jinja2
 import math
-
-# class FixedTickFormatter(TickFormatter):
-#     """
-#     Class used to allow custom axis tick labels on a bokeh chart
-#     Extends bokeh.model.formatters.TickFormatter
-#     """
-
-#     COFFEESCRIPT =  """
-#         import {Model} from "model"
-#         import * as p from "core/properties"
-#         export class FixedTickFormatter extends Model
-#           type: 'FixedTickFormatter'
-#           doFormat: (ticks) ->
-#             labels = @get("labels")
-#             return (labels[tick] ? "" for tick in ticks)
-#           @define {
-#             labels: [ p.Any ]
-#           }
-#     """
-
-#     labels = Dict(Int, String, help="""
-#     A mapping of integer ticks values to their labels.
-#     """)
-
-#     __implementation__ = CoffeeScript(COFFEESCRIPT)
 
 curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
 <html lang="en">
@@ -2069,7 +2045,7 @@ p.line('x', 'y', source = sourcesdp, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcesdv, line_color = "blue", line_width = 5)
 
 
-
+   
 
 
 
@@ -2218,7 +2194,7 @@ def sdr_update(attr, old, new):
     	skgr = float(skgrytas.value.replace(",", "."))
     	dkar = float(dkarytas.value.replace(",", "."))
     	dkgr = float(dkarytas.value.replace(",", "."))
-    	vertesd = skar-skgr+dkar-dkgr
+    	vertesd = (skar-skgr)+(dkar-dkgr)
     	if (vertesd-balansd)*kryptissdr()>=0:
     		return 1
     	else:
