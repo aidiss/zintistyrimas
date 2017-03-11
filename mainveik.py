@@ -2186,6 +2186,8 @@ def ps1v_update(attr, old, new):
 psvakaras.on_change("value", ps1v_update)
 pgvakaras.on_change("value", ps1v_update)
 
+
+
 normaksd = 11
 normaasd = 6
 balansd = (normaasd+normaksd)/2
@@ -2333,9 +2335,6 @@ dkgvakaras.on_change("value", sdv_update)
 
 
 
-
-
-
 normakpp = 25
 normaapp = 22
 balanpp = (normaapp+normakpp)/2
@@ -2390,6 +2389,57 @@ pgrytas.on_change("value", ppr_update)
 parytas.on_change("value", ppr_update)
 pa15rytas.on_change("value", ppr_update)
 pa45rytas.on_change("value", ppr_update)
+
+def ppp_update(attr, old, new):
+    def zenklasppp():
+    	def kryptisppp():
+    		if normakpp-balanpp < 0:
+    			return 1
+    		else:
+    			return-1
+    	pgp = float(pgpietus.value.replace(",", "."))
+    	pap = float(papietus.value.replace(",", "."))
+    	pa15p = float(pa15pietus.value.replace(",", "."))
+    	pa45p = float(pa45pietus.value.replace(",", "."))
+    	pp1 = max(pgp, pap, pa15p, pa45p)-pgp
+    	pp2= max(pgp, pap, pa15p, pa45p)-pa45p
+    	vertepp = pp1+pp2
+    	if (vertepp-balanpp)*kryptisppp()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasppp())
+    def alfappp():
+    	if zenklasppp()>0:
+    		return (1-pagrpp)/(balanpp-normaapp)
+    	else:
+    		return (1-pagrpp)/(balanpp-normakpp)
+    print(alfappp())
+    def betappp():
+    	if zenklasppp()>0:
+    		return (pagrpp*balanpp-normaapp)/(balanpp-normaapp)
+    	else:
+    		return (pagrpp*balanpp-normakpp)/(balanpp-normakpp)
+    print(betappp())
+    def karareiksmeppp():
+    	pgp = float(pgpietus.value.replace(",", "."))
+    	pap = float(papietus.value.replace(",", "."))
+    	pa15p = float(pa15pietus.value.replace(",", "."))
+    	pa45p = float(pa45pietus.value.replace(",", "."))
+    	pp1 = max(pgp, pap, pa15p, pa45p)-pgp
+    	pp2= max(pgp, pap, pa15p, pa45p)-pa45p
+    	vertepp = pp1+pp2
+    	if zenklasppp()<0:
+    		return zenklasppp()*math.log(alfappp()*vertepp+betappp(), pagrpp)
+    	else:
+    		return zenklasppp()*math.log(alfappp()*vertepp+betappp(), pagrpp)
+    pppnew_data={'x':[0,karareiksmeppp()],'y':["ppp","ppp"]}
+    sourceppp.data.update(pppnew_data)
+    print(karareiksmeppp())
+pgpietus.on_change("value", ppp_update)
+papietus.on_change("value", ppp_update)
+pa15pietus.on_change("value", ppp_update)
+pa45pietus.on_change("value", ppp_update)
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
