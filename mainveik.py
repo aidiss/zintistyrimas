@@ -2658,7 +2658,7 @@ def tempr_update(attr, old, new):
     	if zenklastempr()>0:
     		return (1-pagrtemp)/(balantemp-normaatemp)
     	else:
-    		return (1-pagrtemp)/(balantemp-normaatemp)
+    		return (1-pagrtemp)/(balantemp-normaktemp)
     print(alfatempr())
     def betatempr():
     	if zenklastempr()>0:
