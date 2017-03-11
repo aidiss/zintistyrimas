@@ -2588,6 +2588,47 @@ def krip_update(attr, old, new):
 pspietus.on_change("value", krip_update)
 kdpietus.on_change("value", krip_update)
 
+def kriv_update(attr, old, new):
+    def zenklaskriv():
+    	def kryptiskriv():
+    		if normakkri-balankri < 0:
+    			return 1
+    		else:
+    			return-1
+    	psv = float(psvakaras.value.replace(",", "."))
+    	kdv = float(kdvakaras.value.replace(",", "."))
+    	vertekri = psv/kdv
+    	if (vertekri-balankri)*kryptiskriv()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklaskriv())
+    def alfakriv():
+    	if zenklaskriv()>0:
+    		return (1-pagrkri)/(balankri-normaakri)
+    	else:
+    		return (1-pagrkri)/(balankri-normakkri)
+    print(alfakriv())
+    def betakriv():
+    	if zenklaskriv()>0:
+    		return (pagrkri*balankri-normaakri)/(balankri-normaakri)
+    	else:
+    		return (pagrkri*balankri-normakkri)/(balankri-normakkri)
+    print(betakriv())
+    def karareiksmekriv():
+    	psv = float(psvakaras.value.replace(",", "."))
+    	kdv = float(kdvakaras.value.replace(",", "."))
+    	vertekri = psv/kdv
+    	if zenklaskriv()<0:
+    		return zenklaskriv()*math.log(alfakriv()*vertekri+betakriv(), pagrkri)
+    	else:
+    		return zenklaskriv()*math.log(alfakriv()*vertekri+betakriv(), pagrkri)
+    krivnew_data={'x':[0,karareiksmekriv()],'y':["kriv","kriv"]}
+    sourcekriv.data.update(krivnew_data)
+    print(karareiksmekriv())
+psvakaras.on_change("value", kriv_update)
+kdvakaras.on_change("value", kriv_update)
+
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
     [pav1()],
