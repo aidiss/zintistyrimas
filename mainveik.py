@@ -7,7 +7,7 @@ from bokeh.models import Span, BoxAnnotation, Title, ColorBar, LinearColorMapper
 from bokeh.util.compiler import CoffeeScript
 from bokeh.models.ranges import DataRange1d, FactorRange
 import jinja2
-import math
+import math, cmath
 
 curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
 <html lang="en">
@@ -1363,7 +1363,7 @@ psrytas = TextInput(name = "rytas7", value="", title = "Rytas", width = 60)
 pspietus = TextInput(name = "pietus7", value="", title = "Pietūs", width = 60)
 psvakaras = TextInput(name = "vakaras7", value="", title = "Vakaras", width = 60)
 
-def kunotemp():
+def aprkunotemp():
     return Div(text="""
 <div class="box">
     <a class="button" href="#popup12"><br>Kūno temperatūra</a>
@@ -2059,9 +2059,14 @@ sourcekriv = ColumnDataSource(data=dict(x=[], y=[]))
 p.line('x', 'y', source = sourcekrir, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcekrip, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcekriv, line_color = "blue", line_width = 5)
-   
 
+sourcetempr = ColumnDataSource(data=dict(x=[], y=[]))
+sourcetempp = ColumnDataSource(data=dict(x=[], y=[]))
+sourcetempv = ColumnDataSource(data=dict(x=[], y=[]))
 
+p.line('x', 'y', source = sourcetempr, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcetempp, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcetempv, line_color = "blue", line_width = 5)
 
 
 
@@ -2629,6 +2634,49 @@ def kriv_update(attr, old, new):
 psvakaras.on_change("value", kriv_update)
 kdvakaras.on_change("value", kriv_update)
 
+
+
+normaktemp = 36.7
+normaatemp = 36.5
+balantemp = float((normaatemp+normaktemp)/2)
+pagrtemp = 2
+
+def tempr_update(attr, old, new):
+    def zenklastempr():
+    	def kryptistempr():
+    		if normaktemp-balantemp < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertetemp = float(ktrytas.value.replace(",", "."))
+    	if (vertetemp-balantemp)*kryptistempr()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklastempr())
+    def alfatempr():
+    	if zenklastempr()>0:
+    		return (1-pagrtemp)/(balantemp-normaatemp)
+    	else:
+    		return (1-pagrtemp)/(balantemp-normaatemp)
+    print(alfatempr())
+    def betatempr():
+    	if zenklastempr()>0:
+    		return (pagrtemp*balantemp-normaatemp)/(balantemp-normaatemp)
+    	else:
+    		return (pagrtemp*balantemp-normaktemp)/(balantemp-normaktemp)
+    print(betatempr())
+    def karareiksmetempr():
+    	vertetemp = float(ktrytas.value.replace(",", "."))
+    	if zenklastempr()<0:
+    		return zenklastempr()*math.log(float(alfatempr())*float(vertetemp)+float(betatempr()), pagrtemp)
+    	else:
+    		return zenklastempr()*math.log(float(alfatempr())*float(vertetemp)+float(betatempr()), pagrtemp)
+    temprnew_data={'x':[0,karareiksmetempr()],'y':["tempr","tempr"]}
+    sourcetempr.data.update(temprnew_data)
+    print(karareiksmetempr())
+ktrytas.on_change("value", tempr_update)
+
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
     [pav1()],
@@ -2649,6 +2697,7 @@ l = layout([protok(), invard , inpavard, lytis, inamz],
     [kraujot()],
     [aprpulsed(), psrytas, pspietus, psvakaras],
     [refleksu()],
+    [aprkunotemp(), ktrytas, ktpietus, ktvakaras],
     [aprdermoref(), drrytas, drpietus, drvakaras],
     [aprvasomref(), vrrytas, vrpietus, vrvakaras],
     [aprvyzdyd(), vdrytas, vdpietus, vdvakaras],
