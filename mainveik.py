@@ -2640,7 +2640,6 @@ normaktemp = 36.7
 normaatemp = 36.5
 balantemp = float((normaatemp+normaktemp)/2)
 pagrtemp = 2
-
 def tempr_update(attr, old, new):
     def zenklastempr():
     	def kryptistempr():
@@ -2676,6 +2675,78 @@ def tempr_update(attr, old, new):
     sourcetempr.data.update(temprnew_data)
     print(karareiksmetempr())
 ktrytas.on_change("value", tempr_update)
+
+def tempp_update(attr, old, new):
+    def zenklastempp():
+    	def kryptistempp():
+    		if normaktemp-balantemp < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertetemp = float(ktpietus.value.replace(",", "."))
+    	if (vertetemp-balantemp)*kryptistempp()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklastempp())
+    def alfatempp():
+    	if zenklastempp()>0:
+    		return (1-pagrtemp)/(balantemp-normaatemp)
+    	else:
+    		return (1-pagrtemp)/(balantemp-normaktemp)
+    print(alfatempp())
+    def betatempp():
+    	if zenklastempp()>0:
+    		return (pagrtemp*balantemp-normaatemp)/(balantemp-normaatemp)
+    	else:
+    		return (pagrtemp*balantemp-normaktemp)/(balantemp-normaktemp)
+    print(betatempp())
+    def karareiksmetempp():
+    	vertetemp = float(ktpietus.value.replace(",", "."))
+    	if zenklastempp()<0:
+    		return zenklastempp()*math.log(float(alfatempp())*float(vertetemp)+float(betatempp()), pagrtemp)
+    	else:
+    		return zenklastempp()*math.log(float(alfatempp())*float(vertetemp)+float(betatempp()), pagrtemp)
+    temppnew_data={'x':[0,karareiksmetempp()],'y':["tempp","tempp"]}
+    sourcetempp.data.update(temppnew_data)
+    print(karareiksmetempp())
+ktpietus.on_change("value", tempp_update)
+
+def tempv_update(attr, old, new):
+    def zenklastempv():
+    	def kryptistempv():
+    		if normaktemp-balantemp < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertetemp = float(ktvakaras.value.replace(",", "."))
+    	if (vertetemp-balantemp)*kryptistempv()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklastempv())
+    def alfatempv():
+    	if zenklastempv()>0:
+    		return (1-pagrtemp)/(balantemp-normaatemp)
+    	else:
+    		return (1-pagrtemp)/(balantemp-normaktemp)
+    print(alfatempv())
+    def betatempv():
+    	if zenklastempv()>0:
+    		return (pagrtemp*balantemp-normaatemp)/(balantemp-normaatemp)
+    	else:
+    		return (pagrtemp*balantemp-normaktemp)/(balantemp-normaktemp)
+    print(betatempv())
+    def karareiksmetempv():
+    	vertetemp = float(ktvakaras.value.replace(",", "."))
+    	if zenklastempv()<0:
+    		return zenklastempv()*math.log(float(alfatempv())*float(vertetemp)+float(betatempv()), pagrtemp)
+    	else:
+    		return zenklastempv()*math.log(float(alfatempv())*float(vertetemp)+float(betatempv()), pagrtemp)
+    tempvnew_data={'x':[0,karareiksmetempv()],'y':["tempv","tempv"]}
+    sourcetempv.data.update(tempvnew_data)
+    print(karareiksmetempv())
+ktvakaras.on_change("value", tempv_update)
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
