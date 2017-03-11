@@ -879,7 +879,7 @@ def tiriam2():
     return Div(text="""<b>9.</b><i>Tiriamajam pranešama, kad jis jau gali užsidengti pilvą ir paprašoma atsipalaiduoti,
 nekalbėti ir nusiraminti. Taip tiriamasis turi pagulėti daugiau nei 1 minutę.</i>""", width=780)
 
-def kvepparmat():
+def kvepparmat10():
     return Div(text="""<b>10. Kvėpavimo parametrų matavimas:</b>""", width=780)
 
 def tiriam3():
@@ -922,7 +922,7 @@ def pulsatsi45():
 def tiriam4():
     return Div(text="""<b>13.</b><i> Nuimama manžetė nuo tiriamojo žasto.</i>""", width=780)
 
-def kvepparmat():
+def kvepparmat14():
     return Div(text="""<b>14. Kvėpavimo parametrų matavimas:</b>""", width=780)
 
 def kataanab():
@@ -2052,6 +2052,13 @@ p.line('x', 'y', source = sourceppr, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourceppp, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourceppv, line_color = "blue", line_width = 5)
 
+sourcekrir = ColumnDataSource(data=dict(x=[], y=[]))
+sourcekrip = ColumnDataSource(data=dict(x=[], y=[]))
+sourcekriv = ColumnDataSource(data=dict(x=[], y=[]))
+
+p.line('x', 'y', source = sourcekrir, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcekrip, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcekriv, line_color = "blue", line_width = 5)
    
 
 
@@ -2493,6 +2500,53 @@ pavakaras.on_change("value", ppv_update)
 pa15vakaras.on_change("value", ppv_update)
 pa45vakaras.on_change("value", ppv_update)
 
+
+
+normakkri = 6
+normaakri = 4
+balankri = (normaakri+normakkri)/2
+pagrkri = 1.001
+def krir_update(attr, old, new):
+    def zenklaskrir():
+    	def kryptiskrir():
+    		if normakkri-balankri < 0:
+    			return 1
+    		else:
+    			return-1
+    	psr = float(psrytas.value.replace(",", "."))
+    	kdr = float(kdrytas.value.replace(",", "."))
+    	vertekri = psr/kdr
+    	if (vertekri-balankri)*kryptiskrir()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklaskrir())
+    def alfakrir():
+    	if zenklaskrir()>0:
+    		return (1-pagrkri)/(balankri-normaakri)
+    	else:
+    		return (1-pagrkri)/(balankri-normakkri)
+    print(alfakrir())
+    def betakrir():
+    	if zenklaskrir()>0:
+    		return (pagrkri*balankri-normaakri)/(balankri-normaakri)
+    	else:
+    		return (pagrkri*balankri-normakkri)/(balankri-normakkri)
+    print(betakrir())
+    def karareiksmekrir():
+    	psr = float(psrytas.value.replace(",", "."))
+    	kdr = float(kdrytas.value.replace(",", "."))
+    	vertekri = psr/kdr
+    	if zenklaskrir()<0:
+    		return zenklaskrir()*math.log(alfakrir()*vertekri+betakrir(), pagrkri)
+    	else:
+    		return zenklaskrir()*math.log(alfakrir()*vertekri+betakrir(), pagrkri)
+    krirnew_data={'x':[0,karareiksmekrir()],'y':["krir","krir"]}
+    sourcekrir.data.update(krirnew_data)
+    print(karareiksmekrir())
+psrytas.on_change("value", krir_update)
+kdrytas.on_change("value", krir_update)
+
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
     [pav1()],
@@ -2521,7 +2575,7 @@ l = layout([protok(), invard , inpavard, lytis, inamz],
     [tiriam1()],
     [aprsarglinref(), slrrytas, slrpietus, slrvakaras],
     [tiriam2()],
-    [kvepparmat()],
+    [kvepparmat10()],
     [aprkvepdaz(), kdrytas, kdpietus, kdvakaras],
     [tiriam3()],
     [kraujparmat()],
@@ -2537,7 +2591,7 @@ l = layout([protok(), invard , inpavard, lytis, inamz],
     [diaskraujatsi(), dkarytas, dkapietus, dkavakaras],
     [pulsatsi45(), pa45rytas, pa45pietus, pa45vakaras],
     [tiriam4()],
-    [kvepparmat()],
+    [kvepparmat14()],
     [aprkvepsu(), ksirytas, ksipietus, ksivakaras],
 
 
