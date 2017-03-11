@@ -2441,6 +2441,58 @@ papietus.on_change("value", ppp_update)
 pa15pietus.on_change("value", ppp_update)
 pa45pietus.on_change("value", ppp_update)
 
+
+def ppv_update(attr, old, new):
+    def zenklasppv():
+    	def kryptisppv():
+    		if normakpp-balanpp < 0:
+    			return 1
+    		else:
+    			return-1
+    	pgv = float(pgvakaras.value.replace(",", "."))
+    	pav = float(pavakaras.value.replace(",", "."))
+    	pa15v = float(pa15vakaras.value.replace(",", "."))
+    	pa45v = float(pa45vakaras.value.replace(",", "."))
+    	pp1 = max(pgv, pav, pa15v, pa45v)-pgv
+    	pp2= max(pgv, pav, pa15v, pa45v)-pa45v
+    	vertepp = pp1+pp2
+    	if (vertepp-balanpp)*kryptisppv()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasppv())
+    def alfappv():
+    	if zenklasppv()>0:
+    		return (1-pagrpp)/(balanpp-normaapp)
+    	else:
+    		return (1-pagrpp)/(balanpp-normakpp)
+    print(alfappv())
+    def betappv():
+    	if zenklasppv()>0:
+    		return (pagrpp*balanpp-normaapp)/(balanpp-normaapp)
+    	else:
+    		return (pagrpp*balanpp-normakpp)/(balanpp-normakpp)
+    print(betappv())
+    def karareiksmeppv():
+    	pgv = float(pgvakaras.value.replace(",", "."))
+    	pav = float(pavakaras.value.replace(",", "."))
+    	pa15v = float(pa15vakaras.value.replace(",", "."))
+    	pa45v = float(pa45vakaras.value.replace(",", "."))
+    	pp1 = max(pgv, pav, pa15v, pa45v)-pgv
+    	pp2= max(pgv, pav, pa15v, pa45v)-pa45v
+    	vertepp = pp1+pp2
+    	if zenklasppv()<0:
+    		return zenklasppv()*math.log(alfappv()*vertepp+betappv(), pagrpp)
+    	else:
+    		return zenklasppv()*math.log(alfappv()*vertepp+betappv(), pagrpp)
+    ppvnew_data={'x':[0,karareiksmeppv()],'y':["ppv","ppv"]}
+    sourceppv.data.update(ppvnew_data)
+    print(karareiksmeppv())
+pgvakaras.on_change("value", ppv_update)
+pavakaras.on_change("value", ppv_update)
+pa15vakaras.on_change("value", ppv_update)
+pa45vakaras.on_change("value", ppv_update)
+
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
     [pav1()],
