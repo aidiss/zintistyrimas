@@ -1953,9 +1953,9 @@ parytas = TextInput(name = "rytas19", value="", title = "Rytas", width = 60)
 papietus = TextInput(name = "pietus19", value="", title = "Pietūs", width = 60)
 pavakaras = TextInput(name = "vakaras19", value="", title = "Vakaras", width = 60)
 
-p15rytas = TextInput(name = "rytas20", value="", title = "Rytas", width = 60)
-p15pietus = TextInput(name = "pietus20", value="", title = "Pietūs", width = 60)
-p15vakaras = TextInput(name = "vakaras20", value="", title = "Vakaras", width = 60)
+pa15rytas = TextInput(name = "rytas20", value="", title = "Rytas", width = 60)
+pa15pietus = TextInput(name = "pietus20", value="", title = "Pietūs", width = 60)
+pa15vakaras = TextInput(name = "vakaras20", value="", title = "Vakaras", width = 60)
 
 def aprkraujpulsatsi45():
     return Div(text="""
@@ -2044,6 +2044,13 @@ p.line('x', 'y', source = sourcesdr, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcesdp, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcesdv, line_color = "blue", line_width = 5)
 
+sourceppr = ColumnDataSource(data=dict(x=[], y=[]))
+sourceppp = ColumnDataSource(data=dict(x=[], y=[]))
+sourceppv = ColumnDataSource(data=dict(x=[], y=[]))
+
+p.line('x', 'y', source = sourceppr, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourceppp, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourceppv, line_color = "blue", line_width = 5)
 
    
 
@@ -2324,6 +2331,66 @@ skgvakaras.on_change("value", sdv_update)
 dkavakaras.on_change("value", sdv_update)
 dkgvakaras.on_change("value", sdv_update)
 
+
+
+
+
+
+normakpp = 25
+normaapp = 22
+balanpp = (normaapp+normakpp)/2
+pagrpp = 2
+def ppr_update(attr, old, new):
+    def zenklasppr():
+    	def kryptisppr():
+    		if normakpp-balanpp < 0:
+    			return 1
+    		else:
+    			return-1
+    	pgr = float(pgrytas.value.replace(",", "."))
+    	par = float(parytas.value.replace(",", "."))
+    	pa15r = float(pa15rytas.value.replace(",", "."))
+    	pa45r = float(pa45rytas.value.replace(",", "."))
+    	pp1 = max(pgr, par, pa15r, pa45r)-pgr
+    	pp2= max(pgr, par, pa15r, pa45r)-pa45r
+    	vertepp = pp1+pp2
+    	if (vertepp-balanpp)*kryptisppr()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasppr())
+    def alfappr():
+    	if zenklasppr()>0:
+    		return (1-pagrpp)/(balanpp-normaapp)
+    	else:
+    		return (1-pagrpp)/(balanpp-normakpp)
+    print(alfappr())
+    def betappr():
+    	if zenklasppr()>0:
+    		return (pagrpp*balanpp-normaapp)/(balanpp-normaapp)
+    	else:
+    		return (pagrpp*balanpp-normakpp)/(balanpp-normakpp)
+    print(betappr())
+    def karareiksmeppr():
+    	pgr = float(pgrytas.value.replace(",", "."))
+    	par = float(parytas.value.replace(",", "."))
+    	pa15r = float(pa15rytas.value.replace(",", "."))
+    	pa45r = float(pa45rytas.value.replace(",", "."))
+    	pp1 = max(pgr, par, pa15r, pa45r)-pgr
+    	pp2= max(pgr, par, pa15r, pa45r)-pa45r
+    	vertepp = pp1+pp2
+    	if zenklasppr()<0:
+    		return zenklasppr()*math.log(alfappr()*vertepp+betappr(), pagrpp)
+    	else:
+    		return zenklasppr()*math.log(alfappr()*vertepp+betappr(), pagrpp)
+    pprnew_data={'x':[0,karareiksmeppr()],'y':["ppr","ppr"]}
+    sourceppr.data.update(pprnew_data)
+    print(karareiksmeppr())
+pgrytas.on_change("value", ppr_update)
+parytas.on_change("value", ppr_update)
+pa15rytas.on_change("value", ppr_update)
+pa45rytas.on_change("value", ppr_update)
+
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
     [pav1()],
@@ -2362,7 +2429,7 @@ l = layout([protok(), invard , inpavard, lytis, inamz],
     [ortatest()],
     [aprpulsatsi15()],
     [atsist(), parytas, papietus, pavakaras],
-    [po15(), p15rytas, p15pietus, p15vakaras],
+    [po15(), pa15rytas, pa15pietus, pa15vakaras],
     [aprkraujpulsatsi45()],
     [siskraujatsi(), skarytas, skapietus, skavakaras],
     [diaskraujatsi(), dkarytas, dkapietus, dkavakaras],
