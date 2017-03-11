@@ -2193,7 +2193,7 @@ def sdr_update(attr, old, new):
     	skar = float(skarytas.value.replace(",", "."))
     	skgr = float(skgrytas.value.replace(",", "."))
     	dkar = float(dkarytas.value.replace(",", "."))
-    	dkgr = float(dkarytas.value.replace(",", "."))
+    	dkgr = float(dkgrytas.value.replace(",", "."))
     	vertesd = (skar-skgr)+(dkar-dkgr)
     	if (vertesd-balansd)*kryptissdr()>=0:
     		return 1
@@ -2216,8 +2216,13 @@ def sdr_update(attr, old, new):
     	skar = float(skarytas.value.replace(",", "."))
     	skgr = float(skgrytas.value.replace(",", "."))
     	dkar = float(dkarytas.value.replace(",", "."))
-    	dkgr = float(dkarytas.value.replace(",", "."))
+    	dkgr = float(dkgrytas.value.replace(",", "."))
     	vertesd = skar-skgr+dkar-dkgr
+    	print(skar)
+    	print(skgr)
+    	print(dkar)
+    	print(dkgr)
+    	print(vertesd)
     	if zenklassdr()<0:
     		return zenklassdr()*math.log(alfasdr()*vertesd+betasdr(), pagrsd)
     	else:
@@ -2229,6 +2234,53 @@ skarytas.on_change("value", sdr_update)
 skgrytas.on_change("value", sdr_update)
 dkarytas.on_change("value", sdr_update)
 dkgrytas.on_change("value", sdr_update)
+
+def sdp_update(attr, old, new):
+    def zenklassdp():
+    	def kryptissdp():
+    		if normaksd-balansd < 0:
+    			return 1
+    		else:
+    			return-1
+    	skap = float(skapietus.value.replace(",", "."))
+    	skgp = float(skgpietus.value.replace(",", "."))
+    	dkap = float(dkapietus.value.replace(",", "."))
+    	dkgp = float(dkapietus.value.replace(",", "."))
+    	vertesd = (skap-skgp)+(dkap-dkgp)
+    	if (vertesd-balansd)*kryptissdp()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklassdp())
+    def alfasdp():
+    	if zenklassdp()>0:
+    		return (1-pagrsd)/(balansd-normaasd)
+    	else:
+    		return (1-pagrsd)/(balansd-normaksd)
+    print(alfasdp())
+    def betasdp():
+    	if zenklassdp()>0:
+    		return (pagrsd*balansd-normaasd)/(balansd-normaasd)
+    	else:
+    		return (pagrsd*balansd-normaksd)/(balansd-normaksd)
+    print(betasdp())
+    def karareiksmesdp():
+    	skap = float(skapietus.value.replace(",", "."))
+    	skgp = float(skgpietus.value.replace(",", "."))
+    	dkap = float(dkapietus.value.replace(",", "."))
+    	dkgp = float(dkapietus.value.replace(",", "."))
+    	vertesd = (skap-skgp)+(dkap-dkgp)
+    	if zenklassdp()<0:
+    		return zenklassdp()*math.log(alfasdp()*vertesd+betasdp(), pagrsd)
+    	else:
+    		return zenklassdp()*math.log(alfasdp()*vertesd+betasdp(), pagrsd)
+    sdpnew_data={'x':[0,karareiksmesdp()],'y':["sdp","sdp"]}
+    sourcesdp.data.update(sdpnew_data)
+    print(karareiksmesdp())
+skapietus.on_change("value", sdp_update)
+skgpietus.on_change("value", sdp_update)
+dkapietus.on_change("value", sdp_update)
+dkgpietus.on_change("value", sdp_update)
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
