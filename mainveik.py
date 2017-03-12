@@ -730,7 +730,7 @@ p.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='d
 p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p.add_layout(BoxAnnotation(top = 13, fill_alpha=0.1, fill_color='grey'))
+p.add_layout(BoxAnnotation(top = 13, fill_alpha=0.1, fill_color='black'))
 p.add_layout(BoxAnnotation(bottom = 13, top = 25, fill_alpha=0.1, fill_color='cyan'))
 p.add_layout(BoxAnnotation(top=37, fill_alpha=0.1, fill_color='yellow'))
 
@@ -2076,6 +2076,13 @@ p.line('x', 'y', source = sourcedermr, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcedermp, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcedermv, line_color = "blue", line_width = 5)
 
+sourcevasor = ColumnDataSource(data=dict(x=[], y=[]))
+sourcevasop = ColumnDataSource(data=dict(x=[], y=[]))
+sourcevasov = ColumnDataSource(data=dict(x=[], y=[]))
+
+p.line('x', 'y', source = sourcevasor, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcevasop, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcevasov, line_color = "blue", line_width = 5)
 
 
 normakps1 = -2
@@ -2868,6 +2875,46 @@ def dermv_update(attr, old, new):
     print(karareiksmedermv())
 drvakaras.on_change("value", dermv_update)
 
+
+normakvaso= -1
+normaavaso = 1
+balanvaso = float((normaavaso+normakvaso)/2)
+pagrvaso = 1.001
+def vasor_update(attr, old, new):
+    def zenklasvasor():
+    	def kryptisvasor():
+    		if normakvaso-balanvaso < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertederm = float(vrrytas.value.replace(",", "."))
+    	if (vertederm-balanvaso)*kryptisvasor()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasvasor())
+    def alfavasor():
+    	if zenklasvasor()>0:
+    		return (1-pagrvaso)/(balanvaso-normaavaso)
+    	else:
+    		return (1-pagrvaso)/(balanvaso-normakvaso)
+    print(alfavasor())
+    def betavasor():
+    	if zenklasvasor()>0:
+    		return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
+    	else:
+    		return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
+    print(betavasor())
+    def karareiksmevasor():
+    	vertederm = float(vrrytas.value.replace(",", "."))
+    	if zenklasvasor()<0:
+    		return zenklasvasor()*math.log(float(alfavasor())*float(vertederm)+float(betavasor()), pagrvaso)
+    	else:
+    		return zenklasvasor()*math.log(float(alfavasor())*float(vertederm)+float(betavasor()), pagrvaso)
+    vasornew_data={'x':[0,karareiksmevasor()],'y':["vasor","vasor"]}
+    sourcevasor.data.update(vasornew_data)
+    print(karareiksmevasor())
+vrrytas.on_change("value", vasor_update)
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
