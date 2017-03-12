@@ -729,8 +729,8 @@ p.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='d
 p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p.add_layout(BoxAnnotation(top = 14, fill_alpha=0.1, fill_color='black'))
-p.add_layout(BoxAnnotation(bottom = 14, top = 26, fill_alpha=0.1, fill_color='cyan'))
+p.add_layout(BoxAnnotation(top = 13, fill_alpha=0.1, fill_color='black'))
+p.add_layout(BoxAnnotation(bottom = 13, top = 25, fill_alpha=0.1, fill_color='cyan'))
 p.add_layout(BoxAnnotation(top=count, fill_alpha=0.1, fill_color='yellow'))
 
 p1.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
@@ -3595,6 +3595,12 @@ def sklv_update(attr, old, new):
     		return zenklassklv()*math.log(float(alfasklv())*float(verteskl)+float(betasklv()), pagrskl)
     sklvnew_data={'x':[0,karareiksmesklv()],'y':["sklv","sklv"]}
     sourcesklv.data.update(sklvnew_data)
+    # fig = p.line('x', 'y', source = sourcesklv, line_color = "blue", line_width = 5)
+    # gl1 = fig.glyph
+    # if karareiksmesklv()>0:
+    # 	return gl1.line_color = "red"
+    # else:
+    # 	return gl1.line_color = "blue"
     print(karareiksmesklv())
 sekvakaras.on_change("value", sklv_update)
 
