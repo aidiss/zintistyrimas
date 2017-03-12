@@ -2916,6 +2916,78 @@ def vasor_update(attr, old, new):
     print(karareiksmevasor())
 vrrytas.on_change("value", vasor_update)
 
+def vasop_update(attr, old, new):
+    def zenklasvasop():
+    	def kryptisvasop():
+    		if normakvaso-balanvaso < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertederm = float(vrpietus.value.replace(",", "."))
+    	if (vertederm-balanvaso)*kryptisvasop()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasvasop())
+    def alfavasop():
+    	if zenklasvasop()>0:
+    		return (1-pagrvaso)/(balanvaso-normaavaso)
+    	else:
+    		return (1-pagrvaso)/(balanvaso-normakvaso)
+    print(alfavasop())
+    def betavasop():
+    	if zenklasvasop()>0:
+    		return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
+    	else:
+    		return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
+    print(betavasop())
+    def karareiksmevasop():
+    	vertederm = float(vrpietus.value.replace(",", "."))
+    	if zenklasvasop()<0:
+    		return zenklasvasop()*math.log(float(alfavasop())*float(vertederm)+float(betavasop()), pagrvaso)
+    	else:
+    		return zenklasvasop()*math.log(float(alfavasop())*float(vertederm)+float(betavasop()), pagrvaso)
+    vasopnew_data={'x':[0,karareiksmevasop()],'y':["vasop","vasop"]}
+    sourcevasop.data.update(vasopnew_data)
+    print(karareiksmevasop())
+vrpietus.on_change("value", vasop_update)
+
+def vasov_update(attr, old, new):
+    def zenklasvasov():
+    	def kryptisvasov():
+    		if normakvaso-balanvaso < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertederm = float(vrvakaras.value.replace(",", "."))
+    	if (vertederm-balanvaso)*kryptisvasov()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasvasov())
+    def alfavasov():
+    	if zenklasvasov()>0:
+    		return (1-pagrvaso)/(balanvaso-normaavaso)
+    	else:
+    		return (1-pagrvaso)/(balanvaso-normakvaso)
+    print(alfavasov())
+    def betavasov():
+    	if zenklasvasov()>0:
+    		return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
+    	else:
+    		return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
+    print(betavasov())
+    def karareiksmevasov():
+    	vertederm = float(vrvakaras.value.replace(",", "."))
+    	if zenklasvasov()<0:
+    		return zenklasvasov()*math.log(float(alfavasov())*float(vertederm)+float(betavasov()), pagrvaso)
+    	else:
+    		return zenklasvasov()*math.log(float(alfavasov())*float(vertederm)+float(betavasov()), pagrvaso)
+    vasovnew_data={'x':[0,karareiksmevasov()],'y':["vasov","vasov"]}
+    sourcevasov.data.update(vasovnew_data)
+    print(karareiksmevasov())
+vrvakaras.on_change("value", vasov_update)
+
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
     [pav1()],
