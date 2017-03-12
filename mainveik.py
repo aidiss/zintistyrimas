@@ -3325,7 +3325,41 @@ def nosp_update(attr, old, new):
     print(karareiksmenosp())
 supietus.on_change("value", nosp_update)
 
-
+def nosv_update(attr, old, new):
+    def zenklasnosv():
+    	def kryptisnosv():
+    		if normaknos-balannos < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertenos = float(suvakaras.value.replace(",", "."))
+    	if (vertenos-balannos)*kryptisnosv()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasnosv())
+    def alfanosv():
+    	if zenklasnosv()>0:
+    		return (1-pagrnos)/(balannos-normaanos)
+    	else:
+    		return (1-pagrnos)/(balannos-normaknos)
+    print(alfanosv())
+    def betanosv():
+    	if zenklasnosv()>0:
+    		return (pagrnos*balannos-normaanos)/(balannos-normaanos)
+    	else:
+    		return (pagrnos*balannos-normaknos)/(balanvaso-normaknos)
+    print(betanosv())
+    def karareiksmenosv():
+    	vertenos = float(suvakaras.value.replace(",", "."))
+    	if zenklasnosv()<0:
+    		return zenklasnosv()*math.log(float(alfanosv())*float(vertenos)+float(betanosv()), pagrnos)
+    	else:
+    		return zenklasnosv()*math.log(float(alfanosv())*float(vertenos)+float(betanosv()), pagrnos)
+    nosvnew_data={'x':[0,karareiksmenosv()],'y':["nosv","nosv"]}
+    sourcenosv.data.update(nosvnew_data)
+    print(karareiksmenosv())
+suvakaras.on_change("value", nosv_update)
 
 
 
