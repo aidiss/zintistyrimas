@@ -602,9 +602,9 @@ th {
 </html>
 ''')
 
-factorssp = ["sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "ppv", "sdv", "ps1v", "sklp", "sargp", "nosp", "tremp", "vyzdp",
+factorssp = ["sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "ppv", "sdv", "ps1v", "bla1", "sklp", "sargp", "nosp", "tremp", "vyzdp",
 "vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", 
-"blaaa"]
+"bla3"]
 
 count = len(factorssp)
 
@@ -623,7 +623,6 @@ p.xaxis.formatter = FuncTickFormatter(code="""
     data = {"-4": "Didelis", "-3": "Vidutinis", "-2": 'Mažas', "-1": "Norma", 1: 'Norma', 2: 'Mažas', 3: 'Vidutinis', 4: 'Didelis'}
     return data[tick]
 """)
-p.yaxis.formatter = NumeralTickFormatter(format="0,0")
 
 p1 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
 p1.title.text = "<-Katabolizmas|Anabolizmas->"
@@ -730,9 +729,9 @@ p.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='d
 p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p.add_layout(BoxAnnotation(top = 13, fill_alpha=0.1, fill_color='black'))
-p.add_layout(BoxAnnotation(bottom = 13, top = 25, fill_alpha=0.1, fill_color='cyan'))
-p.add_layout(BoxAnnotation(top=37, fill_alpha=0.1, fill_color='yellow'))
+p.add_layout(BoxAnnotation(top = 14, fill_alpha=0.1, fill_color='black'))
+p.add_layout(BoxAnnotation(bottom = 14, top = 26, fill_alpha=0.1, fill_color='cyan'))
+p.add_layout(BoxAnnotation(top=count, fill_alpha=0.1, fill_color='yellow'))
 
 p1.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
 p1.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
@@ -812,8 +811,6 @@ p6.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
 p6.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
 p6.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
 
-# add a line renderer
-
 
 # create some widgets
 def protok():
@@ -823,7 +820,6 @@ invard = TextInput(name = "vard", value="", title = "Vardas", width = 130)
 inpavard = TextInput(name = "pavard", value="", title = "Pavardė", width = 160)
 lytis = Select(title="Lytis:", value="", options=["Vyras", "Moteris"], width = 110)
 inamz = TextInput(name = "amz", value="", title = "Amžius", width = 80) 
-# indata = TextInput(value="", title = "Data")
 
 def tikslus():
     return Div(text="""Tikslūs organizmo tyrimo metu atliekamų testų rezultatai padeda geriau suprasti
@@ -2116,6 +2112,13 @@ p.line('x', 'y', source = sourcesargr, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcesargp, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcesargv, line_color = "blue", line_width = 5)
 
+sourcesklr = ColumnDataSource(data=dict(x=[], y=[]))
+sourcesklp = ColumnDataSource(data=dict(x=[], y=[]))
+sourcesklv = ColumnDataSource(data=dict(x=[], y=[]))
+
+p.line('x', 'y', source = sourcesklr, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcesklp, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcesklv, line_color = "blue", line_width = 5)
 
 
 
@@ -3483,9 +3486,81 @@ slrvakaras.on_change("value", sargv_update)
 
 
 
+normakskl= 1
+normaaskl = -1
+balanskl = float((normaaskl+normakskl)/2)
+pagrskl = 1.001
+def sklr_update(attr, old, new):
+    def zenklassklr():
+    	def kryptissklr():
+    		if normakskl-balanskl < 0:
+    			return 1
+    		else:
+    			return-1
+    	verteskl = float(sekrytas.value.replace(",", "."))
+    	if (verteskl-balanskl)*kryptissklr()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklassklr())
+    def alfasklr():
+    	if zenklassklr()>0:
+    		return (1-pagrskl)/(balanskl-normaaskl)
+    	else:
+    		return (1-pagrskl)/(balanskl-normakskl)
+    print(alfasklr())
+    def betasklr():
+    	if zenklassklr()>0:
+    		return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
+    	else:
+    		return (pagrskl*balanskl-normakskl)/(balanvaso-normakskl)
+    print(betasklr())
+    def karareiksmesklr():
+    	verteskl = float(sekrytas.value.replace(",", "."))
+    	if zenklassklr()<0:
+    		return zenklassklr()*math.log(float(alfasklr())*float(verteskl)+float(betasklr()), pagrskl)
+    	else:
+    		return zenklassklr()*math.log(float(alfasklr())*float(verteskl)+float(betasklr()), pagrskl)
+    sklrnew_data={'x':[0,karareiksmesklr()],'y':["sklr","sklr"]}
+    sourcesklr.data.update(sklrnew_data)
+    print(karareiksmesklr())
+sekrytas.on_change("value", sklr_update)
 
-
-
+def sklp_update(attr, old, new):
+    def zenklassklp():
+    	def kryptissklp():
+    		if normakskl-balanskl < 0:
+    			return 1
+    		else:
+    			return-1
+    	verteskl = float(sekpietus.value.replace(",", "."))
+    	if (verteskl-balanskl)*kryptissklp()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklassklp())
+    def alfasklp():
+    	if zenklassklp()>0:
+    		return (1-pagrskl)/(balanskl-normaaskl)
+    	else:
+    		return (1-pagrskl)/(balanskl-normakskl)
+    print(alfasklp())
+    def betasklp():
+    	if zenklassklp()>0:
+    		return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
+    	else:
+    		return (pagrskl*balanskl-normakskl)/(balanvaso-normakskl)
+    print(betasklp())
+    def karareiksmesklp():
+    	verteskl = float(sekpietus.value.replace(",", "."))
+    	if zenklassklp()<0:
+    		return zenklassklp()*math.log(float(alfasklp())*float(verteskl)+float(betasklp()), pagrskl)
+    	else:
+    		return zenklassklp()*math.log(float(alfasklp())*float(verteskl)+float(betasklp()), pagrskl)
+    sklpnew_data={'x':[0,karareiksmesklp()],'y':["sklp","sklp"]}
+    sourcesklp.data.update(sklpnew_data)
+    print(karareiksmesklp())
+sekpietus.on_change("value", sklp_update)
 
 
 
