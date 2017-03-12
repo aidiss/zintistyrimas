@@ -2108,7 +2108,13 @@ p.line('x', 'y', source = sourcenosr, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcenosp, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcenosv, line_color = "blue", line_width = 5)
 
+sourcesargr = ColumnDataSource(data=dict(x=[], y=[]))
+sourcesargp = ColumnDataSource(data=dict(x=[], y=[]))
+sourcesargv = ColumnDataSource(data=dict(x=[], y=[]))
 
+p.line('x', 'y', source = sourcesargr, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcesargp, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcesargv, line_color = "blue", line_width = 5)
 
 
 
@@ -3363,45 +3369,45 @@ suvakaras.on_change("value", nosv_update)
 
 
 
-normaknos= 1
-normaanos = -1
-balannos = float((normaanos+normaknos)/2)
-pagrnos = 1.001
-def nosr_update(attr, old, new):
-    def zenklasnosr():
-    	def kryptisnosr():
-    		if normaknos-balannos < 0:
+normaksarg= 1
+normaasarg = -1
+balansarg = float((normaasarg+normaksarg)/2)
+pagrsarg = 1.001
+def sargr_update(attr, old, new):
+    def zenklassargr():
+    	def kryptissargr():
+    		if normaksarg-balansarg < 0:
     			return 1
     		else:
     			return-1
-    	vertenos = float(surytas.value.replace(",", "."))
-    	if (vertenos-balannos)*kryptisnosr()>=0:
+    	vertesarg = float(slrrytas.value.replace(",", "."))
+    	if (vertesarg-balansarg)*kryptissargr()>=0:
     		return 1
     	else:
     		return -1
-    print(zenklasnosr())
-    def alfanosr():
-    	if zenklasnosr()>0:
-    		return (1-pagrnos)/(balannos-normaanos)
+    print(zenklassargr())
+    def alfasargr():
+    	if zenklassargr()>0:
+    		return (1-pagrsarg)/(balansarg-normaasarg)
     	else:
-    		return (1-pagrnos)/(balannos-normaknos)
-    print(alfanosr())
-    def betanosr():
-    	if zenklasnosr()>0:
-    		return (pagrnos*balannos-normaanos)/(balannos-normaanos)
+    		return (1-pagrsarg)/(balansarg-normaksarg)
+    print(alfasargr())
+    def betasargr():
+    	if zenklassargr()>0:
+    		return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
     	else:
-    		return (pagrnos*balannos-normaknos)/(balanvaso-normaknos)
-    print(betanosr())
-    def karareiksmenosr():
-    	vertenos = float(surytas.value.replace(",", "."))
-    	if zenklasnosr()<0:
-    		return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
+    		return (pagrsarg*balansarg-normaksarg)/(balanvaso-normaksarg)
+    print(betasargr())
+    def karareiksmesargr():
+    	vertesarg = float(slrrytas.value.replace(",", "."))
+    	if zenklassargr()<0:
+    		return zenklassargr()*math.log(float(alfasargr())*float(vertesarg)+float(betasargr()), pagrsarg)
     	else:
-    		return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
-    nosrnew_data={'x':[0,karareiksmenosr()],'y':["nosr","nosr"]}
-    sourcenosr.data.update(nosrnew_data)
-    print(karareiksmenosr())
-surytas.on_change("value", nosr_update)
+    		return zenklassargr()*math.log(float(alfasargr())*float(vertesarg)+float(betasargr()), pagrsarg)
+    sargrnew_data={'x':[0,karareiksmesargr()],'y':["sargr","sargr"]}
+    sourcesargr.data.update(sargrnew_data)
+    print(karareiksmesargr())
+slrrytas.on_change("value", sargr_update)
 
 
 
