@@ -3289,6 +3289,50 @@ def nosr_update(attr, old, new):
     print(karareiksmenosr())
 surytas.on_change("value", nosr_update)
 
+def nosp_update(attr, old, new):
+    def zenklasnosp():
+    	def kryptisnosp():
+    		if normaknos-balannos < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertenos = float(supietus.value.replace(",", "."))
+    	if (vertenos-balannos)*kryptisnosp()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasnosp())
+    def alfanosp():
+    	if zenklasnosp()>0:
+    		return (1-pagrnos)/(balannos-normaanos)
+    	else:
+    		return (1-pagrnos)/(balannos-normaknos)
+    print(alfanosp())
+    def betanosp():
+    	if zenklasnosp()>0:
+    		return (pagrnos*balannos-normaanos)/(balannos-normaanos)
+    	else:
+    		return (pagrnos*balannos-normaknos)/(balanvaso-normaknos)
+    print(betanosp())
+    def karareiksmenosp():
+    	vertenos = float(supietus.value.replace(",", "."))
+    	if zenklasnosp()<0:
+    		return zenklasnosp()*math.log(float(alfanosp())*float(vertenos)+float(betanosp()), pagrnos)
+    	else:
+    		return zenklasnosp()*math.log(float(alfanosp())*float(vertenos)+float(betanosp()), pagrnos)
+    nospnew_data={'x':[0,karareiksmenosp()],'y':["nosp","nosp"]}
+    sourcenosp.data.update(nospnew_data)
+    print(karareiksmenosp())
+supietus.on_change("value", nosp_update)
+
+
+
+
+
+
+
+
+
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
