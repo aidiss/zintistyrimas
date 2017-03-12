@@ -2796,6 +2796,79 @@ def dermr_update(attr, old, new):
     print(karareiksmedermr())
 drrytas.on_change("value", dermr_update)
 
+def dermp_update(attr, old, new):
+    def zenklasdermp():
+    	def kryptisdermp():
+    		if normakderm-balanderm < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertederm = float(drpietus.value.replace(",", "."))
+    	if (vertederm-balanderm)*kryptisdermp()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasdermp())
+    def alfadermp():
+    	if zenklasdermp()>0:
+    		return (1-pagrderm)/(balanderm-normaaderm)
+    	else:
+    		return (1-pagrderm)/(balanderm-normakderm)
+    print(alfadermp())
+    def betadermp():
+    	if zenklasdermp()>0:
+    		return (pagrderm*balanderm-normaaderm)/(balanderm-normaaderm)
+    	else:
+    		return (pagrderm*balanderm-normakderm)/(balanderm-normakderm)
+    print(betadermp())
+    def karareiksmedermp():
+    	vertederm = float(drpietus.value.replace(",", "."))
+    	if zenklasdermp()<0:
+    		return zenklasdermp()*math.log(float(alfadermp())*float(vertederm)+float(betadermp()), pagrderm)
+    	else:
+    		return zenklasdermp()*math.log(float(alfadermp())*float(vertederm)+float(betadermp()), pagrderm)
+    dermpnew_data={'x':[0,karareiksmedermp()],'y':["dermp","dermp"]}
+    sourcedermp.data.update(dermpnew_data)
+    print(karareiksmedermp())
+drpietus.on_change("value", dermp_update)
+
+def dermv_update(attr, old, new):
+    def zenklasdermv():
+    	def kryptisdermv():
+    		if normakderm-balanderm < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertederm = float(drvakaras.value.replace(",", "."))
+    	if (vertederm-balanderm)*kryptisdermv()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasdermv())
+    def alfadermv():
+    	if zenklasdermv()>0:
+    		return (1-pagrderm)/(balanderm-normaaderm)
+    	else:
+    		return (1-pagrderm)/(balanderm-normakderm)
+    print(alfadermv())
+    def betadermv():
+    	if zenklasdermv()>0:
+    		return (pagrderm*balanderm-normaaderm)/(balanderm-normaaderm)
+    	else:
+    		return (pagrderm*balanderm-normakderm)/(balanderm-normakderm)
+    print(betadermv())
+    def karareiksmedermv():
+    	vertederm = float(drvakaras.value.replace(",", "."))
+    	if zenklasdermv()<0:
+    		return zenklasdermv()*math.log(float(alfadermv())*float(vertederm)+float(betadermv()), pagrderm)
+    	else:
+    		return zenklasdermv()*math.log(float(alfadermv())*float(vertederm)+float(betadermv()), pagrderm)
+    dermvnew_data={'x':[0,karareiksmedermv()],'y':["dermv","dermv"]}
+    sourcedermv.data.update(dermvnew_data)
+    print(karareiksmedermv())
+drvakaras.on_change("value", dermv_update)
+
+
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
     [pav1()],
@@ -2843,9 +2916,6 @@ l = layout([protok(), invard , inpavard, lytis, inamz],
     [tiriam4()],
     [kvepparmat14()],
     [aprkvepsu(), ksirytas, ksipietus, ksivakaras],
-
-
-    # [input2],
     )
 l2= column(p, p1, p2, p3, p4, p5, p6)
 l1 = row(l, l2)
