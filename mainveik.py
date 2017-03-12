@@ -2100,6 +2100,20 @@ p.line('x', 'y', source = sourcetremr, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcetremp, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcetremv, line_color = "blue", line_width = 5)
 
+sourcenosr = ColumnDataSource(data=dict(x=[], y=[]))
+sourcenosp = ColumnDataSource(data=dict(x=[], y=[]))
+sourcenosv = ColumnDataSource(data=dict(x=[], y=[]))
+
+p.line('x', 'y', source = sourcenosr, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcenosp, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcenosv, line_color = "blue", line_width = 5)
+
+
+
+
+
+
+
 normakps1 = -2
 normaaps1 = 0
 balanps1 = (normaaps1+normakps1)/2
@@ -2894,8 +2908,8 @@ drvakaras.on_change("value", dermv_update)
 
 
 normakvaso= -1
-normaavyzd = 1
-balanvaso = float((normaavyzd+normakvaso)/2)
+normaavaso = 1
+balanvaso = float((normaavaso+normakvaso)/2)
 pagrvaso = 1.001
 def vasor_update(attr, old, new):
     def zenklasvasor():
@@ -2904,30 +2918,30 @@ def vasor_update(attr, old, new):
     			return 1
     		else:
     			return-1
-    	vertederm = float(vrrytas.value.replace(",", "."))
-    	if (vertederm-balanvaso)*kryptisvasor()>=0:
+    	vertevaso = float(vrrytas.value.replace(",", "."))
+    	if (vertevaso-balanvaso)*kryptisvasor()>=0:
     		return 1
     	else:
     		return -1
     print(zenklasvasor())
     def alfavasor():
     	if zenklasvasor()>0:
-    		return (1-pagrvaso)/(balanvaso-normaavyzd)
+    		return (1-pagrvaso)/(balanvaso-normaavaso)
     	else:
     		return (1-pagrvaso)/(balanvaso-normakvaso)
     print(alfavasor())
     def betavasor():
     	if zenklasvasor()>0:
-    		return (pagrvaso*balanvaso-normaavyzd)/(balanvaso-normaavyzd)
+    		return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
     	else:
     		return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
     print(betavasor())
     def karareiksmevasor():
-    	vertederm = float(vrrytas.value.replace(",", "."))
+    	vertevaso = float(vrrytas.value.replace(",", "."))
     	if zenklasvasor()<0:
-    		return zenklasvasor()*math.log(float(alfavasor())*float(vertederm)+float(betavasor()), pagrvaso)
+    		return zenklasvasor()*math.log(float(alfavasor())*float(vertevaso)+float(betavasor()), pagrvaso)
     	else:
-    		return zenklasvasor()*math.log(float(alfavasor())*float(vertederm)+float(betavasor()), pagrvaso)
+    		return zenklasvasor()*math.log(float(alfavasor())*float(vertevaso)+float(betavasor()), pagrvaso)
     vasornew_data={'x':[0,karareiksmevasor()],'y':["vasor","vasor"]}
     sourcevasor.data.update(vasornew_data)
     print(karareiksmevasor())
@@ -2940,8 +2954,8 @@ def vasop_update(attr, old, new):
     			return 1
     		else:
     			return-1
-    	vertederm = float(vrpietus.value.replace(",", "."))
-    	if (vertederm-balanvaso)*kryptisvasop()>=0:
+    	vertevaso = float(vrpietus.value.replace(",", "."))
+    	if (vertevaso-balanvaso)*kryptisvasop()>=0:
     		return 1
     	else:
     		return -1
@@ -2959,11 +2973,11 @@ def vasop_update(attr, old, new):
     		return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
     print(betavasop())
     def karareiksmevasop():
-    	vertederm = float(vrpietus.value.replace(",", "."))
+    	vertevaso = float(vrpietus.value.replace(",", "."))
     	if zenklasvasop()<0:
-    		return zenklasvasop()*math.log(float(alfavasop())*float(vertederm)+float(betavasop()), pagrvaso)
+    		return zenklasvasop()*math.log(float(alfavasop())*float(vertevaso)+float(betavasop()), pagrvaso)
     	else:
-    		return zenklasvasop()*math.log(float(alfavasop())*float(vertederm)+float(betavasop()), pagrvaso)
+    		return zenklasvasop()*math.log(float(alfavasop())*float(vertevaso)+float(betavasop()), pagrvaso)
     vasopnew_data={'x':[0,karareiksmevasop()],'y':["vasop","vasop"]}
     sourcevasop.data.update(vasopnew_data)
     print(karareiksmevasop())
@@ -2976,8 +2990,8 @@ def vasov_update(attr, old, new):
     			return 1
     		else:
     			return-1
-    	vertederm = float(vrvakaras.value.replace(",", "."))
-    	if (vertederm-balanvaso)*kryptisvasov()>=0:
+    	vertevaso = float(vrvakaras.value.replace(",", "."))
+    	if (vertevaso-balanvaso)*kryptisvasov()>=0:
     		return 1
     	else:
     		return -1
@@ -2995,11 +3009,11 @@ def vasov_update(attr, old, new):
     		return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
     print(betavasov())
     def karareiksmevasov():
-    	vertederm = float(vrvakaras.value.replace(",", "."))
+    	vertevaso = float(vrvakaras.value.replace(",", "."))
     	if zenklasvasov()<0:
-    		return zenklasvasov()*math.log(float(alfavasov())*float(vertederm)+float(betavasov()), pagrvaso)
+    		return zenklasvasov()*math.log(float(alfavasov())*float(vertevaso)+float(betavasov()), pagrvaso)
     	else:
-    		return zenklasvasov()*math.log(float(alfavasov())*float(vertederm)+float(betavasov()), pagrvaso)
+    		return zenklasvasov()*math.log(float(alfavasov())*float(vertevaso)+float(betavasov()), pagrvaso)
     vasovnew_data={'x':[0,karareiksmevasov()],'y':["vasov","vasov"]}
     sourcevasov.data.update(vasovnew_data)
     print(karareiksmevasov())
@@ -3018,8 +3032,8 @@ def vyzdr_update(attr, old, new):
     			return 1
     		else:
     			return-1
-    	vertederm = float(vdrytas.value.replace(",", "."))
-    	if (vertederm-balanvyzd)*kryptisvyzdr()>=0:
+    	vertevyzd = float(vdrytas.value.replace(",", "."))
+    	if (vertevyzd-balanvyzd)*kryptisvyzdr()>=0:
     		return 1
     	else:
     		return -1
@@ -3037,11 +3051,11 @@ def vyzdr_update(attr, old, new):
     		return (pagrvyzd*balanvyzd-normakvyzd)/(balanvaso-normakvyzd)
     print(betavyzdr())
     def karareiksmevyzdr():
-    	vertederm = float(vdrytas.value.replace(",", "."))
+    	vertevyzd = float(vdrytas.value.replace(",", "."))
     	if zenklasvyzdr()<0:
-    		return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertederm)+float(betavyzdr()), pagrvyzd)
+    		return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertevyzd)+float(betavyzdr()), pagrvyzd)
     	else:
-    		return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertederm)+float(betavyzdr()), pagrvyzd)
+    		return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertevyzd)+float(betavyzdr()), pagrvyzd)
     vyzdrnew_data={'x':[0,karareiksmevyzdr()],'y':["vyzdr","vyzdr"]}
     sourcevyzdr.data.update(vyzdrnew_data)
     print(karareiksmevyzdr())
@@ -3054,8 +3068,8 @@ def vyzdp_update(attr, old, new):
     			return 1
     		else:
     			return-1
-    	vertederm = float(vdpietus.value.replace(",", "."))
-    	if (vertederm-balanvyzd)*kryptisvyzdp()>=0:
+    	vertevyzd = float(vdpietus.value.replace(",", "."))
+    	if (vertevyzd-balanvyzd)*kryptisvyzdp()>=0:
     		return 1
     	else:
     		return -1
@@ -3073,11 +3087,11 @@ def vyzdp_update(attr, old, new):
     		return (pagrvyzd*balanvyzd-normakvyzd)/(balanvaso-normakvyzd)
     print(betavyzdp())
     def karareiksmevyzdp():
-    	vertederm = float(vdpietus.value.replace(",", "."))
+    	vertevyzd = float(vdpietus.value.replace(",", "."))
     	if zenklasvyzdp()<0:
-    		return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertederm)+float(betavyzdp()), pagrvyzd)
+    		return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertevyzd)+float(betavyzdp()), pagrvyzd)
     	else:
-    		return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertederm)+float(betavyzdp()), pagrvyzd)
+    		return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertevyzd)+float(betavyzdp()), pagrvyzd)
     vyzdpnew_data={'x':[0,karareiksmevyzdp()],'y':["vyzdp","vyzdp"]}
     sourcevyzdp.data.update(vyzdpnew_data)
     print(karareiksmevyzdp())
@@ -3090,8 +3104,8 @@ def vyzdv_update(attr, old, new):
     			return 1
     		else:
     			return-1
-    	vertederm = float(vdvakaras.value.replace(",", "."))
-    	if (vertederm-balanvyzd)*kryptisvyzdv()>=0:
+    	vertevyzd = float(vdvakaras.value.replace(",", "."))
+    	if (vertevyzd-balanvyzd)*kryptisvyzdv()>=0:
     		return 1
     	else:
     		return -1
@@ -3109,11 +3123,11 @@ def vyzdv_update(attr, old, new):
     		return (pagrvyzd*balanvyzd-normakvyzd)/(balanvaso-normakvyzd)
     print(betavyzdv())
     def karareiksmevyzdv():
-    	vertederm = float(vdvakaras.value.replace(",", "."))
+    	vertevyzd = float(vdvakaras.value.replace(",", "."))
     	if zenklasvyzdv()<0:
-    		return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertederm)+float(betavyzdv()), pagrvyzd)
+    		return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertevyzd)+float(betavyzdv()), pagrvyzd)
     	else:
-    		return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertederm)+float(betavyzdv()), pagrvyzd)
+    		return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertevyzd)+float(betavyzdv()), pagrvyzd)
     vyzdvnew_data={'x':[0,karareiksmevyzdv()],'y':["vyzdv","vyzdv"]}
     sourcevyzdv.data.update(vyzdvnew_data)
     print(karareiksmevyzdv())
@@ -3132,8 +3146,8 @@ def tremr_update(attr, old, new):
     			return 1
     		else:
     			return-1
-    	vertederm = float(trrytas.value.replace(",", "."))
-    	if (vertederm-balantrem)*kryptistremr()>=0:
+    	vertetrem = float(trrytas.value.replace(",", "."))
+    	if (vertetrem-balantrem)*kryptistremr()>=0:
     		return 1
     	else:
     		return -1
@@ -3151,11 +3165,11 @@ def tremr_update(attr, old, new):
     		return (pagrtrem*balantrem-normaktrem)/(balanvaso-normaktrem)
     print(betatremr())
     def karareiksmetremr():
-    	vertederm = float(trrytas.value.replace(",", "."))
+    	vertetrem = float(trrytas.value.replace(",", "."))
     	if zenklastremr()<0:
-    		return zenklastremr()*math.log(float(alfatremr())*float(vertederm)+float(betatremr()), pagrtrem)
+    		return zenklastremr()*math.log(float(alfatremr())*float(vertetrem)+float(betatremr()), pagrtrem)
     	else:
-    		return zenklastremr()*math.log(float(alfatremr())*float(vertederm)+float(betatremr()), pagrtrem)
+    		return zenklastremr()*math.log(float(alfatremr())*float(vertetrem)+float(betatremr()), pagrtrem)
     tremrnew_data={'x':[0,karareiksmetremr()],'y':["tremr","tremr"]}
     sourcetremr.data.update(tremrnew_data)
     print(karareiksmetremr())
@@ -3168,8 +3182,8 @@ def tremp_update(attr, old, new):
     			return 1
     		else:
     			return-1
-    	vertederm = float(trpietus.value.replace(",", "."))
-    	if (vertederm-balantrem)*kryptistremp()>=0:
+    	vertetrem = float(trpietus.value.replace(",", "."))
+    	if (vertetrem-balantrem)*kryptistremp()>=0:
     		return 1
     	else:
     		return -1
@@ -3187,11 +3201,11 @@ def tremp_update(attr, old, new):
     		return (pagrtrem*balantrem-normaktrem)/(balanvaso-normaktrem)
     print(betatremp())
     def karareiksmetremp():
-    	vertederm = float(trpietus.value.replace(",", "."))
+    	vertetrem = float(trpietus.value.replace(",", "."))
     	if zenklastremp()<0:
-    		return zenklastremp()*math.log(float(alfatremp())*float(vertederm)+float(betatremp()), pagrtrem)
+    		return zenklastremp()*math.log(float(alfatremp())*float(vertetrem)+float(betatremp()), pagrtrem)
     	else:
-    		return zenklastremp()*math.log(float(alfatremp())*float(vertederm)+float(betatremp()), pagrtrem)
+    		return zenklastremp()*math.log(float(alfatremp())*float(vertetrem)+float(betatremp()), pagrtrem)
     trempnew_data={'x':[0,karareiksmetremp()],'y':["tremp","tremp"]}
     sourcetremp.data.update(trempnew_data)
     print(karareiksmetremp())
@@ -3204,8 +3218,8 @@ def tremv_update(attr, old, new):
     			return 1
     		else:
     			return-1
-    	vertederm = float(trvakaras.value.replace(",", "."))
-    	if (vertederm-balantrem)*kryptistremv()>=0:
+    	vertetrem = float(trvakaras.value.replace(",", "."))
+    	if (vertetrem-balantrem)*kryptistremv()>=0:
     		return 1
     	else:
     		return -1
@@ -3223,11 +3237,11 @@ def tremv_update(attr, old, new):
     		return (pagrtrem*balantrem-normaktrem)/(balanvaso-normaktrem)
     print(betatremv())
     def karareiksmetremv():
-    	vertederm = float(trvakaras.value.replace(",", "."))
+    	vertetrem = float(trvakaras.value.replace(",", "."))
     	if zenklastremv()<0:
-    		return zenklastremv()*math.log(float(alfatremv())*float(vertederm)+float(betatremv()), pagrtrem)
+    		return zenklastremv()*math.log(float(alfatremv())*float(vertetrem)+float(betatremv()), pagrtrem)
     	else:
-    		return zenklastremv()*math.log(float(alfatremv())*float(vertederm)+float(betatremv()), pagrtrem)
+    		return zenklastremv()*math.log(float(alfatremv())*float(vertetrem)+float(betatremv()), pagrtrem)
     tremvnew_data={'x':[0,karareiksmetremv()],'y':["tremv","tremv"]}
     sourcetremv.data.update(tremvnew_data)
     print(karareiksmetremv())
@@ -3235,7 +3249,45 @@ trvakaras.on_change("value", tremv_update)
 
 
 
-
+normaknos= -1
+normaanos = 1
+balannos = float((normaanos+normaknos)/2)
+pagrnos = 1.001
+def nosr_update(attr, old, new):
+    def zenklasnosr():
+    	def kryptisnosr():
+    		if normaknos-balannos < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertenos = float(surytas.value.replace(",", "."))
+    	if (vertenos-balannos)*kryptisnosr()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasnosr())
+    def alfanosr():
+    	if zenklasnosr()>0:
+    		return (1-pagrnos)/(balannos-normaanos)
+    	else:
+    		return (1-pagrnos)/(balannos-normaknos)
+    print(alfanosr())
+    def betanosr():
+    	if zenklasnosr()>0:
+    		return (pagrnos*balannos-normaanos)/(balannos-normaanos)
+    	else:
+    		return (pagrnos*balannos-normaknos)/(balanvaso-normaknos)
+    print(betanosr())
+    def karareiksmenosr():
+    	vertenos = float(surytas.value.replace(",", "."))
+    	if zenklasnosr()<0:
+    		return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
+    	else:
+    		return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
+    nosrnew_data={'x':[0,karareiksmenosr()],'y':["nosr","nosr"]}
+    sourcenosr.data.update(nosrnew_data)
+    print(karareiksmenosr())
+surytas.on_change("value", nosr_update)
 
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
