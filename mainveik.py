@@ -2092,6 +2092,13 @@ p.line('x', 'y', source = sourcevyzdr, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcevyzdp, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcevyzdv, line_color = "blue", line_width = 5)
 
+sourcetremr = ColumnDataSource(data=dict(x=[], y=[]))
+sourcetremp = ColumnDataSource(data=dict(x=[], y=[]))
+sourcetremv = ColumnDataSource(data=dict(x=[], y=[]))
+
+p.line('x', 'y', source = sourcetremr, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcetremp, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcetremv, line_color = "blue", line_width = 5)
 
 normakps1 = -2
 normaaps1 = 0
@@ -2771,6 +2778,7 @@ def tempv_update(attr, old, new):
 ktvakaras.on_change("value", tempv_update)
 
 
+
 normakderm= 1
 normaaderm = 2
 balanderm = float((normaaderm+normakderm)/2)
@@ -2882,6 +2890,7 @@ def dermv_update(attr, old, new):
     sourcedermv.data.update(dermvnew_data)
     print(karareiksmedermv())
 drvakaras.on_change("value", dermv_update)
+
 
 
 normakvaso= -1
@@ -2996,8 +3005,10 @@ def vasov_update(attr, old, new):
     print(karareiksmevasov())
 vrvakaras.on_change("value", vasov_update)
 
-normakvyzd= -1
-normaavyzd = 1
+
+
+normakvyzd= 1
+normaavyzd = -1
 balanvyzd = float((normaavyzd+normakvyzd)/2)
 pagrvyzd = 1.001
 def vyzdr_update(attr, old, new):
@@ -3107,6 +3118,84 @@ def vyzdv_update(attr, old, new):
     sourcevyzdv.data.update(vyzdvnew_data)
     print(karareiksmevyzdv())
 vdvakaras.on_change("value", vyzdv_update)
+
+
+
+normaktrem= 1
+normaatrem = -1
+balantrem = float((normaatrem+normaktrem)/2)
+pagrtrem = 1.001
+def tremr_update(attr, old, new):
+    def zenklastremr():
+    	def kryptistremr():
+    		if normaktrem-balantrem < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertederm = float(trrytas.value.replace(",", "."))
+    	if (vertederm-balantrem)*kryptistremr()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklastremr())
+    def alfatremr():
+    	if zenklastremr()>0:
+    		return (1-pagrtrem)/(balantrem-normaatrem)
+    	else:
+    		return (1-pagrtrem)/(balantrem-normaktrem)
+    print(alfatremr())
+    def betatremr():
+    	if zenklastremr()>0:
+    		return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
+    	else:
+    		return (pagrtrem*balantrem-normaktrem)/(balanvaso-normaktrem)
+    print(betatremr())
+    def karareiksmetremr():
+    	vertederm = float(trrytas.value.replace(",", "."))
+    	if zenklastremr()<0:
+    		return zenklastremr()*math.log(float(alfatremr())*float(vertederm)+float(betatremr()), pagrtrem)
+    	else:
+    		return zenklastremr()*math.log(float(alfatremr())*float(vertederm)+float(betatremr()), pagrtrem)
+    tremrnew_data={'x':[0,karareiksmetremr()],'y':["tremr","tremr"]}
+    sourcetremr.data.update(tremrnew_data)
+    print(karareiksmetremr())
+trrytas.on_change("value", tremr_update)
+
+def tremp_update(attr, old, new):
+    def zenklastremp():
+    	def kryptistremp():
+    		if normaktrem-balantrem < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertederm = float(trpietus.value.replace(",", "."))
+    	if (vertederm-balantrem)*kryptistremp()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklastremp())
+    def alfatremp():
+    	if zenklastremp()>0:
+    		return (1-pagrtrem)/(balantrem-normaatrem)
+    	else:
+    		return (1-pagrtrem)/(balantrem-normaktrem)
+    print(alfatremp())
+    def betatremp():
+    	if zenklastremp()>0:
+    		return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
+    	else:
+    		return (pagrtrem*balantrem-normaktrem)/(balanvaso-normaktrem)
+    print(betatremp())
+    def karareiksmetremp():
+    	vertederm = float(trpietus.value.replace(",", "."))
+    	if zenklastremp()<0:
+    		return zenklastremp()*math.log(float(alfatremp())*float(vertederm)+float(betatremp()), pagrtrem)
+    	else:
+    		return zenklastremp()*math.log(float(alfatremp())*float(vertederm)+float(betatremp()), pagrtrem)
+    trempnew_data={'x':[0,karareiksmetremp()],'y':["tremp","tremp"]}
+    sourcetremp.data.update(trempnew_data)
+    print(karareiksmetremp())
+trpietus.on_change("value", tremp_update)
 
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
