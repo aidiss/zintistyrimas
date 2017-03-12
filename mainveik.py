@@ -3409,7 +3409,41 @@ def sargr_update(attr, old, new):
     print(karareiksmesargr())
 slrrytas.on_change("value", sargr_update)
 
-
+def sargp_update(attr, old, new):
+    def zenklassargp():
+    	def kryptissargp():
+    		if normaksarg-balansarg < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertesarg = float(slrpietus.value.replace(",", "."))
+    	if (vertesarg-balansarg)*kryptissargp()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklassargp())
+    def alfasargp():
+    	if zenklassargp()>0:
+    		return (1-pagrsarg)/(balansarg-normaasarg)
+    	else:
+    		return (1-pagrsarg)/(balansarg-normaksarg)
+    print(alfasargp())
+    def betasargp():
+    	if zenklassargp()>0:
+    		return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
+    	else:
+    		return (pagrsarg*balansarg-normaksarg)/(balanvaso-normaksarg)
+    print(betasargp())
+    def karareiksmesargp():
+    	vertesarg = float(slrpietus.value.replace(",", "."))
+    	if zenklassargp()<0:
+    		return zenklassargp()*math.log(float(alfasargp())*float(vertesarg)+float(betasargp()), pagrsarg)
+    	else:
+    		return zenklassargp()*math.log(float(alfasargp())*float(vertesarg)+float(betasargp()), pagrsarg)
+    sargpnew_data={'x':[0,karareiksmesargp()],'y':["sargp","sargp"]}
+    sourcesargp.data.update(sargpnew_data)
+    print(karareiksmesargp())
+slrpietus.on_change("value", sargp_update)
 
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
