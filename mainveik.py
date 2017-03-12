@@ -2084,6 +2084,14 @@ p.line('x', 'y', source = sourcevasor, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcevasop, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcevasov, line_color = "blue", line_width = 5)
 
+sourcevyzdr = ColumnDataSource(data=dict(x=[], y=[]))
+sourcevyzdp = ColumnDataSource(data=dict(x=[], y=[]))
+sourcevyzdv = ColumnDataSource(data=dict(x=[], y=[]))
+
+p.line('x', 'y', source = sourcevyzdr, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcevyzdp, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcevyzdv, line_color = "blue", line_width = 5)
+
 
 normakps1 = -2
 normaaps1 = 0
@@ -2877,8 +2885,8 @@ drvakaras.on_change("value", dermv_update)
 
 
 normakvaso= -1
-normaavaso = 1
-balanvaso = float((normaavaso+normakvaso)/2)
+normaavyzd = 1
+balanvaso = float((normaavyzd+normakvaso)/2)
 pagrvaso = 1.001
 def vasor_update(attr, old, new):
     def zenklasvasor():
@@ -2895,13 +2903,13 @@ def vasor_update(attr, old, new):
     print(zenklasvasor())
     def alfavasor():
     	if zenklasvasor()>0:
-    		return (1-pagrvaso)/(balanvaso-normaavaso)
+    		return (1-pagrvaso)/(balanvaso-normaavyzd)
     	else:
     		return (1-pagrvaso)/(balanvaso-normakvaso)
     print(alfavasor())
     def betavasor():
     	if zenklasvasor()>0:
-    		return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
+    		return (pagrvaso*balanvaso-normaavyzd)/(balanvaso-normaavyzd)
     	else:
     		return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
     print(betavasor())
@@ -2987,6 +2995,46 @@ def vasov_update(attr, old, new):
     sourcevasov.data.update(vasovnew_data)
     print(karareiksmevasov())
 vrvakaras.on_change("value", vasov_update)
+
+normakvyzd= -1
+normaavyzd = 1
+balanvyzd = float((normaavyzd+normakvyzd)/2)
+pagrvyzd = 1.001
+def vyzdr_update(attr, old, new):
+    def zenklasvyzdr():
+    	def kryptisvyzdr():
+    		if normakvyzd-balanvyzd < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertederm = float(vdrytas.value.replace(",", "."))
+    	if (vertederm-balanvyzd)*kryptisvyzdr()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasvyzdr())
+    def alfavyzdr():
+    	if zenklasvyzdr()>0:
+    		return (1-pagrvyzd)/(balanvyzd-normaavyzd)
+    	else:
+    		return (1-pagrvyzd)/(balanvyzd-normakvyzd)
+    print(alfavyzdr())
+    def betavyzdr():
+    	if zenklasvyzdr()>0:
+    		return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
+    	else:
+    		return (pagrvyzd*balanvyzd-normakvyzd)/(balanvaso-normakvyzd)
+    print(betavyzdr())
+    def karareiksmevyzdr():
+    	vertederm = float(vdrytas.value.replace(",", "."))
+    	if zenklasvyzdr()<0:
+    		return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertederm)+float(betavyzdr()), pagrvyzd)
+    	else:
+    		return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertederm)+float(betavyzdr()), pagrvyzd)
+    vyzdrnew_data={'x':[0,karareiksmevyzdr()],'y':["vyzdr","vyzdr"]}
+    sourcevyzdr.data.update(vyzdrnew_data)
+    print(karareiksmevyzdr())
+vdrytas.on_change("value", vyzdr_update)
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
