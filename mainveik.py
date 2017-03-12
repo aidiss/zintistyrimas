@@ -3197,6 +3197,46 @@ def tremp_update(attr, old, new):
     print(karareiksmetremp())
 trpietus.on_change("value", tremp_update)
 
+def tremv_update(attr, old, new):
+    def zenklastremv():
+    	def kryptistremv():
+    		if normaktrem-balantrem < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertederm = float(trvakaras.value.replace(",", "."))
+    	if (vertederm-balantrem)*kryptistremv()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklastremv())
+    def alfatremv():
+    	if zenklastremv()>0:
+    		return (1-pagrtrem)/(balantrem-normaatrem)
+    	else:
+    		return (1-pagrtrem)/(balantrem-normaktrem)
+    print(alfatremv())
+    def betatremv():
+    	if zenklastremv()>0:
+    		return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
+    	else:
+    		return (pagrtrem*balantrem-normaktrem)/(balanvaso-normaktrem)
+    print(betatremv())
+    def karareiksmetremv():
+    	vertederm = float(trvakaras.value.replace(",", "."))
+    	if zenklastremv()<0:
+    		return zenklastremv()*math.log(float(alfatremv())*float(vertederm)+float(betatremv()), pagrtrem)
+    	else:
+    		return zenklastremv()*math.log(float(alfatremv())*float(vertederm)+float(betatremv()), pagrtrem)
+    tremvnew_data={'x':[0,karareiksmetremv()],'y':["tremv","tremv"]}
+    sourcetremv.data.update(tremvnew_data)
+    print(karareiksmetremv())
+trvakaras.on_change("value", tremv_update)
+
+
+
+
+
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
