@@ -3363,7 +3363,45 @@ suvakaras.on_change("value", nosv_update)
 
 
 
-
+normaknos= 1
+normaanos = -1
+balannos = float((normaanos+normaknos)/2)
+pagrnos = 1.001
+def nosr_update(attr, old, new):
+    def zenklasnosr():
+    	def kryptisnosr():
+    		if normaknos-balannos < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertenos = float(surytas.value.replace(",", "."))
+    	if (vertenos-balannos)*kryptisnosr()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasnosr())
+    def alfanosr():
+    	if zenklasnosr()>0:
+    		return (1-pagrnos)/(balannos-normaanos)
+    	else:
+    		return (1-pagrnos)/(balannos-normaknos)
+    print(alfanosr())
+    def betanosr():
+    	if zenklasnosr()>0:
+    		return (pagrnos*balannos-normaanos)/(balannos-normaanos)
+    	else:
+    		return (pagrnos*balannos-normaknos)/(balanvaso-normaknos)
+    print(betanosr())
+    def karareiksmenosr():
+    	vertenos = float(surytas.value.replace(",", "."))
+    	if zenklasnosr()<0:
+    		return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
+    	else:
+    		return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
+    nosrnew_data={'x':[0,karareiksmenosr()],'y':["nosr","nosr"]}
+    sourcenosr.data.update(nosrnew_data)
+    print(karareiksmenosr())
+surytas.on_change("value", nosr_update)
 
 
 
