@@ -3445,6 +3445,52 @@ def sargp_update(attr, old, new):
     print(karareiksmesargp())
 slrpietus.on_change("value", sargp_update)
 
+def sargv_update(attr, old, new):
+    def zenklassargv():
+    	def kryptissargv():
+    		if normaksarg-balansarg < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertesarg = float(slrvakaras.value.replace(",", "."))
+    	if (vertesarg-balansarg)*kryptissargv()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklassargv())
+    def alfasargv():
+    	if zenklassargv()>0:
+    		return (1-pagrsarg)/(balansarg-normaasarg)
+    	else:
+    		return (1-pagrsarg)/(balansarg-normaksarg)
+    print(alfasargv())
+    def betasargv():
+    	if zenklassargv()>0:
+    		return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
+    	else:
+    		return (pagrsarg*balansarg-normaksarg)/(balanvaso-normaksarg)
+    print(betasargv())
+    def karareiksmesargv():
+    	vertesarg = float(slrvakaras.value.replace(",", "."))
+    	if zenklassargv()<0:
+    		return zenklassargv()*math.log(float(alfasargv())*float(vertesarg)+float(betasargv()), pagrsarg)
+    	else:
+    		return zenklassargv()*math.log(float(alfasargv())*float(vertesarg)+float(betasargv()), pagrsarg)
+    sargvnew_data={'x':[0,karareiksmesargv()],'y':["sargv","sargv"]}
+    sourcesargv.data.update(sargvnew_data)
+    print(karareiksmesargv())
+slrvakaras.on_change("value", sargv_update)
+
+
+
+
+
+
+
+
+
+
+
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
