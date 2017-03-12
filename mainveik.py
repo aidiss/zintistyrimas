@@ -7,7 +7,7 @@ from bokeh.models import Span, BoxAnnotation, Title, ColorBar, LinearColorMapper
 from bokeh.util.compiler import CoffeeScript
 from bokeh.models.ranges import DataRange1d, FactorRange
 import jinja2
-import math, cmath
+import math
 
 curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
 <html lang="en">
@@ -2068,6 +2068,13 @@ p.line('x', 'y', source = sourcetempr, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcetempp, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcetempv, line_color = "blue", line_width = 5)
 
+sourcedermr = ColumnDataSource(data=dict(x=[], y=[]))
+sourcedermp = ColumnDataSource(data=dict(x=[], y=[]))
+sourcedermv = ColumnDataSource(data=dict(x=[], y=[]))
+
+p.line('x', 'y', source = sourcedermr, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcedermp, line_color = "blue", line_width = 5)
+p.line('x', 'y', source = sourcedermv, line_color = "blue", line_width = 5)
 
 
 
@@ -2747,6 +2754,47 @@ def tempv_update(attr, old, new):
     sourcetempv.data.update(tempvnew_data)
     print(karareiksmetempv())
 ktvakaras.on_change("value", tempv_update)
+
+
+normakderm= 1
+normaaderm = 2
+balanderm = float((normaaderm+normakderm)/2)
+pagrderm = 1.2
+def dermr_update(attr, old, new):
+    def zenklasdermr():
+    	def kryptisdermr():
+    		if normakderm-balanderm < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertederm = float(drrytas.value.replace(",", "."))
+    	if (vertederm-balanderm)*kryptisdermr()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasdermr())
+    def alfadermr():
+    	if zenklasdermr()>0:
+    		return (1-pagrderm)/(balanderm-normaaderm)
+    	else:
+    		return (1-pagrderm)/(balanderm-normakderm)
+    print(alfadermr())
+    def betadermr():
+    	if zenklasdermr()>0:
+    		return (pagrderm*balanderm-normaaderm)/(balanderm-normaaderm)
+    	else:
+    		return (pagrderm*balanderm-normakderm)/(balanderm-normakderm)
+    print(betadermr())
+    def karareiksmedermr():
+    	vertederm = float(drrytas.value.replace(",", "."))
+    	if zenklasdermr()<0:
+    		return zenklasdermr()*math.log(float(alfadermr())*float(vertederm)+float(betadermr()), pagrderm)
+    	else:
+    		return zenklasdermr()*math.log(float(alfadermr())*float(vertederm)+float(betadermr()), pagrderm)
+    dermrnew_data={'x':[0,karareiksmedermr()],'y':["dermr","dermr"]}
+    sourcedermr.data.update(dermrnew_data)
+    print(karareiksmedermr())
+drrytas.on_change("value", dermr_update)
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
