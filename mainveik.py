@@ -3562,7 +3562,41 @@ def sklp_update(attr, old, new):
     print(karareiksmesklp())
 sekpietus.on_change("value", sklp_update)
 
-
+def sklv_update(attr, old, new):
+    def zenklassklv():
+    	def kryptissklv():
+    		if normakskl-balanskl < 0:
+    			return 1
+    		else:
+    			return-1
+    	verteskl = float(sekvakaras.value.replace(",", "."))
+    	if (verteskl-balanskl)*kryptissklv()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklassklv())
+    def alfasklv():
+    	if zenklassklv()>0:
+    		return (1-pagrskl)/(balanskl-normaaskl)
+    	else:
+    		return (1-pagrskl)/(balanskl-normakskl)
+    print(alfasklv())
+    def betasklv():
+    	if zenklassklv()>0:
+    		return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
+    	else:
+    		return (pagrskl*balanskl-normakskl)/(balanvaso-normakskl)
+    print(betasklv())
+    def karareiksmesklv():
+    	verteskl = float(sekvakaras.value.replace(",", "."))
+    	if zenklassklv()<0:
+    		return zenklassklv()*math.log(float(alfasklv())*float(verteskl)+float(betasklv()), pagrskl)
+    	else:
+    		return zenklassklv()*math.log(float(alfasklv())*float(verteskl)+float(betasklv()), pagrskl)
+    sklvnew_data={'x':[0,karareiksmesklv()],'y':["sklv","sklv"]}
+    sourcesklv.data.update(sklvnew_data)
+    print(karareiksmesklv())
+sekvakaras.on_change("value", sklv_update)
 
 
 
