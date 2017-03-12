@@ -3036,6 +3036,79 @@ def vyzdr_update(attr, old, new):
     print(karareiksmevyzdr())
 vdrytas.on_change("value", vyzdr_update)
 
+def vyzdp_update(attr, old, new):
+    def zenklasvyzdp():
+    	def kryptisvyzdp():
+    		if normakvyzd-balanvyzd < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertederm = float(vdpietus.value.replace(",", "."))
+    	if (vertederm-balanvyzd)*kryptisvyzdp()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasvyzdp())
+    def alfavyzdp():
+    	if zenklasvyzdp()>0:
+    		return (1-pagrvyzd)/(balanvyzd-normaavyzd)
+    	else:
+    		return (1-pagrvyzd)/(balanvyzd-normakvyzd)
+    print(alfavyzdp())
+    def betavyzdp():
+    	if zenklasvyzdp()>0:
+    		return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
+    	else:
+    		return (pagrvyzd*balanvyzd-normakvyzd)/(balanvaso-normakvyzd)
+    print(betavyzdp())
+    def karareiksmevyzdp():
+    	vertederm = float(vdpietus.value.replace(",", "."))
+    	if zenklasvyzdp()<0:
+    		return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertederm)+float(betavyzdp()), pagrvyzd)
+    	else:
+    		return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertederm)+float(betavyzdp()), pagrvyzd)
+    vyzdpnew_data={'x':[0,karareiksmevyzdp()],'y':["vyzdp","vyzdp"]}
+    sourcevyzdp.data.update(vyzdpnew_data)
+    print(karareiksmevyzdp())
+vdpietus.on_change("value", vyzdp_update)
+
+def vyzdv_update(attr, old, new):
+    def zenklasvyzdv():
+    	def kryptisvyzdv():
+    		if normakvyzd-balanvyzd < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertederm = float(vdvakaras.value.replace(",", "."))
+    	if (vertederm-balanvyzd)*kryptisvyzdv()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklasvyzdv())
+    def alfavyzdv():
+    	if zenklasvyzdv()>0:
+    		return (1-pagrvyzd)/(balanvyzd-normaavyzd)
+    	else:
+    		return (1-pagrvyzd)/(balanvyzd-normakvyzd)
+    print(alfavyzdv())
+    def betavyzdv():
+    	if zenklasvyzdv()>0:
+    		return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
+    	else:
+    		return (pagrvyzd*balanvyzd-normakvyzd)/(balanvaso-normakvyzd)
+    print(betavyzdv())
+    def karareiksmevyzdv():
+    	vertederm = float(vdvakaras.value.replace(",", "."))
+    	if zenklasvyzdv()<0:
+    		return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertederm)+float(betavyzdv()), pagrvyzd)
+    	else:
+    		return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertederm)+float(betavyzdv()), pagrvyzd)
+    vyzdvnew_data={'x':[0,karareiksmevyzdv()],'y':["vyzdv","vyzdv"]}
+    sourcevyzdv.data.update(vyzdvnew_data)
+    print(karareiksmevyzdv())
+vdvakaras.on_change("value", vyzdv_update)
+
+
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
     [pav1()],
