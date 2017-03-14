@@ -608,7 +608,7 @@ factorssp = ["sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv
 
 count = len(factorssp)
 
-p = figure(x_range = [-5, 5], y_range = factorssp, height = 350, toolbar_location = None)
+p = figure(x_range = [-5, 5], y_range=FactorRange(factors=factorssp), height = 350, tools= "")
 p.title.text = "<-Katabolizmas|Anabolizmas->"
 p.title.align = "center"
 p.text(x=[-4.7], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
@@ -2118,7 +2118,7 @@ sourcesklv = ColumnDataSource(data=dict(x=[], y=[]))
 
 p.line('x', 'y', source = sourcesklr, line_color = "blue", line_width = 5)
 p.line('x', 'y', source = sourcesklp, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcesklv, line_color = "blue", line_width = 5)
+r = p.line('x', 'y', source = sourcesklv, line_color = "blue", line_width = 5)
 
 
 
@@ -3594,13 +3594,11 @@ def sklv_update(attr, old, new):
     	else:
     		return zenklassklv()*math.log(float(alfasklv())*float(verteskl)+float(betasklv()), pagrskl)
     sklvnew_data={'x':[0,karareiksmesklv()],'y':["sklv","sklv"]}
+    if karareiksmesklv() > 0:
+    	r.glyph.line_color = "blue"
+    else:
+    	r.glyph.line_color = "red"
     sourcesklv.data.update(sklvnew_data)
-    # fig = p.line('x', 'y', source = sourcesklv, line_color = "blue", line_width = 5)
-    # gl1 = fig.glyph
-    # if karareiksmesklv()>0:
-    # 	return gl1.line_color = "red"
-    # else:
-    # 	return gl1.line_color = "blue"
     print(karareiksmesklv())
 sekvakaras.on_change("value", sklv_update)
 
