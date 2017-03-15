@@ -3593,13 +3593,20 @@ def sklv_update(attr, old, new):
     		return zenklassklv()*math.log(float(alfasklv())*float(verteskl)+float(betasklv()), pagrskl)
     	else:
     		return zenklassklv()*math.log(float(alfasklv())*float(verteskl)+float(betasklv()), pagrskl)
-    sklvnew_data={'x':[0,karareiksmesklv()],'y':["sklv","sklv"]}
-    if karareiksmesklv() > 0:
+    def karareiksmesklvriba():
+    	if karareiksmesklv()>4:
+    		return 4
+    	elif karareiksmesklv()<-4:
+    		return -4
+    	else:
+    		return karareiksmesklv()
+    sklvnew_data={'x':[0,karareiksmesklvriba()],'y':["sklv","sklv"]}
+    if karareiksmesklvriba() > 0:
     	r.glyph.line_color = "blue"
     else:
     	r.glyph.line_color = "red"
     sourcesklv.data.update(sklvnew_data)
-    print(karareiksmesklv())
+    print(karareiksmesklvriba())
 sekvakaras.on_change("value", sklv_update)
 
 
