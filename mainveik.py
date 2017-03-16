@@ -3294,7 +3294,18 @@ def nosr_update(attr, old, new):
     		return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
     	else:
     		return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
-    nosrnew_data={'x':[0,karareiksmenosr()],'y':["nosr","nosr"]}
+    def karareiksmenosrriba():
+    	if karareiksmenosr()>4:
+    		return 4
+    	elif karareiksmenosr()<-4:
+    		return -4
+    	else:
+    		return karareiksmenosr()
+    nosrnew_data={'x':[0,karareiksmenosrriba()],'y':["nosr","nosr"]}
+    if karareiksmenosrriba() > 0:
+    	r28.glyph.line_color = "blue"
+    else:
+    	r28.glyph.line_color = "red"
     sourcenosr.data.update(nosrnew_data)
     print(karareiksmenosr())
 surytas.on_change("value", nosr_update)
