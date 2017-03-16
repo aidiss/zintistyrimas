@@ -3366,7 +3366,18 @@ def nosv_update(attr, old, new):
     		return zenklasnosv()*math.log(float(alfanosv())*float(vertenos)+float(betanosv()), pagrnos)
     	else:
     		return zenklasnosv()*math.log(float(alfanosv())*float(vertenos)+float(betanosv()), pagrnos)
-    nosvnew_data={'x':[0,karareiksmenosv()],'y':["nosv","nosv"]}
+    def karareiksmenosvriba():
+    	if karareiksmenosv()>4:
+    		return 4
+    	elif karareiksmenosv()<-4:
+    		return -4
+    	else:
+    		return karareiksmenosv()
+    nosvnew_data={'x':[0,karareiksmenosvriba()],'y':["nosv","nosv"]}
+    if karareiksmenosvriba() > 0:
+    	r30.glyph.line_color = "blue"
+    else:
+    	r30.glyph.line_color = "red"
     sourcenosv.data.update(nosvnew_data)
     print(karareiksmenosv())
 suvakaras.on_change("value", nosv_update)
