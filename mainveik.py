@@ -2952,7 +2952,18 @@ def vasor_update(attr, old, new):
     		return zenklasvasor()*math.log(float(alfavasor())*float(vertevaso)+float(betavasor()), pagrvaso)
     	else:
     		return zenklasvasor()*math.log(float(alfavasor())*float(vertevaso)+float(betavasor()), pagrvaso)
-    vasornew_data={'x':[0,karareiksmevasor()],'y':["vasor","vasor"]}
+    def karareiksmevasorriba():
+    	if karareiksmevasor()>4:
+    		return 4
+    	elif karareiksmevasor()<-4:
+    		return -4
+    	else:
+    		return karareiksmevasor()
+    vasornew_data={'x':[0,karareiksmevasorriba()],'y':["vasor","vasor"]}
+    if karareiksmevasorriba() > 0:
+    	r19.glyph.line_color = "blue"
+    else:
+    	r19.glyph.line_color = "red"
     sourcevasor.data.update(vasornew_data)
     print(karareiksmevasor())
 vrrytas.on_change("value", vasor_update)
