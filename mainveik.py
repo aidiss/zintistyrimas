@@ -3408,7 +3408,18 @@ def sargr_update(attr, old, new):
     		return zenklassargr()*math.log(float(alfasargr())*float(vertesarg)+float(betasargr()), pagrsarg)
     	else:
     		return zenklassargr()*math.log(float(alfasargr())*float(vertesarg)+float(betasargr()), pagrsarg)
-    sargrnew_data={'x':[0,karareiksmesargr()],'y':["sargr","sargr"]}
+    def karareiksmesargrriba():
+    	if karareiksmesargr()>4:
+    		return 4
+    	elif karareiksmesargr()<-4:
+    		return -4
+    	else:
+    		return karareiksmesargr()
+    sargrnew_data={'x':[0,karareiksmesargrriba()],'y':["sargr","sargr"]}
+    if karareiksmesargrriba() > 0:
+    	r31.glyph.line_color = "blue"
+    else:
+    	r31.glyph.line_color = "red"
     sourcesargr.data.update(sargrnew_data)
     print(karareiksmesargr())
 slrrytas.on_change("value", sargr_update)
@@ -3444,7 +3455,18 @@ def sargp_update(attr, old, new):
     		return zenklassargp()*math.log(float(alfasargp())*float(vertesarg)+float(betasargp()), pagrsarg)
     	else:
     		return zenklassargp()*math.log(float(alfasargp())*float(vertesarg)+float(betasargp()), pagrsarg)
-    sargpnew_data={'x':[0,karareiksmesargp()],'y':["sargp","sargp"]}
+    def karareiksmesargpriba():
+    	if karareiksmesargp()>4:
+    		return 4
+    	elif karareiksmesargp()<-4:
+    		return -4
+    	else:
+    		return karareiksmesargp()
+    sargpnew_data={'x':[0,karareiksmesargpriba()],'y':["sargp","sargp"]}
+    if karareiksmesargpriba() > 0:
+    	r32.glyph.line_color = "blue"
+    else:
+    	r32.glyph.line_color = "red"
     sourcesargp.data.update(sargpnew_data)
     print(karareiksmesargp())
 slrpietus.on_change("value", sargp_update)
