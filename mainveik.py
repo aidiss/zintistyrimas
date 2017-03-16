@@ -2988,7 +2988,18 @@ def vasop_update(attr, old, new):
     		return zenklasvasop()*math.log(float(alfavasop())*float(vertevaso)+float(betavasop()), pagrvaso)
     	else:
     		return zenklasvasop()*math.log(float(alfavasop())*float(vertevaso)+float(betavasop()), pagrvaso)
-    vasopnew_data={'x':[0,karareiksmevasop()],'y':["vasop","vasop"]}
+    def karareiksmevasopriba():
+    	if karareiksmevasop()>4:
+    		return 4
+    	elif karareiksmevasop()<-4:
+    		return -4
+    	else:
+    		return karareiksmevasop()
+    vasopnew_data={'x':[0,karareiksmevasopriba()],'y':["vasop","vasop"]}
+    if karareiksmevasopriba() > 0:
+    	r20.glyph.line_color = "blue"
+    else:
+    	r20.glyph.line_color = "red"
     sourcevasop.data.update(vasopnew_data)
     print(karareiksmevasop())
 vrpietus.on_change("value", vasop_update)
