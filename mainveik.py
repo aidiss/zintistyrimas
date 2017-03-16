@@ -3024,7 +3024,18 @@ def vasov_update(attr, old, new):
     		return zenklasvasov()*math.log(float(alfavasov())*float(vertevaso)+float(betavasov()), pagrvaso)
     	else:
     		return zenklasvasov()*math.log(float(alfavasov())*float(vertevaso)+float(betavasov()), pagrvaso)
-    vasovnew_data={'x':[0,karareiksmevasov()],'y':["vasov","vasov"]}
+    def karareiksmevasovriba():
+    	if karareiksmevasov()>4:
+    		return 4
+    	elif karareiksmevasov()<-4:
+    		return -4
+    	else:
+    		return karareiksmevasov()
+    vasovnew_data={'x':[0,karareiksmevasovriba()],'y':["vasov","vasov"]}
+    if karareiksmevasovriba() > 0:
+    	r21.glyph.line_color = "blue"
+    else:
+    	r21.glyph.line_color = "red"
     sourcevasov.data.update(vasovnew_data)
     print(karareiksmevasov())
 vrvakaras.on_change("value", vasov_update)
@@ -3066,7 +3077,18 @@ def vyzdr_update(attr, old, new):
     		return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertevyzd)+float(betavyzdr()), pagrvyzd)
     	else:
     		return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertevyzd)+float(betavyzdr()), pagrvyzd)
-    vyzdrnew_data={'x':[0,karareiksmevyzdr()],'y':["vyzdr","vyzdr"]}
+    def karareiksmevyzdrriba():
+    	if karareiksmevyzdr()>4:
+    		return 4
+    	elif karareiksmevyzdr()<-4:
+    		return -4
+    	else:
+    		return karareiksmevyzdr()
+    vyzdrnew_data={'x':[0,karareiksmevyzdrriba()],'y':["vyzdr","vyzdr"]}
+    if karareiksmevyzdrriba() > 0:
+    	r22.glyph.line_color = "blue"
+    else:
+    	r22.glyph.line_color = "red"
     sourcevyzdr.data.update(vyzdrnew_data)
     print(karareiksmevyzdr())
 vdrytas.on_change("value", vyzdr_update)
