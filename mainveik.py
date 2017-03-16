@@ -3480,7 +3480,18 @@ def sargv_update(attr, old, new):
     		return zenklassargv()*math.log(float(alfasargv())*float(vertesarg)+float(betasargv()), pagrsarg)
     	else:
     		return zenklassargv()*math.log(float(alfasargv())*float(vertesarg)+float(betasargv()), pagrsarg)
-    sargvnew_data={'x':[0,karareiksmesargv()],'y':["sargv","sargv"]}
+    def karareiksmesargvriba():
+    	if karareiksmesargv()>4:
+    		return 4
+    	elif karareiksmesargv()<-4:
+    		return -4
+    	else:
+    		return karareiksmesargv()
+    sargvnew_data={'x':[0,karareiksmesargvriba()],'y':["sargv","sargv"]}
+    if karareiksmesargvriba() > 0:
+    	r33.glyph.line_color = "blue"
+    else:
+    	r33.glyph.line_color = "red"
     sourcesargv.data.update(sargvnew_data)
     print(karareiksmesargv())
 slrvakaras.on_change("value", sargv_update)
