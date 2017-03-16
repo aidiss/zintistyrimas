@@ -3102,7 +3102,18 @@ def vyzdp_update(attr, old, new):
     		return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertevyzd)+float(betavyzdp()), pagrvyzd)
     	else:
     		return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertevyzd)+float(betavyzdp()), pagrvyzd)
-    vyzdpnew_data={'x':[0,karareiksmevyzdp()],'y':["vyzdp","vyzdp"]}
+    def karareiksmevyzdpriba():
+    	if karareiksmevyzdp()>4:
+    		return 4
+    	elif karareiksmevyzdp()<-4:
+    		return -4
+    	else:
+    		return karareiksmevyzdp()
+    vyzdpnew_data={'x':[0,karareiksmevyzdpriba()],'y':["vyzdp","vyzdp"]}
+    if karareiksmevyzdpriba() > 0:
+    	r23.glyph.line_color = "blue"
+    else:
+    	r23.glyph.line_color = "red"
     sourcevyzdp.data.update(vyzdpnew_data)
     print(karareiksmevyzdp())
 vdpietus.on_change("value", vyzdp_update)
