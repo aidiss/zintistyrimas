@@ -9,24 +9,25 @@ from bokeh.models.ranges import DataRange1d, FactorRange
 import jinja2
 import math
 
-curdoc().template =  jinja2.Template(source='''<!DOCTYPE html>
-<html lang="en">
+curdoc().template =  jinja2.Template(source='''
+	<!DOCTYPE html>
+	<html lang="en">
     <head>
         <meta charset="utf-8">
         <title>{{ title if title else "Bokeh Plot" }}</title>
         {{ bokeh_css }}
         {{ bokeh_js }}
         <style>
-          html {
-            width: 100%;
-            height: 100%;
-          }
+        @import url(https://fonts.googleapis.com/css?family=Noto+Sans);
           body {
             width: 90%;
             height: 100%;
             margin: auto;
             text-align: justify;
             text-justify: inter-word;
+            font-family: 'Noto Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
           }
           .bk-widget input[name$="vard"] {
              min-width: 50px !important;
@@ -2028,97 +2029,97 @@ sourceps1r = ColumnDataSource(data=dict(x=[], y=[]))
 sourceps1p = ColumnDataSource(data=dict(x=[], y=[]))
 sourceps1v = ColumnDataSource(data=dict(x=[], y=[]))
 
-p.line('x', 'y', source = sourceps1r, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourceps1p, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourceps1v, line_color = "blue", line_width = 5)
+r1 = p.line('x', 'y', source = sourceps1r, line_color = "blue", line_width = 5)
+r2 = p.line('x', 'y', source = sourceps1p, line_color = "blue", line_width = 5)
+r3 = p.line('x', 'y', source = sourceps1v, line_color = "blue", line_width = 5)
 
 sourcesdr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesdp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesdv = ColumnDataSource(data=dict(x=[], y=[]))
 
-p.line('x', 'y', source = sourcesdr, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcesdp, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcesdv, line_color = "blue", line_width = 5)
+r4 = p.line('x', 'y', source = sourcesdr, line_color = "blue", line_width = 5)
+r5 = p.line('x', 'y', source = sourcesdp, line_color = "blue", line_width = 5)
+r6 = p.line('x', 'y', source = sourcesdv, line_color = "blue", line_width = 5)
 
 sourceppr = ColumnDataSource(data=dict(x=[], y=[]))
 sourceppp = ColumnDataSource(data=dict(x=[], y=[]))
 sourceppv = ColumnDataSource(data=dict(x=[], y=[]))
 
-p.line('x', 'y', source = sourceppr, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourceppp, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourceppv, line_color = "blue", line_width = 5)
+r7 = p.line('x', 'y', source = sourceppr, line_color = "blue", line_width = 5)
+r8 = p.line('x', 'y', source = sourceppp, line_color = "blue", line_width = 5)
+r9 = p.line('x', 'y', source = sourceppv, line_color = "blue", line_width = 5)
 
 sourcekrir = ColumnDataSource(data=dict(x=[], y=[]))
 sourcekrip = ColumnDataSource(data=dict(x=[], y=[]))
 sourcekriv = ColumnDataSource(data=dict(x=[], y=[]))
 
-p.line('x', 'y', source = sourcekrir, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcekrip, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcekriv, line_color = "blue", line_width = 5)
+r10 = p.line('x', 'y', source = sourcekrir, line_color = "blue", line_width = 5)
+r11 = p.line('x', 'y', source = sourcekrip, line_color = "blue", line_width = 5)
+r12 = p.line('x', 'y', source = sourcekriv, line_color = "blue", line_width = 5)
 
 sourcetempr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetempp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetempv = ColumnDataSource(data=dict(x=[], y=[]))
 
-p.line('x', 'y', source = sourcetempr, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcetempp, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcetempv, line_color = "blue", line_width = 5)
+r13 = p.line('x', 'y', source = sourcetempr, line_color = "blue", line_width = 5)
+r14 = p.line('x', 'y', source = sourcetempp, line_color = "blue", line_width = 5)
+r15 = p.line('x', 'y', source = sourcetempv, line_color = "blue", line_width = 5)
 
 sourcedermr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcedermp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcedermv = ColumnDataSource(data=dict(x=[], y=[]))
 
-p.line('x', 'y', source = sourcedermr, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcedermp, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcedermv, line_color = "blue", line_width = 5)
+r16 = p.line('x', 'y', source = sourcedermr, line_color = "blue", line_width = 5)
+r17 = p.line('x', 'y', source = sourcedermp, line_color = "blue", line_width = 5)
+r18 = p.line('x', 'y', source = sourcedermv, line_color = "blue", line_width = 5)
 
 sourcevasor = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevasop = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevasov = ColumnDataSource(data=dict(x=[], y=[]))
 
-p.line('x', 'y', source = sourcevasor, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcevasop, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcevasov, line_color = "blue", line_width = 5)
+r19 = p.line('x', 'y', source = sourcevasor, line_color = "blue", line_width = 5)
+r20 = p.line('x', 'y', source = sourcevasop, line_color = "blue", line_width = 5)
+r21 = p.line('x', 'y', source = sourcevasov, line_color = "blue", line_width = 5)
 
 sourcevyzdr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevyzdp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevyzdv = ColumnDataSource(data=dict(x=[], y=[]))
 
-p.line('x', 'y', source = sourcevyzdr, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcevyzdp, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcevyzdv, line_color = "blue", line_width = 5)
+r22 = p.line('x', 'y', source = sourcevyzdr, line_color = "blue", line_width = 5)
+r23 = p.line('x', 'y', source = sourcevyzdp, line_color = "blue", line_width = 5)
+r24 = p.line('x', 'y', source = sourcevyzdv, line_color = "blue", line_width = 5)
 
 sourcetremr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetremp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetremv = ColumnDataSource(data=dict(x=[], y=[]))
 
-p.line('x', 'y', source = sourcetremr, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcetremp, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcetremv, line_color = "blue", line_width = 5)
+r25 = p.line('x', 'y', source = sourcetremr, line_color = "blue", line_width = 5)
+r26 = p.line('x', 'y', source = sourcetremp, line_color = "blue", line_width = 5)
+r27 = p.line('x', 'y', source = sourcetremv, line_color = "blue", line_width = 5)
 
 sourcenosr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcenosp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcenosv = ColumnDataSource(data=dict(x=[], y=[]))
 
-p.line('x', 'y', source = sourcenosr, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcenosp, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcenosv, line_color = "blue", line_width = 5)
+r28 = p.line('x', 'y', source = sourcenosr, line_color = "blue", line_width = 5)
+r29 = p.line('x', 'y', source = sourcenosp, line_color = "blue", line_width = 5)
+r30 = p.line('x', 'y', source = sourcenosv, line_color = "blue", line_width = 5)
 
 sourcesargr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesargp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesargv = ColumnDataSource(data=dict(x=[], y=[]))
 
-p.line('x', 'y', source = sourcesargr, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcesargp, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcesargv, line_color = "blue", line_width = 5)
+r31 = p.line('x', 'y', source = sourcesargr, line_color = "blue", line_width = 5)
+r32 = p.line('x', 'y', source = sourcesargp, line_color = "blue", line_width = 5)
+r33 = p.line('x', 'y', source = sourcesargv, line_color = "blue", line_width = 5)
 
 sourcesklr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesklp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesklv = ColumnDataSource(data=dict(x=[], y=[]))
 
-p.line('x', 'y', source = sourcesklr, line_color = "blue", line_width = 5)
-p.line('x', 'y', source = sourcesklp, line_color = "blue", line_width = 5)
-r = p.line('x', 'y', source = sourcesklv, line_color = "blue", line_width = 5)
+r34 = p.line('x', 'y', source = sourcesklr, line_color = "blue", line_width = 5)
+r35 = p.line('x', 'y', source = sourcesklp, line_color = "blue", line_width = 5)
+r36 = p.line('x', 'y', source = sourcesklv, line_color = "blue", line_width = 5)
 
 
 
@@ -3557,7 +3558,18 @@ def sklp_update(attr, old, new):
     		return zenklassklp()*math.log(float(alfasklp())*float(verteskl)+float(betasklp()), pagrskl)
     	else:
     		return zenklassklp()*math.log(float(alfasklp())*float(verteskl)+float(betasklp()), pagrskl)
-    sklpnew_data={'x':[0,karareiksmesklp()],'y':["sklp","sklp"]}
+    def karareiksmesklpriba():
+    	if karareiksmesklp()>4:
+    		return 4
+    	elif karareiksmesklp()<-4:
+    		return -4
+    	else:
+    		return karareiksmesklp()
+    sklpnew_data={'x':[0,karareiksmesklpriba()],'y':["sklp","sklp"]}
+    if karareiksmesklpriba() > 0:
+    	r35.glyph.line_color = "blue"
+    else:
+    	r35.glyph.line_color = "red"
     sourcesklp.data.update(sklpnew_data)
     print(karareiksmesklp())
 sekpietus.on_change("value", sklp_update)
@@ -3602,9 +3614,9 @@ def sklv_update(attr, old, new):
     		return karareiksmesklv()
     sklvnew_data={'x':[0,karareiksmesklvriba()],'y':["sklv","sklv"]}
     if karareiksmesklvriba() > 0:
-    	r.glyph.line_color = "blue"
+    	r36.glyph.line_color = "blue"
     else:
-    	r.glyph.line_color = "red"
+    	r36.glyph.line_color = "red"
     sourcesklv.data.update(sklvnew_data)
     print(karareiksmesklvriba())
 sekvakaras.on_change("value", sklv_update)
