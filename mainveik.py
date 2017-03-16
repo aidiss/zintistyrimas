@@ -3330,7 +3330,18 @@ def nosp_update(attr, old, new):
     		return zenklasnosp()*math.log(float(alfanosp())*float(vertenos)+float(betanosp()), pagrnos)
     	else:
     		return zenklasnosp()*math.log(float(alfanosp())*float(vertenos)+float(betanosp()), pagrnos)
-    nospnew_data={'x':[0,karareiksmenosp()],'y':["nosp","nosp"]}
+    def karareiksmenospriba():
+    	if karareiksmenosp()>4:
+    		return 4
+    	elif karareiksmenosp()<-4:
+    		return -4
+    	else:
+    		return karareiksmenosp()
+    nospnew_data={'x':[0,karareiksmenospriba()],'y':["nosp","nosp"]}
+    if karareiksmenospriba() > 0:
+    	r29.glyph.line_color = "blue"
+    else:
+    	r29.glyph.line_color = "red"
     sourcenosp.data.update(nospnew_data)
     print(karareiksmenosp())
 supietus.on_change("value", nosp_update)
