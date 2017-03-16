@@ -2838,7 +2838,18 @@ def dermr_update(attr, old, new):
     		return zenklasdermr()*math.log(float(alfadermr())*float(vertederm)+float(betadermr()), pagrderm)
     	else:
     		return zenklasdermr()*math.log(float(alfadermr())*float(vertederm)+float(betadermr()), pagrderm)
-    dermrnew_data={'x':[0,karareiksmedermr()],'y':["dermr","dermr"]}
+    def karareiksmedermrriba():
+    	if karareiksmedermr()>4:
+    		return 4
+    	elif karareiksmedermr()<-4:
+    		return -4
+    	else:
+    		return karareiksmedermr()
+    dermrnew_data={'x':[0,karareiksmedermrriba()],'y':["dermr","dermr"]}
+    if karareiksmedermrriba() > 0:
+    	r16.glyph.line_color = "blue"
+    else:
+    	r16.glyph.line_color = "red"
     sourcedermr.data.update(dermrnew_data)
     print(karareiksmedermr())
 drrytas.on_change("value", dermr_update)
@@ -2874,7 +2885,18 @@ def dermp_update(attr, old, new):
     		return zenklasdermp()*math.log(float(alfadermp())*float(vertederm)+float(betadermp()), pagrderm)
     	else:
     		return zenklasdermp()*math.log(float(alfadermp())*float(vertederm)+float(betadermp()), pagrderm)
-    dermpnew_data={'x':[0,karareiksmedermp()],'y':["dermp","dermp"]}
+    def karareiksmedermpriba():
+    	if karareiksmedermp()>4:
+    		return 4
+    	elif karareiksmedermp()<-4:
+    		return -4
+    	else:
+    		return karareiksmedermp()
+    dermpnew_data={'x':[0,karareiksmedermpriba()],'y':["dermp","dermp"]}
+    if karareiksmedermpriba() > 0:
+    	r17.glyph.line_color = "blue"
+    else:
+    	r17.glyph.line_color = "red"
     sourcedermp.data.update(dermpnew_data)
     print(karareiksmedermp())
 drpietus.on_change("value", dermp_update)
@@ -2910,7 +2932,18 @@ def dermv_update(attr, old, new):
     		return zenklasdermv()*math.log(float(alfadermv())*float(vertederm)+float(betadermv()), pagrderm)
     	else:
     		return zenklasdermv()*math.log(float(alfadermv())*float(vertederm)+float(betadermv()), pagrderm)
-    dermvnew_data={'x':[0,karareiksmedermv()],'y':["dermv","dermv"]}
+    def karareiksmedermvriba():
+    	if karareiksmedermv()>4:
+    		return 4
+    	elif karareiksmedermv()<-4:
+    		return -4
+    	else:
+    		return karareiksmedermv()
+    dermvnew_data={'x':[0,karareiksmedermvriba()],'y':["dermv","dermv"]}
+    if karareiksmedermvriba() > 0:
+    	r18.glyph.line_color = "blue"
+    else:
+    	r18.glyph.line_color = "red"
     sourcedermv.data.update(dermvnew_data)
     print(karareiksmedermv())
 drvakaras.on_change("value", dermv_update)
