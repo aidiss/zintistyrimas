@@ -3252,7 +3252,18 @@ def tremv_update(attr, old, new):
     		return zenklastremv()*math.log(float(alfatremv())*float(vertetrem)+float(betatremv()), pagrtrem)
     	else:
     		return zenklastremv()*math.log(float(alfatremv())*float(vertetrem)+float(betatremv()), pagrtrem)
-    tremvnew_data={'x':[0,karareiksmetremv()],'y':["tremv","tremv"]}
+    def karareiksmetremvriba():
+    	if karareiksmetremv()>4:
+    		return 4
+    	elif karareiksmetremv()<-4:
+    		return -4
+    	else:
+    		return karareiksmetremv()
+    tremvnew_data={'x':[0,karareiksmetremvriba()],'y':["tremv","tremv"]}
+    if karareiksmetremvriba() > 0:
+    	r27.glyph.line_color = "blue"
+    else:
+    	r27.glyph.line_color = "red"
     sourcetremv.data.update(tremvnew_data)
     print(karareiksmetremv())
 trvakaras.on_change("value", tremv_update)
