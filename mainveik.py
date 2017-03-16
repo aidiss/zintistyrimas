@@ -3216,7 +3216,18 @@ def tremp_update(attr, old, new):
     		return zenklastremp()*math.log(float(alfatremp())*float(vertetrem)+float(betatremp()), pagrtrem)
     	else:
     		return zenklastremp()*math.log(float(alfatremp())*float(vertetrem)+float(betatremp()), pagrtrem)
-    trempnew_data={'x':[0,karareiksmetremp()],'y':["tremp","tremp"]}
+    def karareiksmetrempriba():
+    	if karareiksmetremp()>4:
+    		return 4
+    	elif karareiksmetremp()<-4:
+    		return -4
+    	else:
+    		return karareiksmetremp()
+    trempnew_data={'x':[0,karareiksmetrempriba()],'y':["tremp","tremp"]}
+    if karareiksmetrempriba() > 0:
+    	r26.glyph.line_color = "blue"
+    else:
+    	r26.glyph.line_color = "red"
     sourcetremp.data.update(trempnew_data)
     print(karareiksmetremp())
 trpietus.on_change("value", tremp_update)
