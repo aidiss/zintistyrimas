@@ -3138,7 +3138,18 @@ def vyzdv_update(attr, old, new):
     		return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertevyzd)+float(betavyzdv()), pagrvyzd)
     	else:
     		return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertevyzd)+float(betavyzdv()), pagrvyzd)
-    vyzdvnew_data={'x':[0,karareiksmevyzdv()],'y':["vyzdv","vyzdv"]}
+    def karareiksmevyzdvriba():
+    	if karareiksmevyzdv()>4:
+    		return 4
+    	elif karareiksmevyzdv()<-4:
+    		return -4
+    	else:
+    		return karareiksmevyzdv()
+    vyzdvnew_data={'x':[0,karareiksmevyzdvriba()],'y':["vyzdv","vyzdv"]}
+    if karareiksmevyzdvriba() > 0:
+    	r24.glyph.line_color = "blue"
+    else:
+    	r24.glyph.line_color = "red"
     sourcevyzdv.data.update(vyzdvnew_data)
     print(karareiksmevyzdv())
 vdvakaras.on_change("value", vyzdv_update)
