@@ -3522,7 +3522,18 @@ def sklr_update(attr, old, new):
     		return zenklassklr()*math.log(float(alfasklr())*float(verteskl)+float(betasklr()), pagrskl)
     	else:
     		return zenklassklr()*math.log(float(alfasklr())*float(verteskl)+float(betasklr()), pagrskl)
-    sklrnew_data={'x':[0,karareiksmesklr()],'y':["sklr","sklr"]}
+    def karareiksmesklrriba():
+    	if karareiksmesklr()>4:
+    		return 4
+    	elif karareiksmesklr()<-4:
+    		return -4
+    	else:
+    		return karareiksmesklr()
+    sklrnew_data={'x':[0,karareiksmesklrriba()],'y':["sklr","sklr"]}
+    if karareiksmesklrriba() > 0:
+    	r34.glyph.line_color = "blue"
+    else:
+    	r34.glyph.line_color = "red"
     sourcesklr.data.update(sklrnew_data)
     print(karareiksmesklr())
 sekrytas.on_change("value", sklr_update)
