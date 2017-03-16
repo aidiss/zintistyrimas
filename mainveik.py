@@ -3180,7 +3180,18 @@ def tremr_update(attr, old, new):
     		return zenklastremr()*math.log(float(alfatremr())*float(vertetrem)+float(betatremr()), pagrtrem)
     	else:
     		return zenklastremr()*math.log(float(alfatremr())*float(vertetrem)+float(betatremr()), pagrtrem)
-    tremrnew_data={'x':[0,karareiksmetremr()],'y':["tremr","tremr"]}
+    def karareiksmetremrriba():
+    	if karareiksmetremr()>4:
+    		return 4
+    	elif karareiksmetremr()<-4:
+    		return -4
+    	else:
+    		return karareiksmetremr()
+    tremrnew_data={'x':[0,karareiksmetremrriba()],'y':["tremr","tremr"]}
+    if karareiksmetremrriba() > 0:
+    	r25.glyph.line_color = "blue"
+    else:
+    	r25.glyph.line_color = "red"
     sourcetremr.data.update(tremrnew_data)
     print(karareiksmetremr())
 trrytas.on_change("value", tremr_update)
