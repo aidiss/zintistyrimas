@@ -604,7 +604,7 @@ th {
 ''')
 
 factorssp = ["sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "ppv", "sdv", "ps1v", "bla1", "sklp", "sargp", "nosp", "tremp", "vyzdp",
-"vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", 
+"vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "bla2", "sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", 
 "bla3"]
 
 count = len(factorssp)
@@ -731,7 +731,7 @@ p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='
 p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
 p.add_layout(BoxAnnotation(top = 13, fill_alpha=0.1, fill_color='black'))
-p.add_layout(BoxAnnotation(bottom = 13, top = 25, fill_alpha=0.1, fill_color='cyan'))
+p.add_layout(BoxAnnotation(bottom = 13, top = 26, fill_alpha=0.1, fill_color='cyan'))
 p.add_layout(BoxAnnotation(top=count, fill_alpha=0.1, fill_color='yellow'))
 
 p1.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
@@ -2163,7 +2163,18 @@ def ps1r_update(attr, old, new):
     		return zenklasps1r()*math.log(alfaps1r()*verteps1+betaps1r(), pagrps1)
     	else:
     		return zenklasps1r()*math.log(alfaps1r()*verteps1+betaps1r(), pagrps1)
-    ps1rnew_data={'x':[0,karareiksmeps1r()],'y':["ps1r","ps1r"]}
+    def karareiksmeps1rriba():
+    	if karareiksmeps1r()>4:
+    		return 4
+    	elif karareiksmeps1r()<-4:
+    		return -4
+    	else:
+    		return karareiksmeps1r()
+    ps1rnew_data={'x':[0,karareiksmeps1rriba()],'y':["ps1r","ps1r"]}
+    if karareiksmeps1rriba() > 0:
+    	r2.glyph.line_color = "blue"
+    else:
+    	r2.glyph.line_color = "red"
     sourceps1r.data.update(ps1rnew_data)
     print(karareiksmeps1r())
 psrytas.on_change("value", ps1r_update)
@@ -2204,8 +2215,19 @@ def ps1p_update(attr, old, new):
     		return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
     	else:
     		return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
-    ps1pnew_data={'x':[0,karareiksmeps1p()],'y':["ps1p","ps1p"]}
+    def karareiksmeps1priba():
+    	if karareiksmeps1p()>4:
+    		return 4
+    	elif karareiksmeps1p()<-4:
+    		return -4
+    	else:
+    		return karareiksmeps1p()
+    ps1pnew_data={'x':[0,karareiksmeps1priba()],'y':["ps1p","ps1p"]}
     sourceps1p.data.update(ps1pnew_data)
+    if karareiksmeps1priba() > 0:
+    	r1.glyph.line_color = "blue"
+    else:
+    	r1.glyph.line_color = "red"
     print(karareiksmeps1p())
 pspietus.on_change("value", ps1p_update)
 pgpietus.on_change("value", ps1p_update)
