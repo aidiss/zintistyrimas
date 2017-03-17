@@ -2296,7 +2296,18 @@ def sdr_update(attr, old, new):
     		return zenklassdr()*math.log(alfasdr()*vertesd+betasdr(), pagrsd)
     	else:
     		return zenklassdr()*math.log(alfasdr()*vertesd+betasdr(), pagrsd)
-    sdrnew_data={'x':[0,karareiksmesdr()],'y':["sdr","sdr"]}
+    def karareiksmesdrriba():
+     	if karareiksmesdr()>4:
+     		return 4
+     	elif karareiksmesdr()<-4:
+     		return -4
+     	else:
+     		return karareiksmesdr()
+    sdrnew_data={'x':[0,karareiksmesdrriba()],'y':["sdr","sdr"]}
+    if karareiksmesdrriba() > 0:
+    	r4.glyph.line_color = "blue"
+    else:
+    	r4.glyph.line_color = "red"
     sourcesdr.data.update(sdrnew_data)
     print(karareiksmesdr())
 skarytas.on_change("value", sdr_update)
@@ -2343,7 +2354,18 @@ def sdp_update(attr, old, new):
     		return zenklassdp()*math.log(alfasdp()*vertesd+betasdp(), pagrsd)
     	else:
     		return zenklassdp()*math.log(alfasdp()*vertesd+betasdp(), pagrsd)
-    sdpnew_data={'x':[0,karareiksmesdp()],'y':["sdp","sdp"]}
+    def karareiksmesdpriba():
+     	if karareiksmesdp()>4:
+     		return 4
+     	elif karareiksmesdp()<-4:
+     		return -4
+     	else:
+     		return karareiksmesdp()
+    sdpnew_data={'x':[0,karareiksmesdpriba()],'y':["sdp","sdp"]}
+    if karareiksmesdpriba() > 0:
+    	r5.glyph.line_color = "blue"
+    else:
+    	r5.glyph.line_color = "red"
     sourcesdp.data.update(sdpnew_data)
     print(karareiksmesdp())
 skapietus.on_change("value", sdp_update)
