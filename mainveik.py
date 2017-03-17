@@ -2640,7 +2640,18 @@ def krip_update(attr, old, new):
     		return zenklaskrip()*math.log(alfakrip()*vertekri+betakrip(), pagrkri)
     	else:
     		return zenklaskrip()*math.log(alfakrip()*vertekri+betakrip(), pagrkri)
-    kripnew_data={'x':[0,karareiksmekrip()],'y':["krip","krip"]}
+    def karareiksmekripriba():
+    	if karareiksmekrip()>4:
+    		return 4
+    	elif karareiksmekrip()<-4:
+    		return -4
+    	else:
+    		return karareiksmekrip()
+    kripnew_data={'x':[0,karareiksmekripriba()],'y':["krip","krip"]}
+    if karareiksmekripriba() > 0:
+    	r11.glyph.line_color = "blue"
+    else:
+    	r11.glyph.line_color = "red"
     sourcekrip.data.update(kripnew_data)
     print(karareiksmekrip())
 pspietus.on_change("value", krip_update)
