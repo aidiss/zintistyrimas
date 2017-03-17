@@ -2796,7 +2796,18 @@ def tempv_update(attr, old, new):
     		return zenklastempv()*math.log(float(alfatempv())*float(vertetemp)+float(betatempv()), pagrtemp)
     	else:
     		return zenklastempv()*math.log(float(alfatempv())*float(vertetemp)+float(betatempv()), pagrtemp)
-    tempvnew_data={'x':[0,karareiksmetempv()],'y':["tempv","tempv"]}
+    def karareiksmetempvriba():
+    	if karareiksmetempv()>4:
+    		return 4
+    	elif karareiksmetempv()<-4:
+    		return -4
+    	else:
+    		return karareiksmetempv()
+    tempvnew_data={'x':[0,karareiksmetempvriba()],'y':["tempv","tempv"]}
+    if karareiksmetempvriba() > 0:
+    	r15.glyph.line_color = "blue"
+    else:
+    	r15.glyph.line_color = "red"
     sourcetempv.data.update(tempvnew_data)
     print(karareiksmetempv())
 ktvakaras.on_change("value", tempv_update)
