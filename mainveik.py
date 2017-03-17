@@ -2245,7 +2245,18 @@ def ps1v_update(attr, old, new):
     		return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
     	else:
     		return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
-    ps1vnew_data={'x':[0,karareiksmeps1v()],'y':["ps1v","ps1v"]}
+    def karareiksmeps1vriba():
+    	if karareiksmeps1v()>4:
+    		return 4
+    	elif karareiksmeps1v()<-4:
+    		return -4
+    	else:
+    		return karareiksmeps1v()
+    ps1vnew_data={'x':[0,karareiksmeps1vriba()],'y':["ps1v","ps1v"]}
+    if karareiksmeps1vriba() > 0:
+    	r3.glyph.line_color = "blue"
+    else:
+    	r3.glyph.line_color = "red"
     sourceps1v.data.update(ps1vnew_data)
     print(karareiksmeps1v())
 psvakaras.on_change("value", ps1v_update)
