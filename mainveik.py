@@ -2390,7 +2390,18 @@ def sdv_update(attr, old, new):
     		return zenklassdv()*math.log(alfasdv()*vertesd+betasdv(), pagrsd)
     	else:
     		return zenklassdv()*math.log(alfasdv()*vertesd+betasdv(), pagrsd)
-    sdvnew_data={'x':[0,karareiksmesdv()],'y':["sdv","sdv"]}
+    def karareiksmesdvriba():
+     	if karareiksmesdv()>4:
+     		return 4
+     	elif karareiksmesdv()<-4:
+     		return -4
+     	else:
+     		return karareiksmesdv()
+    sdvnew_data={'x':[0,karareiksmesdvriba()],'y':["sdv","sdv"]}
+    if karareiksmesdvriba() > 0:
+    	r6.glyph.line_color = "blue"
+    else:
+    	r6.glyph.line_color = "red"
     sourcesdv.data.update(sdvnew_data)
     print(karareiksmesdv())
 skavakaras.on_change("value", sdv_update)
@@ -2447,7 +2458,18 @@ def ppr_update(attr, old, new):
     		return zenklasppr()*math.log(alfappr()*vertepp+betappr(), pagrpp)
     	else:
     		return zenklasppr()*math.log(alfappr()*vertepp+betappr(), pagrpp)
-    pprnew_data={'x':[0,karareiksmeppr()],'y':["ppr","ppr"]}
+    def karareiksmepprriba():
+    	if karareiksmeppr()>4:
+    		return 4
+    	elif karareiksmeppr()<-4:
+    		return -4
+    	else:
+    		return karareiksmeppr()
+    pprnew_data={'x':[0,karareiksmepprriba()],'y':["ppr","ppr"]}
+    if karareiksmepprriba() > 0:
+    	r7.glyph.line_color = "blue"
+    else:
+    	r7.glyph.line_color = "red"
     sourceppr.data.update(pprnew_data)
     print(karareiksmeppr())
 pgrytas.on_change("value", ppr_update)
@@ -2498,7 +2520,18 @@ def ppp_update(attr, old, new):
     		return zenklasppp()*math.log(alfappp()*vertepp+betappp(), pagrpp)
     	else:
     		return zenklasppp()*math.log(alfappp()*vertepp+betappp(), pagrpp)
-    pppnew_data={'x':[0,karareiksmeppp()],'y':["ppp","ppp"]}
+    def karareiksmepppriba():
+    	if karareiksmeppp()>4:
+    		return 4
+    	elif karareiksmeppp()<-4:
+    		return -4
+    	else:
+    		return karareiksmeppp()
+    pppnew_data={'x':[0,karareiksmepppriba()],'y':["ppp","ppp"]}
+    if karareiksmepppriba() > 0:
+    	r8.glyph.line_color = "blue"
+    else:
+    	r8.glyph.line_color = "red"
     sourceppp.data.update(pppnew_data)
     print(karareiksmeppp())
 pgpietus.on_change("value", ppp_update)
@@ -2550,7 +2583,18 @@ def ppv_update(attr, old, new):
     		return zenklasppv()*math.log(alfappv()*vertepp+betappv(), pagrpp)
     	else:
     		return zenklasppv()*math.log(alfappv()*vertepp+betappv(), pagrpp)
-    ppvnew_data={'x':[0,karareiksmeppv()],'y':["ppv","ppv"]}
+    def karareiksmeppvriba():
+    	if karareiksmeppv()>4:
+    		return 4
+    	elif karareiksmeppv()<-4:
+    		return -4
+    	else:
+    		return karareiksmeppv()
+    ppvnew_data={'x':[0,karareiksmeppvriba()],'y':["ppv","ppv"]}
+    if karareiksmeppvriba() > 0:
+    	r9.glyph.line_color = "blue"
+    else:
+    	r9.glyph.line_color = "red"
     sourceppv.data.update(ppvnew_data)
     print(karareiksmeppv())
 pgvakaras.on_change("value", ppv_update)
@@ -2599,7 +2643,18 @@ def krir_update(attr, old, new):
     		return zenklaskrir()*math.log(alfakrir()*vertekri+betakrir(), pagrkri)
     	else:
     		return zenklaskrir()*math.log(alfakrir()*vertekri+betakrir(), pagrkri)
-    krirnew_data={'x':[0,karareiksmekrir()],'y':["krir","krir"]}
+    def karareiksmekrirriba():
+    	if karareiksmekrir()>4:
+    		return 4
+    	elif karareiksmekrir()<-4:
+    		return -4
+    	else:
+    		return karareiksmekrir()
+    krirnew_data={'x':[0,karareiksmekrirriba()],'y':["krir","krir"]}
+    if karareiksmekrirriba() > 0:
+    	r10.glyph.line_color = "blue"
+    else:
+    	r10.glyph.line_color = "red"
     sourcekrir.data.update(krirnew_data)
     print(karareiksmekrir())
 psrytas.on_change("value", krir_update)
