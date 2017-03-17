@@ -2724,7 +2724,18 @@ def tempr_update(attr, old, new):
     		return zenklastempr()*math.log(float(alfatempr())*float(vertetemp)+float(betatempr()), pagrtemp)
     	else:
     		return zenklastempr()*math.log(float(alfatempr())*float(vertetemp)+float(betatempr()), pagrtemp)
-    temprnew_data={'x':[0,karareiksmetempr()],'y':["tempr","tempr"]}
+    def karareiksmetemprriba():
+    	if karareiksmetempr()>4:
+    		return 4
+    	elif karareiksmetempr()<-4:
+    		return -4
+    	else:
+    		return karareiksmetempr()
+    temprnew_data={'x':[0,karareiksmetemprriba()],'y':["tempr","tempr"]}
+    if karareiksmetemprriba() > 0:
+    	r13.glyph.line_color = "blue"
+    else:
+    	r13.glyph.line_color = "red"
     sourcetempr.data.update(temprnew_data)
     print(karareiksmetempr())
 ktrytas.on_change("value", tempr_update)
@@ -2760,7 +2771,18 @@ def tempp_update(attr, old, new):
     		return zenklastempp()*math.log(float(alfatempp())*float(vertetemp)+float(betatempp()), pagrtemp)
     	else:
     		return zenklastempp()*math.log(float(alfatempp())*float(vertetemp)+float(betatempp()), pagrtemp)
-    temppnew_data={'x':[0,karareiksmetempp()],'y':["tempp","tempp"]}
+    def karareiksmetemppriba():
+    	if karareiksmetempp()>4:
+    		return 4
+    	elif karareiksmetempp()<-4:
+    		return -4
+    	else:
+    		return karareiksmetempp()
+    temppnew_data={'x':[0,karareiksmetemppriba()],'y':["tempp","tempp"]}
+    if karareiksmetemppriba() > 0:
+    	r14.glyph.line_color = "blue"
+    else:
+    	r14.glyph.line_color = "red"
     sourcetempp.data.update(temppnew_data)
     print(karareiksmetempp())
 ktpietus.on_change("value", tempp_update)
