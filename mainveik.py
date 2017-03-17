@@ -2681,7 +2681,18 @@ def kriv_update(attr, old, new):
     		return zenklaskriv()*math.log(alfakriv()*vertekri+betakriv(), pagrkri)
     	else:
     		return zenklaskriv()*math.log(alfakriv()*vertekri+betakriv(), pagrkri)
-    krivnew_data={'x':[0,karareiksmekriv()],'y':["kriv","kriv"]}
+    def karareiksmekrivriba():
+    	if karareiksmekriv()>4:
+    		return 4
+    	elif karareiksmekriv()<-4:
+    		return -4
+    	else:
+    		return karareiksmekriv()
+    krivnew_data={'x':[0,karareiksmekrivriba()],'y':["kriv","kriv"]}
+    if karareiksmekrivriba() > 0:
+    	r12.glyph.line_color = "blue"
+    else:
+    	r12.glyph.line_color = "red"
     sourcekriv.data.update(krivnew_data)
     print(karareiksmekriv())
 psvakaras.on_change("value", kriv_update)
