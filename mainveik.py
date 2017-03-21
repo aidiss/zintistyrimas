@@ -607,14 +607,18 @@ factorssp = ["sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv
 "vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "bla2", "sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", 
 "bla3"]
 
-count = len(factorssp)
+factorskg = ["sphkv", "kdv", "tv", "p4v", "kphiv", "d2p4v", "usvv", "uputv", "bla1", "sphkp", "kdp", "tp", "p4p", "kphip", "d2p4p", "usvp", "uputp", "bla2", "sphkr",
+"kdr", "tr", "p4r", "kphir", "d2p4r", "usvr", "uputr", "bla3"]
+
+countsp = len(factorssp)
+countkg = len(factorskg)
 
 p = figure(x_range = [-5, 5], y_range=FactorRange(factors=factorssp), height = 350, tools= "")
 p.title.text = "<-Katabolizmas|Anabolizmas->"
 p.title.align = "center"
-p.text(x=[-4.7], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
-p.text(x=[-4.7], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
-p.text(x=[-4.7], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
+p.text(x=[-4.7], y =[(countsp-(countsp-3)/3-1)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
+p.text(x=[-4.7], y =[(countsp-(countsp-3)/3*2-2)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
+p.text(x=[-4.7], y =[(countsp-(countsp-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
 p.x_range.bounds = 'auto'
 p.y_range.bounds = 'auto'
 p.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
@@ -625,101 +629,101 @@ p.xaxis.formatter = FuncTickFormatter(code="""
     return data[tick]
 """)
 
-p1 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
+p1 = figure(x_range = [-5, 5], y_range=FactorRange(factors=factorskg), height = 350, tools= "")
 p1.title.text = "<-Katabolizmas|Anabolizmas->"
 p1.title.align = "center"
-p1.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p1.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p1.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+p1.text(x=[-4.7], y =[(countkg-(countkg-3)/3-1)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
+p1.text(x=[-4.7], y =[(countkg-(countkg-3)/3*2-2)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
+p1.text(x=[-4.7], y =[(countkg-(countkg-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
 p1.x_range.bounds = 'auto'
 p1.y_range.bounds = 'auto'
-p1.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
+p1.xaxis.axis_label = '<-Katogeninins|Gliukogeninis->'
 p1.yaxis.visible =False
-p1.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
+p1.xaxis.ticker = FixedTicker(ticks=[-4, -3, -2, -1, 1, 2, 3, 4])
 p1.xaxis.formatter = FuncTickFormatter(code="""
-    data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
+    data = {"-4": "Didelis", "-3": "Vidutinis", "-2": 'Mažas', "-1": "Norma", 1: 'Norma', 2: 'Mažas', 3: 'Vidutinis', 4: 'Didelis'}
     return data[tick]
 """)
 
-p2 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
-p2.title.text = "<-Katabolizmas|Anabolizmas->"
-p2.title.align = "center"
-p2.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p2.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p2.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p2.x_range.bounds = 'auto'
-p2.y_range.bounds = 'auto'
-p2.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
-p2.yaxis.visible =False
-p2.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
-p2.xaxis.formatter = FuncTickFormatter(code="""
-    data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
-    return data[tick]
-""")
+# p2 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
+# p2.title.text = "<-Katabolizmas|Anabolizmas->"
+# p2.title.align = "center"
+# p2.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p2.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p2.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p2.x_range.bounds = 'auto'
+# p2.y_range.bounds = 'auto'
+# p2.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
+# p2.yaxis.visible =False
+# p2.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
+# p2.xaxis.formatter = FuncTickFormatter(code="""
+#     data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
+#     return data[tick]
+# """)
 
-p3 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
-p3.title.text = "<-Katabolizmas|Anabolizmas->"
-p3.title.align = "center"
-p3.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p3.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p3.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p3.x_range.bounds = 'auto'
-p3.y_range.bounds = 'auto'
-p3.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
-p3.yaxis.visible =False
-p3.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
-p3.xaxis.formatter = FuncTickFormatter(code="""
-    data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
-    return data[tick]
-""")
+# p3 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
+# p3.title.text = "<-Katabolizmas|Anabolizmas->"
+# p3.title.align = "center"
+# p3.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p3.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p3.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p3.x_range.bounds = 'auto'
+# p3.y_range.bounds = 'auto'
+# p3.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
+# p3.yaxis.visible =False
+# p3.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
+# p3.xaxis.formatter = FuncTickFormatter(code="""
+#     data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
+#     return data[tick]
+# """)
 
-p4 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
-p4.title.text = "<-Katabolizmas|Anabolizmas->"
-p4.title.align = "center"
-p4.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p4.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p4.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p4.x_range.bounds = 'auto'
-p4.y_range.bounds = 'auto'
-p4.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
-p4.yaxis.visible =False
-p4.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
-p4.xaxis.formatter = FuncTickFormatter(code="""
-    data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
-    return data[tick]
-""")
+# p4 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
+# p4.title.text = "<-Katabolizmas|Anabolizmas->"
+# p4.title.align = "center"
+# p4.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p4.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p4.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p4.x_range.bounds = 'auto'
+# p4.y_range.bounds = 'auto'
+# p4.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
+# p4.yaxis.visible =False
+# p4.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
+# p4.xaxis.formatter = FuncTickFormatter(code="""
+#     data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
+#     return data[tick]
+# """)
 
-p5 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
-p5.title.text = "<-Katabolizmas|Anabolizmas->"
-p5.title.align = "center"
-p5.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p5.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p5.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p5.x_range.bounds = 'auto'
-p5.y_range.bounds = 'auto'
-p5.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
-p5.yaxis.visible =False
-p5.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
-p5.xaxis.formatter = FuncTickFormatter(code="""
-    data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
-    return data[tick]
-""")
+# p5 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
+# p5.title.text = "<-Katabolizmas|Anabolizmas->"
+# p5.title.align = "center"
+# p5.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p5.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p5.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p5.x_range.bounds = 'auto'
+# p5.y_range.bounds = 'auto'
+# p5.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
+# p5.yaxis.visible =False
+# p5.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
+# p5.xaxis.formatter = FuncTickFormatter(code="""
+#     data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
+#     return data[tick]
+# """)
 
-p6 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
-p6.title.text = "<-Katabolizmas|Anabolizmas->"
-p6.title.align = "center"
-p6.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p6.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p6.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-p6.x_range.bounds = 'auto'
-p6.y_range.bounds = 'auto'
-p6.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
-p6.yaxis.visible =False
-p6.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
-p6.xaxis.formatter = FuncTickFormatter(code="""
-    data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
-    return data[tick]
-""")
+# p6 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
+# p6.title.text = "<-Katabolizmas|Anabolizmas->"
+# p6.title.align = "center"
+# p6.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p6.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p6.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p6.x_range.bounds = 'auto'
+# p6.y_range.bounds = 'auto'
+# p6.xaxis.axis_label = '<-Simpatinis|Parasimpatinis->'
+# p6.yaxis.visible =False
+# p6.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
+# p6.xaxis.formatter = FuncTickFormatter(code="""
+#     data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
+#     return data[tick]
+# """)
 
 p.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
 p.add_layout(Span(location=1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
@@ -730,87 +734,87 @@ p.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='d
 p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p.add_layout(BoxAnnotation(top = 13, fill_alpha=0.1, fill_color='black'))
-p.add_layout(BoxAnnotation(bottom = 13, top = 26, fill_alpha=0.1, fill_color='cyan'))
-p.add_layout(BoxAnnotation(top=count, fill_alpha=0.1, fill_color='yellow'))
+p.add_layout(BoxAnnotation(top = (countsp-3)/3+1, fill_alpha=0.1, fill_color='black'))
+p.add_layout(BoxAnnotation(bottom = (countsp-3)/3+1, top = (countsp-3)/3*2+2, fill_alpha=0.1, fill_color='cyan'))
+p.add_layout(BoxAnnotation(top=countsp, fill_alpha=0.1, fill_color='yellow'))
 
 p1.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-p1.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p1.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
-p1.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
-p1.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
+p1.add_layout(Span(location=1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+p1.add_layout(Span(location=-1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+p1.add_layout(Span(location=2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+p1.add_layout(Span(location=-2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+p1.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+p1.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+p1.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+p1.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+p1.add_layout(BoxAnnotation(top = (countkg-3)/3+1, fill_alpha=0.1, fill_color='black'))
+p1.add_layout(BoxAnnotation(bottom = (countkg-3)/3+1, top = (countkg-3)/3*2+2, fill_alpha=0.1, fill_color='cyan'))
+p1.add_layout(BoxAnnotation(top=countkg, fill_alpha=0.1, fill_color='yellow'))
 
-p2.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-p2.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p2.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p2.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p2.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p2.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p2.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p2.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p2.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p2.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
-p2.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
-p2.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
+# p2.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
+# p2.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+# p2.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+# p2.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+# p2.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+# p2.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+# p2.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+# p2.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+# p2.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+# p2.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
+# p2.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
+# p2.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
 
-p3.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-p3.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p3.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p3.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p3.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p3.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p3.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p3.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p3.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p3.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
-p3.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
-p3.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
+# p3.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
+# p3.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+# p3.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+# p3.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+# p3.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+# p3.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+# p3.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+# p3.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+# p3.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+# p3.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
+# p3.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
+# p3.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
 
-p4.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-p4.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p4.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p4.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p4.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p4.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p4.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p4.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p4.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p4.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
-p4.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
-p4.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
+# p4.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
+# p4.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+# p4.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+# p4.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+# p4.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+# p4.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+# p4.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+# p4.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+# p4.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+# p4.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
+# p4.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
+# p4.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
 
-p5.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-p5.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p5.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p5.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p5.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p5.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p5.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p5.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p5.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p5.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
-p5.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
-p5.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
+# p5.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
+# p5.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+# p5.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+# p5.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+# p5.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+# p5.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+# p5.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+# p5.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+# p5.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+# p5.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
+# p5.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
+# p5.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
 
-p6.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-p6.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p6.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p6.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p6.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p6.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p6.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p6.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p6.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p6.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
-p6.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
-p6.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
+# p6.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
+# p6.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+# p6.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+# p6.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+# p6.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+# p6.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+# p6.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+# p6.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+# p6.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+# p6.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
+# p6.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
+# p6.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
 
 
 # create some widgets
@@ -4046,7 +4050,7 @@ l = layout([protok(), invard , inpavard, lytis, inamz],
     [kvepparmat14()],
     [aprkvepsu(), ksirytas, ksipietus, ksivakaras],
     )
-l2= column(p, p1, p2, p3, p4, p5, p6)
+l2= column(p, p1)
 l1 = row(l, l2)
 # add the layout to curdoc
 curdoc().add_root(l1)
