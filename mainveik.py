@@ -2029,104 +2029,102 @@ ksipietus = TextInput(name = "pietus24", value="", title = "Pietūs", width = 60
 ksivakaras = TextInput(name = "vakaras24", value="", title = "Vakaras", width = 60)
 
 
+# simpatinis/parasimpatinis
 sourceps1r = ColumnDataSource(data=dict(x=[], y=[]))
 sourceps1p = ColumnDataSource(data=dict(x=[], y=[]))
 sourceps1v = ColumnDataSource(data=dict(x=[], y=[]))
 
-r1 = p.line('x', 'y', source = sourceps1r, line_color = "blue", line_width = 5)
-r2 = p.line('x', 'y', source = sourceps1p, line_color = "blue", line_width = 5)
-r3 = p.line('x', 'y', source = sourceps1v, line_color = "blue", line_width = 5)
+sp1 = p.line('x', 'y', source = sourceps1r, line_color = "blue", line_width = 5)
+sp2 = p.line('x', 'y', source = sourceps1p, line_color = "blue", line_width = 5)
+sp3 = p.line('x', 'y', source = sourceps1v, line_color = "blue", line_width = 5)
 
 sourcesdr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesdp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesdv = ColumnDataSource(data=dict(x=[], y=[]))
 
-r4 = p.line('x', 'y', source = sourcesdr, line_color = "blue", line_width = 5)
-r5 = p.line('x', 'y', source = sourcesdp, line_color = "blue", line_width = 5)
-r6 = p.line('x', 'y', source = sourcesdv, line_color = "blue", line_width = 5)
+sp4 = p.line('x', 'y', source = sourcesdr, line_color = "blue", line_width = 5)
+sp5 = p.line('x', 'y', source = sourcesdp, line_color = "blue", line_width = 5)
+sp6 = p.line('x', 'y', source = sourcesdv, line_color = "blue", line_width = 5)
 
 sourceppr = ColumnDataSource(data=dict(x=[], y=[]))
 sourceppp = ColumnDataSource(data=dict(x=[], y=[]))
 sourceppv = ColumnDataSource(data=dict(x=[], y=[]))
 
-r7 = p.line('x', 'y', source = sourceppr, line_color = "blue", line_width = 5)
-r8 = p.line('x', 'y', source = sourceppp, line_color = "blue", line_width = 5)
-r9 = p.line('x', 'y', source = sourceppv, line_color = "blue", line_width = 5)
+sp7 = p.line('x', 'y', source = sourceppr, line_color = "blue", line_width = 5)
+sp8 = p.line('x', 'y', source = sourceppp, line_color = "blue", line_width = 5)
+sp9 = p.line('x', 'y', source = sourceppv, line_color = "blue", line_width = 5)
 
 sourcekrir = ColumnDataSource(data=dict(x=[], y=[]))
 sourcekrip = ColumnDataSource(data=dict(x=[], y=[]))
 sourcekriv = ColumnDataSource(data=dict(x=[], y=[]))
 
-r10 = p.line('x', 'y', source = sourcekrir, line_color = "blue", line_width = 5)
-r11 = p.line('x', 'y', source = sourcekrip, line_color = "blue", line_width = 5)
-r12 = p.line('x', 'y', source = sourcekriv, line_color = "blue", line_width = 5)
+sp10 = p.line('x', 'y', source = sourcekrir, line_color = "blue", line_width = 5)
+sp11 = p.line('x', 'y', source = sourcekrip, line_color = "blue", line_width = 5)
+sp12 = p.line('x', 'y', source = sourcekriv, line_color = "blue", line_width = 5)
 
 sourcetempr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetempp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetempv = ColumnDataSource(data=dict(x=[], y=[]))
 
-r13 = p.line('x', 'y', source = sourcetempr, line_color = "blue", line_width = 5)
-r14 = p.line('x', 'y', source = sourcetempp, line_color = "blue", line_width = 5)
-r15 = p.line('x', 'y', source = sourcetempv, line_color = "blue", line_width = 5)
+sp13 = p.line('x', 'y', source = sourcetempr, line_color = "blue", line_width = 5)
+sp14 = p.line('x', 'y', source = sourcetempp, line_color = "blue", line_width = 5)
+sp15 = p.line('x', 'y', source = sourcetempv, line_color = "blue", line_width = 5)
 
 sourcedermr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcedermp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcedermv = ColumnDataSource(data=dict(x=[], y=[]))
 
-r16 = p.line('x', 'y', source = sourcedermr, line_color = "blue", line_width = 5)
-r17 = p.line('x', 'y', source = sourcedermp, line_color = "blue", line_width = 5)
-r18 = p.line('x', 'y', source = sourcedermv, line_color = "blue", line_width = 5)
+sp16 = p.line('x', 'y', source = sourcedermr, line_color = "blue", line_width = 5)
+sp17 = p.line('x', 'y', source = sourcedermp, line_color = "blue", line_width = 5)
+sp18 = p.line('x', 'y', source = sourcedermv, line_color = "blue", line_width = 5)
 
 sourcevasor = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevasop = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevasov = ColumnDataSource(data=dict(x=[], y=[]))
 
-r19 = p.line('x', 'y', source = sourcevasor, line_color = "blue", line_width = 5)
-r20 = p.line('x', 'y', source = sourcevasop, line_color = "blue", line_width = 5)
-r21 = p.line('x', 'y', source = sourcevasov, line_color = "blue", line_width = 5)
+sp19 = p.line('x', 'y', source = sourcevasor, line_color = "blue", line_width = 5)
+sp20 = p.line('x', 'y', source = sourcevasop, line_color = "blue", line_width = 5)
+sp21 = p.line('x', 'y', source = sourcevasov, line_color = "blue", line_width = 5)
 
 sourcevyzdr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevyzdp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevyzdv = ColumnDataSource(data=dict(x=[], y=[]))
 
-r22 = p.line('x', 'y', source = sourcevyzdr, line_color = "blue", line_width = 5)
-r23 = p.line('x', 'y', source = sourcevyzdp, line_color = "blue", line_width = 5)
-r24 = p.line('x', 'y', source = sourcevyzdv, line_color = "blue", line_width = 5)
+sp22 = p.line('x', 'y', source = sourcevyzdr, line_color = "blue", line_width = 5)
+sp23 = p.line('x', 'y', source = sourcevyzdp, line_color = "blue", line_width = 5)
+sp24 = p.line('x', 'y', source = sourcevyzdv, line_color = "blue", line_width = 5)
 
 sourcetremr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetremp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetremv = ColumnDataSource(data=dict(x=[], y=[]))
 
-r25 = p.line('x', 'y', source = sourcetremr, line_color = "blue", line_width = 5)
-r26 = p.line('x', 'y', source = sourcetremp, line_color = "blue", line_width = 5)
-r27 = p.line('x', 'y', source = sourcetremv, line_color = "blue", line_width = 5)
+sp25 = p.line('x', 'y', source = sourcetremr, line_color = "blue", line_width = 5)
+sp26 = p.line('x', 'y', source = sourcetremp, line_color = "blue", line_width = 5)
+sp27 = p.line('x', 'y', source = sourcetremv, line_color = "blue", line_width = 5)
 
 sourcenosr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcenosp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcenosv = ColumnDataSource(data=dict(x=[], y=[]))
 
-r28 = p.line('x', 'y', source = sourcenosr, line_color = "blue", line_width = 5)
-r29 = p.line('x', 'y', source = sourcenosp, line_color = "blue", line_width = 5)
-r30 = p.line('x', 'y', source = sourcenosv, line_color = "blue", line_width = 5)
+sp28 = p.line('x', 'y', source = sourcenosr, line_color = "blue", line_width = 5)
+sp29 = p.line('x', 'y', source = sourcenosp, line_color = "blue", line_width = 5)
+sp30 = p.line('x', 'y', source = sourcenosv, line_color = "blue", line_width = 5)
 
 sourcesargr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesargp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesargv = ColumnDataSource(data=dict(x=[], y=[]))
 
-r31 = p.line('x', 'y', source = sourcesargr, line_color = "blue", line_width = 5)
-r32 = p.line('x', 'y', source = sourcesargp, line_color = "blue", line_width = 5)
-r33 = p.line('x', 'y', source = sourcesargv, line_color = "blue", line_width = 5)
+sp31 = p.line('x', 'y', source = sourcesargr, line_color = "blue", line_width = 5)
+sp32 = p.line('x', 'y', source = sourcesargp, line_color = "blue", line_width = 5)
+sp33 = p.line('x', 'y', source = sourcesargv, line_color = "blue", line_width = 5)
 
 sourcesklr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesklp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesklv = ColumnDataSource(data=dict(x=[], y=[]))
 
-r34 = p.line('x', 'y', source = sourcesklr, line_color = "blue", line_width = 5)
-r35 = p.line('x', 'y', source = sourcesklp, line_color = "blue", line_width = 5)
-r36 = p.line('x', 'y', source = sourcesklv, line_color = "blue", line_width = 5)
-
-
-
+sp34 = p.line('x', 'y', source = sourcesklr, line_color = "blue", line_width = 5)
+sp35 = p.line('x', 'y', source = sourcesklp, line_color = "blue", line_width = 5)
+sp36 = p.line('x', 'y', source = sourcesklv, line_color = "blue", line_width = 5)
 
 normakps1 = -2
 normaaps1 = 0
@@ -2176,9 +2174,9 @@ def ps1r_update(attr, old, new):
     		return karareiksmeps1r()
     ps1rnew_data={'x':[0,karareiksmeps1rriba()],'y':["ps1r","ps1r"]}
     if karareiksmeps1rriba() > 0:
-    	r2.glyph.line_color = "blue"
+    	sp1.glyph.line_color = "blue"
     else:
-    	r2.glyph.line_color = "red"
+    	sp1.glyph.line_color = "red"
     sourceps1r.data.update(ps1rnew_data)
     print(karareiksmeps1r())
 psrytas.on_change("value", ps1r_update)
@@ -2229,9 +2227,9 @@ def ps1p_update(attr, old, new):
     ps1pnew_data={'x':[0,karareiksmeps1priba()],'y':["ps1p","ps1p"]}
     sourceps1p.data.update(ps1pnew_data)
     if karareiksmeps1priba() > 0:
-    	r1.glyph.line_color = "blue"
+    	sp2.glyph.line_color = "blue"
     else:
-    	r1.glyph.line_color = "red"
+    	sp2.glyph.line_color = "red"
     print(karareiksmeps1p())
 pspietus.on_change("value", ps1p_update)
 pgpietus.on_change("value", ps1p_update)
@@ -2280,9 +2278,9 @@ def ps1v_update(attr, old, new):
     		return karareiksmeps1v()
     ps1vnew_data={'x':[0,karareiksmeps1vriba()],'y':["ps1v","ps1v"]}
     if karareiksmeps1vriba() > 0:
-    	r3.glyph.line_color = "blue"
+    	sp3.glyph.line_color = "blue"
     else:
-    	r3.glyph.line_color = "red"
+    	sp3.glyph.line_color = "red"
     sourceps1v.data.update(ps1vnew_data)
     print(karareiksmeps1v())
 psvakaras.on_change("value", ps1v_update)
@@ -2342,9 +2340,9 @@ def sdr_update(attr, old, new):
      		return karareiksmesdr()
     sdrnew_data={'x':[0,karareiksmesdrriba()],'y':["sdr","sdr"]}
     if karareiksmesdrriba() > 0:
-    	r4.glyph.line_color = "blue"
+    	sp4.glyph.line_color = "blue"
     else:
-    	r4.glyph.line_color = "red"
+    	sp4.glyph.line_color = "red"
     sourcesdr.data.update(sdrnew_data)
     print(karareiksmesdr())
 skarytas.on_change("value", sdr_update)
@@ -2400,9 +2398,9 @@ def sdp_update(attr, old, new):
      		return karareiksmesdp()
     sdpnew_data={'x':[0,karareiksmesdpriba()],'y':["sdp","sdp"]}
     if karareiksmesdpriba() > 0:
-    	r5.glyph.line_color = "blue"
+    	sp5.glyph.line_color = "blue"
     else:
-    	r5.glyph.line_color = "red"
+    	sp5.glyph.line_color = "red"
     sourcesdp.data.update(sdpnew_data)
     print(karareiksmesdp())
 skapietus.on_change("value", sdp_update)
@@ -2458,9 +2456,9 @@ def sdv_update(attr, old, new):
      		return karareiksmesdv()
     sdvnew_data={'x':[0,karareiksmesdvriba()],'y':["sdv","sdv"]}
     if karareiksmesdvriba() > 0:
-    	r6.glyph.line_color = "blue"
+    	sp6.glyph.line_color = "blue"
     else:
-    	r6.glyph.line_color = "red"
+    	sp6.glyph.line_color = "red"
     sourcesdv.data.update(sdvnew_data)
     print(karareiksmesdv())
 skavakaras.on_change("value", sdv_update)
@@ -2526,9 +2524,9 @@ def ppr_update(attr, old, new):
     		return karareiksmeppr()
     pprnew_data={'x':[0,karareiksmepprriba()],'y':["ppr","ppr"]}
     if karareiksmepprriba() > 0:
-    	r7.glyph.line_color = "blue"
+    	sp7.glyph.line_color = "blue"
     else:
-    	r7.glyph.line_color = "red"
+    	sp7.glyph.line_color = "red"
     sourceppr.data.update(pprnew_data)
     print(karareiksmeppr())
 pgrytas.on_change("value", ppr_update)
@@ -2588,9 +2586,9 @@ def ppp_update(attr, old, new):
     		return karareiksmeppp()
     pppnew_data={'x':[0,karareiksmepppriba()],'y':["ppp","ppp"]}
     if karareiksmepppriba() > 0:
-    	r8.glyph.line_color = "blue"
+    	sp8.glyph.line_color = "blue"
     else:
-    	r8.glyph.line_color = "red"
+    	sp8.glyph.line_color = "red"
     sourceppp.data.update(pppnew_data)
     print(karareiksmeppp())
 pgpietus.on_change("value", ppp_update)
@@ -2651,9 +2649,9 @@ def ppv_update(attr, old, new):
     		return karareiksmeppv()
     ppvnew_data={'x':[0,karareiksmeppvriba()],'y':["ppv","ppv"]}
     if karareiksmeppvriba() > 0:
-    	r9.glyph.line_color = "blue"
+    	sp9.glyph.line_color = "blue"
     else:
-    	r9.glyph.line_color = "red"
+    	sp9.glyph.line_color = "red"
     sourceppv.data.update(ppvnew_data)
     print(karareiksmeppv())
 pgvakaras.on_change("value", ppv_update)
@@ -2711,9 +2709,9 @@ def krir_update(attr, old, new):
     		return karareiksmekrir()
     krirnew_data={'x':[0,karareiksmekrirriba()],'y':["krir","krir"]}
     if karareiksmekrirriba() > 0:
-    	r10.glyph.line_color = "blue"
+    	sp10.glyph.line_color = "blue"
     else:
-    	r10.glyph.line_color = "red"
+    	sp10.glyph.line_color = "red"
     sourcekrir.data.update(krirnew_data)
     print(karareiksmekrir())
 psrytas.on_change("value", krir_update)
@@ -2763,9 +2761,9 @@ def krip_update(attr, old, new):
     		return karareiksmekrip()
     kripnew_data={'x':[0,karareiksmekripriba()],'y':["krip","krip"]}
     if karareiksmekripriba() > 0:
-    	r11.glyph.line_color = "blue"
+    	sp11.glyph.line_color = "blue"
     else:
-    	r11.glyph.line_color = "red"
+    	sp11.glyph.line_color = "red"
     sourcekrip.data.update(kripnew_data)
     print(karareiksmekrip())
 pspietus.on_change("value", krip_update)
@@ -2815,9 +2813,9 @@ def kriv_update(attr, old, new):
     		return karareiksmekriv()
     krivnew_data={'x':[0,karareiksmekrivriba()],'y':["kriv","kriv"]}
     if karareiksmekrivriba() > 0:
-    	r12.glyph.line_color = "blue"
+    	sp12.glyph.line_color = "blue"
     else:
-    	r12.glyph.line_color = "red"
+    	sp12.glyph.line_color = "red"
     sourcekriv.data.update(krivnew_data)
     print(karareiksmekriv())
 psvakaras.on_change("value", kriv_update)
@@ -2869,9 +2867,9 @@ def tempr_update(attr, old, new):
     		return karareiksmetempr()
     temprnew_data={'x':[0,karareiksmetemprriba()],'y':["tempr","tempr"]}
     if karareiksmetemprriba() > 0:
-    	r13.glyph.line_color = "blue"
+    	sp13.glyph.line_color = "blue"
     else:
-    	r13.glyph.line_color = "red"
+    	sp13.glyph.line_color = "red"
     sourcetempr.data.update(temprnew_data)
     print(karareiksmetempr())
 ktrytas.on_change("value", tempr_update)
@@ -2916,9 +2914,9 @@ def tempp_update(attr, old, new):
     		return karareiksmetempp()
     temppnew_data={'x':[0,karareiksmetemppriba()],'y':["tempp","tempp"]}
     if karareiksmetemppriba() > 0:
-    	r14.glyph.line_color = "blue"
+    	sp14.glyph.line_color = "blue"
     else:
-    	r14.glyph.line_color = "red"
+    	sp14.glyph.line_color = "red"
     sourcetempp.data.update(temppnew_data)
     print(karareiksmetempp())
 ktpietus.on_change("value", tempp_update)
@@ -2963,9 +2961,9 @@ def tempv_update(attr, old, new):
     		return karareiksmetempv()
     tempvnew_data={'x':[0,karareiksmetempvriba()],'y':["tempv","tempv"]}
     if karareiksmetempvriba() > 0:
-    	r15.glyph.line_color = "blue"
+    	sp15.glyph.line_color = "blue"
     else:
-    	r15.glyph.line_color = "red"
+    	sp15.glyph.line_color = "red"
     sourcetempv.data.update(tempvnew_data)
     print(karareiksmetempv())
 ktvakaras.on_change("value", tempv_update)
@@ -3016,9 +3014,9 @@ def dermr_update(attr, old, new):
     		return karareiksmedermr()
     dermrnew_data={'x':[0,karareiksmedermrriba()],'y':["dermr","dermr"]}
     if karareiksmedermrriba() > 0:
-    	r16.glyph.line_color = "blue"
+    	sp16.glyph.line_color = "blue"
     else:
-    	r16.glyph.line_color = "red"
+    	sp16.glyph.line_color = "red"
     sourcedermr.data.update(dermrnew_data)
     print(karareiksmedermr())
 drrytas.on_change("value", dermr_update)
@@ -3063,9 +3061,9 @@ def dermp_update(attr, old, new):
     		return karareiksmedermp()
     dermpnew_data={'x':[0,karareiksmedermpriba()],'y':["dermp","dermp"]}
     if karareiksmedermpriba() > 0:
-    	r17.glyph.line_color = "blue"
+    	sp17.glyph.line_color = "blue"
     else:
-    	r17.glyph.line_color = "red"
+    	sp17.glyph.line_color = "red"
     sourcedermp.data.update(dermpnew_data)
     print(karareiksmedermp())
 drpietus.on_change("value", dermp_update)
@@ -3110,9 +3108,9 @@ def dermv_update(attr, old, new):
     		return karareiksmedermv()
     dermvnew_data={'x':[0,karareiksmedermvriba()],'y':["dermv","dermv"]}
     if karareiksmedermvriba() > 0:
-    	r18.glyph.line_color = "blue"
+    	sp18.glyph.line_color = "blue"
     else:
-    	r18.glyph.line_color = "red"
+    	sp18.glyph.line_color = "red"
     sourcedermv.data.update(dermvnew_data)
     print(karareiksmedermv())
 drvakaras.on_change("value", dermv_update)
@@ -3163,9 +3161,9 @@ def vasor_update(attr, old, new):
     		return karareiksmevasor()
     vasornew_data={'x':[0,karareiksmevasorriba()],'y':["vasor","vasor"]}
     if karareiksmevasorriba() > 0:
-    	r19.glyph.line_color = "blue"
+    	sp19.glyph.line_color = "blue"
     else:
-    	r19.glyph.line_color = "red"
+    	sp19.glyph.line_color = "red"
     sourcevasor.data.update(vasornew_data)
     print(karareiksmevasor())
 vrrytas.on_change("value", vasor_update)
@@ -3210,9 +3208,9 @@ def vasop_update(attr, old, new):
     		return karareiksmevasop()
     vasopnew_data={'x':[0,karareiksmevasopriba()],'y':["vasop","vasop"]}
     if karareiksmevasopriba() > 0:
-    	r20.glyph.line_color = "blue"
+    	sp20.glyph.line_color = "blue"
     else:
-    	r20.glyph.line_color = "red"
+    	sp20.glyph.line_color = "red"
     sourcevasop.data.update(vasopnew_data)
     print(karareiksmevasop())
 vrpietus.on_change("value", vasop_update)
@@ -3257,9 +3255,9 @@ def vasov_update(attr, old, new):
     		return karareiksmevasov()
     vasovnew_data={'x':[0,karareiksmevasovriba()],'y':["vasov","vasov"]}
     if karareiksmevasovriba() > 0:
-    	r21.glyph.line_color = "blue"
+    	sp21.glyph.line_color = "blue"
     else:
-    	r21.glyph.line_color = "red"
+    	sp21.glyph.line_color = "red"
     sourcevasov.data.update(vasovnew_data)
     print(karareiksmevasov())
 vrvakaras.on_change("value", vasov_update)
@@ -3310,9 +3308,9 @@ def vyzdr_update(attr, old, new):
     		return karareiksmevyzdr()
     vyzdrnew_data={'x':[0,karareiksmevyzdrriba()],'y':["vyzdr","vyzdr"]}
     if karareiksmevyzdrriba() > 0:
-    	r22.glyph.line_color = "blue"
+    	sp22.glyph.line_color = "blue"
     else:
-    	r22.glyph.line_color = "red"
+    	sp22.glyph.line_color = "red"
     sourcevyzdr.data.update(vyzdrnew_data)
     print(karareiksmevyzdr())
 vdrytas.on_change("value", vyzdr_update)
@@ -3357,9 +3355,9 @@ def vyzdp_update(attr, old, new):
     		return karareiksmevyzdp()
     vyzdpnew_data={'x':[0,karareiksmevyzdpriba()],'y':["vyzdp","vyzdp"]}
     if karareiksmevyzdpriba() > 0:
-    	r23.glyph.line_color = "blue"
+    	sp23.glyph.line_color = "blue"
     else:
-    	r23.glyph.line_color = "red"
+    	sp23.glyph.line_color = "red"
     sourcevyzdp.data.update(vyzdpnew_data)
     print(karareiksmevyzdp())
 vdpietus.on_change("value", vyzdp_update)
@@ -3404,9 +3402,9 @@ def vyzdv_update(attr, old, new):
     		return karareiksmevyzdv()
     vyzdvnew_data={'x':[0,karareiksmevyzdvriba()],'y':["vyzdv","vyzdv"]}
     if karareiksmevyzdvriba() > 0:
-    	r24.glyph.line_color = "blue"
+    	sp24.glyph.line_color = "blue"
     else:
-    	r24.glyph.line_color = "red"
+    	sp24.glyph.line_color = "red"
     sourcevyzdv.data.update(vyzdvnew_data)
     print(karareiksmevyzdv())
 vdvakaras.on_change("value", vyzdv_update)
@@ -3457,9 +3455,9 @@ def tremr_update(attr, old, new):
     		return karareiksmetremr()
     tremrnew_data={'x':[0,karareiksmetremrriba()],'y':["tremr","tremr"]}
     if karareiksmetremrriba() > 0:
-    	r25.glyph.line_color = "blue"
+    	sp25.glyph.line_color = "blue"
     else:
-    	r25.glyph.line_color = "red"
+    	sp25.glyph.line_color = "red"
     sourcetremr.data.update(tremrnew_data)
     print(karareiksmetremr())
 trrytas.on_change("value", tremr_update)
@@ -3504,9 +3502,9 @@ def tremp_update(attr, old, new):
     		return karareiksmetremp()
     trempnew_data={'x':[0,karareiksmetrempriba()],'y':["tremp","tremp"]}
     if karareiksmetrempriba() > 0:
-    	r26.glyph.line_color = "blue"
+    	sp26.glyph.line_color = "blue"
     else:
-    	r26.glyph.line_color = "red"
+    	sp26.glyph.line_color = "red"
     sourcetremp.data.update(trempnew_data)
     print(karareiksmetremp())
 trpietus.on_change("value", tremp_update)
@@ -3551,9 +3549,9 @@ def tremv_update(attr, old, new):
     		return karareiksmetremv()
     tremvnew_data={'x':[0,karareiksmetremvriba()],'y':["tremv","tremv"]}
     if karareiksmetremvriba() > 0:
-    	r27.glyph.line_color = "blue"
+    	sp27.glyph.line_color = "blue"
     else:
-    	r27.glyph.line_color = "red"
+    	sp27.glyph.line_color = "red"
     sourcetremv.data.update(tremvnew_data)
     print(karareiksmetremv())
 trvakaras.on_change("value", tremv_update)
@@ -3604,9 +3602,9 @@ def nosr_update(attr, old, new):
     		return karareiksmenosr()
     nosrnew_data={'x':[0,karareiksmenosrriba()],'y':["nosr","nosr"]}
     if karareiksmenosrriba() > 0:
-    	r28.glyph.line_color = "blue"
+    	sp28.glyph.line_color = "blue"
     else:
-    	r28.glyph.line_color = "red"
+    	sp28.glyph.line_color = "red"
     sourcenosr.data.update(nosrnew_data)
     print(karareiksmenosr())
 surytas.on_change("value", nosr_update)
@@ -3651,9 +3649,9 @@ def nosp_update(attr, old, new):
     		return karareiksmenosp()
     nospnew_data={'x':[0,karareiksmenospriba()],'y':["nosp","nosp"]}
     if karareiksmenospriba() > 0:
-    	r29.glyph.line_color = "blue"
+    	sp29.glyph.line_color = "blue"
     else:
-    	r29.glyph.line_color = "red"
+    	sp29.glyph.line_color = "red"
     sourcenosp.data.update(nospnew_data)
     print(karareiksmenosp())
 supietus.on_change("value", nosp_update)
@@ -3698,9 +3696,9 @@ def nosv_update(attr, old, new):
     		return karareiksmenosv()
     nosvnew_data={'x':[0,karareiksmenosvriba()],'y':["nosv","nosv"]}
     if karareiksmenosvriba() > 0:
-    	r30.glyph.line_color = "blue"
+    	sp30.glyph.line_color = "blue"
     else:
-    	r30.glyph.line_color = "red"
+    	sp30.glyph.line_color = "red"
     sourcenosv.data.update(nosvnew_data)
     print(karareiksmenosv())
 suvakaras.on_change("value", nosv_update)
@@ -3751,9 +3749,9 @@ def sargr_update(attr, old, new):
     		return karareiksmesargr()
     sargrnew_data={'x':[0,karareiksmesargrriba()],'y':["sargr","sargr"]}
     if karareiksmesargrriba() > 0:
-    	r31.glyph.line_color = "blue"
+    	sp31.glyph.line_color = "blue"
     else:
-    	r31.glyph.line_color = "red"
+    	sp31.glyph.line_color = "red"
     sourcesargr.data.update(sargrnew_data)
     print(karareiksmesargr())
 slrrytas.on_change("value", sargr_update)
@@ -3798,9 +3796,9 @@ def sargp_update(attr, old, new):
     		return karareiksmesargp()
     sargpnew_data={'x':[0,karareiksmesargpriba()],'y':["sargp","sargp"]}
     if karareiksmesargpriba() > 0:
-    	r32.glyph.line_color = "blue"
+    	sp32.glyph.line_color = "blue"
     else:
-    	r32.glyph.line_color = "red"
+    	sp32.glyph.line_color = "red"
     sourcesargp.data.update(sargpnew_data)
     print(karareiksmesargp())
 slrpietus.on_change("value", sargp_update)
@@ -3845,9 +3843,9 @@ def sargv_update(attr, old, new):
     		return karareiksmesargv()
     sargvnew_data={'x':[0,karareiksmesargvriba()],'y':["sargv","sargv"]}
     if karareiksmesargvriba() > 0:
-    	r33.glyph.line_color = "blue"
+    	sp33.glyph.line_color = "blue"
     else:
-    	r33.glyph.line_color = "red"
+    	sp33.glyph.line_color = "red"
     sourcesargv.data.update(sargvnew_data)
     print(karareiksmesargv())
 slrvakaras.on_change("value", sargv_update)
@@ -3898,9 +3896,9 @@ def sklr_update(attr, old, new):
     		return karareiksmesklr()
     sklrnew_data={'x':[0,karareiksmesklrriba()],'y':["sklr","sklr"]}
     if karareiksmesklrriba() > 0:
-    	r34.glyph.line_color = "blue"
+    	sp34.glyph.line_color = "blue"
     else:
-    	r34.glyph.line_color = "red"
+    	sp34.glyph.line_color = "red"
     sourcesklr.data.update(sklrnew_data)
     print(karareiksmesklr())
 sekrytas.on_change("value", sklr_update)
@@ -3945,9 +3943,9 @@ def sklp_update(attr, old, new):
     		return karareiksmesklp()
     sklpnew_data={'x':[0,karareiksmesklpriba()],'y':["sklp","sklp"]}
     if karareiksmesklpriba() > 0:
-    	r35.glyph.line_color = "blue"
+    	sp35.glyph.line_color = "blue"
     else:
-    	r35.glyph.line_color = "red"
+    	sp35.glyph.line_color = "red"
     sourcesklp.data.update(sklpnew_data)
     print(karareiksmesklp())
 sekpietus.on_change("value", sklp_update)
@@ -3992,13 +3990,47 @@ def sklv_update(attr, old, new):
     		return karareiksmesklv()
     sklvnew_data={'x':[0,karareiksmesklvriba()],'y':["sklv","sklv"]}
     if karareiksmesklvriba() > 0:
-    	r36.glyph.line_color = "blue"
+    	sp36.glyph.line_color = "blue"
     else:
-    	r36.glyph.line_color = "red"
+    	sp36.glyph.line_color = "red"
     sourcesklv.data.update(sklvnew_data)
     print(karareiksmesklvriba())
 sekvakaras.on_change("value", sklv_update)
 
+
+# katogeninis/gliukogeninis
+# S-pHK
+# KD
+# t
+# P4
+# KpHi
+# D2-P4
+# U-šv
+# U-put
+
+sourcesphkr = ColumnDataSource(data=dict(x=[], y=[]))
+sourcesphkp = ColumnDataSource(data=dict(x=[], y=[]))
+sourcesphkv = ColumnDataSource(data=dict(x=[], y=[]))
+
+kg1 = p.line('x', 'y', source = sourcesphkr, line_color = "blue", line_width = 5)
+kg2 = p.line('x', 'y', source = sourcesphkp, line_color = "blue", line_width = 5)
+kg3 = p.line('x', 'y', source = sourcesphkv, line_color = "blue", line_width = 5)
+
+def sphkr_update(attr, old, new):
+    def sphkr():
+    	tank = float(strytas.value.replace(",", "."))
+    	vertetank = tank*1000-1000
+    	serug = float(serrytas.value.replace(",", "."))
+    	return serug+0.033333*vertetank-0.533333
+    sphkrnew_data={'x':[0,sphkr()],'y':["sphkr","sphkr"]}
+    if sphkr() > 0:
+    	kg1.glyph.line_color = "blue"
+    else:
+    	kg1.glyph.line_color = "red"
+    sourcesphkr.data.update(sphkrnew_data)
+    print(sphkr())
+strytas.on_change("value", sphkr_update)
+serrytas.on_change("value", sphkr_update)
 
 
 
