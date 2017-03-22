@@ -4017,6 +4017,14 @@ kg1 = p1.line('x', 'y', source = sourcesphkr, line_color = "blue", line_width = 
 kg2 = p1.line('x', 'y', source = sourcesphkp, line_color = "blue", line_width = 5)
 kg3 = p1.line('x', 'y', source = sourcesphkv, line_color = "blue", line_width = 5)
 
+# sourcekdr = ColumnDataSource(data=dict(x=[], y=[]))
+# sourcekdp = ColumnDataSource(data=dict(x=[], y=[]))
+# sourcekdv = ColumnDataSource(data=dict(x=[], y=[]))
+
+# kg4 = p1.line('x', 'y', source = sourcekdr, line_color = "blue", line_width = 5)
+# kg5 = p1.line('x', 'y', source = sourcekdp, line_color = "blue", line_width = 5)
+# kg6 = p1.line('x', 'y', source = sourcekdv, line_color = "blue", line_width = 5)
+
 def sphkr_update(attr, old, new):
     def sphkr():
     	tank = float(strytas.value.replace(",", "."))
@@ -4040,6 +4048,28 @@ def sphkr_update(attr, old, new):
 strytas.on_change("value", sphkr_update)
 serrytas.on_change("value", sphkr_update)
 
+def sphkp_update(attr, old, new):
+    def sphkp():
+    	tank = float(stpietus.value.replace(",", "."))
+    	vertetank = tank*1000-1000
+    	serug = float(serpietus.value.replace(",", "."))
+    	return serug+0.033333*vertetank-0.533333
+    def sphkpriba():
+    	if sphkp()>4:
+    		return 4
+    	elif sphkp()<-4:
+    		return -4
+    	else:
+    		return sphkp()
+    sphkpnew_data={'x':[0,sphkpriba()],'y':["sphkp","sphkp"]}
+    if sphkpriba() > 0:
+    	kg2.glyph.line_color = "blue"
+    else:
+    	kg2.glyph.line_color = "red"
+    sourcesphkp.data.update(sphkpnew_data)
+    print(sphkpriba())
+stpietus.on_change("value", sphkp_update)
+serpietus.on_change("value", sphkp_update)
 
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
