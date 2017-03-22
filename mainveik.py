@@ -607,8 +607,9 @@ factorssp = ["sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv
 "vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "bla2", "sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", 
 "bla3"]
 
-factorskg = ["sphkv", "kdv", "tv", "p4v", "kphiv", "d2p4v", "usvv", "uputv", "bla1", "sphkp", "kdp", "tp", "p4p", "kphip", "d2p4p", "usvp", "uputp", "bla2", "sphkr",
-"kdr", "tr", "p4r", "kphir", "d2p4r", "usvr", "uputr", "bla3"]
+factorskg = ["uputv", "usvv", "d2p4v", "kphiv", "p4v", "tv", "kdv", "sphkv", "bla1",
+			 "uputp", "usvp", "d2p4p", "kphip", "p4p", "tp", "kdp", "sphkp", "bla2",
+			 "uputr", "usvr", "d2p4r", "kphir", "p4r", "tr", "kdr", "sphkr", "bla3"]
 
 countsp = len(factorssp)
 countkg = len(factorskg)
@@ -4012,9 +4013,9 @@ sourcesphkr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesphkp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesphkv = ColumnDataSource(data=dict(x=[], y=[]))
 
-kg1 = p.line('x', 'y', source = sourcesphkr, line_color = "blue", line_width = 5)
-kg2 = p.line('x', 'y', source = sourcesphkp, line_color = "blue", line_width = 5)
-kg3 = p.line('x', 'y', source = sourcesphkv, line_color = "blue", line_width = 5)
+kg1 = p1.line('x', 'y', source = sourcesphkr, line_color = "blue", line_width = 5)
+kg2 = p1.line('x', 'y', source = sourcesphkp, line_color = "blue", line_width = 5)
+kg3 = p1.line('x', 'y', source = sourcesphkv, line_color = "blue", line_width = 5)
 
 def sphkr_update(attr, old, new):
     def sphkr():
@@ -4022,13 +4023,20 @@ def sphkr_update(attr, old, new):
     	vertetank = tank*1000-1000
     	serug = float(serrytas.value.replace(",", "."))
     	return serug+0.033333*vertetank-0.533333
-    sphkrnew_data={'x':[0,sphkr()],'y':["sphkr","sphkr"]}
-    if sphkr() > 0:
+    def sphkrriba():
+    	if sphkr()>4:
+    		return 4
+    	elif sphkr()<-4:
+    		return -4
+    	else:
+    		return sphkr()
+    sphkrnew_data={'x':[0,sphkrriba()],'y':["sphkr","sphkr"]}
+    if sphkrriba() > 0:
     	kg1.glyph.line_color = "blue"
     else:
     	kg1.glyph.line_color = "red"
     sourcesphkr.data.update(sphkrnew_data)
-    print(sphkr())
+    print(sphkrriba())
 strytas.on_change("value", sphkr_update)
 serrytas.on_change("value", sphkr_update)
 
