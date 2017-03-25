@@ -607,9 +607,9 @@ factorssp = ["sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv
 "vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "bla2", "sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", 
 "bla3"]
 
-factorskg = ["uputv", "usvv", "d2p4v", "kphiv", "p4v", "tv", "kdv", "sphkv", "bla1",
-			 "uputp", "usvp", "d2p4p", "kphip", "p4p", "tp", "kdp", "sphkp", "bla2",
-			 "uputr", "usvr", "d2p4r", "kphir", "p4r", "tr", "kdr", "sphkr", "bla3"]
+factorskg = ["uputv", "usvv", "d2p4v", "kphiv", "p4v", "tankv", "kdv", "sphkv", "bla1",
+			 "uputp", "usvp", "d2p4p", "kphip", "p4p", "tankp", "kdp", "sphkp", "bla2",
+			 "uputr", "usvr", "d2p4r", "kphir", "p4r", "tankr", "kdr", "sphkr", "bla3"]
 
 countsp = len(factorssp)
 countkg = len(factorskg)
@@ -4025,6 +4025,14 @@ kg4 = p1.line('x', 'y', source = sourcekdr, line_color = "blue", line_width = 5)
 kg5 = p1.line('x', 'y', source = sourcekdp, line_color = "blue", line_width = 5)
 kg6 = p1.line('x', 'y', source = sourcekdv, line_color = "blue", line_width = 5)
 
+sourcetankr = ColumnDataSource(data=dict(x=[], y=[]))
+sourcetankp = ColumnDataSource(data=dict(x=[], y=[]))
+sourcetankv = ColumnDataSource(data=dict(x=[], y=[]))
+
+kg7 = p1.line('x', 'y', source = sourcetankr, line_color = "blue", line_width = 5)
+kg8 = p1.line('x', 'y', source = sourcetankp, line_color = "blue", line_width = 5)
+kg9 = p1.line('x', 'y', source = sourcetankv, line_color = "blue", line_width = 5)
+
 def sphkr_update(attr, old, new):
     def sphkr():
     	tank = float(strytas.value.replace(",", "."))
@@ -4044,7 +4052,6 @@ def sphkr_update(attr, old, new):
     else:
     	kg1.glyph.line_color = "red"
     sourcesphkr.data.update(sphkrnew_data)
-    print(sphkrriba())
     return float(sphkrriba())
 strytas.on_change("value", sphkr_update)
 serrytas.on_change("value", sphkr_update)
@@ -4068,7 +4075,6 @@ def sphkp_update(attr, old, new):
     else:
     	kg2.glyph.line_color = "red"
     sourcesphkp.data.update(sphkpnew_data)
-    print(sphkpriba())
     return float(sphkpriba())
 stpietus.on_change("value", sphkp_update)
 serpietus.on_change("value", sphkp_update)
@@ -4092,7 +4098,6 @@ def sphkv_update(attr, old, new):
     else:
     	kg3.glyph.line_color = "red"
     sourcesphkv.data.update(sphkvnew_data)
-    print(sphkvriba())
     return float(sphkvriba())
 stvakaras.on_change("value", sphkv_update)
 servakaras.on_change("value", sphkv_update)
@@ -4102,13 +4107,13 @@ servakaras.on_change("value", sphkv_update)
 normakkd= 15
 pagrkd = 2
 def kdr_update(attr, old, new):
-    def normaakd():
+    def normaakdr():
     	if sphkr_update(attr, old, new)>=6.8 and sphkr_update(attr, old, new)<7:
     		return 16
     	else:
     		return 17
-    print(normaakd())
-    balankd = float((normaakd()+normakkd)/2)
+    print(normaakdr())
+    balankd = float((normaakdr()+normakkd)/2)
     def zenklaskdr():
     	def kryptiskdr():
     		if normakkd-balankd < 0:
@@ -4123,13 +4128,13 @@ def kdr_update(attr, old, new):
     print(zenklaskdr())
     def alfakdr():
     	if zenklaskdr()>0:
-    		return (1-pagrkd)/(balankd-normaakd())
+    		return (1-pagrkd)/(balankd-normaakdr())
     	else:
     		return (1-pagrkd)/(balankd-normakkd)
     print(alfakdr())
     def betakdr():
     	if zenklaskdr()>0:
-    		return (pagrkd*balankd-normaakd())/(balankd-normaakd())
+    		return (pagrkd*balankd-normaakdr())/(balankd-normaakdr())
     	else:
     		return (pagrkd*balankd-normakkd)/(balankd-normakkd)
     print(betakdr())
@@ -4156,13 +4161,13 @@ def kdr_update(attr, old, new):
 kdrytas.on_change("value", kdr_update)
 
 def kdp_update(attr, old, new):
-    def normaakd():
+    def normaakdp():
     	if sphkp_update(attr, old, new)>=6.8 and sphkp_update(attr, old, new)<7:
     		return 16
     	else:
     		return 17
-    print(normaakd())
-    balankd = float((normaakd()+normakkd)/2)
+    print(normaakdp())
+    balankd = float((normaakdp()+normakkd)/2)
     def zenklaskdp():
     	def kryptiskdp():
     		if normakkd-balankd < 0:
@@ -4177,13 +4182,13 @@ def kdp_update(attr, old, new):
     print(zenklaskdp())
     def alfakdp():
     	if zenklaskdp()>0:
-    		return (1-pagrkd)/(balankd-normaakd())
+    		return (1-pagrkd)/(balankd-normaakdp())
     	else:
     		return (1-pagrkd)/(balankd-normakkd)
     print(alfakdp())
     def betakdp():
     	if zenklaskdp()>0:
-    		return (pagrkd*balankd-normaakd())/(balankd-normaakd())
+    		return (pagrkd*balankd-normaakdp())/(balankd-normaakdp())
     	else:
     		return (pagrkd*balankd-normakkd)/(balankd-normakkd)
     print(betakdp())
@@ -4210,13 +4215,13 @@ def kdp_update(attr, old, new):
 kdpietus.on_change("value", kdp_update)
 
 def kdv_update(attr, old, new):
-    def normaakd():
+    def normaakdv():
     	if sphkv_update(attr, old, new)>=6.8 and sphkv_update(attr, old, new)<7:
     		return 16
     	else:
     		return 17
-    print(normaakd())
-    balankd = float((normaakd()+normakkd)/2)
+    print(normaakdv())
+    balankd = float((normaakdv()+normakkd)/2)
     def zenklaskdv():
     	def kryptiskdv():
     		if normakkd-balankd < 0:
@@ -4231,13 +4236,13 @@ def kdv_update(attr, old, new):
     print(zenklaskdv())
     def alfakdv():
     	if zenklaskdv()>0:
-    		return (1-pagrkd)/(balankd-normaakd())
+    		return (1-pagrkd)/(balankd-normaakdv())
     	else:
     		return (1-pagrkd)/(balankd-normakkd)
     print(alfakdv())
     def betakdv():
     	if zenklaskdv()>0:
-    		return (pagrkd*balankd-normaakd())/(balankd-normaakd())
+    		return (pagrkd*balankd-normaakdv())/(balankd-normaakdv())
     	else:
     		return (pagrkd*balankd-normakkd)/(balankd-normakkd)
     print(betakdv())
@@ -4263,6 +4268,73 @@ def kdv_update(attr, old, new):
     print(karareiksmekdv())
 kdvakaras.on_change("value", kdv_update)
 
+
+
+pagrtank = 1.2
+def tankr_update(attr, old, new):
+    def normaktankr():
+    	if sphkr_update(attr, old, new)<6.4:
+    		return 67
+    	elif sphkr_update(attr, old, new)>7.1:
+    		return 46
+    	else:
+    		return float(sphkr_update(attr, old, new)*(-30)+259)
+    print(normaktankr())
+    def normaatank():
+    	if sphkr_update(attr, old, new)<6.4:
+    		return 52
+    	elif sphkr_update(attr, old, new)>7.1:
+    		return 31
+    	else:
+    		return float(sphkr_update(attr, old, new)*(-30)+244)
+    print(normaatank())
+    balantank = float((normaatank()+normaktankr())/2)
+    print(balantank)
+    def zenklastankr():
+    	def kryptistankr():
+    		if normaktankr()-balantank < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertetank = float(ksirytas.value.replace(",", "."))
+    	if (vertetank-balantank)*kryptistankr()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklastankr())
+    def alfatankr():
+    	if zenklastankr()>0:
+    		return (1-pagrtank)/(balantank-normaatank())
+    	else:
+    		return (1-pagrtank)/(balantank-normaktankr())
+    print(alfatankr())
+    def betatankr():
+    	if zenklastankr()>0:
+    		return (pagrtank*balantank-normaatank())/(balantank-normaatank())
+    	else:
+    		return (pagrtank*balantank-normaktankr())/(balantank-normaktankr())
+    print(betatankr())
+    def karareiksmetankr():
+    	vertetank = float(ksirytas.value.replace(",", "."))
+    	if zenklastankr()<0:
+    		return zenklastankr()*math.log(float(alfatankr())*float(vertetank)+float(betatankr()), pagrtank)
+    	else:
+    		return zenklastankr()*math.log(float(alfatankr())*float(vertetank)+float(betatankr()), pagrtank)
+    def karareiksmetankrriba():
+    	if karareiksmetankr()>4:
+    		return 4
+    	elif karareiksmetankr()<-4:
+    		return -4
+    	else:
+    		return karareiksmetankr()
+    tankrnew_data={'x':[0,karareiksmetankrriba()],'y':["tankr","tankr"]}
+    if karareiksmetankrriba() > 0:
+    	kg7.glyph.line_color = "blue"
+    else:
+    	kg7.glyph.line_color = "red"
+    sourcetankr.data.update(tankrnew_data)
+    print(karareiksmetankr())
+ksirytas.on_change("value", tankr_update)
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
