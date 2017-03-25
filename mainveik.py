@@ -638,7 +638,7 @@ p1.text(x=[-4.7], y =[(countkg-(countkg-3)/3*2-2)], text = ["Pietūs"], text_fon
 p1.text(x=[-4.7], y =[(countkg-(countkg-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.56)
 p1.x_range.bounds = 'auto'
 p1.y_range.bounds = 'auto'
-p1.xaxis.axis_label = '<-Katogeninins|Gliukogeninis->'
+p1.xaxis.axis_label = '<-Katogeniniss|Gliukogeninis->'
 p1.yaxis.visible =False
 p1.xaxis.ticker = FixedTicker(ticks=[-4, -3, -2, -1, 1, 2, 3, 4])
 p1.xaxis.formatter = FuncTickFormatter(code="""
@@ -3292,7 +3292,7 @@ def vyzdr_update(attr, old, new):
     	if zenklasvyzdr()>0:
     		return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
     	else:
-    		return (pagrvyzd*balanvyzd-normakvyzd)/(balanvaso-normakvyzd)
+    		return (pagrvyzd*balanvyzd-normakvyzd)/(balanvyzd-normakvyzd)
     print(betavyzdr())
     def karareiksmevyzdr():
     	vertevyzd = float(vdrytas.value.replace(",", "."))
@@ -3339,7 +3339,7 @@ def vyzdp_update(attr, old, new):
     	if zenklasvyzdp()>0:
     		return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
     	else:
-    		return (pagrvyzd*balanvyzd-normakvyzd)/(balanvaso-normakvyzd)
+    		return (pagrvyzd*balanvyzd-normakvyzd)/(balanvyzd-normakvyzd)
     print(betavyzdp())
     def karareiksmevyzdp():
     	vertevyzd = float(vdpietus.value.replace(",", "."))
@@ -3386,7 +3386,7 @@ def vyzdv_update(attr, old, new):
     	if zenklasvyzdv()>0:
     		return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
     	else:
-    		return (pagrvyzd*balanvyzd-normakvyzd)/(balanvaso-normakvyzd)
+    		return (pagrvyzd*balanvyzd-normakvyzd)/(balanvyzd-normakvyzd)
     print(betavyzdv())
     def karareiksmevyzdv():
     	vertevyzd = float(vdvakaras.value.replace(",", "."))
@@ -3439,7 +3439,7 @@ def tremr_update(attr, old, new):
     	if zenklastremr()>0:
     		return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
     	else:
-    		return (pagrtrem*balantrem-normaktrem)/(balanvaso-normaktrem)
+    		return (pagrtrem*balantrem-normaktrem)/(balantrem-normaktrem)
     print(betatremr())
     def karareiksmetremr():
     	vertetrem = float(trrytas.value.replace(",", "."))
@@ -3486,7 +3486,7 @@ def tremp_update(attr, old, new):
     	if zenklastremp()>0:
     		return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
     	else:
-    		return (pagrtrem*balantrem-normaktrem)/(balanvaso-normaktrem)
+    		return (pagrtrem*balantrem-normaktrem)/(balantrem-normaktrem)
     print(betatremp())
     def karareiksmetremp():
     	vertetrem = float(trpietus.value.replace(",", "."))
@@ -3533,7 +3533,7 @@ def tremv_update(attr, old, new):
     	if zenklastremv()>0:
     		return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
     	else:
-    		return (pagrtrem*balantrem-normaktrem)/(balanvaso-normaktrem)
+    		return (pagrtrem*balantrem-normaktrem)/(balantrem-normaktrem)
     print(betatremv())
     def karareiksmetremv():
     	vertetrem = float(trvakaras.value.replace(",", "."))
@@ -3586,7 +3586,7 @@ def nosr_update(attr, old, new):
     	if zenklasnosr()>0:
     		return (pagrnos*balannos-normaanos)/(balannos-normaanos)
     	else:
-    		return (pagrnos*balannos-normaknos)/(balanvaso-normaknos)
+    		return (pagrnos*balannos-normaknos)/(balannos-normaknos)
     print(betanosr())
     def karareiksmenosr():
     	vertenos = float(surytas.value.replace(",", "."))
@@ -3633,7 +3633,7 @@ def nosp_update(attr, old, new):
     	if zenklasnosp()>0:
     		return (pagrnos*balannos-normaanos)/(balannos-normaanos)
     	else:
-    		return (pagrnos*balannos-normaknos)/(balanvaso-normaknos)
+    		return (pagrnos*balannos-normaknos)/(balannos-normaknos)
     print(betanosp())
     def karareiksmenosp():
     	vertenos = float(supietus.value.replace(",", "."))
@@ -3680,7 +3680,7 @@ def nosv_update(attr, old, new):
     	if zenklasnosv()>0:
     		return (pagrnos*balannos-normaanos)/(balannos-normaanos)
     	else:
-    		return (pagrnos*balannos-normaknos)/(balanvaso-normaknos)
+    		return (pagrnos*balannos-normaknos)/(balannos-normaknos)
     print(betanosv())
     def karareiksmenosv():
     	vertenos = float(suvakaras.value.replace(",", "."))
@@ -3733,7 +3733,7 @@ def sargr_update(attr, old, new):
     	if zenklassargr()>0:
     		return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
     	else:
-    		return (pagrsarg*balansarg-normaksarg)/(balanvaso-normaksarg)
+    		return (pagrsarg*balansarg-normaksarg)/(balansarg-normaksarg)
     print(betasargr())
     def karareiksmesargr():
     	vertesarg = float(slrrytas.value.replace(",", "."))
@@ -3780,7 +3780,7 @@ def sargp_update(attr, old, new):
     	if zenklassargp()>0:
     		return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
     	else:
-    		return (pagrsarg*balansarg-normaksarg)/(balanvaso-normaksarg)
+    		return (pagrsarg*balansarg-normaksarg)/(balansarg-normaksarg)
     print(betasargp())
     def karareiksmesargp():
     	vertesarg = float(slrpietus.value.replace(",", "."))
@@ -3827,7 +3827,7 @@ def sargv_update(attr, old, new):
     	if zenklassargv()>0:
     		return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
     	else:
-    		return (pagrsarg*balansarg-normaksarg)/(balanvaso-normaksarg)
+    		return (pagrsarg*balansarg-normaksarg)/(balansarg-normaksarg)
     print(betasargv())
     def karareiksmesargv():
     	vertesarg = float(slrvakaras.value.replace(",", "."))
@@ -3880,7 +3880,7 @@ def sklr_update(attr, old, new):
     	if zenklassklr()>0:
     		return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
     	else:
-    		return (pagrskl*balanskl-normakskl)/(balanvaso-normakskl)
+    		return (pagrskl*balanskl-normakskl)/(balanskl-normakskl)
     print(betasklr())
     def karareiksmesklr():
     	verteskl = float(sekrytas.value.replace(",", "."))
@@ -3927,7 +3927,7 @@ def sklp_update(attr, old, new):
     	if zenklassklp()>0:
     		return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
     	else:
-    		return (pagrskl*balanskl-normakskl)/(balanvaso-normakskl)
+    		return (pagrskl*balanskl-normakskl)/(balanvskl-normakskl)
     print(betasklp())
     def karareiksmesklp():
     	verteskl = float(sekpietus.value.replace(",", "."))
@@ -3974,7 +3974,7 @@ def sklv_update(attr, old, new):
     	if zenklassklv()>0:
     		return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
     	else:
-    		return (pagrskl*balanskl-normakskl)/(balanvaso-normakskl)
+    		return (pagrskl*balanskl-normakskl)/(balanskl-normakskl)
     print(betasklv())
     def karareiksmesklv():
     	verteskl = float(sekvakaras.value.replace(",", "."))
@@ -4017,13 +4017,13 @@ kg1 = p1.line('x', 'y', source = sourcesphkr, line_color = "blue", line_width = 
 kg2 = p1.line('x', 'y', source = sourcesphkp, line_color = "blue", line_width = 5)
 kg3 = p1.line('x', 'y', source = sourcesphkv, line_color = "blue", line_width = 5)
 
-# sourcekdr = ColumnDataSource(data=dict(x=[], y=[]))
-# sourcekdp = ColumnDataSource(data=dict(x=[], y=[]))
-# sourcekdv = ColumnDataSource(data=dict(x=[], y=[]))
+sourcekdr = ColumnDataSource(data=dict(x=[], y=[]))
+sourcekdp = ColumnDataSource(data=dict(x=[], y=[]))
+sourcekdv = ColumnDataSource(data=dict(x=[], y=[]))
 
-# kg4 = p1.line('x', 'y', source = sourcekdr, line_color = "blue", line_width = 5)
-# kg5 = p1.line('x', 'y', source = sourcekdp, line_color = "blue", line_width = 5)
-# kg6 = p1.line('x', 'y', source = sourcekdv, line_color = "blue", line_width = 5)
+kg4 = p1.line('x', 'y', source = sourcekdr, line_color = "blue", line_width = 5)
+kg5 = p1.line('x', 'y', source = sourcekdp, line_color = "blue", line_width = 5)
+kg6 = p1.line('x', 'y', source = sourcekdv, line_color = "blue", line_width = 5)
 
 def sphkr_update(attr, old, new):
     def sphkr():
@@ -4045,6 +4045,7 @@ def sphkr_update(attr, old, new):
     	kg1.glyph.line_color = "red"
     sourcesphkr.data.update(sphkrnew_data)
     print(sphkrriba())
+    return float(sphkrriba())
 strytas.on_change("value", sphkr_update)
 serrytas.on_change("value", sphkr_update)
 
@@ -4068,9 +4069,91 @@ def sphkp_update(attr, old, new):
     	kg2.glyph.line_color = "red"
     sourcesphkp.data.update(sphkpnew_data)
     print(sphkpriba())
+    return float(sphkpriba())
 stpietus.on_change("value", sphkp_update)
 serpietus.on_change("value", sphkp_update)
 
+def sphkv_update(attr, old, new):
+    def sphkv():
+    	tank = float(stvakaras.value.replace(",", "."))
+    	vertetank = tank*1000-1000
+    	serug = float(servakaras.value.replace(",", "."))
+    	return serug+0.033333*vertetank-0.533333
+    def sphkvriba():
+    	if sphkv()>4:
+    		return 4
+    	elif sphkv()<-4:
+    		return -4
+    	else:
+    		return sphkv()
+    sphkvnew_data={'x':[0,sphkvriba()],'y':["sphkv","sphkv"]}
+    if sphkvriba() > 0:
+    	kg3.glyph.line_color = "blue"
+    else:
+    	kg3.glyph.line_color = "red"
+    sourcesphkv.data.update(sphkvnew_data)
+    print(sphkvriba())
+    return float(sphkvriba())
+stvakaras.on_change("value", sphkv_update)
+servakaras.on_change("value", sphkv_update)
+
+
+
+normakkd= 15
+pagrkd = 2
+def kdr_update(attr, old, new):
+    def normaakd():
+    	if sphkr_update(attr, old, new)>=6.8 and sphkr_update(attr, old, new)<7:
+    		return 16
+    	else:
+    		return 17
+    print(normaakd())
+    balankd = float((normaakd()+normakkd)/2)
+    def zenklaskdr():
+    	def kryptiskdr():
+    		if normakkd-balankd < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertekd = float(kdrytas.value.replace(",", "."))
+    	if (vertekd-balankd)*kryptiskdr()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklaskdr())
+    def alfakdr():
+    	if zenklaskdr()>0:
+    		return (1-pagrkd)/(balankd-normaakd())
+    	else:
+    		return (1-pagrkd)/(balankd-normakkd)
+    print(alfakdr())
+    def betakdr():
+    	if zenklaskdr()>0:
+    		return (pagrkd*balankd-normaakd())/(balankd-normaakd())
+    	else:
+    		return (pagrkd*balankd-normakkd)/(balankd-normakkd)
+    print(betakdr())
+    def karareiksmekdr():
+    	vertekd = float(kdrytas.value.replace(",", "."))
+    	if zenklaskdr()<0:
+    		return zenklaskdr()*math.log(float(alfakdr())*float(vertekd)+float(betakdr()), pagrkd)
+    	else:
+    		return zenklaskdr()*math.log(float(alfakdr())*float(vertekd)+float(betakdr()), pagrkd)
+    def karareiksmekdrriba():
+    	if karareiksmekdr()>4:
+    		return 4
+    	elif karareiksmekdr()<-4:
+    		return -4
+    	else:
+    		return karareiksmekdr()
+    kdrnew_data={'x':[0,karareiksmekdrriba()],'y':["kdr","kdr"]}
+    if karareiksmekdrriba() > 0:
+    	kg4.glyph.line_color = "blue"
+    else:
+    	kg4.glyph.line_color = "red"
+    sourcekdr.data.update(kdrnew_data)
+    print(karareiksmekdr())
+kdrytas.on_change("value", kdr_update)
 
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
