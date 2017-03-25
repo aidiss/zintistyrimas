@@ -4155,6 +4155,115 @@ def kdr_update(attr, old, new):
     print(karareiksmekdr())
 kdrytas.on_change("value", kdr_update)
 
+def kdp_update(attr, old, new):
+    def normaakd():
+    	if sphkp_update(attr, old, new)>=6.8 and sphkp_update(attr, old, new)<7:
+    		return 16
+    	else:
+    		return 17
+    print(normaakd())
+    balankd = float((normaakd()+normakkd)/2)
+    def zenklaskdp():
+    	def kryptiskdp():
+    		if normakkd-balankd < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertekd = float(kdpietus.value.replace(",", "."))
+    	if (vertekd-balankd)*kryptiskdp()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklaskdp())
+    def alfakdp():
+    	if zenklaskdp()>0:
+    		return (1-pagrkd)/(balankd-normaakd())
+    	else:
+    		return (1-pagrkd)/(balankd-normakkd)
+    print(alfakdp())
+    def betakdp():
+    	if zenklaskdp()>0:
+    		return (pagrkd*balankd-normaakd())/(balankd-normaakd())
+    	else:
+    		return (pagrkd*balankd-normakkd)/(balankd-normakkd)
+    print(betakdp())
+    def karareiksmekdp():
+    	vertekd = float(kdpietus.value.replace(",", "."))
+    	if zenklaskdp()<0:
+    		return zenklaskdp()*math.log(float(alfakdp())*float(vertekd)+float(betakdp()), pagrkd)
+    	else:
+    		return zenklaskdp()*math.log(float(alfakdp())*float(vertekd)+float(betakdp()), pagrkd)
+    def karareiksmekdpriba():
+    	if karareiksmekdp()>4:
+    		return 4
+    	elif karareiksmekdp()<-4:
+    		return -4
+    	else:
+    		return karareiksmekdp()
+    kdpnew_data={'x':[0,karareiksmekdpriba()],'y':["kdp","kdp"]}
+    if karareiksmekdpriba() > 0:
+    	kg5.glyph.line_color = "blue"
+    else:
+    	kg5.glyph.line_color = "red"
+    sourcekdp.data.update(kdpnew_data)
+    print(karareiksmekdp())
+kdpietus.on_change("value", kdp_update)
+
+def kdv_update(attr, old, new):
+    def normaakd():
+    	if sphkv_update(attr, old, new)>=6.8 and sphkv_update(attr, old, new)<7:
+    		return 16
+    	else:
+    		return 17
+    print(normaakd())
+    balankd = float((normaakd()+normakkd)/2)
+    def zenklaskdv():
+    	def kryptiskdv():
+    		if normakkd-balankd < 0:
+    			return 1
+    		else:
+    			return-1
+    	vertekd = float(kdvakaras.value.replace(",", "."))
+    	if (vertekd-balankd)*kryptiskdv()>=0:
+    		return 1
+    	else:
+    		return -1
+    print(zenklaskdv())
+    def alfakdv():
+    	if zenklaskdv()>0:
+    		return (1-pagrkd)/(balankd-normaakd())
+    	else:
+    		return (1-pagrkd)/(balankd-normakkd)
+    print(alfakdv())
+    def betakdv():
+    	if zenklaskdv()>0:
+    		return (pagrkd*balankd-normaakd())/(balankd-normaakd())
+    	else:
+    		return (pagrkd*balankd-normakkd)/(balankd-normakkd)
+    print(betakdv())
+    def karareiksmekdv():
+    	vertekd = float(kdvakaras.value.replace(",", "."))
+    	if zenklaskdv()<0:
+    		return zenklaskdv()*math.log(float(alfakdv())*float(vertekd)+float(betakdv()), pagrkd)
+    	else:
+    		return zenklaskdv()*math.log(float(alfakdv())*float(vertekd)+float(betakdv()), pagrkd)
+    def karareiksmekdvriba():
+    	if karareiksmekdv()>4:
+    		return 4
+    	elif karareiksmekdv()<-4:
+    		return -4
+    	else:
+    		return karareiksmekdv()
+    kdvnew_data={'x':[0,karareiksmekdvriba()],'y':["kdv","kdv"]}
+    if karareiksmekdvriba() > 0:
+    	kg6.glyph.line_color = "blue"
+    else:
+    	kg6.glyph.line_color = "red"
+    sourcekdv.data.update(kdvnew_data)
+    print(karareiksmekdv())
+kdvakaras.on_change("value", kdv_update)
+
+
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
     [pav1()],
