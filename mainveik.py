@@ -9,6 +9,7 @@ from bokeh.models.ranges import DataRange1d, FactorRange
 import jinja2
 import math
 
+#ši dalis, tam, kad būtų galima reguliuoti TextInput width, nes yra nustatytas Bokeh TextInput default min width, kurio negalima mažinti per parametrų nurodymą. Pvz. "invard = TextInput(name = "vard", value="", title = "Vardas", width = 130" - per TextInput "name" galima nurodyti kažkokį vardą ir tada per html/css bk-root input[name$="vard"] galima nustatyti norimą width.
 curdoc().template =  jinja2.Template(source='''
 	<!DOCTYPE html>
 	<html lang="en">
@@ -29,303 +30,303 @@ curdoc().template =  jinja2.Template(source='''
             -webkit-font-smoothing: antialiased;
             text-rendering: optimizeLegibility;
           }
-          .bk-widget input[name$="vard"] {
+          .bk-root input[name$="vard"] {
              min-width: 50px !important;
              width: 100px !important;
            }
-           .bk-widget input[name$="pavard"] {
+           .bk-root input[name$="pavard"] {
              min-width: 50px !important;
              width: 130px !important;
            }
-           .bk-widget input[name$="amz"] {
+           .bk-root input[name$="amz"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas1"] {
+           .bk-root input[name$="rytas1"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus1"] {
+           .bk-root input[name$="pietus1"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras1"] {
+           .bk-root input[name$="vakaras1"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas2"] {
+           .bk-root input[name$="rytas2"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus2"] {
+           .bk-root input[name$="pietus2"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras2"] {
+           .bk-root input[name$="vakaras2"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas3"] {
+           .bk-root input[name$="rytas3"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus3"] {
+           .bk-root input[name$="pietus3"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras3"] {
+           .bk-root input[name$="vakaras3"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas4"] {
+           .bk-root input[name$="rytas4"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus4"] {
+           .bk-root input[name$="pietus4"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras4"] {
+           .bk-root input[name$="vakaras4"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas5"] {
+           .bk-root input[name$="rytas5"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus5"] {
+           .bk-root input[name$="pietus5"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras5"] {
+           .bk-root input[name$="vakaras5"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas6"] {
+           .bk-root input[name$="rytas6"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus6"] {
+           .bk-root input[name$="pietus6"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras6"] {
+           .bk-root input[name$="vakaras6"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas7"] {
+           .bk-root input[name$="rytas7"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus7"] {
+           .bk-root input[name$="pietus7"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras7"] {
+           .bk-root input[name$="vakaras7"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas8"] {
+           .bk-root input[name$="rytas8"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus8"] {
+           .bk-root input[name$="pietus8"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras8"] {
+           .bk-root input[name$="vakaras8"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas9"] {
+           .bk-root input[name$="rytas9"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus9"] {
+           .bk-root input[name$="pietus9"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras9"] {
+           .bk-root input[name$="vakaras9"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas10"] {
+           .bk-root input[name$="rytas10"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus10"] {
+           .bk-root input[name$="pietus10"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras10"] {
+           .bk-root input[name$="vakaras10"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas11"] {
+           .bk-root input[name$="rytas11"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus11"] {
+           .bk-root input[name$="pietus11"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras11"] {
+           .bk-root input[name$="vakaras11"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas12"] {
+           .bk-root input[name$="rytas12"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus12"] {
+           .bk-root input[name$="pietus12"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras12"] {
+           .bk-root input[name$="vakaras12"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas13"] {
+           .bk-root input[name$="rytas13"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus13"] {
+           .bk-root input[name$="pietus13"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras13"] {
+           .bk-root input[name$="vakaras13"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas14"] {
+           .bk-root input[name$="rytas14"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus14"] {
+           .bk-root input[name$="pietus14"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras14"] {
+           .bk-root input[name$="vakaras14"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas15"] {
+           .bk-root input[name$="rytas15"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus15"] {
+           .bk-root input[name$="pietus15"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras15"] {
+           .bk-root input[name$="vakaras15"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas16"] {
+           .bk-root input[name$="rytas16"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus16"] {
+           .bk-root input[name$="pietus16"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras16"] {
+           .bk-root input[name$="vakaras16"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas17"] {
+           .bk-root input[name$="rytas17"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus17"] {
+           .bk-root input[name$="pietus17"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras17"] {
+           .bk-root input[name$="vakaras17"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas18"] {
+           .bk-root input[name$="rytas18"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus18"] {
+           .bk-root input[name$="pietus18"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras18"] {
+           .bk-root input[name$="vakaras18"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas19"] {
+           .bk-root input[name$="rytas19"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus19"] {
+           .bk-root input[name$="pietus19"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras19"] {
+           .bk-root input[name$="vakaras19"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas20"] {
+           .bk-root input[name$="rytas20"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus20"] {
+           .bk-root input[name$="pietus20"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras20"] {
+           .bk-root input[name$="vakaras20"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas21"] {
+           .bk-root input[name$="rytas21"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus21"] {
+           .bk-root input[name$="pietus21"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras21"] {
+           .bk-root input[name$="vakaras21"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas22"] {
+           .bk-root input[name$="rytas22"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus22"] {
+           .bk-root input[name$="pietus22"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras22"] {
+           .bk-root input[name$="vakaras22"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas23"] {
+           .bk-root input[name$="rytas23"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus23"] {
+           .bk-root input[name$="pietus23"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras23"] {
+           .bk-root input[name$="vakaras23"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="rytas24"] {
+           .bk-root input[name$="rytas24"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="pietus24"] {
+           .bk-root input[name$="pietus24"] {
              min-width: 25px !important;
              width: 25px !important;
            }
-           .bk-widget input[name$="vakaras24"] {
+           .bk-root input[name$="vakaras24"] {
              min-width: 25px !important;
              width: 25px !important;
            }
@@ -603,17 +604,23 @@ th {
 </html>
 ''')
 
-factorssp = ["sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "ppv", "sdv", "ps1v", "bla1", "sklp", "sargp", "nosp", "tremp", "vyzdp",
-"vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "bla2", "sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", 
-"bla3"]
+#categorical tipo duomenys, kad būtų galima atvaziduoti grafike, atitinaktys kiekvieno tyrimo ryto, pietų ir vakaro  (kol kas tik 2)
+factorssp = ["sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "ppv", "sdv", "ps1v", "bla1",
+			 "sklp", "sargp", "nosp", "tremp", "vyzdp", "vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "bla2",
+			 "sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", "bla3"]
 
 factorskg = ["uputv", "usvv", "d2p4v", "kphiv", "p4v", "tankv", "kdv", "sphkv", "bla1",
 			 "uputp", "usvp", "d2p4p", "kphip", "p4p", "tankp", "kdp", "sphkp", "bla2",
 			 "uputr", "usvr", "d2p4r", "kphir", "p4r", "tankr", "kdr", "sphkr", "bla3"]
 
+#skaičiuojam atitinakamų categorical skaičių, kad 
+#1) automatiškai grafike nusistatytų ribos tarp ryto, pietų ir vakaro
+#2) tekstas atskiriantis jį
+#3) y categorical axis range'as
 countsp = len(factorssp)
 countkg = len(factorskg)
 
+#grafikai
 p = figure(x_range = [-5, 5], y_range=FactorRange(factors=factorssp), height = 350, tools= "")
 p.title.text = "<-Katabolizmas|Anabolizmas->"
 p.title.align = "center"
@@ -726,6 +733,9 @@ p1.xaxis.formatter = FuncTickFormatter(code="""
 #     return data[tick]
 # """)
 
+
+
+#kiekvieno grafiko spalvinės anotacijos, atskiriant rytą, pietus ir vakarą
 p.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
 p.add_layout(Span(location=1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=-1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
@@ -751,6 +761,8 @@ p1.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_d
 p1.add_layout(BoxAnnotation(top = (countkg-3)/3+1, fill_alpha=0.1, fill_color='black'))
 p1.add_layout(BoxAnnotation(bottom = (countkg-3)/3+1, top = (countkg-3)/3*2+2, fill_alpha=0.1, fill_color='cyan'))
 p1.add_layout(BoxAnnotation(top=countkg, fill_alpha=0.1, fill_color='yellow'))
+
+
 
 # p2.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
 # p2.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
@@ -818,13 +830,13 @@ p1.add_layout(BoxAnnotation(top=countkg, fill_alpha=0.1, fill_color='yellow'))
 # p6.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
 
 
-# create some widgets
+# viso tyrimo tekstinė dalis TextInput laukeliais, kuriuose reikia suvesti duomenis.
 def protok():
     return Div(text="""<br><b>ORGANIZMO BŪKLĖS TYRIMO PROTOKOLAS</b>""", width=330, height=None)
 
 invard = TextInput(name = "vard", value="", title = "Vardas", width = 130)
 inpavard = TextInput(name = "pavard", value="", title = "Pavardė", width = 160)
-lytis = Select(title="Lytis:", value="", options=["Vyras", "Moteris"], width = 110)
+lytis = Select(title="Lytis:", value="", options=["Vyras", "Moteris"], width = 130)
 inamz = TextInput(name = "amz", value="", title = "Amžius", width = 80) 
 
 def tikslus():
@@ -2030,6 +2042,7 @@ ksipietus = TextInput(name = "pietus24", value="", title = "Pietūs", width = 60
 ksivakaras = TextInput(name = "vakaras24", value="", title = "Vakaras", width = 60)
 
 
+#ši dalims tam, kad suvedus duomenis į atitinakmą TextInput, grafike atsispindėtų
 # simpatinis/parasimpatinis
 sourceps1r = ColumnDataSource(data=dict(x=[], y=[]))
 sourceps1p = ColumnDataSource(data=dict(x=[], y=[]))
@@ -2127,6 +2140,7 @@ sp34 = p.line('x', 'y', source = sourcesklr, line_color = "blue", line_width = 5
 sp35 = p.line('x', 'y', source = sourcesklp, line_color = "blue", line_width = 5)
 sp36 = p.line('x', 'y', source = sourcesklv, line_color = "blue", line_width = 5)
 
+#kiekvineo grafiko kiekvieno TextInput duomenų skaičiavimo formulė, kuri nėra vienoda visiems ir kuri gali įtraukti ir kitų TextInput duomenis t.y. kiekvienam categorical yra nubrėžiama linija pagal skaičavimo formulę.
 normakps1 = -2
 normaaps1 = 0
 balanps1 = (normaaps1+normakps1)/2
@@ -4336,6 +4350,7 @@ def tankr_update(attr, old, new):
     print(karareiksmetankr())
 ksirytas.on_change("value", tankr_update)
 
+#visi elementai sujungiami į norimą layout
 l = layout([protok(), invard , inpavard, lytis, inamz],
     [tikslus()], 
     [pav1()],
