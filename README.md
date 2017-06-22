@@ -4,3 +4,4 @@ Reikalavimai (žiūrėti requirements.txt):
 Python==3.5.3
 Jinja2==2.9.6
 bokeh==0.12.6
+Paleidimas(komandinė eilutė): bokeh serve --show mainveik.py.
