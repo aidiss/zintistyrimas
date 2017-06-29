@@ -15,11 +15,11 @@ curdoc().template = jinja2.Template(source='''
 	<!DOCTYPE html>
 	<html lang="en">
 	<head>
-		<meta charset="utf-8">
-		<title>{{ title if title else "Bokeh Plot" }} </title>
-		{{ bokeh_css }}
-		{{ bokeh_js }}
-		<style>
+	<meta charset="utf-8">
+	<title>{{ title if title else "Bokeh Plot" }} </title>
+	{{ bokeh_css }}
+	{{ bokeh_js }}
+	<style>
 		@import url(https://fonts.googleapis.com/css?family=Noto+Sans);
 		body {
 			width: 90%;
@@ -622,13 +622,17 @@ curdoc().template = jinja2.Template(source='''
 
 
 # categorical tipo duomenys, kad būtų galima atvaziduoti grafike, atitinaktys kiekvieno tyrimo ryto, pietų ir vakaro (kol kas tik 2)
-factorssp = ["sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "ppv", "sdv", "ps1v", "bla1",
-			 "sklp", "sargp", "nosp", "tremp", "vyzdp", "vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "bla2",
-			 "sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", "bla3"]
+factorssp = [
+			"sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "ppv", "sdv", "ps1v", "bla1",
+			"sklp", "sargp", "nosp", "tremp", "vyzdp", "vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "bla2",
+			"sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", "bla3"
+			]
 
-factorskg = ["uputv", "usvv", "d2p4v", "kphiv", "p4v", "tankv", "kdv", "sphkv", "bla1",
-			 "uputp", "usvp", "d2p4p", "kphip", "p4p", "tankp", "kdp", "sphkp", "bla2",
-			 "uputr", "usvr", "d2p4r", "kphir", "p4r", "tankr", "kdr", "sphkr", "bla3"]
+factorskg = [
+			"uputv", "usvv", "d2p4v", "kphiv", "p4v", "tankv", "kdv", "sphkv", "bla1",
+			"uputp", "usvp", "d2p4p", "kphip", "p4p", "tankp", "kdp", "sphkp", "bla2",
+			"uputr", "usvr", "d2p4r", "kphir", "p4r", "tankr", "kdr", "sphkr", "bla3"
+			]
 
 # skaičiuojam atitinakamų categorical skaičių, kad
 # 1) automatiškai grafike nusistatytų ribos tarp ryto, pietų ir vakaro
@@ -688,7 +692,7 @@ p1.xaxis.formatter = FuncTickFormatter(code="""
 # p3 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
 # p3.title.text = " < -Katabolizmas|Anabolizmas->"
 # p3.title.align = "center"
-# p3.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
+# p3.text(x=[-62], y =[(count-12)], text = ["Rytas"], tesxt_font_size='10pt', text_font_style = "bold", angle = 1.55)
 # p3.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
 # p3.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
 # p3.x_range.bounds = 'auto'
@@ -758,7 +762,7 @@ p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='
 p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
 p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
 p.add_layout(BoxAnnotation(top=(countsp-3)/3+1, fill_alpha=0.1, fill_color='black'))
-p.add_layout(BoxAnnotation(bottom =(countsp-3)/3+1, top=(countsp-3)/3*2+2, fill_alpha=0.1, fill_color='cyan'))
+p.add_layout(BoxAnnotation(bottom=(countsp-3)/3+1, top=(countsp-3)/3*2+2, fill_alpha=0.1, fill_color='cyan'))
 p.add_layout(BoxAnnotation(top=countsp, fill_alpha=0.1, fill_color='yellow'))
 
 p1.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
@@ -1411,12 +1415,12 @@ tiriamasis nusiraminęs. Tada su dūžiu paleidžiamas chronometras ir 15 sekund
 skaičiuojami širdies dūžiai. Jei laikas baigėsi anksčiau, nei įvyko paskutinis širdies dūžis,
 prie pilnų dūžių skaičiaus dar pridedama 0,5. Gautą skaičių padauginus iš 4 gauname
 pulsą sėdint, šis skaičius įrašomas eilutėje 5.1 „Pulsas sėdint, P sėd “.
-<br> < font size="1"><i>Pvz: Jei chronometras rodo 0:14, o Jūs mintyse esate suskaičiavęs 18 dūžių, 19-tą dūžį
+<br><font size="1"><i>Pvz: Jei chronometras rodo 0:14, o Jūs mintyse esate suskaičiavęs 18 dūžių, 19-tą dūžį
 pajuntate tuo pat metu, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašote
 skaičių „19”, o pulsas bus P sėd = 4×19 = 76.
 Jei chronometras rodo 0:14, o Jūs mintyse esate suskaičiavęs 18 dūžių, tačiau 19-tą dūžį
 pajuntate po to, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašote skaičių
-„18,5”, o pulsas bus P sėd = 4×18,5 = 74.</i> < /font>
+„18,5”, o pulsas bus P sėd = 4×18,5 = 74.</i></font>
 		</div>
 	</div>
 </div>
@@ -1906,7 +1910,7 @@ kriterijus:
 <br>• jei laikas baigėsi tiriamajam iškvėpinėjant, tai +0,75
 <br>Gautą skaičių padauginus iš 2 gaunamas kvėpavimo dažnis, jis įrašomas eilutėje 6.1
 „Kvėpavimo dažnis, KD“.
-<br> < font size="1"><i>Pavyzdžiui: Chronometras rodo 0:29, o Jūs mintyse esate suskaičiavęs 7 pilnų ciklų.
+<br><font size="1"><i>Pavyzdžiui: Chronometras rodo 0:29, o Jūs mintyse esate suskaičiavęs 7 pilnų ciklų.
 Chronometras parodo 0:30, kai tiriamais įkvėpinėja, tuomet į juodraštį užsirašote skaičių
 „7,25”, ir kvėpavimo dažnis bus KD = 2×7,25 = 14,5.
 Chronometras parodo 0:30, kai tiriamais yra pilnai įkvėpęs, tuomet į juodraštį užsirašote
@@ -1945,12 +1949,12 @@ tiriamasis nusiraminęs. Tada su dūžiu paleidžiamas chronometras ir 15 sekund
 skaičiuojami širdies dūžiai. Jei laikas baigėsi anksčiau, nei įvyko paskutinis širdies dūžis,
 prie pilnų dūžių skaičiaus dar pridedama 0,5. Gautą skaičių padauginus iš 4 gauname
 pulsą gulint, šis skaičius įrašomas eilutėje 5.1 „Pulsas gulint, P sėd “.
-<br> < font size="1"><i>Pvz: Jei chronometras rodo 0:14, o Jūs mintyse esate suskaičiavęs 18 dūžių, 19-tą dūžį
+<br><font size="1"><i>Pvz: Jei chronometras rodo 0:14, o Jūs mintyse esate suskaičiavęs 18 dūžių, 19-tą dūžį
 pajuntate tuo pat metu, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašote
 skaičių „19”, o pulsas bus P gul = 4×19 = 76.
 Jei chronometras rodo 0:14, o Jūs mintyse esate suskaičiavęs 18 dūžių, tačiau 19-tą dūžį
 pajuntate po to, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašote skaičių
-„18,5”, o pulsas bus P gul = 4×18,5 = 74.</i> < /font>
+„18,5”, o pulsas bus P gul = 4×18,5 = 74.</i></font>
 		</div>
 	</div>
 </div>
@@ -2113,9 +2117,9 @@ rodomas laikas sekundėmis įrašomas eilutėje 6.2 „Kvėpavimo sulaikymas įk
 	""", width=250)
 
 
-ksirytas = TextInput(name= "rytas24", value="", title="Rytas", width=60)
-ksipietus = TextInput(name= "pietus24", value="", title="Pietūs", width=60)
-ksivakaras = TextInput(name= "vakaras24", value="", title="Vakaras", width=60)
+ksirytas = TextInput(name="rytas24", value="", title="Rytas", width=60)
+ksipietus = TextInput(name="pietus24", value="", title="Pietūs", width=60)
+ksivakaras = TextInput(name="vakaras24", value="", title="Vakaras", width=60)
 
 # ši dalims tam, kad suvedus duomenis į atitinakmą TextInput, grafike atsispindėtų
 # simpatinis/parasimpatinis
@@ -2237,18 +2241,21 @@ def ps1r_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasps1r())
+
 	def alfaps1r():
 		if zenklasps1r() > 0:
 			return (1-pagrps1)/(balanps1-normaaps1)
 		else:
 			return (1-pagrps1)/(balanps1-normakps1)
 	print(alfaps1r())
+
 	def betaps1r():
 		if zenklasps1r() > 0:
 			return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
 		else:
 			return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
 	print(betaps1r())
+
 	def karareiksmeps1r():
 		psr = float(psrytas.value.replace(",", "."))
 		pgr = float(pgrytas.value.replace(",", "."))
@@ -2257,6 +2264,7 @@ def ps1r_update(attr, old, new):
 			return zenklasps1r()*math.log(alfaps1r()*verteps1+betaps1r(), pagrps1)
 		else:
 			return zenklasps1r()*math.log(alfaps1r()*verteps1+betaps1r(), pagrps1)
+
 	def karareiksmeps1rriba():
 		if karareiksmeps1r() > 4:
 			return 4
@@ -2264,7 +2272,7 @@ def ps1r_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmeps1r()
-	ps1rnew_data={'x': [0,karareiksmeps1rriba()],'y': ["ps1r","ps1r"]}
+	ps1rnew_data = {'x': [0, karareiksmeps1rriba()], 'y': ["ps1r", "ps1r"]}
 	if karareiksmeps1rriba() > 0:
 		sp1.glyph.line_color = "blue"
 	else:
@@ -2290,18 +2298,21 @@ def ps1p_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasps1p())
+
 	def alfaps1p():
 		if zenklasps1p() > 0:
-			return (1-pagrps1) /(balanps1-normaaps1)
+			return (1-pagrps1)/(balanps1-normaaps1)
 		else:
 			return (1-pagrps1)/(balanps1-normakps1)
 	print(alfaps1p())
+
 	def betaps1p():
 		if zenklasps1p() > 0:
 			return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
 		else:
 			return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
 	print(betaps1p())
+
 	def karareiksmeps1p():
 		psp = float(pspietus.value.replace(",", "."))
 		pgp = float(pgpietus.value.replace(",", "."))
@@ -2310,6 +2321,7 @@ def ps1p_update(attr, old, new):
 			return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
 		else:
 			return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
+
 	def karareiksmeps1priba():
 		if karareiksmeps1p() > 4:
 			return 4
@@ -2317,7 +2329,7 @@ def ps1p_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmeps1p()
-	ps1pnew_data={'x': [0,karareiksmeps1priba()],'y': ["ps1p","ps1p"]}
+	ps1pnew_data = {'x': [0, karareiksmeps1priba()], 'y': ["ps1p", "ps1p"]}
 	sourceps1p.data.update(ps1pnew_data)
 	if karareiksmeps1priba() > 0:
 		sp2.glyph.line_color = "blue"
@@ -2343,18 +2355,21 @@ def ps1v_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasps1v())
+
 	def alfaps1v():
 		if zenklasps1v() > 0:
 			return (1-pagrps1)/(balanps1-normaaps1)
 		else:
 			return (1-pagrps1)/(balanps1-normakps1)
 	print(alfaps1v())
+
 	def betaps1v():
 		if zenklasps1v() > 0:
 			return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
 		else:
 			return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
 	print(betaps1v())
+
 	def karareiksmeps1v():
 		psv = float(psvakaras.value.replace(",", "."))
 		pgv = float(pgvakaras.value.replace(",", "."))
@@ -2363,6 +2378,7 @@ def ps1v_update(attr, old, new):
 			return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
 		else:
 			return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
+
 	def karareiksmeps1vriba():
 		if karareiksmeps1v() > 4:
 			return 4
@@ -2370,7 +2386,7 @@ def ps1v_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmeps1v()
-	ps1vnew_data={'x': [0,karareiksmeps1vriba()],'y': ["ps1v","ps1v"]}
+	ps1vnew_data = {'x': [0, karareiksmeps1vriba()], 'y': ["ps1v", "ps1v"]}
 	if karareiksmeps1vriba() > 0:
 		sp3.glyph.line_color = "blue"
 	else:
@@ -2404,18 +2420,21 @@ def sdr_update(attr, old, new):
 		else:
 			return -1
 	print(zenklassdr())
+
 	def alfasdr():
 		if zenklassdr() > 0:
 			return (1-pagrsd)/(balansd-normaasd)
 		else:
 			return (1-pagrsd)/(balansd-normaksd)
 	print(alfasdr())
+
 	def betasdr():
 		if zenklassdr() > 0:
 			return (pagrsd*balansd-normaasd)/(balansd-normaasd)
 		else:
 			return (pagrsd*balansd-normaksd)/(balansd-normaksd)
 	print(betasdr())
+
 	def karareiksmesdr():
 		skar = float(skarytas.value.replace(",", "."))
 		skgr = float(skgrytas.value.replace(",", "."))
@@ -2426,6 +2445,7 @@ def sdr_update(attr, old, new):
 			return zenklassdr()*math.log(alfasdr()*vertesd+betasdr(), pagrsd)
 		else:
 			return zenklassdr()*math.log(alfasdr()*vertesd+betasdr(), pagrsd)
+
 	def karareiksmesdrriba():
 		if karareiksmesdr() > 4:
 			return 4
@@ -2433,7 +2453,7 @@ def sdr_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmesdr()
-	sdrnew_data={'x': [0,karareiksmesdrriba()],'y': ["sdr","sdr"]}
+	sdrnew_data = {'x': [0, karareiksmesdrriba()], 'y': ["sdr", "sdr"]}
 	if karareiksmesdrriba() > 0:
 		sp4.glyph.line_color = "blue"
 	else:
@@ -2463,18 +2483,21 @@ def sdp_update(attr, old, new):
 		else:
 			return -1
 	print(zenklassdp())
+
 	def alfasdp():
 		if zenklassdp() > 0:
 			return (1-pagrsd)/(balansd-normaasd)
 		else:
 			return (1-pagrsd)/(balansd-normaksd)
 	print(alfasdp())
+
 	def betasdp():
 		if zenklassdp() > 0:
 			return (pagrsd*balansd-normaasd)/(balansd-normaasd)
 		else:
 			return (pagrsd*balansd-normaksd)/(balansd-normaksd)
 	print(betasdp())
+
 	def karareiksmesdp():
 		skap = float(skapietus.value.replace(",", "."))
 		skgp = float(skgpietus.value.replace(",", "."))
@@ -2485,6 +2508,7 @@ def sdp_update(attr, old, new):
 			return zenklassdp()*math.log(alfasdp()*vertesd+betasdp(), pagrsd)
 		else:
 			return zenklassdp()*math.log(alfasdp()*vertesd+betasdp(), pagrsd)
+
 	def karareiksmesdpriba():
 		if karareiksmesdp() > 4:
 			return 4
@@ -2492,7 +2516,7 @@ def sdp_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmesdp()
-	sdpnew_data={'x': [0,karareiksmesdpriba()],'y': ["sdp","sdp"]}
+	sdpnew_data = {'x': [0, karareiksmesdpriba()], 'y': ["sdp", "sdp"]}
 	if karareiksmesdpriba() > 0:
 		sp5.glyph.line_color = "blue"
 	else:
@@ -2522,18 +2546,21 @@ def sdv_update(attr, old, new):
 		else:
 			return -1
 	print(zenklassdv())
+
 	def alfasdv():
 		if zenklassdv() > 0:
 			return (1-pagrsd)/(balansd-normaasd)
 		else:
 			return (1-pagrsd)/(balansd-normaksd)
 	print(alfasdv())
+
 	def betasdv():
 		if zenklassdv() > 0:
 			return (pagrsd*balansd-normaasd)/(balansd-normaasd)
 		else:
 			return (pagrsd*balansd-normaksd)/(balansd-normaksd)
 	print(betasdv())
+
 	def karareiksmesdv():
 		skav = float(skavakaras.value.replace(",", "."))
 		skgv = float(skgvakaras.value.replace(",", "."))
@@ -2544,6 +2571,7 @@ def sdv_update(attr, old, new):
 			return zenklassdv()*math.log(alfasdv()*vertesd+betasdv(), pagrsd)
 		else:
 			return zenklassdv()*math.log(alfasdv()*vertesd+betasdv(), pagrsd)
+
 	def karareiksmesdvriba():
 		if karareiksmesdv() > 4:
 			return 4
@@ -2551,7 +2579,7 @@ def sdv_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmesdv()
-	sdvnew_data={'x': [0,karareiksmesdvriba()],'y': ["sdv","sdv"]}
+	sdvnew_data = {'x': [0, karareiksmesdvriba()], 'y': ["sdv", "sdv"]}
 	if karareiksmesdvriba() > 0:
 		sp6.glyph.line_color = "blue"
 	else:
@@ -2589,18 +2617,21 @@ def ppr_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasppr())
+
 	def alfappr():
 		if zenklasppr() > 0:
 			return (1-pagrpp)/(balanpp-normaapp)
 		else:
 			return (1-pagrpp)/(balanpp-normakpp)
 	print(alfappr())
+
 	def betappr():
 		if zenklasppr() > 0:
 			return (pagrpp*balanpp-normaapp)/(balanpp-normaapp)
 		else:
 			return (pagrpp*balanpp-normakpp)/(balanpp-normakpp)
 	print(betappr())
+
 	def karareiksmeppr():
 		pgr = float(pgrytas.value.replace(",", "."))
 		par = float(parytas.value.replace(",", "."))
@@ -2613,6 +2644,7 @@ def ppr_update(attr, old, new):
 			return zenklasppr()*math.log(alfappr()*vertepp+betappr(), pagrpp)
 		else:
 			return zenklasppr()*math.log(alfappr()*vertepp+betappr(), pagrpp)
+
 	def karareiksmepprriba():
 		if karareiksmeppr() > 4:
 			return 4
@@ -2620,7 +2652,7 @@ def ppr_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmeppr()
-	pprnew_data={'x': [0,karareiksmepprriba()],'y': ["ppr","ppr"]}
+	pprnew_data = {'x': [0, karareiksmepprriba()], 'y': ["ppr", "ppr"]}
 	if karareiksmepprriba() > 0:
 		sp7.glyph.line_color = "blue"
 	else:
@@ -2652,18 +2684,21 @@ def ppp_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasppp())
+
 	def alfappp():
 		if zenklasppp() > 0:
 			return (1-pagrpp)/(balanpp-normaapp)
 		else:
 			return (1-pagrpp)/(balanpp-normakpp)
 	print(alfappp())
+
 	def betappp():
 		if zenklasppp() > 0:
 			return (pagrpp*balanpp-normaapp)/(balanpp-normaapp)
 		else:
 			return (pagrpp*balanpp-normakpp)/(balanpp-normakpp)
 	print(betappp())
+
 	def karareiksmeppp():
 		pgp = float(pgpietus.value.replace(",", "."))
 		pap = float(papietus.value.replace(",", "."))
@@ -2676,6 +2711,7 @@ def ppp_update(attr, old, new):
 			return zenklasppp()*math.log(alfappp()*vertepp+betappp(), pagrpp)
 		else:
 			return zenklasppp()*math.log(alfappp()*vertepp+betappp(), pagrpp)
+
 	def karareiksmepppriba():
 		if karareiksmeppp() > 4:
 			return 4
@@ -2683,7 +2719,7 @@ def ppp_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmeppp()
-	pppnew_data={'x': [0,karareiksmepppriba()],'y': ["ppp","ppp"]}
+	pppnew_data = {'x': [0, karareiksmepppriba()], 'y': ["ppp", "ppp"]}
 	if karareiksmepppriba() > 0:
 		sp8.glyph.line_color = "blue"
 	else:
@@ -2715,18 +2751,21 @@ def ppv_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasppv())
+
 	def alfappv():
 		if zenklasppv() > 0:
 			return (1-pagrpp)/(balanpp-normaapp)
 		else:
 			return (1-pagrpp)/(balanpp-normakpp)
 	print(alfappv())
+
 	def betappv():
 		if zenklasppv() > 0:
 			return (pagrpp*balanpp-normaapp)/(balanpp-normaapp)
 		else:
 			return (pagrpp*balanpp-normakpp)/(balanpp-normakpp)
 	print(betappv())
+
 	def karareiksmeppv():
 		pgv = float(pgvakaras.value.replace(",", "."))
 		pav = float(pavakaras.value.replace(",", "."))
@@ -2739,6 +2778,7 @@ def ppv_update(attr, old, new):
 			return zenklasppv()*math.log(alfappv()*vertepp+betappv(), pagrpp)
 		else:
 			return zenklasppv()*math.log(alfappv()*vertepp+betappv(), pagrpp)
+
 	def karareiksmeppvriba():
 		if karareiksmeppv() > 4:
 			return 4
@@ -2746,7 +2786,7 @@ def ppv_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmeppv()
-	ppvnew_data={'x': [0,karareiksmeppvriba()],'y': ["ppv","ppv"]}
+	ppvnew_data = {'x': [0, karareiksmeppvriba()], 'y': ["ppv", "ppv"]}
 	if karareiksmeppvriba() > 0:
 		sp9.glyph.line_color = "blue"
 	else:
@@ -2780,18 +2820,21 @@ def krir_update(attr, old, new):
 		else:
 			return -1
 	print(zenklaskrir())
+
 	def alfakrir():
 		if zenklaskrir() > 0:
 			return (1-pagrkri)/(balankri-normaakri)
 		else:
 			return (1-pagrkri)/(balankri-normakkri)
 	print(alfakrir())
+
 	def betakrir():
 		if zenklaskrir() > 0:
 			return (pagrkri*balankri-normaakri)/(balankri-normaakri)
 		else:
 			return (pagrkri*balankri-normakkri)/(balankri-normakkri)
 	print(betakrir())
+
 	def karareiksmekrir():
 		psr = float(psrytas.value.replace(",", "."))
 		kdr = float(kdrytas.value.replace(",", "."))
@@ -2800,6 +2843,7 @@ def krir_update(attr, old, new):
 			return zenklaskrir()*math.log(alfakrir()*vertekri+betakrir(), pagrkri)
 		else:
 			return zenklaskrir()*math.log(alfakrir()*vertekri+betakrir(), pagrkri)
+
 	def karareiksmekrirriba():
 		if karareiksmekrir() > 4:
 			return 4
@@ -2807,7 +2851,7 @@ def krir_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmekrir()
-	krirnew_data={'x': [0,karareiksmekrirriba()],'y': ["krir","krir"]}
+	krirnew_data = {'x': [0, karareiksmekrirriba()], 'y': ["krir", "krir"]}
 	if karareiksmekrirriba() > 0:
 		sp10.glyph.line_color = "blue"
 	else:
@@ -2833,18 +2877,21 @@ def krip_update(attr, old, new):
 		else:
 			return -1
 	print(zenklaskrip())
+
 	def alfakrip():
 		if zenklaskrip() > 0:
 			return (1-pagrkri)/(balankri-normaakri)
 		else:
 			return (1-pagrkri)/(balankri-normakkri)
 	print(alfakrip())
+
 	def betakrip():
 		if zenklaskrip() > 0:
 			return (pagrkri*balankri-normaakri)/(balankri-normaakri)
 		else:
 			return (pagrkri*balankri-normakkri)/(balankri-normakkri)
 	print(betakrip())
+
 	def karareiksmekrip():
 		psp = float(pspietus.value.replace(",", "."))
 		kdp = float(kdpietus.value.replace(",", "."))
@@ -2853,6 +2900,7 @@ def krip_update(attr, old, new):
 			return zenklaskrip()*math.log(alfakrip()*vertekri+betakrip(), pagrkri)
 		else:
 			return zenklaskrip()*math.log(alfakrip()*vertekri+betakrip(), pagrkri)
+
 	def karareiksmekripriba():
 		if karareiksmekrip() > 4:
 			return 4
@@ -2860,7 +2908,7 @@ def krip_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmekrip()
-	kripnew_data={'x': [0,karareiksmekripriba()],'y': ["krip","krip"]}
+	kripnew_data = {'x': [0, karareiksmekripriba()], 'y': ["krip", "krip"]}
 	if karareiksmekripriba() > 0:
 		sp11.glyph.line_color = "blue"
 	else:
@@ -2886,18 +2934,21 @@ def kriv_update(attr, old, new):
 		else:
 			return -1
 	print(zenklaskriv())
+
 	def alfakriv():
 		if zenklaskriv() > 0:
 			return (1-pagrkri)/(balankri-normaakri)
 		else:
 			return (1-pagrkri)/(balankri-normakkri)
 	print(alfakriv())
+
 	def betakriv():
 		if zenklaskriv() > 0:
 			return (pagrkri*balankri-normaakri)/(balankri-normaakri)
 		else:
 			return (pagrkri*balankri-normakkri)/(balankri-normakkri)
 	print(betakriv())
+
 	def karareiksmekriv():
 		psv = float(psvakaras.value.replace(",", "."))
 		kdv = float(kdvakaras.value.replace(",", "."))
@@ -2906,6 +2957,7 @@ def kriv_update(attr, old, new):
 			return zenklaskriv()*math.log(alfakriv()*vertekri+betakriv(), pagrkri)
 		else:
 			return zenklaskriv()*math.log(alfakriv()*vertekri+betakriv(), pagrkri)
+
 	def karareiksmekrivriba():
 		if karareiksmekriv() > 4:
 			return 4
@@ -2913,7 +2965,7 @@ def kriv_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmekriv()
-	krivnew_data={'x': [0,karareiksmekrivriba()],'y': ["kriv","kriv"]}
+	krivnew_data = {'x': [0, karareiksmekrivriba()], 'y': ["kriv", "kriv"]}
 	if karareiksmekrivriba() > 0:
 		sp12.glyph.line_color = "blue"
 	else:
@@ -2943,24 +2995,28 @@ def tempr_update(attr, old, new):
 		else:
 			return -1
 	print(zenklastempr())
+
 	def alfatempr():
 		if zenklastempr() > 0:
 			return (1-pagrtemp)/(balantemp-normaatemp)
 		else:
 			return (1-pagrtemp)/(balantemp-normaktemp)
 	print(alfatempr())
+
 	def betatempr():
 		if zenklastempr() > 0:
 			return (pagrtemp*balantemp-normaatemp)/(balantemp-normaatemp)
 		else:
 			return (pagrtemp*balantemp-normaktemp)/(balantemp-normaktemp)
 	print(betatempr())
+
 	def karareiksmetempr():
 		vertetemp = float(ktrytas.value.replace(",", "."))
 		if zenklastempr() < 0:
 			return zenklastempr()*math.log(float(alfatempr())*float(vertetemp)+float(betatempr()), pagrtemp)
 		else:
 			return zenklastempr()*math.log(float(alfatempr())*float(vertetemp)+float(betatempr()), pagrtemp)
+
 	def karareiksmetemprriba():
 		if karareiksmetempr() > 4:
 			return 4
@@ -2968,7 +3024,7 @@ def tempr_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmetempr()
-	temprnew_data={'x': [0,karareiksmetemprriba()],'y': ["tempr","tempr"]}
+	temprnew_data = {'x': [0, karareiksmetemprriba()], 'y': ["tempr", "tempr"]}
 	if karareiksmetemprriba() > 0:
 		sp13.glyph.line_color = "blue"
 	else:
@@ -2991,24 +3047,28 @@ def tempp_update(attr, old, new):
 		else:
 			return -1
 	print(zenklastempp())
+
 	def alfatempp():
 		if zenklastempp() > 0:
 			return (1-pagrtemp)/(balantemp-normaatemp)
 		else:
 			return (1-pagrtemp)/(balantemp-normaktemp)
 	print(alfatempp())
+
 	def betatempp():
 		if zenklastempp() > 0:
 			return (pagrtemp*balantemp-normaatemp)/(balantemp-normaatemp)
 		else:
 			return (pagrtemp*balantemp-normaktemp)/(balantemp-normaktemp)
 	print(betatempp())
+
 	def karareiksmetempp():
 		vertetemp = float(ktpietus.value.replace(",", "."))
 		if zenklastempp() < 0:
 			return zenklastempp()*math.log(float(alfatempp())*float(vertetemp)+float(betatempp()), pagrtemp)
 		else:
 			return zenklastempp()*math.log(float(alfatempp())*float(vertetemp)+float(betatempp()), pagrtemp)
+
 	def karareiksmetemppriba():
 		if karareiksmetempp() > 4:
 			return 4
@@ -3016,7 +3076,7 @@ def tempp_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmetempp()
-	temppnew_data={'x': [0,karareiksmetemppriba()],'y': ["tempp","tempp"]}
+	temppnew_data = {'x': [0, karareiksmetemppriba()], 'y': ["tempp", "tempp"]}
 	if karareiksmetemppriba() > 0:
 		sp14.glyph.line_color = "blue"
 	else:
@@ -3039,24 +3099,28 @@ def tempv_update(attr, old, new):
 		else:
 			return -1
 	print(zenklastempv())
+
 	def alfatempv():
 		if zenklastempv() > 0:
 			return (1-pagrtemp)/(balantemp-normaatemp)
 		else:
 			return (1-pagrtemp)/(balantemp-normaktemp)
 	print(alfatempv())
+
 	def betatempv():
 		if zenklastempv() > 0:
 			return (pagrtemp*balantemp-normaatemp)/(balantemp-normaatemp)
 		else:
 			return (pagrtemp*balantemp-normaktemp)/(balantemp-normaktemp)
 	print(betatempv())
+
 	def karareiksmetempv():
 		vertetemp = float(ktvakaras.value.replace(",", "."))
 		if zenklastempv() < 0:
 			return zenklastempv()*math.log(float(alfatempv())*float(vertetemp)+float(betatempv()), pagrtemp)
 		else:
 			return zenklastempv()*math.log(float(alfatempv())*float(vertetemp)+float(betatempv()), pagrtemp)
+
 	def karareiksmetempvriba():
 		if karareiksmetempv() > 4:
 			return 4
@@ -3064,7 +3128,7 @@ def tempv_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmetempv()
-	tempvnew_data={'x': [0,karareiksmetempvriba()],'y': ["tempv","tempv"]}
+	tempvnew_data = {'x': [0, karareiksmetempvriba()], 'y': ["tempv", "tempv"]}
 	if karareiksmetempvriba() > 0:
 		sp15.glyph.line_color = "blue"
 	else:
@@ -3093,24 +3157,28 @@ def dermr_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasdermr())
+
 	def alfadermr():
 		if zenklasdermr() > 0:
 			return (1-pagrderm)/(balanderm-normaaderm)
 		else:
 			return (1-pagrderm)/(balanderm-normakderm)
 	print(alfadermr())
+
 	def betadermr():
 		if zenklasdermr() > 0:
 			return (pagrderm*balanderm-normaaderm)/(balanderm-normaaderm)
 		else:
 			return (pagrderm*balanderm-normakderm)/(balanderm-normakderm)
 	print(betadermr())
+
 	def karareiksmedermr():
 		vertederm = float(drrytas.value.replace(",", "."))
 		if zenklasdermr() < 0:
 			return zenklasdermr()*math.log(float(alfadermr())*float(vertederm)+float(betadermr()), pagrderm)
 		else:
 			return zenklasdermr()*math.log(float(alfadermr())*float(vertederm)+float(betadermr()), pagrderm)
+
 	def karareiksmedermrriba():
 		if karareiksmedermr() > 4:
 			return 4
@@ -3118,7 +3186,7 @@ def dermr_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmedermr()
-	dermrnew_data={'x': [0,karareiksmedermrriba()],'y': ["dermr","dermr"]}
+	dermrnew_data = {'x': [0, karareiksmedermrriba()], 'y': ["dermr", "dermr"]}
 	if karareiksmedermrriba() > 0:
 		sp16.glyph.line_color = "blue"
 	else:
@@ -3141,24 +3209,28 @@ def dermp_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasdermp())
+
 	def alfadermp():
 		if zenklasdermp() > 0:
 			return (1-pagrderm)/(balanderm-normaaderm)
 		else:
 			return (1-pagrderm)/(balanderm-normakderm)
 	print(alfadermp())
+
 	def betadermp():
 		if zenklasdermp() > 0:
 			return (pagrderm*balanderm-normaaderm)/(balanderm-normaaderm)
 		else:
 			return (pagrderm*balanderm-normakderm)/(balanderm-normakderm)
 	print(betadermp())
+
 	def karareiksmedermp():
 		vertederm = float(drpietus.value.replace(",", "."))
 		if zenklasdermp() < 0:
 			return zenklasdermp()*math.log(float(alfadermp())*float(vertederm)+float(betadermp()), pagrderm)
 		else:
 			return zenklasdermp()*math.log(float(alfadermp())*float(vertederm)+float(betadermp()), pagrderm)
+
 	def karareiksmedermpriba():
 		if karareiksmedermp() > 4:
 			return 4
@@ -3166,7 +3238,7 @@ def dermp_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmedermp()
-	dermpnew_data={'x': [0,karareiksmedermpriba()],'y': ["dermp","dermp"]}
+	dermpnew_data = {'x': [0, karareiksmedermpriba()], 'y': ["dermp", "dermp"]}
 	if karareiksmedermpriba() > 0:
 		sp17.glyph.line_color = "blue"
 	else:
@@ -3189,24 +3261,28 @@ def dermv_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasdermv())
+
 	def alfadermv():
 		if zenklasdermv() > 0:
 			return (1-pagrderm)/(balanderm-normaaderm)
 		else:
 			return (1-pagrderm)/(balanderm-normakderm)
 	print(alfadermv())
+
 	def betadermv():
 		if zenklasdermv() > 0:
 			return (pagrderm*balanderm-normaaderm)/(balanderm-normaaderm)
 		else:
 			return (pagrderm*balanderm-normakderm)/(balanderm-normakderm)
 	print(betadermv())
+
 	def karareiksmedermv():
 		vertederm = float(drvakaras.value.replace(",", "."))
 		if zenklasdermv() < 0:
 			return zenklasdermv()*math.log(float(alfadermv())*float(vertederm)+float(betadermv()), pagrderm)
 		else:
 			return zenklasdermv()*math.log(float(alfadermv())*float(vertederm)+float(betadermv()), pagrderm)
+
 	def karareiksmedermvriba():
 		if karareiksmedermv() > 4:
 			return 4
@@ -3214,7 +3290,7 @@ def dermv_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmedermv()
-	dermvnew_data={'x': [0,karareiksmedermvriba()],'y': ["dermv","dermv"]}
+	dermvnew_data = {'x': [0, karareiksmedermvriba()], 'y': ["dermv", "dermv"]}
 	if karareiksmedermvriba() > 0:
 		sp18.glyph.line_color = "blue"
 	else:
@@ -3243,24 +3319,28 @@ def vasor_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasvasor())
+
 	def alfavasor():
 		if zenklasvasor() > 0:
 			return (1-pagrvaso)/(balanvaso-normaavaso)
 		else:
 			return (1-pagrvaso)/(balanvaso-normakvaso)
 	print(alfavasor())
+
 	def betavasor():
 		if zenklasvasor() > 0:
 			return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
 		else:
 			return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
 	print(betavasor())
+
 	def karareiksmevasor():
 		vertevaso = float(vrrytas.value.replace(",", "."))
 		if zenklasvasor() < 0:
 			return zenklasvasor()*math.log(float(alfavasor())*float(vertevaso)+float(betavasor()), pagrvaso)
 		else:
 			return zenklasvasor()*math.log(float(alfavasor())*float(vertevaso)+float(betavasor()), pagrvaso)
+
 	def karareiksmevasorriba():
 		if karareiksmevasor() > 4:
 			return 4
@@ -3268,7 +3348,7 @@ def vasor_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmevasor()
-	vasornew_data={'x': [0,karareiksmevasorriba()],'y': ["vasor","vasor"]}
+	vasornew_data = {'x': [0, karareiksmevasorriba()], 'y': ["vasor", "vasor"]}
 	if karareiksmevasorriba() > 0:
 		sp19.glyph.line_color = "blue"
 	else:
@@ -3291,24 +3371,28 @@ def vasop_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasvasop())
+
 	def alfavasop():
 		if zenklasvasop() > 0:
 			return (1-pagrvaso)/(balanvaso-normaavaso)
 		else:
 			return (1-pagrvaso)/(balanvaso-normakvaso)
 	print(alfavasop())
+
 	def betavasop():
 		if zenklasvasop() > 0:
 			return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
 		else:
 			return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
 	print(betavasop())
+
 	def karareiksmevasop():
 		vertevaso = float(vrpietus.value.replace(",", "."))
 		if zenklasvasop() < 0:
 			return zenklasvasop()*math.log(float(alfavasop())*float(vertevaso)+float(betavasop()), pagrvaso)
 		else:
 			return zenklasvasop()*math.log(float(alfavasop())*float(vertevaso)+float(betavasop()), pagrvaso)
+
 	def karareiksmevasopriba():
 		if karareiksmevasop() > 4:
 			return 4
@@ -3316,7 +3400,7 @@ def vasop_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmevasop()
-	vasopnew_data={'x': [0,karareiksmevasopriba()],'y': ["vasop","vasop"]}
+	vasopnew_data = {'x': [0, karareiksmevasopriba()], 'y': ["vasop", "vasop"]}
 	if karareiksmevasopriba() > 0:
 		sp20.glyph.line_color = "blue"
 	else:
@@ -3339,24 +3423,28 @@ def vasov_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasvasov())
+
 	def alfavasov():
 		if zenklasvasov() > 0:
 			return (1-pagrvaso)/(balanvaso-normaavaso)
 		else:
 			return (1-pagrvaso)/(balanvaso-normakvaso)
 	print(alfavasov())
+
 	def betavasov():
 		if zenklasvasov() > 0:
 			return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
 		else:
 			return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
 	print(betavasov())
+
 	def karareiksmevasov():
 		vertevaso = float(vrvakaras.value.replace(",", "."))
 		if zenklasvasov() < 0:
 			return zenklasvasov()*math.log(float(alfavasov())*float(vertevaso)+float(betavasov()), pagrvaso)
 		else:
 			return zenklasvasov()*math.log(float(alfavasov())*float(vertevaso)+float(betavasov()), pagrvaso)
+
 	def karareiksmevasovriba():
 		if karareiksmevasov() > 4:
 			return 4
@@ -3364,7 +3452,7 @@ def vasov_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmevasov()
-	vasovnew_data={'x': [0,karareiksmevasovriba()],'y': ["vasov","vasov"]}
+	vasovnew_data = {'x': [0, karareiksmevasovriba()], 'y': ["vasov", "vasov"]}
 	if karareiksmevasovriba() > 0:
 		sp21.glyph.line_color = "blue"
 	else:
@@ -3393,24 +3481,28 @@ def vyzdr_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasvyzdr())
+
 	def alfavyzdr():
 		if zenklasvyzdr() > 0:
 			return (1-pagrvyzd)/(balanvyzd-normaavyzd)
 		else:
 			return (1-pagrvyzd)/(balanvyzd-normakvyzd)
 	print(alfavyzdr())
+
 	def betavyzdr():
 		if zenklasvyzdr() > 0:
 			return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
 		else:
 			return (pagrvyzd*balanvyzd-normakvyzd)/(balanvyzd-normakvyzd)
 	print(betavyzdr())
+
 	def karareiksmevyzdr():
 		vertevyzd = float(vdrytas.value.replace(",", "."))
 		if zenklasvyzdr() < 0:
 			return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertevyzd)+float(betavyzdr()), pagrvyzd)
 		else:
 			return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertevyzd)+float(betavyzdr()), pagrvyzd)
+
 	def karareiksmevyzdrriba():
 		if karareiksmevyzdr() > 4:
 			return 4
@@ -3418,7 +3510,7 @@ def vyzdr_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmevyzdr()
-	vyzdrnew_data={'x': [0,karareiksmevyzdrriba()],'y': ["vyzdr","vyzdr"]}
+	vyzdrnew_data = {'x': [0, karareiksmevyzdrriba()], 'y': ["vyzdr", "vyzdr"]}
 	if karareiksmevyzdrriba() > 0:
 		sp22.glyph.line_color = "blue"
 	else:
@@ -3441,24 +3533,28 @@ def vyzdp_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasvyzdp())
+
 	def alfavyzdp():
 		if zenklasvyzdp() > 0:
 			return (1-pagrvyzd)/(balanvyzd-normaavyzd)
 		else:
 			return (1-pagrvyzd)/(balanvyzd-normakvyzd)
 	print(alfavyzdp())
+
 	def betavyzdp():
 		if zenklasvyzdp() > 0:
 			return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
 		else:
 			return (pagrvyzd*balanvyzd-normakvyzd)/(balanvyzd-normakvyzd)
 	print(betavyzdp())
+
 	def karareiksmevyzdp():
 		vertevyzd = float(vdpietus.value.replace(",", "."))
 		if zenklasvyzdp() < 0:
 			return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertevyzd)+float(betavyzdp()), pagrvyzd)
 		else:
 			return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertevyzd)+float(betavyzdp()), pagrvyzd)
+
 	def karareiksmevyzdpriba():
 		if karareiksmevyzdp() > 4:
 			return 4
@@ -3466,7 +3562,7 @@ def vyzdp_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmevyzdp()
-	vyzdpnew_data={'x': [0,karareiksmevyzdpriba()],'y': ["vyzdp","vyzdp"]}
+	vyzdpnew_data = {'x': [0, karareiksmevyzdpriba()], 'y': ["vyzdp", "vyzdp"]}
 	if karareiksmevyzdpriba() > 0:
 		sp23.glyph.line_color = "blue"
 	else:
@@ -3489,24 +3585,28 @@ def vyzdv_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasvyzdv())
+
 	def alfavyzdv():
 		if zenklasvyzdv() > 0:
 			return (1-pagrvyzd)/(balanvyzd-normaavyzd)
 		else:
 			return (1-pagrvyzd)/(balanvyzd-normakvyzd)
 	print(alfavyzdv())
+
 	def betavyzdv():
 		if zenklasvyzdv() > 0:
 			return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
 		else:
 			return (pagrvyzd*balanvyzd-normakvyzd)/(balanvyzd-normakvyzd)
 	print(betavyzdv())
+
 	def karareiksmevyzdv():
 		vertevyzd = float(vdvakaras.value.replace(",", "."))
 		if zenklasvyzdv() < 0:
 			return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertevyzd)+float(betavyzdv()), pagrvyzd)
 		else:
 			return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertevyzd)+float(betavyzdv()), pagrvyzd)
+
 	def karareiksmevyzdvriba():
 		if karareiksmevyzdv() > 4:
 			return 4
@@ -3514,7 +3614,7 @@ def vyzdv_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmevyzdv()
-	vyzdvnew_data={'x': [0,karareiksmevyzdvriba()],'y': ["vyzdv","vyzdv"]}
+	vyzdvnew_data = {'x': [0, karareiksmevyzdvriba()], 'y': ["vyzdv", "vyzdv"]}
 	if karareiksmevyzdvriba() > 0:
 		sp24.glyph.line_color = "blue"
 	else:
@@ -3543,24 +3643,28 @@ def tremr_update(attr, old, new):
 		else:
 			return -1
 	print(zenklastremr())
+
 	def alfatremr():
 		if zenklastremr() > 0:
 			return (1-pagrtrem)/(balantrem-normaatrem)
 		else:
 			return (1-pagrtrem)/(balantrem-normaktrem)
 	print(alfatremr())
+
 	def betatremr():
 		if zenklastremr() > 0:
 			return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
 		else:
 			return (pagrtrem*balantrem-normaktrem)/(balantrem-normaktrem)
 	print(betatremr())
+
 	def karareiksmetremr():
 		vertetrem = float(trrytas.value.replace(",", "."))
 		if zenklastremr() < 0:
 			return zenklastremr()*math.log(float(alfatremr())*float(vertetrem)+float(betatremr()), pagrtrem)
 		else:
 			return zenklastremr()*math.log(float(alfatremr())*float(vertetrem)+float(betatremr()), pagrtrem)
+
 	def karareiksmetremrriba():
 		if karareiksmetremr() > 4:
 			return 4
@@ -3568,7 +3672,7 @@ def tremr_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmetremr()
-	tremrnew_data={'x': [0,karareiksmetremrriba()],'y': ["tremr","tremr"]}
+	tremrnew_data = {'x': [0, karareiksmetremrriba()], 'y': ["tremr", "tremr"]}
 	if karareiksmetremrriba() > 0:
 		sp25.glyph.line_color = "blue"
 	else:
@@ -3591,24 +3695,28 @@ def tremp_update(attr, old, new):
 		else:
 			return -1
 	print(zenklastremp())
+
 	def alfatremp():
 		if zenklastremp() > 0:
 			return (1-pagrtrem)/(balantrem-normaatrem)
 		else:
 			return (1-pagrtrem)/(balantrem-normaktrem)
 	print(alfatremp())
+
 	def betatremp():
 		if zenklastremp() > 0:
 			return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
 		else:
 			return (pagrtrem*balantrem-normaktrem)/(balantrem-normaktrem)
 	print(betatremp())
+
 	def karareiksmetremp():
 		vertetrem = float(trpietus.value.replace(",", "."))
 		if zenklastremp() < 0:
 			return zenklastremp()*math.log(float(alfatremp())*float(vertetrem)+float(betatremp()), pagrtrem)
 		else:
 			return zenklastremp()*math.log(float(alfatremp())*float(vertetrem)+float(betatremp()), pagrtrem)
+
 	def karareiksmetrempriba():
 		if karareiksmetremp() > 4:
 			return 4
@@ -3616,7 +3724,7 @@ def tremp_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmetremp()
-	trempnew_data={'x': [0,karareiksmetrempriba()],'y': ["tremp","tremp"]}
+	trempnew_data = {'x': [0, karareiksmetrempriba()], 'y': ["tremp", "tremp"]}
 	if karareiksmetrempriba() > 0:
 		sp26.glyph.line_color = "blue"
 	else:
@@ -3639,24 +3747,28 @@ def tremv_update(attr, old, new):
 		else:
 			return -1
 	print(zenklastremv())
+
 	def alfatremv():
 		if zenklastremv() > 0:
 			return (1-pagrtrem)/(balantrem-normaatrem)
 		else:
 			return (1-pagrtrem)/(balantrem-normaktrem)
 	print(alfatremv())
+
 	def betatremv():
 		if zenklastremv() > 0:
 			return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
 		else:
 			return (pagrtrem*balantrem-normaktrem)/(balantrem-normaktrem)
 	print(betatremv())
+
 	def karareiksmetremv():
 		vertetrem = float(trvakaras.value.replace(",", "."))
 		if zenklastremv() < 0:
 			return zenklastremv()*math.log(float(alfatremv())*float(vertetrem)+float(betatremv()), pagrtrem)
 		else:
 			return zenklastremv()*math.log(float(alfatremv())*float(vertetrem)+float(betatremv()), pagrtrem)
+
 	def karareiksmetremvriba():
 		if karareiksmetremv() > 4:
 			return 4
@@ -3664,7 +3776,7 @@ def tremv_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmetremv()
-	tremvnew_data={'x': [0,karareiksmetremvriba()],'y': ["tremv","tremv"]}
+	tremvnew_data = {'x': [0, karareiksmetremvriba()], 'y': ["tremv", "tremv"]}
 	if karareiksmetremvriba() > 0:
 		sp27.glyph.line_color = "blue"
 	else:
@@ -3693,24 +3805,28 @@ def nosr_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasnosr())
+
 	def alfanosr():
 		if zenklasnosr() > 0:
 			return (1-pagrnos)/(balannos-normaanos)
 		else:
 			return (1-pagrnos)/(balannos-normaknos)
 	print(alfanosr())
+
 	def betanosr():
 		if zenklasnosr() > 0:
 			return (pagrnos*balannos-normaanos)/(balannos-normaanos)
 		else:
 			return (pagrnos*balannos-normaknos)/(balannos-normaknos)
 	print(betanosr())
+
 	def karareiksmenosr():
 		vertenos = float(surytas.value.replace(",", "."))
 		if zenklasnosr() < 0:
 			return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
 		else:
 			return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
+
 	def karareiksmenosrriba():
 		if karareiksmenosr() > 4:
 			return 4
@@ -3718,7 +3834,7 @@ def nosr_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmenosr()
-	nosrnew_data={'x': [0,karareiksmenosrriba()],'y': ["nosr","nosr"]}
+	nosrnew_data = {'x': [0, karareiksmenosrriba()], 'y': ["nosr", "nosr"]}
 	if karareiksmenosrriba() > 0:
 		sp28.glyph.line_color = "blue"
 	else:
@@ -3741,24 +3857,28 @@ def nosp_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasnosp())
+
 	def alfanosp():
 		if zenklasnosp() > 0:
 			return (1-pagrnos)/(balannos-normaanos)
 		else:
 			return (1-pagrnos)/(balannos-normaknos)
 	print(alfanosp())
+
 	def betanosp():
 		if zenklasnosp() > 0:
 			return (pagrnos*balannos-normaanos)/(balannos-normaanos)
 		else:
 			return (pagrnos*balannos-normaknos)/(balannos-normaknos)
 	print(betanosp())
+
 	def karareiksmenosp():
 		vertenos = float(supietus.value.replace(",", "."))
 		if zenklasnosp() < 0:
 			return zenklasnosp()*math.log(float(alfanosp())*float(vertenos)+float(betanosp()), pagrnos)
 		else:
 			return zenklasnosp()*math.log(float(alfanosp())*float(vertenos)+float(betanosp()), pagrnos)
+
 	def karareiksmenospriba():
 		if karareiksmenosp() > 4:
 			return 4
@@ -3766,7 +3886,7 @@ def nosp_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmenosp()
-	nospnew_data={'x': [0,karareiksmenospriba()],'y': ["nosp","nosp"]}
+	nospnew_data = {'x': [0, karareiksmenospriba()], 'y': ["nosp", "nosp"]}
 	if karareiksmenospriba() > 0:
 		sp29.glyph.line_color = "blue"
 	else:
@@ -3789,24 +3909,28 @@ def nosv_update(attr, old, new):
 		else:
 			return -1
 	print(zenklasnosv())
+
 	def alfanosv():
 		if zenklasnosv() > 0:
 			return (1-pagrnos)/(balannos-normaanos)
 		else:
 			return (1-pagrnos)/(balannos-normaknos)
 	print(alfanosv())
+
 	def betanosv():
 		if zenklasnosv() > 0:
 			return (pagrnos*balannos-normaanos)/(balannos-normaanos)
 		else:
 			return (pagrnos*balannos-normaknos)/(balannos-normaknos)
 	print(betanosv())
+
 	def karareiksmenosv():
 		vertenos = float(suvakaras.value.replace(",", "."))
 		if zenklasnosv() < 0:
 			return zenklasnosv()*math.log(float(alfanosv())*float(vertenos)+float(betanosv()), pagrnos)
 		else:
 			return zenklasnosv()*math.log(float(alfanosv())*float(vertenos)+float(betanosv()), pagrnos)
+
 	def karareiksmenosvriba():
 		if karareiksmenosv() > 4:
 			return 4
@@ -3814,7 +3938,7 @@ def nosv_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmenosv()
-	nosvnew_data={'x': [0,karareiksmenosvriba()],'y': ["nosv","nosv"]}
+	nosvnew_data = {'x': [0, karareiksmenosvriba()], 'y': ["nosv", "nosv"]}
 	if karareiksmenosvriba() > 0:
 		sp30.glyph.line_color = "blue"
 	else:
@@ -3843,24 +3967,28 @@ def sargr_update(attr, old, new):
 		else:
 			return -1
 	print(zenklassargr())
+
 	def alfasargr():
 		if zenklassargr() > 0:
 			return (1-pagrsarg)/(balansarg-normaasarg)
 		else:
 			return (1-pagrsarg)/(balansarg-normaksarg)
 	print(alfasargr())
+
 	def betasargr():
 		if zenklassargr() > 0:
 			return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
 		else:
 			return (pagrsarg*balansarg-normaksarg)/(balansarg-normaksarg)
 	print(betasargr())
+
 	def karareiksmesargr():
 		vertesarg = float(slrrytas.value.replace(",", "."))
 		if zenklassargr() < 0:
 			return zenklassargr()*math.log(float(alfasargr())*float(vertesarg)+float(betasargr()), pagrsarg)
 		else:
 			return zenklassargr()*math.log(float(alfasargr())*float(vertesarg)+float(betasargr()), pagrsarg)
+
 	def karareiksmesargrriba():
 		if karareiksmesargr() > 4:
 			return 4
@@ -3868,7 +3996,7 @@ def sargr_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmesargr()
-	sargrnew_data={'x': [0,karareiksmesargrriba()],'y': ["sargr","sargr"]}
+	sargrnew_data = {'x': [0, karareiksmesargrriba()], 'y': ["sargr", "sargr"]}
 	if karareiksmesargrriba() > 0:
 		sp31.glyph.line_color = "blue"
 	else:
@@ -3891,24 +4019,28 @@ def sargp_update(attr, old, new):
 		else:
 			return -1
 	print(zenklassargp())
+
 	def alfasargp():
 		if zenklassargp() > 0:
 			return (1-pagrsarg)/(balansarg-normaasarg)
 		else:
 			return (1-pagrsarg)/(balansarg-normaksarg)
 	print(alfasargp())
+
 	def betasargp():
 		if zenklassargp() > 0:
 			return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
 		else:
 			return (pagrsarg*balansarg-normaksarg)/(balansarg-normaksarg)
 	print(betasargp())
+
 	def karareiksmesargp():
 		vertesarg = float(slrpietus.value.replace(",", "."))
 		if zenklassargp() < 0:
 			return zenklassargp()*math.log(float(alfasargp())*float(vertesarg)+float(betasargp()), pagrsarg)
 		else:
 			return zenklassargp()*math.log(float(alfasargp())*float(vertesarg)+float(betasargp()), pagrsarg)
+
 	def karareiksmesargpriba():
 		if karareiksmesargp() > 4:
 			return 4
@@ -3916,7 +4048,7 @@ def sargp_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmesargp()
-	sargpnew_data={'x': [0,karareiksmesargpriba()],'y': ["sargp","sargp"]}
+	sargpnew_data = {'x': [0, karareiksmesargpriba()], 'y': ["sargp", "sargp"]}
 	if karareiksmesargpriba() > 0:
 		sp32.glyph.line_color = "blue"
 	else:
@@ -3939,24 +4071,28 @@ def sargv_update(attr, old, new):
 		else:
 			return -1
 	print(zenklassargv())
+
 	def alfasargv():
 		if zenklassargv() > 0:
 			return (1-pagrsarg)/(balansarg-normaasarg)
 		else:
 			return (1-pagrsarg)/(balansarg-normaksarg)
 	print(alfasargv())
+
 	def betasargv():
 		if zenklassargv() > 0:
 			return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
 		else:
 			return (pagrsarg*balansarg-normaksarg)/(balansarg-normaksarg)
 	print(betasargv())
+
 	def karareiksmesargv():
 		vertesarg = float(slrvakaras.value.replace(",", "."))
 		if zenklassargv() < 0:
 			return zenklassargv()*math.log(float(alfasargv())*float(vertesarg)+float(betasargv()), pagrsarg)
 		else:
 			return zenklassargv()*math.log(float(alfasargv())*float(vertesarg)+float(betasargv()), pagrsarg)
+
 	def karareiksmesargvriba():
 		if karareiksmesargv() > 4:
 			return 4
@@ -3964,7 +4100,7 @@ def sargv_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmesargv()
-	sargvnew_data={'x': [0,karareiksmesargvriba()],'y': ["sargv","sargv"]}
+	sargvnew_data = {'x': [0, karareiksmesargvriba()], 'y': ["sargv", "sargv"]}
 	if karareiksmesargvriba() > 0:
 		sp33.glyph.line_color = "blue"
 	else:
@@ -3993,24 +4129,28 @@ def sklr_update(attr, old, new):
 		else:
 			return -1
 	print(zenklassklr())
+
 	def alfasklr():
 		if zenklassklr() > 0:
 			return (1-pagrskl)/(balanskl-normaaskl)
 		else:
 			return (1-pagrskl)/(balanskl-normakskl)
 	print(alfasklr())
+
 	def betasklr():
 		if zenklassklr() > 0:
 			return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
 		else:
 			return (pagrskl*balanskl-normakskl)/(balanskl-normakskl)
 	print(betasklr())
+
 	def karareiksmesklr():
 		verteskl = float(sekrytas.value.replace(",", "."))
 		if zenklassklr() < 0:
 			return zenklassklr()*math.log(float(alfasklr())*float(verteskl)+float(betasklr()), pagrskl)
 		else:
 			return zenklassklr()*math.log(float(alfasklr())*float(verteskl)+float(betasklr()), pagrskl)
+
 	def karareiksmesklrriba():
 		if karareiksmesklr() > 4:
 			return 4
@@ -4018,7 +4158,7 @@ def sklr_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmesklr()
-	sklrnew_data={'x': [0,karareiksmesklrriba()],'y': ["sklr","sklr"]}
+	sklrnew_data = {'x': [0, karareiksmesklrriba()], 'y': ["sklr", "sklr"]}
 	if karareiksmesklrriba() > 0:
 		sp34.glyph.line_color = "blue"
 	else:
@@ -4041,24 +4181,28 @@ def sklp_update(attr, old, new):
 		else:
 			return -1
 	print(zenklassklp())
+
 	def alfasklp():
 		if zenklassklp() > 0:
 			return (1-pagrskl)/(balanskl-normaaskl)
 		else:
 			return (1-pagrskl)/(balanskl-normakskl)
 	print(alfasklp())
+
 	def betasklp():
 		if zenklassklp() > 0:
 			return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
 		else:
 			return (pagrskl*balanskl-normakskl)/(balanskl-normakskl)
 	print(betasklp())
+
 	def karareiksmesklp():
 		verteskl = float(sekpietus.value.replace(",", "."))
 		if zenklassklp() < 0:
 			return zenklassklp()*math.log(float(alfasklp())*float(verteskl)+float(betasklp()), pagrskl)
 		else:
 			return zenklassklp()*math.log(float(alfasklp())*float(verteskl)+float(betasklp()), pagrskl)
+
 	def karareiksmesklpriba():
 		if karareiksmesklp() > 4:
 			return 4
@@ -4066,7 +4210,7 @@ def sklp_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmesklp()
-	sklpnew_data={'x': [0,karareiksmesklpriba()],'y': ["sklp","sklp"]}
+	sklpnew_data = {'x': [0, karareiksmesklpriba()], 'y': ["sklp", "sklp"]}
 	if karareiksmesklpriba() > 0:
 		sp35.glyph.line_color = "blue"
 	else:
@@ -4089,24 +4233,28 @@ def sklv_update(attr, old, new):
 		else:
 			return -1
 	print(zenklassklv())
+
 	def alfasklv():
 		if zenklassklv() > 0:
 			return (1-pagrskl)/(balanskl-normaaskl)
 		else:
 			return (1-pagrskl)/(balanskl-normakskl)
 	print(alfasklv())
+
 	def betasklv():
 		if zenklassklv() > 0:
 			return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
 		else:
 			return (pagrskl*balanskl-normakskl)/(balanskl-normakskl)
 	print(betasklv())
+
 	def karareiksmesklv():
 		verteskl = float(sekvakaras.value.replace(",", "."))
 		if zenklassklv() < 0:
 			return zenklassklv()*math.log(float(alfasklv())*float(verteskl)+float(betasklv()), pagrskl)
 		else:
 			return zenklassklv()*math.log(float(alfasklv())*float(verteskl)+float(betasklv()), pagrskl)
+
 	def karareiksmesklvriba():
 		if karareiksmesklv() > 4:
 			return 4
@@ -4114,7 +4262,7 @@ def sklv_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmesklv()
-	sklvnew_data={'x': [0,karareiksmesklvriba()],'y': ["sklv","sklv"]}
+	sklvnew_data = {'x': [0, karareiksmesklvriba()], 'y': ["sklv", "sklv"]}
 	if karareiksmesklvriba() > 0:
 		sp36.glyph.line_color = "blue"
 	else:
@@ -4164,6 +4312,7 @@ def sphkr_update(attr, old, new):
 		vertetank = tank*1000-1000
 		serug = float(serrytas.value.replace(",", "."))
 		return serug+0.033333*vertetank-0.533333
+
 	def sphkrriba():
 		if sphkr() > 4:
 			return 4
@@ -4171,7 +4320,7 @@ def sphkr_update(attr, old, new):
 			return -4
 		else:
 			return sphkr()
-	sphkrnew_data={'x': [0,sphkrriba()],'y': ["sphkr","sphkr"]}
+	sphkrnew_data = {'x': [0, sphkrriba()], 'y': ["sphkr", "sphkr"]}
 	if sphkrriba() > 0:
 		kg1.glyph.line_color = "blue"
 	else:
@@ -4188,6 +4337,7 @@ def sphkp_update(attr, old, new):
 		vertetank = tank*1000-1000
 		serug = float(serpietus.value.replace(",", "."))
 		return serug+0.033333*vertetank-0.533333
+
 	def sphkpriba():
 		if sphkp() > 4:
 			return 4
@@ -4195,7 +4345,7 @@ def sphkp_update(attr, old, new):
 			return -4
 		else:
 			return sphkp()
-	sphkpnew_data={'x': [0,sphkpriba()],'y': ["sphkp","sphkp"]}
+	sphkpnew_data = {'x': [0, sphkpriba()], 'y': ["sphkp", "sphkp"]}
 	if sphkpriba() > 0:
 		kg2.glyph.line_color = "blue"
 	else:
@@ -4212,6 +4362,7 @@ def sphkv_update(attr, old, new):
 		vertetank = tank*1000-1000
 		serug = float(servakaras.value.replace(",", "."))
 		return serug+0.033333*vertetank-0.533333
+
 	def sphkvriba():
 		if sphkv() > 4:
 			return 4
@@ -4219,7 +4370,7 @@ def sphkv_update(attr, old, new):
 			return -4
 		else:
 			return sphkv()
-	sphkvnew_data={'x': [0,sphkvriba()],'y': ["sphkv","sphkv"]}
+	sphkvnew_data = {'x': [0, sphkvriba()], 'y': ["sphkv", "sphkv"]}
 	if sphkvriba() > 0:
 		kg3.glyph.line_color = "blue"
 	else:
@@ -4236,12 +4387,13 @@ pagrkd = 2
 
 def kdr_update(attr, old, new):
 	def normaakdr():
-		if sphkr_update(attr, old, new)>=6.8 and sphkr_update(attr, old, new) < 7:
+		if sphkr_update(attr, old, new) >= 6.8 and sphkr_update(attr, old, new) < 7:
 			return 16
 		else:
 			return 17
 	print(normaakdr())
 	balankd = float((normaakdr()+normakkd)/2)
+
 	def zenklaskdr():
 		def kryptiskdr():
 			if normakkd-balankd < 0:
@@ -4254,24 +4406,28 @@ def kdr_update(attr, old, new):
 		else:
 			return -1
 	print(zenklaskdr())
+
 	def alfakdr():
 		if zenklaskdr() > 0:
 			return (1-pagrkd)/(balankd-normaakdr())
 		else:
 			return (1-pagrkd)/(balankd-normakkd)
 	print(alfakdr())
+
 	def betakdr():
 		if zenklaskdr() > 0:
 			return (pagrkd*balankd-normaakdr())/(balankd-normaakdr())
 		else:
 			return (pagrkd*balankd-normakkd)/(balankd-normakkd)
 	print(betakdr())
+
 	def karareiksmekdr():
 		vertekd = float(kdrytas.value.replace(",", "."))
 		if zenklaskdr() < 0:
 			return zenklaskdr()*math.log(float(alfakdr())*float(vertekd)+float(betakdr()), pagrkd)
 		else:
 			return zenklaskdr()*math.log(float(alfakdr())*float(vertekd)+float(betakdr()), pagrkd)
+
 	def karareiksmekdrriba():
 		if karareiksmekdr() > 4:
 			return 4
@@ -4279,7 +4435,7 @@ def kdr_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmekdr()
-	kdrnew_data={'x': [0,karareiksmekdrriba()],'y': ["kdr","kdr"]}
+	kdrnew_data = {'x': [0, karareiksmekdrriba()], 'y': ["kdr", "kdr"]}
 	if karareiksmekdrriba() > 0:
 		kg4.glyph.line_color = "blue"
 	else:
@@ -4291,12 +4447,13 @@ kdrytas.on_change("value", kdr_update)
 
 def kdp_update(attr, old, new):
 	def normaakdp():
-		if sphkp_update(attr, old, new)>=6.8 and sphkp_update(attr, old, new) < 7:
+		if sphkp_update(attr, old, new) >= 6.8 and sphkp_update(attr, old, new) < 7:
 			return 16
 		else:
 			return 17
 	print(normaakdp())
 	balankd = float((normaakdp()+normakkd)/2)
+
 	def zenklaskdp():
 		def kryptiskdp():
 			if normakkd-balankd < 0:
@@ -4309,24 +4466,28 @@ def kdp_update(attr, old, new):
 		else:
 			return -1
 	print(zenklaskdp())
+
 	def alfakdp():
 		if zenklaskdp() > 0:
 			return (1-pagrkd)/(balankd-normaakdp())
 		else:
 			return (1-pagrkd)/(balankd-normakkd)
 	print(alfakdp())
+
 	def betakdp():
 		if zenklaskdp() > 0:
 			return (pagrkd*balankd-normaakdp())/(balankd-normaakdp())
 		else:
 			return (pagrkd*balankd-normakkd)/(balankd-normakkd)
 	print(betakdp())
+
 	def karareiksmekdp():
 		vertekd = float(kdpietus.value.replace(",", "."))
 		if zenklaskdp() < 0:
 			return zenklaskdp()*math.log(float(alfakdp())*float(vertekd)+float(betakdp()), pagrkd)
 		else:
 			return zenklaskdp()*math.log(float(alfakdp())*float(vertekd)+float(betakdp()), pagrkd)
+
 	def karareiksmekdpriba():
 		if karareiksmekdp() > 4:
 			return 4
@@ -4334,7 +4495,7 @@ def kdp_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmekdp()
-	kdpnew_data={'x': [0,karareiksmekdpriba()],'y': ["kdp","kdp"]}
+	kdpnew_data = {'x': [0, karareiksmekdpriba()], 'y': ["kdp", "kdp"]}
 	if karareiksmekdpriba() > 0:
 		kg5.glyph.line_color = "blue"
 	else:
@@ -4346,12 +4507,13 @@ kdpietus.on_change("value", kdp_update)
 
 def kdv_update(attr, old, new):
 	def normaakdv():
-		if sphkv_update(attr, old, new)>=6.8 and sphkv_update(attr, old, new) < 7:
+		if sphkv_update(attr, old, new) >= 6.8 and sphkv_update(attr, old, new) < 7:
 			return 16
 		else:
 			return 17
 	print(normaakdv())
 	balankd = float((normaakdv()+normakkd)/2)
+
 	def zenklaskdv():
 		def kryptiskdv():
 			if normakkd-balankd < 0:
@@ -4364,24 +4526,28 @@ def kdv_update(attr, old, new):
 		else:
 			return -1
 	print(zenklaskdv())
+
 	def alfakdv():
 		if zenklaskdv() > 0:
 			return (1-pagrkd)/(balankd-normaakdv())
 		else:
 			return (1-pagrkd)/(balankd-normakkd)
 	print(alfakdv())
+
 	def betakdv():
 		if zenklaskdv() > 0:
 			return (pagrkd*balankd-normaakdv())/(balankd-normaakdv())
 		else:
 			return (pagrkd*balankd-normakkd)/(balankd-normakkd)
 	print(betakdv())
+
 	def karareiksmekdv():
 		vertekd = float(kdvakaras.value.replace(",", "."))
 		if zenklaskdv() < 0:
 			return zenklaskdv()*math.log(float(alfakdv())*float(vertekd)+float(betakdv()), pagrkd)
 		else:
 			return zenklaskdv()*math.log(float(alfakdv())*float(vertekd)+float(betakdv()), pagrkd)
+
 	def karareiksmekdvriba():
 		if karareiksmekdv() > 4:
 			return 4
@@ -4389,7 +4555,7 @@ def kdv_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmekdv()
-	kdvnew_data={'x': [0,karareiksmekdvriba()],'y': ["kdv","kdv"]}
+	kdvnew_data = {'x': [0, karareiksmekdvriba()], 'y': ["kdv", "kdv"]}
 	if karareiksmekdvriba() > 0:
 		kg6.glyph.line_color = "blue"
 	else:
@@ -4406,21 +4572,23 @@ def tankr_update(attr, old, new):
 	def normaktankr():
 		if sphkr_update(attr, old, new) < 6.4:
 			return 67
-		elif sphkr_update(attr, old, new)>7.1:
+		elif sphkr_update(attr, old, new) > 7.1:
 			return 46
 		else:
 			return float(sphkr_update(attr, old, new)*(-30)+259)
 	print(normaktankr())
+
 	def normaatank():
 		if sphkr_update(attr, old, new) < 6.4:
 			return 52
-		elif sphkr_update(attr, old, new)>7.1:
+		elif sphkr_update(attr, old, new) > 7.1:
 			return 31
 		else:
 			return float(sphkr_update(attr, old, new)*(-30)+244)
 	print(normaatank())
 	balantank = float((normaatank()+normaktankr())/2)
 	print(balantank)
+
 	def zenklastankr():
 		def kryptistankr():
 			if normaktankr()-balantank < 0:
@@ -4433,24 +4601,28 @@ def tankr_update(attr, old, new):
 		else:
 			return -1
 	print(zenklastankr())
+
 	def alfatankr():
 		if zenklastankr() > 0:
 			return (1-pagrtank)/(balantank-normaatank())
 		else:
 			return (1-pagrtank)/(balantank-normaktankr())
 	print(alfatankr())
+
 	def betatankr():
 		if zenklastankr() > 0:
 			return (pagrtank*balantank-normaatank())/(balantank-normaatank())
 		else:
 			return (pagrtank*balantank-normaktankr())/(balantank-normaktankr())
 	print(betatankr())
+
 	def karareiksmetankr():
 		vertetank = float(ksirytas.value.replace(",", "."))
 		if zenklastankr() < 0:
 			return zenklastankr()*math.log(float(alfatankr())*float(vertetank)+float(betatankr()), pagrtank)
 		else:
 			return zenklastankr()*math.log(float(alfatankr())*float(vertetank)+float(betatankr()), pagrtank)
+
 	def karareiksmetankrriba():
 		if karareiksmetankr() > 4:
 			return 4
@@ -4458,7 +4630,7 @@ def tankr_update(attr, old, new):
 			return -4
 		else:
 			return karareiksmetankr()
-	tankrnew_data={'x': [0,karareiksmetankrriba()],'y': ["tankr","tankr"]}
+	tankrnew_data = {'x': [0, karareiksmetankrriba()], 'y': ["tankr", "tankr"]}
 	if karareiksmetankrriba() > 0:
 		kg7.glyph.line_color = "blue"
 	else:
@@ -4469,7 +4641,8 @@ ksirytas.on_change("value", tankr_update)
 
 
 # visi elementai sujungiami į norimą layout
-l = layout([protok(), invard, inpavard, lytis, inamz],
+l = layout(
+	[protok(), invard, inpavard, lytis, inamz],
 	[tikslus()],
 	[pav1()],
 	[pav2()],
