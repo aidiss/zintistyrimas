@@ -703,7 +703,7 @@ p1.xaxis.formatter = FuncTickFormatter(code="""
 # p3.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
 # p3.xaxis.formatter = FuncTickFormatter(code="""data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
 # return data[tick]
-# """)
+# 	""")
 
 # p4 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
 # p4.title.text = " < -Katabolizmas|Anabolizmas->"
