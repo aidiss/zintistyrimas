@@ -1,4 +1,5 @@
 
+# -*- coding: utf-8 -*-
 from bokeh.io import curdoc
 from bokeh.plotting import figure, ColumnDataSource
 from bokeh.layouts import column, row, layout
@@ -9,10 +10,12 @@ import jinja2
 import math
 import logging
 import pandas as pd
+import collections
 
 # ši dalis, tam, kad būtų galima reguliuoti TextInput width, nes yra nustatytas Bokeh TextInput default min width,
 # kurio negalima mažinti per parametrų nurodymą. Pvz. "invard = TextInput(name = "vard", value="", title = "Vardas", width = 130"
 # -per TextInput "name" galima nurodyti kažkokį vardą ir tada per html/css bk-root input[name$="vard"] galima nustatyti norimą width.
+
 curdoc().template = jinja2.Template(source='''
 	<!DOCTYPE html>
 	<html lang="en">
@@ -1146,9 +1149,9 @@ U-pH 2 “.<i>Jei naudojamas tik matuoklis, šis punktas praleidžiamas</i>.
 	""", width=250)
 
 
-srrytas = TextInput(name="rytas1", value="0.00", title="Rytas", width=60)
-srpietus = TextInput(name="pietus1", value="0.00", title="Pietūs", width=60)
-srvakaras = TextInput(name="vakaras1", value="0.00", title="Vakaras", width=60)
+srrytas = TextInput(name="rytas1", value="", title="Rytas", width=60)
+srpietus = TextInput(name="pietus1", value="", title="Pietūs", width=60)
+srvakaras = TextInput(name="vakaras1", value="", title="Vakaras", width=60)
 
 
 def aprssvies():
@@ -1224,9 +1227,9 @@ atitinkančio stulpelio numerį:
 	""", width=250)
 
 
-ssrytas = TextInput(name="rytas2", value="0.00", title="Rytas", width=60)
-sspietus = TextInput(name="pietus2", value="0.00", title="Pietūs", width=60)
-ssvakaras = TextInput(name="vakaras2", value="0.00", title="Vakaras", width=60)
+ssrytas = TextInput(name="rytas2", value="", title="Rytas", width=60)
+sspietus = TextInput(name="pietus2", value="", title="Pietūs", width=60)
+ssvakaras = TextInput(name="vakaras2", value="", title="Vakaras", width=60)
 
 
 def aprstank():
@@ -1252,9 +1255,9 @@ matavimą pakartoti.
 	""", width=250)
 
 
-strytas = TextInput(name="rytas3", value="0.00", title="Rytas", width=60)
-stpietus = TextInput(name="pietus3", value="0.00", title="Pietūs", width=60)
-stvakaras = TextInput(name="vakaras3", value="0.00", title="Vakaras", width=60)
+strytas = TextInput(name="rytas3", value="", title="Rytas", width=60)
+stpietus = TextInput(name="pietus3", value="", title="Pietūs", width=60)
+stvakaras = TextInput(name="vakaras3", value="", title="Vakaras", width=60)
 
 
 def aprsputo():
@@ -1304,9 +1307,9 @@ skalę ir įrašoma eilutėje 2.5 „Putojimas, U-put“:
 	""", width=250)
 
 
-sprytas = TextInput(name="rytas4", value="0.00", title="Rytas", width=60)
-sppietus = TextInput(name="pietus4", value="0.00", title="Pietūs", width=60)
-spvakaras = TextInput(name="vakaras4", value="0.00", title="Vakaras", width=60)
+sprytas = TextInput(name="rytas4", value="", title="Rytas", width=60)
+sppietus = TextInput(name="pietus4", value="", title="Pietūs", width=60)
+spvakaras = TextInput(name="vakaras4", value="", title="Vakaras", width=60)
 
 
 def aprserugst():
@@ -1340,9 +1343,9 @@ naudojamas tik matuoklis, šis punktas praleidžiamas</i>.
 	""", width=250)
 
 
-serrytas = TextInput(name="rytas5", value="0.00", title="Rytas", width=60)
-serpietus = TextInput(name="pietus5", value="0.00", title="Pietūs", width=60)
-servakaras = TextInput(name="vakaras5", value="0.00", title="Vakaras", width=60)
+serrytas = TextInput(name="rytas5", value="", title="Rytas", width=60)
+serpietus = TextInput(name="pietus5", value="", title="Pietūs", width=60)
+servakaras = TextInput(name="vakaras5", value="", title="Vakaras", width=60)
 
 
 def aprseklamp():
@@ -1392,9 +1395,9 @@ S-kl”:
 	""", width=250)
 
 
-sekrytas = TextInput(name="rytas6", value="0.00", title="Rytas", width=60)
-sekpietus = TextInput(name="pietus6", value="0.00", title="Pietūs", width=60)
-sekvakaras = TextInput(name="vakaras6", value="0.00", title="Vakaras", width=60)
+sekrytas = TextInput(name="rytas6", value="", title="Rytas", width=60)
+sekpietus = TextInput(name="pietus6", value="", title="Pietūs", width=60)
+sekvakaras = TextInput(name="vakaras6", value="", title="Vakaras", width=60)
 
 
 def aprpulsed():
@@ -1429,9 +1432,9 @@ pajuntate po to, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašo
 	""", width=250)
 
 
-psrytas = TextInput(name="rytas7", value="0.00", title="Rytas", width=60)
-pspietus = TextInput(name="pietus7", value="0.00", title="Pietūs", width=60)
-psvakaras = TextInput(name="vakaras7", value="0.00", title="Vakaras", width=60)
+psrytas = TextInput(name="rytas7", value="", title="Rytas", width=60)
+pspietus = TextInput(name="pietus7", value="", title="Pietūs", width=60)
+psvakaras = TextInput(name="vakaras7", value="", title="Vakaras", width=60)
 
 
 def aprkunotemp():
@@ -1460,9 +1463,9 @@ skaičiumi po kablelio įrašomas eilutėje 4.1 „Kūno temperatūra, Temp“.
 	""", width=250)
 
 
-ktrytas = TextInput(name="rytas8", value="0.00", title="Rytas", width=60)
-ktpietus = TextInput(name="pietus8", value="0.00", title="Pietūs", width=60)
-ktvakaras = TextInput(name="vakaras8", value="0.00", title="Vakaras", width=60)
+ktrytas = TextInput(name="rytas8", value="", title="Rytas", width=60)
+ktpietus = TextInput(name="pietus8", value="", title="Pietūs", width=60)
+ktvakaras = TextInput(name="vakaras8", value="", title="Vakaras", width=60)
 
 
 def aprdermoref():
@@ -1523,9 +1526,9 @@ paciento reakcija po 1 min. ir po 6 min. Vertinama pagal skalę ir įrašoma eil
 	""", width=250)
 
 
-drrytas = TextInput(name="rytas9", value="0.00", title="Rytas", width=60)
-drpietus = TextInput(name="pietus9", value="0.00", title="Pietūs", width=60)
-drvakaras = TextInput(name="vakaras9", value="0.00", title="Vakaras", width=60)
+drrytas = TextInput(name="rytas9", value="", title="Rytas", width=60)
+drpietus = TextInput(name="pietus9", value="", title="Pietūs", width=60)
+drvakaras = TextInput(name="vakaras9", value="", title="Vakaras", width=60)
 
 
 def aprvasomref():
@@ -1592,9 +1595,9 @@ skalę ir įrašoma eilutėje 4.3 „Vasomotorinis, Vaso“:
 	""", width=250)
 
 
-vrrytas = TextInput(name="rytas10", value="0.00", title="Rytas", width=60)
-vrpietus = TextInput(name="pietus10", value="0.00", title="Pietūs", width=60)
-vrvakaras = TextInput(name="vakaras10", value="0.00", title="Vakaras", width=60)
+vrrytas = TextInput(name="rytas10", value="", title="Rytas", width=60)
+vrpietus = TextInput(name="pietus10", value="", title="Pietūs", width=60)
+vrvakaras = TextInput(name="vakaras10", value="", title="Vakaras", width=60)
 
 
 def aprvyzdyd():
@@ -1701,9 +1704,9 @@ stebima, apie kokį plotį svyruoja vyzdys. Vertinama pagal skalę ir įrašoma 
 	""", width=250)
 
 
-vdrytas = TextInput(name="rytas11", value="0.00", title="Rytas", width=60)
-vdpietus = TextInput(name="pietus11", value="0.00", title="Pietūs", width=60)
-vdvakaras = TextInput(name="vakaras11", value="0.00", title="Vakaras", width=60)
+vdrytas = TextInput(name="rytas11", value="", title="Rytas", width=60)
+vdpietus = TextInput(name="pietus11", value="", title="Pietūs", width=60)
+vdvakaras = TextInput(name="vakaras11", value="", title="Vakaras", width=60)
 
 
 def aprtremoref():
@@ -1762,9 +1765,9 @@ plaštakos, kai tiriamasis žiūri tiesiai. Vertinama pagal skalę ir įrašoma 
 	""", width=250)
 
 
-trrytas = TextInput(name="rytas12", value="0.00", title="Rytas", width=60)
-trpietus = TextInput(name="pietus12", value="0.00", title="Pietūs", width=60)
-trvakaras = TextInput(name="vakaras12", value="0.00", title="Vakaras", width=60)
+trrytas = TextInput(name="rytas12", value="", title="Rytas", width=60)
+trpietus = TextInput(name="pietus12", value="", title="Pietūs", width=60)
+trvakaras = TextInput(name="vakaras12", value="", title="Vakaras", width=60)
 
 def aprsneruzgu():
 	return Div(text="""
@@ -1830,9 +1833,9 @@ eilutę 4.6 „Šnervių užgulimas, Nos“:
 	""", width=250)
 
 
-surytas = TextInput(name="rytas13", value="0.00", title="Rytas", width=60)
-supietus = TextInput(name="pietus13", value="0.00", title="Pietūs", width=60)
-suvakaras = TextInput(name="vakaras13", value="0.00", title="Vakaras", width=60)
+surytas = TextInput(name="rytas13", value="", title="Rytas", width=60)
+supietus = TextInput(name="pietus13", value="", title="Pietūs", width=60)
+suvakaras = TextInput(name="vakaras13", value="", title="Vakaras", width=60)
 
 
 def aprsarglinref():
@@ -1883,9 +1886,9 @@ išryškėjimas. Vertinama pagal skalę ir įrašoma į eilutę 4.7 „Sargento 
 	""", width=250)
 
 
-slrrytas = TextInput(name="rytas14", value="0.00", title="Rytas", width=60)
-slrpietus = TextInput(name="pietus14", value="0.00", title="Pietūs", width=60)
-slrvakaras = TextInput(name="vakaras14", value="0.00", title="Vakaras", width=60)
+slrrytas = TextInput(name="rytas14", value="", title="Rytas", width=60)
+slrpietus = TextInput(name="pietus14", value="", title="Pietūs", width=60)
+slrvakaras = TextInput(name="vakaras14", value="", title="Vakaras", width=60)
 
 
 def aprkvepdaz():
@@ -1925,9 +1928,9 @@ skaičių „8”, ir kvėpavimo dažnis bus KD = 2×8 = 16.</i>/div>
 	""", width=250)
 
 
-kdrytas = TextInput(name="rytas15", value="0.00", title="Rytas", width=60)
-kdpietus = TextInput(name="pietus15", value="0.00", title="Pietūs", width=60)
-kdvakaras = TextInput(name="vakaras15", value="0.00", title="Vakaras", width=60)
+kdrytas = TextInput(name="rytas15", value="", title="Rytas", width=60)
+kdpietus = TextInput(name="pietus15", value="", title="Pietūs", width=60)
+kdvakaras = TextInput(name="vakaras15", value="", title="Vakaras", width=60)
 
 
 def aprpulgul():
@@ -1962,9 +1965,9 @@ pajuntate po to, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašo
 	""", width=250)
 
 
-pgrytas = TextInput(name="rytas16", value="0.00", title="Rytas", width=60)
-pgpietus = TextInput(name="pietus16", value="0.00", title="Pietūs", width=60)
-pgvakaras = TextInput(name="vakaras16", value="0.00", title="Vakaras", width=60)
+pgrytas = TextInput(name="rytas16", value="", title="Rytas", width=60)
+pgpietus = TextInput(name="pietus16", value="", title="Pietūs", width=60)
+pgvakaras = TextInput(name="vakaras16", value="", title="Vakaras", width=60)
 
 
 def aprsiskraujgul():
@@ -1987,9 +1990,9 @@ pamatuojamas kraujospūdis. Sistolinis kraujospūdis (didesnis rodmuo ties užra
 	""", width=250)
 
 
-skgrytas = TextInput(name="rytas17", value="0.00", title="Rytas", width=60)
-skgpietus = TextInput(name="pietus17", value="0.00", title="Pietūs", width=60)
-skgvakaras = TextInput(name="vakaras17", value="0.00", title="Vakaras", width=60)
+skgrytas = TextInput(name="rytas17", value="", title="Rytas", width=60)
+skgpietus = TextInput(name="pietus17", value="", title="Pietūs", width=60)
+skgvakaras = TextInput(name="vakaras17", value="", title="Vakaras", width=60)
 
 
 def aprdiakraujgul():
@@ -2012,9 +2015,9 @@ gulint, Dia 1 “.
 	""", width=250)
 
 
-dkgrytas = TextInput(name="rytas18", value="0.00", title="Rytas", width=60)
-dkgpietus = TextInput(name="pietus18", value="0.00", title="Pietūs", width=60)
-dkgvakaras = TextInput(name="vakaras18", value="0.00", title="Vakaras", width=60)
+dkgrytas = TextInput(name="rytas18", value="", title="Rytas", width=60)
+dkgpietus = TextInput(name="pietus18", value="", title="Pietūs", width=60)
+dkgvakaras = TextInput(name="vakaras18", value="", title="Vakaras", width=60)
 
 
 def aprpulsatsi15():
@@ -2040,13 +2043,13 @@ pat įsimenamas arba garsiai pasakomas asistentui:
 	""", width=250)
 
 
-parytas = TextInput(name="rytas19", value="0.00", title="Rytas", width=60)
-papietus = TextInput(name="pietus19", value="0.00", title="Pietūs", width=60)
-pavakaras = TextInput(name="vakaras19", value="0.00", title="Vakaras", width=60)
+parytas = TextInput(name="rytas19", value="", title="Rytas", width=60)
+papietus = TextInput(name="pietus19", value="", title="Pietūs", width=60)
+pavakaras = TextInput(name="vakaras19", value="", title="Vakaras", width=60)
 
-pa15rytas = TextInput(name="rytas20", value="0.00", title="Rytas", width=60)
-pa15pietus = TextInput(name="pietus20", value="0.00", title="Pietūs", width=60)
-pa15vakaras = TextInput(name="vakaras20", value="0.00", title="Vakaras", width=60)
+pa15rytas = TextInput(name="rytas20", value="", title="Rytas", width=60)
+pa15pietus = TextInput(name="pietus20", value="", title="Pietūs", width=60)
+pa15vakaras = TextInput(name="vakaras20", value="", title="Vakaras", width=60)
 
 
 def aprkraujpulsatsi45():
@@ -2080,17 +2083,17 @@ kraujospūdis (mažesnis rodmuo ties užrašu „DIA“) įrašomas eilutėje 5.
 	""", width=250)
 
 
-skarytas = TextInput(name="rytas21", value="0.00", title="Rytas", width=60)
-skapietus = TextInput(name="pietus21", value="0.00", title="Pietūs", width=60)
-skavakaras = TextInput(name="vakaras21", value="0.00", title="Vakaras", width=60)
+skarytas = TextInput(name="rytas21", value="", title="Rytas", width=60)
+skapietus = TextInput(name="pietus21", value="", title="Pietūs", width=60)
+skavakaras = TextInput(name="vakaras21", value="", title="Vakaras", width=60)
 
-dkarytas = TextInput(name="rytas22", value="0.00", title="Rytas", width=60)
-dkapietus = TextInput(name="pietus22", value="0.00", title="Pietūs", width=60)
-dkavakaras = TextInput(name="vakaras22", value="0.00", title="Vakaras", width=60)
+dkarytas = TextInput(name="rytas22", value="", title="Rytas", width=60)
+dkapietus = TextInput(name="pietus22", value="", title="Pietūs", width=60)
+dkavakaras = TextInput(name="vakaras22", value="", title="Vakaras", width=60)
 
-pa45rytas = TextInput(name="rytas23", value="0.00", title="Rytas", width=60)
-pa45pietus = TextInput(name="pietus23", value="0.00", title="Pietūs", width=60)
-pa45vakaras = TextInput(name="vakaras23", value="0.00", title="Vakaras", width=60)
+pa45rytas = TextInput(name="rytas23", value="", title="Rytas", width=60)
+pa45pietus = TextInput(name="pietus23", value="", title="Pietūs", width=60)
+pa45vakaras = TextInput(name="vakaras23", value="", title="Vakaras", width=60)
 
 
 def aprkvepsu():
@@ -2118,9 +2121,9 @@ rodomas laikas sekundėmis įrašomas eilutėje 6.2 „Kvėpavimo sulaikymas įk
 	""", width=250)
 
 
-ksirytas = TextInput(name="rytas24", value="0.00", title="Rytas", width=60)
-ksipietus = TextInput(name="pietus24", value="0.00", title="Pietūs", width=60)
-ksivakaras = TextInput(name="vakaras24", value="0.00", title="Vakaras", width=60)
+ksirytas = TextInput(name="rytas24", value="", title="Rytas", width=60)
+ksipietus = TextInput(name="pietus24", value="", title="Pietūs", width=60)
+ksivakaras = TextInput(name="vakaras24", value="", title="Vakaras", width=60)
 
 # ši dalims tam, kad suvedus duomenis į atitinakmą TextInput, grafike atsispindėtų
 # simpatinis/parasimpatinis
@@ -2220,58 +2223,71 @@ sp34 = p.line('x', 'y', source=sourcesklr, line_color="blue", line_width=5)
 sp35 = p.line('x', 'y', source=sourcesklp, line_color="blue", line_width=5)
 sp36 = p.line('x', 'y', source=sourcesklv, line_color="blue", line_width=5)
 
-# kiekvineo grafiko kiekvieno TextInput duomenų skaičiavimo formulė, kuri nėra vienoda visiems ir kuri gali įtraukti ir kitų TextInput duomenis t.y. kiekvienam categorical yra nubrėžiama linija pagal skaičavimo formulę.
 
-simparasim = {	"Norma K" : [-2, 11, 25, 6, 36.7, 1, -1, 1, 1, -1, 1, 1],
-				"Norma A" : [0, 6, 22, 4, 36.5, 2, 1, -1, -1, 1, -1, -1],
-				"Balansas" : [-1, 8.5, 23.5, 5, 36.6, 1.5, 0, 0, 0, 0, 0, 0],
-				"Kryptis" : [1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, ],
-				"Pagrindas" : [2, 2, 2, 1.001, 2, 1.2, 1.001, 1.001, 1.001, 1.001, 1.001, 1.001]
-				}
+simparasim = {
+	"Norma K": [-2, 11, 25, 6, 36.7, 1, -1, 1, 1, -1, 1, 1],
+	"Norma A": [0, 6, 22, 4, 36.5, 2, 1, -1, -1, 1, -1, -1],
+	"Balansas": [-1, 8.5, 23.5, 5, 36.6, 1.5, 0, 0, 0, 0, 0, 0],
+	"Kryptis": [1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, ],
+	"Pagrindas": [2, 2, 2, 1.001, 2, 1.2, 1.001, 1.001, 1.001, 1.001, 1.001, 1.001]}
 
 parametrupav = ["Ps-1", "S+D", "Pm-1+Pm-4", "KRi", "Temp", "Derm", "Vaso", "Vyzd", "Trem", "Nos", "Sarg", "S-kl"]
-
 lentele = pd.DataFrame(simparasim, index=parametrupav)
 lentele = lentele[["Norma K", "Norma A", "Balansas", "Kryptis", "Pagrindas"]]
 
-normakps1 = -2
-normaaps1 = 0
-balanps1 = (normaaps1+normakps1)/2
-pagrps1 = 2
+ps1dict = {
+	"ps1rytas": [psrytas, pgrytas, "ps1r", sourceps1r.data, sp1],
+	"ps1pietūs": [pspietus, pgpietus, "ps1p", sourceps1p.data, sp2],
+	"ps1vakaras": [psvakaras, pgvakaras, "ps1v", sourceps1v.data, sp3]}
+ps1order = collections.OrderedDict(ps1dict)
+
+# normakps1 = -2
+# normaaps1 = 0
+# balanps1 = (normaaps1 + normakps1) / 2
+# pagrps1 = 2
 
 
 def verte(reiksme1, reiksme2):
 	psr = float(reiksme1.value.replace(",", "."))
 	pgr = float(reiksme2.value.replace(",", "."))
-	return psr-pgr
+	return psr - pgr
 
-def ps1r_update(attr, old, new):
-	for i, n in zip([psrytas], [pgrytas]):
-		skirtumas = verte(i, n)
-		if (skirtumas-lentele.loc["Ps-1"]["Balansas"])*lentele.loc["Ps-1"]["Kryptis"] >= 0:
+
+def formulekara(skirtum, linija):
+	if (skirtum - lentele.loc["Ps-1"]["Balansas"]) * lentele.loc["Ps-1"]["Kryptis"] >= 0:
 			zenklas = 1
-		else:
-			zenklas = -1
+	else:
+		zenklas = -1
 
 # nustatoma alfa reikšmė
 	if zenklas > 0:
-		alfa = (1-lentele.loc["Ps-1"]["Pagrindas"])/(lentele.loc["Ps-1"]["Balansas"]-lentele.loc["Ps-1"]["Norma A"])
+		alfa = (1 - lentele.loc["Ps-1"]["Pagrindas"]) / (lentele.loc["Ps-1"]["Balansas"] - lentele.loc["Ps-1"]["Norma A"])
 	else:
-		alfa = (1-lentele.loc["Ps-1"]["Pagrindas"])/(lentele.loc["Ps-1"]["Balansas"]-lentele.loc["Ps-1"]["Norma K"])
+		alfa = (1 - lentele.loc["Ps-1"]["Pagrindas"]) / (lentele.loc["Ps-1"]["Balansas"] - lentele.loc["Ps-1"]["Norma K"])
 
 # nustatoma beta reikšmė
 	if zenklas > 0:
-		beta = (lentele.loc["Ps-1"]["Pagrindas"]*lentele.loc["Ps-1"]["Balansas"]-lentele.loc["Ps-1"]["Norma A"])/(lentele.loc["Ps-1"]["Balansas"]-lentele.loc["Ps-1"]["Norma A"])
+		beta = (
+			lentele.loc["Ps-1"]["Pagrindas"] * lentele.loc["Ps-1"]["Balansas"] -
+			lentele.loc["Ps-1"]["Norma A"]) / (lentele.loc["Ps-1"]["Balansas"] - lentele.loc["Ps-1"]["Norma A"])
 	else:
-		beta = (lentele.loc["Ps-1"]["Pagrindas"]*lentele.loc["Ps-1"]["Balansas"]-lentele.loc["Ps-1"]["Norma K"])/(lentele.loc["Ps-1"]["Balansas"]-lentele.loc["Ps-1"]["Norma K"])
-
+		beta = (
+			lentele.loc["Ps-1"]["Pagrindas"] * lentele.loc["Ps-1"]["Balansas"] -
+			lentele.loc["Ps-1"]["Norma K"]) / (lentele.loc["Ps-1"]["Balansas"] - lentele.loc["Ps-1"]["Norma K"])
 
 # nustatoma ar katabolizmo ar anabolizmo reikšmė
 	if zenklas < 0:
-		kara = zenklas*math.log(alfa*skirtumas+beta, lentele.loc["Ps-1"]["Pagrindas"])
+		kara = zenklas * math.log(alfa * skirtum + beta, lentele.loc["Ps-1"]["Pagrindas"])
 	else:
-		kara = zenklas*math.log(alfa*skirtumas+beta, lentele.loc["Ps-1"]["Pagrindas"])
+		kara = zenklas * math.log(alfa * skirtum + beta, lentele.loc["Ps-1"]["Pagrindas"])
 
+# nurodomos skirtingos spalvos
+	if kara > 0:
+		linija.glyph.line_color = "blue"
+	else:
+		linija.glyph.line_color = "red"
+
+	logging.info(kara)
 # apribojama reikšmė iki 4 arba -4
 	if kara > 4:
 		karariba = 4
@@ -2279,132 +2295,166 @@ def ps1r_update(attr, old, new):
 		karariba = -4
 	else:
 		karariba = kara
+	return karariba
 
-	ps1rnew_data = {'x': [0, karariba], 'y': ["ps1r", "ps1r"]}
-	if kara > 0:
-		sp1.glyph.line_color = "blue"
-	else:
-		sp1.glyph.line_color = "red"
-	sourceps1r.data.update(ps1rnew_data)
-	logging.info(kara)
 
-for w in [psrytas, pgrytas]:
-	w.on_change("value", ps1r_update)
+def ps1r_update(attr, old, new):
+	for key, value in ps1order.items():
+		if "rytas" in str(key):
+			n1, k1, yreiksme1, sourceps1, linijaps1 = ps1order[key]
+			skirtumas1 = verte(n1, k1)
+			karareiksme1 = formulekara(skirtumas1, linijaps1)
 
+# atnaujinamas x ir y reikšmės atvaizdavimui grafike
+			ps1new_data1 = {'x': [0, karareiksme1], 'y': [yreiksme1, yreiksme1]}
+			sourceps1.update(ps1new_data1)
 
 
 def ps1p_update(attr, old, new):
-	def zenklasps1p():
-		def kryptisps1p():
-			if normakps1-balanps1 < 0:
-				return 1
-			else:
-				return -1
-		psp = float(pspietus.value.replace(",", "."))
-		pgp = float(pgpietus.value.replace(",", "."))
-		verteps1p = psp-pgp
-		if (verteps1p-balanps1)*kryptisps1p() >= 0:
-			return 1
-		else:
-			return -1
+	for key, value in ps1order.items():
+		if "pietūs" in str(key):
+			n2, k2, yreiksme2, sourceps2, linijaps2 = ps1order[key]
+			skirtumas2 = verte(n2, k2)
+			karareiksme2 = formulekara(skirtumas2, linijaps2)
 
-	def alfaps1p():
-		if zenklasps1p() > 0:
-			return (1-pagrps1)/(balanps1-normaaps1)
-		else:
-			return (1-pagrps1)/(balanps1-normakps1)
-
-
-	def betaps1p():
-		if zenklasps1p() > 0:
-			return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
-		else:
-			return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
-
-	def karareiksmeps1p():
-		psp = float(pspietus.value.replace(",", "."))
-		pgp = float(pgpietus.value.replace(",", "."))
-		verteps1 = psp-pgp
-		if zenklasps1p() < 0:
-			return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
-		else:
-			return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
-
-	def karareiksmeps1priba():
-		if karareiksmeps1p() > 4:
-			return 4
-		elif karareiksmeps1p() < -4:
-			return -4
-		else:
-			return karareiksmeps1p()
-	ps1pnew_data = {'x': [0, karareiksmeps1priba()], 'y': ["ps1p", "ps1p"]}
-	sourceps1p.data.update(ps1pnew_data)
-	if karareiksmeps1priba() > 0:
-		sp2.glyph.line_color = "blue"
-	else:
-		sp2.glyph.line_color = "red"
-	logging.info(karareiksmeps1p())
-
-pspietus.on_change("value", ps1p_update)
-pgpietus.on_change("value", ps1p_update)
+# atnaujinamas x ir y reikšmės atvaizdavimui grafike
+			ps1new_data2 = {'x': [0, karareiksme2], 'y': [yreiksme2, yreiksme2]}
+			sourceps2.update(ps1new_data2)
 
 
 def ps1v_update(attr, old, new):
-	def zenklasps1v():
-		def kryptisps1v():
-			if normakps1-balanps1 < 0:
-				return 1
-			else:
-				return -1
-		psv = float(psvakaras.value.replace(",", "."))
-		pgv = float(pgvakaras.value.replace(",", "."))
-		verteps1v = psv-pgv
-		if (verteps1v-balanps1)*kryptisps1v() >= 0:
-			return 1
-		else:
-			return -1
+	for key, value in ps1order.items():
+		if "vakaras" in str(key):
+			n3, k3, yreiksme3, sourceps3, linijaps3 = ps1order[key]
+			skirtumas3 = verte(n3, k3)
+			karareiksme3 = formulekara(skirtumas3, linijaps3)
+
+# atnaujinamas x ir y reikšmės atvaizdavimui grafike
+			ps1new_data3 = {'x': [0, karareiksme3], 'y': [yreiksme3, yreiksme3]}
+			sourceps3.update(ps1new_data3)
+
+			logging.info(karareiksme3)
 
 
-	def alfaps1v():
-		if zenklasps1v() > 0:
-			return (1-pagrps1)/(balanps1-normaaps1)
-		else:
-			return (1-pagrps1)/(balanps1-normakps1)
+for w in [psrytas, pgrytas]:
+	w.on_change("value", ps1r_update)
+for w in [pspietus, pgpietus]:
+	w.on_change("value", ps1p_update)
+for w in [psvakaras, pgvakaras]:
+	w.on_change("value", ps1v_update)
+
+# def ps1p_update(attr, old, new):
+# 	def zenklasps1p():
+# 		def kryptisps1p():
+# 			if normakps1-balanps1 < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		psp = float(pspietus.value.replace(",", "."))
+# 		pgp = float(pgpietus.value.replace(",", "."))
+# 		verteps1p = psp-pgp
+# 		if (verteps1p-balanps1)*kryptisps1p() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+# 	def alfaps1p():
+# 		if zenklasps1p() > 0:
+# 			return (1-pagrps1)/(balanps1-normaaps1)
+# 		else:
+# 			return (1-pagrps1)/(balanps1-normakps1)
 
 
-	def betaps1v():
-		if zenklasps1v() > 0:
-			return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
-		else:
-			return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
+# 	def betaps1p():
+# 		if zenklasps1p() > 0:
+# 			return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
+# 		else:
+# 			return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
+
+# 	def karareiksmeps1p():
+# 		psp = float(pspietus.value.replace(",", "."))
+# 		pgp = float(pgpietus.value.replace(",", "."))
+# 		verteps1 = psp-pgp
+# 		if zenklasps1p() < 0:
+# 			return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
+# 		else:
+# 			return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
+
+# 	def karareiksmeps1priba():
+# 		if karareiksmeps1p() > 4:
+# 			return 4
+# 		elif karareiksmeps1p() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmeps1p()
+# 	ps1pnew_data = {'x': [0, karareiksmeps1priba()], 'y': ["ps1p", "ps1p"]}
+# 	sourceps1p.data.update(ps1pnew_data)
+# 	if karareiksmeps1priba() > 0:
+# 		sp2.glyph.line_color = "blue"
+# 	else:
+# 		sp2.glyph.line_color = "red"
+# 	logging.info(karareiksmeps1p())
+
+# pspietus.on_change("value", ps1p_update)
+# pgpietus.on_change("value", ps1p_update)
 
 
-	def karareiksmeps1v():
-		psv = float(psvakaras.value.replace(",", "."))
-		pgv = float(pgvakaras.value.replace(",", "."))
-		verteps1 = psv-pgv
-		if zenklasps1v() < 0:
-			return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
-		else:
-			return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
+# def ps1v_update(attr, old, new):
+# 	def zenklasps1v():
+# 		def kryptisps1v():
+# 			if normakps1-balanps1 < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		psv = float(psvakaras.value.replace(",", "."))
+# 		pgv = float(pgvakaras.value.replace(",", "."))
+# 		verteps1v = psv-pgv
+# 		if (verteps1v-balanps1)*kryptisps1v() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
 
-	def karareiksmeps1vriba():
-		if karareiksmeps1v() > 4:
-			return 4
-		elif karareiksmeps1v() < -4:
-			return -4
-		else:
-			return karareiksmeps1v()
-	ps1vnew_data = {'x': [0, karareiksmeps1vriba()], 'y': ["ps1v", "ps1v"]}
-	if karareiksmeps1vriba() > 0:
-		sp3.glyph.line_color = "blue"
-	else:
-		sp3.glyph.line_color = "red"
-	sourceps1v.data.update(ps1vnew_data)
-	logging.info(karareiksmeps1v())
 
-psvakaras.on_change("value", ps1v_update)
-pgvakaras.on_change("value", ps1v_update)
+# 	def alfaps1v():
+# 		if zenklasps1v() > 0:
+# 			return (1-pagrps1)/(balanps1-normaaps1)
+# 		else:
+# 			return (1-pagrps1)/(balanps1-normakps1)
+
+
+# 	def betaps1v():
+# 		if zenklasps1v() > 0:
+# 			return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
+# 		else:
+# 			return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
+
+
+# 	def karareiksmeps1v():
+# 		psv = float(psvakaras.value.replace(",", "."))
+# 		pgv = float(pgvakaras.value.replace(",", "."))
+# 		verteps1 = psv-pgv
+# 		if zenklasps1v() < 0:
+# 			return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
+# 		else:
+# 			return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
+
+# 	def karareiksmeps1vriba():
+# 		if karareiksmeps1v() > 4:
+# 			return 4
+# 		elif karareiksmeps1v() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmeps1v()
+# 	ps1vnew_data = {'x': [0, karareiksmeps1vriba()], 'y': ["ps1v", "ps1v"]}
+# 	if karareiksmeps1vriba() > 0:
+# 		sp3.glyph.line_color = "blue"
+# 	else:
+# 		sp3.glyph.line_color = "red"
+# 	sourceps1v.data.update(ps1vnew_data)
+# 	logging.info(karareiksmeps1v())
+
+# psvakaras.on_change("value", ps1v_update)
+# pgvakaras.on_change("value", ps1v_update)
 
 
 normaksd = 11
@@ -4632,6 +4682,7 @@ def tankr_update(attr, old, new):
 		kg7.glyph.line_color = "red"
 	sourcetankr.data.update(tankrnew_data)
 
+
 ksirytas.on_change("value", tankr_update)
 
 
@@ -4683,8 +4734,7 @@ l = layout(
 	[pulsatsi45(), pa45rytas, pa45pietus, pa45vakaras],
 	[tiriam4()],
 	[kvepparmat14()],
-	[aprkvepsu(), ksirytas, ksipietus, ksivakaras],
-	)
+	[aprkvepsu(), ksirytas, ksipietus, ksivakaras])
 l2 = column(p, p1)
 l1 = row(l, l2)
 
