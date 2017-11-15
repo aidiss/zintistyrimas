@@ -2235,11 +2235,11 @@ parametrupav = ["Ps-1", "S+D", "Pm-1+Pm-4", "KRi", "Temp", "Derm", "Vaso", "Vyzd
 lentele = pd.DataFrame(simparasim, index=parametrupav)
 lentele = lentele[["Norma K", "Norma A", "Balansas", "Kryptis", "Pagrindas"]]
 
-ps1dict = {
+paramet = {
 	"ps1rytas": [[psrytas, pgrytas], "ps1r", sourceps1r.data, sp1, 0],
 	"ps1pietūs": [[pspietus, pgpietus], "ps1p", sourceps1p.data, sp2, 0],
 	"ps1vakaras": [[psvakaras, pgvakaras], "ps1v", sourceps1v.data, sp3, 0]}
-ps1order = collections.OrderedDict(ps1dict)
+paramet = collections.OrderedDict(paramet)
 
 
 def verte(*reiksme):
@@ -2302,9 +2302,9 @@ def formulekara(skirtum, linija, ind):
 
 
 def ps1r_update(attr, old, new):
-	for key, value in ps1order.items():
+	for key, value in paramet.items():
 		if "rytas" in str(key):
-			n, yreiksme, sourceps, linijaps, indx = ps1order[key]
+			n, yreiksme, sourceps, linijaps, indx = paramet[key]
 			skirtumas = verte(n)
 			karareiksme = formulekara(skirtumas, linijaps, indx)
 
@@ -2314,9 +2314,9 @@ def ps1r_update(attr, old, new):
 
 
 def ps1p_update(attr, old, new):
-	for key, value in ps1order.items():
+	for key, value in paramet.items():
 		if "pietūs" in str(key):
-			n, yreiksme, sourceps, linijaps, indx = ps1order[key]
+			n, yreiksme, sourceps, linijaps, indx = paramet[key]
 			skirtumas = verte(n)
 			karareiksme = formulekara(skirtumas, linijaps, indx)
 
@@ -2326,9 +2326,9 @@ def ps1p_update(attr, old, new):
 
 
 def ps1v_update(attr, old, new):
-	for key, value in ps1order.items():
+	for key, value in paramet.items():
 		if "vakaras" in str(key):
-			n, yreiksme, sourceps, linijaps, indx = ps1order[key]
+			n, yreiksme, sourceps, linijaps, indx = paramet[key]
 			skirtumas = verte(n)
 			karareiksme = formulekara(skirtumas, linijaps, indx)
 
