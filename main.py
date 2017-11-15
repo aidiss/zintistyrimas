@@ -2236,50 +2236,54 @@ lentele = pd.DataFrame(simparasim, index=parametrupav)
 lentele = lentele[["Norma K", "Norma A", "Balansas", "Kryptis", "Pagrindas"]]
 
 ps1dict = {
-	"ps1rytas": [psrytas, pgrytas, "ps1r", sourceps1r.data, sp1],
-	"ps1pietūs": [pspietus, pgpietus, "ps1p", sourceps1p.data, sp2],
-	"ps1vakaras": [psvakaras, pgvakaras, "ps1v", sourceps1v.data, sp3]}
+	"ps1rytas": [[psrytas, pgrytas], "ps1r", sourceps1r.data, sp1, 0],
+	"ps1pietūs": [[pspietus, pgpietus], "ps1p", sourceps1p.data, sp2, 0],
+	"ps1vakaras": [[psvakaras, pgvakaras], "ps1v", sourceps1v.data, sp3, 0]}
 ps1order = collections.OrderedDict(ps1dict)
 
-# normakps1 = -2
-# normaaps1 = 0
-# balanps1 = (normaaps1 + normakps1) / 2
-# pagrps1 = 2
+
+def verte(*reiksme):
+	L = []
+	for r in reiksme:
+		if L is not None:
+			L = []
+			L.append(r)
+	if len(L[0]) == 1:
+		verte1 = float(L[0][0].value.replace(",", "."))
+		return verte1
+	elif len(L[0]) == 2:
+		verte1 = float(L[0][0].value.replace(",", "."))
+		verte2 = float(L[0][-1].value.replace(",", "."))
+		return verte1 - verte2
 
 
-def verte(reiksme1, reiksme2):
-	psr = float(reiksme1.value.replace(",", "."))
-	pgr = float(reiksme2.value.replace(",", "."))
-	return psr - pgr
-
-
-def formulekara(skirtum, linija):
-	if (skirtum - lentele.loc["Ps-1"]["Balansas"]) * lentele.loc["Ps-1"]["Kryptis"] >= 0:
-			zenklas = 1
+def formulekara(skirtum, linija, ind):
+	if float((skirtum - lentele.ix[ind, "Balansas"]) * lentele.ix[ind, "Kryptis"]) >= 0:
+		zenklas = 1
 	else:
 		zenklas = -1
 
 # nustatoma alfa reikšmė
 	if zenklas > 0:
-		alfa = (1 - lentele.loc["Ps-1"]["Pagrindas"]) / (lentele.loc["Ps-1"]["Balansas"] - lentele.loc["Ps-1"]["Norma A"])
+		alfa = float((1 - lentele.ix[ind, "Pagrindas"]) / (lentele.ix[ind, "Balansas"] - lentele.ix[ind, "Norma A"]))
 	else:
-		alfa = (1 - lentele.loc["Ps-1"]["Pagrindas"]) / (lentele.loc["Ps-1"]["Balansas"] - lentele.loc["Ps-1"]["Norma K"])
+		alfa = float((1 - lentele.ix[ind, "Pagrindas"]) / (lentele.ix[ind, "Balansas"] - lentele.ix[ind, "Norma K"]))
 
 # nustatoma beta reikšmė
 	if zenklas > 0:
-		beta = (
-			lentele.loc["Ps-1"]["Pagrindas"] * lentele.loc["Ps-1"]["Balansas"] -
-			lentele.loc["Ps-1"]["Norma A"]) / (lentele.loc["Ps-1"]["Balansas"] - lentele.loc["Ps-1"]["Norma A"])
+		beta = float((
+			lentele.ix[ind, "Pagrindas"] * lentele.ix[ind, "Balansas"] -
+			lentele.ix[ind, "Norma A"]) / (lentele.ix[ind, "Balansas"] - lentele.ix[ind, "Norma A"]))
 	else:
-		beta = (
-			lentele.loc["Ps-1"]["Pagrindas"] * lentele.loc["Ps-1"]["Balansas"] -
-			lentele.loc["Ps-1"]["Norma K"]) / (lentele.loc["Ps-1"]["Balansas"] - lentele.loc["Ps-1"]["Norma K"])
+		beta = float((
+			lentele.ix[ind, "Pagrindas"] * lentele.ix[ind, "Balansas"] -
+			lentele.ix[ind, "Norma K"]) / (lentele.ix[ind, "Balansas"] - lentele.ix[ind, "Norma K"]))
 
 # nustatoma ar katabolizmo ar anabolizmo reikšmė
 	if zenklas < 0:
-		kara = zenklas * math.log(alfa * skirtum + beta, lentele.loc["Ps-1"]["Pagrindas"])
+		kara = float(zenklas * math.log(alfa * skirtum + beta, lentele.ix[ind, "Pagrindas"]))
 	else:
-		kara = zenklas * math.log(alfa * skirtum + beta, lentele.loc["Ps-1"]["Pagrindas"])
+		kara = float(zenklas * math.log(alfa * skirtum + beta, lentele.ix[ind, "Pagrindas"]))
 
 # nurodomos skirtingos spalvos
 	if kara > 0:
@@ -2287,7 +2291,6 @@ def formulekara(skirtum, linija):
 	else:
 		linija.glyph.line_color = "red"
 
-	logging.info(kara)
 # apribojama reikšmė iki 4 arba -4
 	if kara > 4:
 		karariba = 4
@@ -2301,39 +2304,37 @@ def formulekara(skirtum, linija):
 def ps1r_update(attr, old, new):
 	for key, value in ps1order.items():
 		if "rytas" in str(key):
-			n1, k1, yreiksme1, sourceps1, linijaps1 = ps1order[key]
-			skirtumas1 = verte(n1, k1)
-			karareiksme1 = formulekara(skirtumas1, linijaps1)
+			n, yreiksme, sourceps, linijaps, indx = ps1order[key]
+			skirtumas = verte(n)
+			karareiksme = formulekara(skirtumas, linijaps, indx)
 
 # atnaujinamas x ir y reikšmės atvaizdavimui grafike
-			ps1new_data1 = {'x': [0, karareiksme1], 'y': [yreiksme1, yreiksme1]}
-			sourceps1.update(ps1new_data1)
+			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
+			sourceps.update(ps1new_data)
 
 
 def ps1p_update(attr, old, new):
 	for key, value in ps1order.items():
 		if "pietūs" in str(key):
-			n2, k2, yreiksme2, sourceps2, linijaps2 = ps1order[key]
-			skirtumas2 = verte(n2, k2)
-			karareiksme2 = formulekara(skirtumas2, linijaps2)
+			n, yreiksme, sourceps, linijaps, indx = ps1order[key]
+			skirtumas = verte(n)
+			karareiksme = formulekara(skirtumas, linijaps, indx)
 
 # atnaujinamas x ir y reikšmės atvaizdavimui grafike
-			ps1new_data2 = {'x': [0, karareiksme2], 'y': [yreiksme2, yreiksme2]}
-			sourceps2.update(ps1new_data2)
+			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
+			sourceps.update(ps1new_data)
 
 
 def ps1v_update(attr, old, new):
 	for key, value in ps1order.items():
 		if "vakaras" in str(key):
-			n3, k3, yreiksme3, sourceps3, linijaps3 = ps1order[key]
-			skirtumas3 = verte(n3, k3)
-			karareiksme3 = formulekara(skirtumas3, linijaps3)
+			n, yreiksme, sourceps, linijaps, indx = ps1order[key]
+			skirtumas = verte(n)
+			karareiksme = formulekara(skirtumas, linijaps, indx)
 
-# atnaujinamas x ir y reikšmės atvaizdavimui grafike
-			ps1new_data3 = {'x': [0, karareiksme3], 'y': [yreiksme3, yreiksme3]}
-			sourceps3.update(ps1new_data3)
-
-			logging.info(karareiksme3)
+# atnaujinamas x ir y reikšmsės atvaizdavimui grafike
+			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
+			sourceps.update(ps1new_data)
 
 
 for w in [psrytas, pgrytas]:
@@ -2342,119 +2343,6 @@ for w in [pspietus, pgpietus]:
 	w.on_change("value", ps1p_update)
 for w in [psvakaras, pgvakaras]:
 	w.on_change("value", ps1v_update)
-
-# def ps1p_update(attr, old, new):
-# 	def zenklasps1p():
-# 		def kryptisps1p():
-# 			if normakps1-balanps1 < 0:
-# 				return 1
-# 			else:
-# 				return -1
-# 		psp = float(pspietus.value.replace(",", "."))
-# 		pgp = float(pgpietus.value.replace(",", "."))
-# 		verteps1p = psp-pgp
-# 		if (verteps1p-balanps1)*kryptisps1p() >= 0:
-# 			return 1
-# 		else:
-# 			return -1
-
-# 	def alfaps1p():
-# 		if zenklasps1p() > 0:
-# 			return (1-pagrps1)/(balanps1-normaaps1)
-# 		else:
-# 			return (1-pagrps1)/(balanps1-normakps1)
-
-
-# 	def betaps1p():
-# 		if zenklasps1p() > 0:
-# 			return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
-# 		else:
-# 			return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
-
-# 	def karareiksmeps1p():
-# 		psp = float(pspietus.value.replace(",", "."))
-# 		pgp = float(pgpietus.value.replace(",", "."))
-# 		verteps1 = psp-pgp
-# 		if zenklasps1p() < 0:
-# 			return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
-# 		else:
-# 			return zenklasps1p()*math.log(alfaps1p()*verteps1+betaps1p(), pagrps1)
-
-# 	def karareiksmeps1priba():
-# 		if karareiksmeps1p() > 4:
-# 			return 4
-# 		elif karareiksmeps1p() < -4:
-# 			return -4
-# 		else:
-# 			return karareiksmeps1p()
-# 	ps1pnew_data = {'x': [0, karareiksmeps1priba()], 'y': ["ps1p", "ps1p"]}
-# 	sourceps1p.data.update(ps1pnew_data)
-# 	if karareiksmeps1priba() > 0:
-# 		sp2.glyph.line_color = "blue"
-# 	else:
-# 		sp2.glyph.line_color = "red"
-# 	logging.info(karareiksmeps1p())
-
-# pspietus.on_change("value", ps1p_update)
-# pgpietus.on_change("value", ps1p_update)
-
-
-# def ps1v_update(attr, old, new):
-# 	def zenklasps1v():
-# 		def kryptisps1v():
-# 			if normakps1-balanps1 < 0:
-# 				return 1
-# 			else:
-# 				return -1
-# 		psv = float(psvakaras.value.replace(",", "."))
-# 		pgv = float(pgvakaras.value.replace(",", "."))
-# 		verteps1v = psv-pgv
-# 		if (verteps1v-balanps1)*kryptisps1v() >= 0:
-# 			return 1
-# 		else:
-# 			return -1
-
-
-# 	def alfaps1v():
-# 		if zenklasps1v() > 0:
-# 			return (1-pagrps1)/(balanps1-normaaps1)
-# 		else:
-# 			return (1-pagrps1)/(balanps1-normakps1)
-
-
-# 	def betaps1v():
-# 		if zenklasps1v() > 0:
-# 			return (pagrps1*balanps1-normaaps1)/(balanps1-normaaps1)
-# 		else:
-# 			return (pagrps1*balanps1-normakps1)/(balanps1-normakps1)
-
-
-# 	def karareiksmeps1v():
-# 		psv = float(psvakaras.value.replace(",", "."))
-# 		pgv = float(pgvakaras.value.replace(",", "."))
-# 		verteps1 = psv-pgv
-# 		if zenklasps1v() < 0:
-# 			return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
-# 		else:
-# 			return zenklasps1v()*math.log(alfaps1v()*verteps1+betaps1v(), pagrps1)
-
-# 	def karareiksmeps1vriba():
-# 		if karareiksmeps1v() > 4:
-# 			return 4
-# 		elif karareiksmeps1v() < -4:
-# 			return -4
-# 		else:
-# 			return karareiksmeps1v()
-# 	ps1vnew_data = {'x': [0, karareiksmeps1vriba()], 'y': ["ps1v", "ps1v"]}
-# 	if karareiksmeps1vriba() > 0:
-# 		sp3.glyph.line_color = "blue"
-# 	else:
-# 		sp3.glyph.line_color = "red"
-# 	sourceps1v.data.update(ps1vnew_data)
-# 	logging.info(karareiksmeps1v())
-
-# psvakaras.on_change("value", ps1v_update)
-# pgvakaras.on_change("value", ps1v_update)
 
 
 normaksd = 11
