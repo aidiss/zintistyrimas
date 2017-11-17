@@ -2254,7 +2254,13 @@ def verte(*reiksme):
 	elif len(L[0]) == 2:
 		verte1 = float(L[0][0].value.replace(",", "."))
 		verte2 = float(L[0][-1].value.replace(",", "."))
-		return verte1 - verte2
+		return verte1, verte2
+	else:
+		verte1 = float(L[0][0].value.replace(",", "."))
+		verte2 = float(L[0][1].value.replace(",", "."))
+		verte3 = float(L[0][2].value.replace(",", "."))
+		verte4 = float(L[0][-1].value.replace(",", "."))
+		return verte1, verte2, verte3, verte4
 
 
 def formulekara(skirtum, linija, ind):
@@ -2302,47 +2308,50 @@ def formulekara(skirtum, linija, ind):
 
 
 def ps1r_update(attr, old, new):
-	for key, value in paramet.items():
-		if "rytas" in str(key):
-			n, yreiksme, sourceps, linijaps, indx = paramet[key]
-			skirtumas = verte(n)
+	for key in paramet.keys():
+		if "ps1" in str(key):
+			n, yreiksme, sourcedata, linijaps, indx = paramet[key]
+			v1, v2 = verte(n)
+			skirtumas = v1 - v2
 			karareiksme = formulekara(skirtumas, linijaps, indx)
 
 # atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
-			sourceps.update(ps1new_data)
+			sourcedata.update(ps1new_data)
 
 
-def ps1p_update(attr, old, new):
-	for key, value in paramet.items():
-		if "pietūs" in str(key):
-			n, yreiksme, sourceps, linijaps, indx = paramet[key]
-			skirtumas = verte(n)
-			karareiksme = formulekara(skirtumas, linijaps, indx)
+# def ps1p_update(attr, old, new):
+# 	for key in paramet.keys():
+# 		if "pietūs" in str(key):
+# 			n, yreiksme, sourcedata, linijaps, indx = paramet[key]
+# 			v1, v2 = verte(n)
+# 			skirtumas = v1 - v2
+# 			karareiksme = formulekara(skirtumas, linijaps, indx)
 
-# atnaujinamas x ir y reikšmės atvaizdavimui grafike
-			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
-			sourceps.update(ps1new_data)
+# # atnaujinamas x ir y reikšmės atvaizdavimui grafike
+# 			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
+# 			sourcedata.update(ps1new_data)
 
 
-def ps1v_update(attr, old, new):
-	for key, value in paramet.items():
-		if "vakaras" in str(key):
-			n, yreiksme, sourceps, linijaps, indx = paramet[key]
-			skirtumas = verte(n)
-			karareiksme = formulekara(skirtumas, linijaps, indx)
+# def ps1v_update(attr, old, new):
+# 	for key in paramet.keys():
+# 		if "vakaras" in str(key):
+# 			n, yreiksme, sourcedata, linijaps, indx = paramet[key]
+# 			v1, v2 = verte(n)
+# 			skirtumas = v1 - v2
+# 			karareiksme = formulekara(skirtumas, linijaps, indx)
 
-# atnaujinamas x ir y reikšmsės atvaizdavimui grafike
-			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
-			sourceps.update(ps1new_data)
+# # atnaujinamas x ir y reikšmsės atvaizdavimui grafike
+# 			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
+# 			sourcedata.update(ps1new_data)
 
 
 for w in [psrytas, pgrytas]:
 	w.on_change("value", ps1r_update)
 for w in [pspietus, pgpietus]:
-	w.on_change("value", ps1p_update)
+	w.on_change("value", ps1r_update)
 for w in [psvakaras, pgvakaras]:
-	w.on_change("value", ps1v_update)
+	w.on_change("value", ps1r_update)
 
 
 normaksd = 11
