@@ -2309,7 +2309,7 @@ def formulekara(skirtum, linija, ind):
 
 def ps1r_update(attr, old, new):
 	for key in paramet.keys():
-		if "ps1" in str(key):
+		if "rytas" in str(key):
 			n, yreiksme, sourcedata, linijaps, indx = paramet[key]
 			v1, v2 = verte(n)
 			skirtumas = v1 - v2
@@ -2320,38 +2320,38 @@ def ps1r_update(attr, old, new):
 			sourcedata.update(ps1new_data)
 
 
-# def ps1p_update(attr, old, new):
-# 	for key in paramet.keys():
-# 		if "pietūs" in str(key):
-# 			n, yreiksme, sourcedata, linijaps, indx = paramet[key]
-# 			v1, v2 = verte(n)
-# 			skirtumas = v1 - v2
-# 			karareiksme = formulekara(skirtumas, linijaps, indx)
+def ps1p_update(attr, old, new):
+	for key in paramet.keys():
+		if "pietūs" in str(key):
+			n, yreiksme, sourcedata, linijaps, indx = paramet[key]
+			v1, v2 = verte(n)
+			skirtumas = v1 - v2
+			karareiksme = formulekara(skirtumas, linijaps, indx)
 
-# # atnaujinamas x ir y reikšmės atvaizdavimui grafike
-# 			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
-# 			sourcedata.update(ps1new_data)
-
-
-# def ps1v_update(attr, old, new):
-# 	for key in paramet.keys():
-# 		if "vakaras" in str(key):
-# 			n, yreiksme, sourcedata, linijaps, indx = paramet[key]
-# 			v1, v2 = verte(n)
-# 			skirtumas = v1 - v2
-# 			karareiksme = formulekara(skirtumas, linijaps, indx)
-
-# # atnaujinamas x ir y reikšmsės atvaizdavimui grafike
-# 			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
-# 			sourcedata.update(ps1new_data)
+# atnaujinamas x ir y reikšmės atvaizdavimui grafike
+			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
+			sourcedata.update(ps1new_data)
 
 
-for w in [psrytas, pgrytas]:
-	w.on_change("value", ps1r_update)
-for w in [pspietus, pgpietus]:
-	w.on_change("value", ps1r_update)
-for w in [psvakaras, pgvakaras]:
-	w.on_change("value", ps1r_update)
+def ps1v_update(attr, old, new):
+	for key in paramet.keys():
+		if "vakaras" in str(key):
+			n, yreiksme, sourcedata, linijaps, indx = paramet[key]
+			v1, v2 = verte(n)
+			skirtumas = v1 - v2
+			karareiksme = formulekara(skirtumas, linijaps, indx)
+
+# atnaujinamas x ir y reikšmsės atvaizdavimui grafike
+			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
+			sourcedata.update(ps1new_data)
+
+
+for w in [psrytas, pgrytas, pspietus, pgpietus, psvakaras, pgvakaras]:
+	w.on_change("value", ps1r_update, ps1p_update, ps1v_update)
+# for w in [pspietus, pgpietus]:
+# 	w.on_change("value", ps1p_update)
+# for w in [psvakaras, pgvakaras]:
+# 	w.on_change("value", ps1v_update)
 
 
 normaksd = 11
