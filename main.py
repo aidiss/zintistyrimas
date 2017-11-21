@@ -11,6 +11,7 @@ import math
 import logging
 import pandas as pd
 import collections
+import itertools
 
 # ši dalis, tam, kad būtų galima reguliuoti TextInput width, nes yra nustatytas Bokeh TextInput default min width,
 # kurio negalima mažinti per parametrų nurodymą. Pvz. "invard = TextInput(name = "vard", value="", title = "Vardas", width = 130"
@@ -625,19 +626,27 @@ curdoc().template = jinja2.Template(source='''
 	</html>
 ''')
 
+pavadin = [
+	"<-Simpatinis|Parasimpatinis->",
+	"<-Katogeniniss|Gliukogeninis->",
+	"<-Disaerobinis|Anaerobinis->",
+	"<-Rūgščių trūkumas|Rūgščių perteklius->",
+	"<-Elektrolitų trūkumas|Elektrolitų perteklius->",
+	"<-Kalio trūkumas|Kalio perteklius->",
+	"<-Anglies dvideginio trūkumas|Anglies dvideginio perteklius->"]
+
+plist = ["p1", "p2", "p3", "p4", "p5", "p6", "p7"]
 
 # categorical tipo duomenys, kad būtų galima atvaziduoti grafike, atitinaktys kiekvieno tyrimo ryto, pietų ir vakaro (kol kas tik 2)
 factorssp = [
-			"sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "ppv", "sdv", "ps1v", "bla1",
-			"sklp", "sargp", "nosp", "tremp", "vyzdp", "vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "bla2",
-			"sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", "bla3"
-			]
+	"sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "ppv", "sdv", "ps1v", "bla1",
+	"sklp", "sargp", "nosp", "tremp", "vyzdp", "vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "bla2",
+	"sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", "bla3"]
 
 factorskg = [
-			"uputv", "usvv", "d2p4v", "kphiv", "p4v", "tankv", "kdv", "sphkv", "bla1",
-			"uputp", "usvp", "d2p4p", "kphip", "p4p", "tankp", "kdp", "sphkp", "bla2",
-			"uputr", "usvr", "d2p4r", "kphir", "p4r", "tankr", "kdr", "sphkr", "bla3"
-			]
+	"uputv", "usvv", "d2p4v", "kphiv", "p4v", "tankv", "kdv", "sphkv", "bla1",
+	"uputp", "usvp", "d2p4p", "kphip", "p4p", "tankp", "kdp", "sphkp", "bla2",
+	"uputr", "usvr", "d2p4r", "kphir", "p4r", "tankr", "kdr", "sphkr", "bla3"]
 
 # skaičiuojam atitinakamų categorical skaičių, kad
 # 1) automatiškai grafike nusistatytų ribos tarp ryto, pietų ir vakaro
@@ -646,207 +655,46 @@ factorskg = [
 countsp = len(factorssp)
 countkg = len(factorskg)
 
+
 # grafikai
-p = figure(x_range=[-5, 5], y_range=FactorRange(factors=factorssp), height=350, tools="")
-p.title.text = "<-Katabolizmas|Anabolizmas->"
-p.title.align = "center"
-p.text(x=[-4.7], y=[(countsp-(countsp-3)/3-1)], text=["Rytas"], text_font_size='10pt', text_font_style="bold", angle=1.56)
-p.text(x=[-4.7], y=[(countsp-(countsp-3)/3*2-2)], text=["Pietūs"], text_font_size='10pt', text_font_style="bold", angle=1.56)
-p.text(x=[-4.7], y=[(countsp-(countsp-1))], text=["Vakaras"], text_font_size='10pt', text_font_style="bold", angle=1.56)
-p.x_range.bounds = 'auto'
-p.y_range.bounds = 'auto'
-p.xaxis.axis_label = "<-Simpatinis|Parasimpatinis->"
-p.yaxis.visible = False
-p.xaxis.ticker = FixedTicker(ticks=[-4, -3, -2, -1, 1, 2, 3, 4])
-p.xaxis.formatter = FuncTickFormatter(code="""
-	data = {"-4": "Didelis", "-3": "Vidutinis", "-2": 'Mažas', "-1": "Norma", 1: 'Norma', 2: 'Mažas', 3: 'Vidutinis', 4: 'Didelis'}
-	return data[tick]
-""")
+def make_graf(p, pav, count, factor):
+	p = figure(x_range=[-5, 5], y_range=FactorRange(factors=factor), height=350, tools="")
+	p.title.text = "<-Katabolizmas|Anabolizmas->"
+	p.title.align = "center"
+	p.text(x=[-4.7], y=[(count - (count - 3) / 3 - 1)], text=["Rytas"], text_font_size='10pt', text_font_style="bold", angle=1.56)
+	p.text(x=[-4.7], y=[(count - (count - 3) / 3 * 2 - 2)], text=["Pietūs"], text_font_size='10pt', text_font_style="bold", angle=1.56)
+	p.text(x=[-4.7], y=[(count - (count - 1))], text=["Vakaras"], text_font_size='10pt', text_font_style="bold", angle=1.56)
+	p.x_range.bounds = 'auto'
+	p.y_range.bounds = 'auto'
+	p.xaxis.axis_label = pav
+	p.yaxis.visible = False
+	p.xaxis.ticker = FixedTicker(ticks=[-4, -3, -2, -1, 1, 2, 3, 4])
+	p.xaxis.formatter = FuncTickFormatter(code="""
+		data = {"-4": "Didelis", "-3": "Vidutinis", "-2": 'Mažas', "-1": "Norma", 1: 'Norma', 2: 'Mažas', 3: 'Vidutinis', 4: 'Didelis'}
+		return data[tick]
+	""")
+	p.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
+	p.add_layout(Span(location=1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=-1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=-2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+	p.add_layout(BoxAnnotation(top=(count - 3) / 3 + 1, fill_alpha=0.1, fill_color='black'))
+	p.add_layout(BoxAnnotation(bottom=(count - 3) / 3 + 1, top=(count - 3) / 3 * 2 + 2, fill_alpha=0.1, fill_color='cyan'))
+	p.add_layout(BoxAnnotation(top=count, fill_alpha=0.1, fill_color='yellow'))
+	return p
 
-p1 = figure(x_range=[-5, 5], y_range=FactorRange(factors=factorskg), height=350, tools="")
-p1.title.text = "<-Katabolizmas|Anabolizmas->"
-p1.title.align = "center"
-p1.text(x=[-4.7], y=[(countkg-(countkg-3)/3-1)], text=["Rytas"], text_font_size='10pt', text_font_style="bold", angle=1.56)
-p1.text(x=[-4.7], y=[(countkg-(countkg-3)/3*2-2)], text=["Pietūs"], text_font_size='10pt', text_font_style="bold", angle=1.56)
-p1.text(x=[-4.7], y=[(countkg-(countkg-1))], text=["Vakaras"], text_font_size='10pt', text_font_style="bold", angle=1.56)
-p1.x_range.bounds = "auto"
-p1.y_range.bounds = 'auto'
-p1.xaxis.axis_label = '<-Katogeniniss|Gliukogeninis->'
-p1.yaxis.visible = False
-p1.xaxis.ticker = FixedTicker(ticks=[-4, -3, -2, -1, 1, 2, 3, 4])
-p1.xaxis.formatter = FuncTickFormatter(code="""
-	data = {"-4": "Didelis", "-3": "Vidutinis", "-2": 'Mažas', "-1": "Norma", 1: 'Norma', 2: 'Mažas', 3: 'Vidutinis', 4: 'Didelis'}
-	return data[tick]
-""")
 
-# p2 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
-# p2.title.text = " < -Katabolizmas|Anabolizmas->"
-# p2.title.align = "center"
-# p2.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p2.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p2.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p2.x_range.bounds = 'auto'
-# p2.y_range.bounds = 'auto'
-# p2.xaxis.axis_label = ' < -Simpatinis|Parasimpatinis->'
-# p2.yaxis.visible =False
-# p2.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
-# p2.xaxis.formatter = FuncTickFormatter(code=""data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
-#     return data[tick]
-# """)
-
-# p3 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
-# p3.title.text = " < -Katabolizmas|Anabolizmas->"
-# p3.title.align = "center"
-# p3.text(x=[-62], y =[(count-12)], text = ["Rytas"], tesxt_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p3.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p3.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p3.x_range.bounds = 'auto'
-# p3.y_range.bounds = 'auto'
-# p3.xaxis.axis_label = ' < -Simpatinis|Parasimpatinis->'
-# p3.yaxis.visible =False
-# p3.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
-# p3.xaxis.formatter = FuncTickFormatter(code="""data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
-# return data[tick]
-# 	""")
-
-# p4 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
-# p4.title.text = " < -Katabolizmas|Anabolizmas->"
-# p4.title.align = "center"
-# p4.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p4.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p4.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p4.x_range.bounds = 'auto'
-# p4.y_range.bounds = 'auto'
-# p4.xaxis.axis_label = ' < -Simpatinis|Parasimpatinis->'
-# p4.yaxis.visible =False
-# p4.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
-# p4.xaxis.formatter = FuncTickFormatter(code="""data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
-#     return data[tick]
-# """)
-
-# p5 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
-# p5.title.text = " < -Katabolizmas|Anabolizmas->"
-# p5.title.align = "center"
-# p5.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p5.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p5.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p5.x_range.bounds = 'auto'
-# p5.y_range.bounds = 'auto'
-# p5.xaxis.axis_label = ' < -Simpatinis|Parasimpatinis->'
-# p5.yaxis.visible =False
-# p5.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
-# p5.xaxis.formatter = FuncTickFormatter(code="""
-#     data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
-#     return data[tick]
-# """)
-
-# p6 = figure(x_range = [-65, 65], y_range = factorssp, height = 350, toolbar_location = None)
-# p6.title.text = " < -Katabolizmas|Anabolizmas->"
-# p6.title.align = "center"
-# p6.text(x=[-62], y =[(count-12)], text = ["Rytas"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p6.text(x=[-62], y =[(count-24)], text = ["Pietūs"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p6.text(x=[-62], y =[(count-(count-1))], text = ["Vakaras"], text_font_size='10pt', text_font_style = "bold", angle = 1.55)
-# p6.x_range.bounds = 'auto'
-# p6.y_range.bounds = 'auto'
-# p6.xaxis.axis_label = ' < -Simpatinis|Parasimpatinis->'
-# p6.yaxis.visible =False
-# p6.xaxis.ticker = FixedTicker(ticks=[-60, -45, -30, -15, 15, 30, 45, 60])
-# p6.xaxis.formatter = FuncTickFormatter(code="""
-#     data = {"-60": "Didelis", "-45": "Vidutinis", "-30": 'Mažas', "-15": "Norma", 15: 'Norma', 30: 'Mažas', 45: 'Vidutinis', 60: 'Didelis', 65: "Didelis"}
-#     return data[tick]
-# """)
-
-# kiekvieno grafiko spalvinės anotacijos, atskiriant rytą, pietus ir vakarą
-p.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-p.add_layout(Span(location=1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=-1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=-2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p.add_layout(BoxAnnotation(top=(countsp-3)/3+1, fill_alpha=0.1, fill_color='black'))
-p.add_layout(BoxAnnotation(bottom=(countsp-3)/3+1, top=(countsp-3)/3*2+2, fill_alpha=0.1, fill_color='cyan'))
-p.add_layout(BoxAnnotation(top=countsp, fill_alpha=0.1, fill_color='yellow'))
-
-p1.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-p1.add_layout(Span(location=1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=-1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=-2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p1.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-p1.add_layout(BoxAnnotation(top=(countkg-3)/3+1, fill_alpha=0.1, fill_color='black'))
-p1.add_layout(BoxAnnotation(bottom=(countkg-3)/3+1, top=(countkg-3)/3*2+2, fill_alpha=0.1, fill_color='cyan'))
-p1.add_layout(BoxAnnotation(top=countkg, fill_alpha=0.1, fill_color='yellow'))
-
-# p2.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-# p2.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-# p2.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-# p2.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-# p2.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-# p2.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-# p2.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-# p2.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-# p2.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-# p2.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
-# p2.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
-# p2.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
-
-# p3.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-# p3.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-# p3.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-# p3.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-# p3.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-# p3.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-# p3.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-# p3.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-# p3.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-# p3.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
-# p3.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
-# p3.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
-
-# p4.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-# p4.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-# p4.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-# p4.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-# p4.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-# p4.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-# p4.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-# p4.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-# p4.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-# p4.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
-# p4.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
-# p4.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
-
-# p5.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-# p5.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-# p5.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-# p5.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-# p5.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-# p5.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-# p5.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-# p5.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-# p5.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-# p5.add_layout(BoxAnnotation(top = 12, fill_alpha=0.4, fill_color='yellow'))
-# p5.add_layout(BoxAnnotation(bottom = 12, top = 24, fill_alpha=0.2, fill_color='yellow'))
-# p5.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
-
-# p6.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-# p6.add_layout(Span(location=15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-# p6.add_layout(Span(location=-15, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-# p6.add_layout(Span(location=30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-# p6.add_layout(Span(location=-30, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-# p6.add_layout(Span(location=45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-# p6.add_layout(Span(location=-45, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-# p6.add_layout(Span(location=60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-# p6.add_layout(Span(location=-60, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-# p6.add_layout(BoxAnnotation(top=12, fill_alpha=0.4, fill_color='yellow'))
-# p6.add_layout(BoxAnnotation(bottom=12, top = 24, fill_alpha=0.2, fill_color='yellow'))
-# p6.add_layout(BoxAnnotation(top=36, fill_alpha=0.1, fill_color='yellow'))
+p1 = make_graf(plist[0], pavadin[0], countsp, factorssp)
+p2 = make_graf(plist[1], pavadin[1], countkg, factorskg)
+p3 = make_graf(plist[2], pavadin[2], countsp, factorssp)
+p4 = make_graf(plist[3], pavadin[3], countsp, factorssp)
+p5 = make_graf(plist[4], pavadin[4], countsp, factorssp)
+p6 = make_graf(plist[5], pavadin[5], countsp, factorssp)
+p7 = make_graf(plist[6], pavadin[6], countsp, factorssp)
 
 
 # viso tyrimo tekstinė dalis TextInput laukeliais, kuriuose reikia suvesti duomenis.
@@ -1149,9 +997,9 @@ U-pH 2 “.<i>Jei naudojamas tik matuoklis, šis punktas praleidžiamas</i>.
 	""", width=250)
 
 
-srrytas = TextInput(name="rytas1", value="", title="Rytas", width=60)
-srpietus = TextInput(name="pietus1", value="", title="Pietūs", width=60)
-srvakaras = TextInput(name="vakaras1", value="", title="Vakaras", width=60)
+srrytas = TextInput(name="rytas1", value="0", title="Rytas", width=60)
+srpietus = TextInput(name="pietus1", value="0", title="Pietūs", width=60)
+srvakaras = TextInput(name="vakaras1", value="0", title="Vakaras", width=60)
 
 
 def aprssvies():
@@ -1227,9 +1075,9 @@ atitinkančio stulpelio numerį:
 	""", width=250)
 
 
-ssrytas = TextInput(name="rytas2", value="", title="Rytas", width=60)
-sspietus = TextInput(name="pietus2", value="", title="Pietūs", width=60)
-ssvakaras = TextInput(name="vakaras2", value="", title="Vakaras", width=60)
+ssrytas = TextInput(name="rytas2", value="0", title="Rytas", width=60)
+sspietus = TextInput(name="pietus2", value="0", title="Pietūs", width=60)
+ssvakaras = TextInput(name="vakaras2", value="0", title="Vakaras", width=60)
 
 
 def aprstank():
@@ -1255,9 +1103,9 @@ matavimą pakartoti.
 	""", width=250)
 
 
-strytas = TextInput(name="rytas3", value="", title="Rytas", width=60)
-stpietus = TextInput(name="pietus3", value="", title="Pietūs", width=60)
-stvakaras = TextInput(name="vakaras3", value="", title="Vakaras", width=60)
+strytas = TextInput(name="rytas3", value="0", title="Rytas", width=60)
+stpietus = TextInput(name="pietus3", value="0", title="Pietūs", width=60)
+stvakaras = TextInput(name="vakaras3", value="0", title="Vakaras", width=60)
 
 
 def aprsputo():
@@ -1307,9 +1155,9 @@ skalę ir įrašoma eilutėje 2.5 „Putojimas, U-put“:
 	""", width=250)
 
 
-sprytas = TextInput(name="rytas4", value="", title="Rytas", width=60)
-sppietus = TextInput(name="pietus4", value="", title="Pietūs", width=60)
-spvakaras = TextInput(name="vakaras4", value="", title="Vakaras", width=60)
+sprytas = TextInput(name="rytas4", value="0", title="Rytas", width=60)
+sppietus = TextInput(name="pietus4", value="0", title="Pietūs", width=60)
+spvakaras = TextInput(name="vakaras4", value="0", title="Vakaras", width=60)
 
 
 def aprserugst():
@@ -1343,9 +1191,9 @@ naudojamas tik matuoklis, šis punktas praleidžiamas</i>.
 	""", width=250)
 
 
-serrytas = TextInput(name="rytas5", value="", title="Rytas", width=60)
-serpietus = TextInput(name="pietus5", value="", title="Pietūs", width=60)
-servakaras = TextInput(name="vakaras5", value="", title="Vakaras", width=60)
+serrytas = TextInput(name="rytas5", value="0", title="Rytas", width=60)
+serpietus = TextInput(name="pietus5", value="0", title="Pietūs", width=60)
+servakaras = TextInput(name="vakaras5", value="0", title="Vakaras", width=60)
 
 
 def aprseklamp():
@@ -1395,9 +1243,9 @@ S-kl”:
 	""", width=250)
 
 
-sekrytas = TextInput(name="rytas6", value="", title="Rytas", width=60)
-sekpietus = TextInput(name="pietus6", value="", title="Pietūs", width=60)
-sekvakaras = TextInput(name="vakaras6", value="", title="Vakaras", width=60)
+sekrytas = TextInput(name="rytas6", value="0", title="Rytas", width=60)
+sekpietus = TextInput(name="pietus6", value="0", title="Pietūs", width=60)
+sekvakaras = TextInput(name="vakaras6", value="0", title="Vakaras", width=60)
 
 
 def aprpulsed():
@@ -1432,9 +1280,9 @@ pajuntate po to, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašo
 	""", width=250)
 
 
-psrytas = TextInput(name="rytas7", value="", title="Rytas", width=60)
-pspietus = TextInput(name="pietus7", value="", title="Pietūs", width=60)
-psvakaras = TextInput(name="vakaras7", value="", title="Vakaras", width=60)
+psrytas = TextInput(name="rytas7", value="0", title="Rytas", width=60)
+pspietus = TextInput(name="pietus7", value="0", title="Pietūs", width=60)
+psvakaras = TextInput(name="vakaras7", value="0", title="Vakaras", width=60)
 
 
 def aprkunotemp():
@@ -1463,9 +1311,9 @@ skaičiumi po kablelio įrašomas eilutėje 4.1 „Kūno temperatūra, Temp“.
 	""", width=250)
 
 
-ktrytas = TextInput(name="rytas8", value="", title="Rytas", width=60)
-ktpietus = TextInput(name="pietus8", value="", title="Pietūs", width=60)
-ktvakaras = TextInput(name="vakaras8", value="", title="Vakaras", width=60)
+ktrytas = TextInput(name="rytas8", value="0", title="Rytas", width=60)
+ktpietus = TextInput(name="pietus8", value="0", title="Pietūs", width=60)
+ktvakaras = TextInput(name="vakaras8", value="0", title="Vakaras", width=60)
 
 
 def aprdermoref():
@@ -1526,9 +1374,9 @@ paciento reakcija po 1 min. ir po 6 min. Vertinama pagal skalę ir įrašoma eil
 	""", width=250)
 
 
-drrytas = TextInput(name="rytas9", value="", title="Rytas", width=60)
-drpietus = TextInput(name="pietus9", value="", title="Pietūs", width=60)
-drvakaras = TextInput(name="vakaras9", value="", title="Vakaras", width=60)
+drrytas = TextInput(name="rytas9", value="0", title="Rytas", width=60)
+drpietus = TextInput(name="pietus9", value="0", title="Pietūs", width=60)
+drvakaras = TextInput(name="vakaras9", value="0", title="Vakaras", width=60)
 
 
 def aprvasomref():
@@ -1595,9 +1443,9 @@ skalę ir įrašoma eilutėje 4.3 „Vasomotorinis, Vaso“:
 	""", width=250)
 
 
-vrrytas = TextInput(name="rytas10", value="", title="Rytas", width=60)
-vrpietus = TextInput(name="pietus10", value="", title="Pietūs", width=60)
-vrvakaras = TextInput(name="vakaras10", value="", title="Vakaras", width=60)
+vrrytas = TextInput(name="rytas10", value="0", title="Rytas", width=60)
+vrpietus = TextInput(name="pietus10", value="0", title="Pietūs", width=60)
+vrvakaras = TextInput(name="vakaras10", value="0", title="Vakaras", width=60)
 
 
 def aprvyzdyd():
@@ -1704,9 +1552,9 @@ stebima, apie kokį plotį svyruoja vyzdys. Vertinama pagal skalę ir įrašoma 
 	""", width=250)
 
 
-vdrytas = TextInput(name="rytas11", value="", title="Rytas", width=60)
-vdpietus = TextInput(name="pietus11", value="", title="Pietūs", width=60)
-vdvakaras = TextInput(name="vakaras11", value="", title="Vakaras", width=60)
+vdrytas = TextInput(name="rytas11", value="0", title="Rytas", width=60)
+vdpietus = TextInput(name="pietus11", value="0", title="Pietūs", width=60)
+vdvakaras = TextInput(name="vakaras11", value="0", title="Vakaras", width=60)
 
 
 def aprtremoref():
@@ -1765,9 +1613,9 @@ plaštakos, kai tiriamasis žiūri tiesiai. Vertinama pagal skalę ir įrašoma 
 	""", width=250)
 
 
-trrytas = TextInput(name="rytas12", value="", title="Rytas", width=60)
-trpietus = TextInput(name="pietus12", value="", title="Pietūs", width=60)
-trvakaras = TextInput(name="vakaras12", value="", title="Vakaras", width=60)
+trrytas = TextInput(name="rytas12", value="0", title="Rytas", width=60)
+trpietus = TextInput(name="pietus12", value="0", title="Pietūs", width=60)
+trvakaras = TextInput(name="vakaras12", value="0", title="Vakaras", width=60)
 
 def aprsneruzgu():
 	return Div(text="""
@@ -1833,9 +1681,9 @@ eilutę 4.6 „Šnervių užgulimas, Nos“:
 	""", width=250)
 
 
-surytas = TextInput(name="rytas13", value="", title="Rytas", width=60)
-supietus = TextInput(name="pietus13", value="", title="Pietūs", width=60)
-suvakaras = TextInput(name="vakaras13", value="", title="Vakaras", width=60)
+surytas = TextInput(name="rytas13", value="0", title="Rytas", width=60)
+supietus = TextInput(name="pietus13", value="0", title="Pietūs", width=60)
+suvakaras = TextInput(name="vakaras13", value="0", title="Vakaras", width=60)
 
 
 def aprsarglinref():
@@ -1886,9 +1734,9 @@ išryškėjimas. Vertinama pagal skalę ir įrašoma į eilutę 4.7 „Sargento 
 	""", width=250)
 
 
-slrrytas = TextInput(name="rytas14", value="", title="Rytas", width=60)
-slrpietus = TextInput(name="pietus14", value="", title="Pietūs", width=60)
-slrvakaras = TextInput(name="vakaras14", value="", title="Vakaras", width=60)
+slrrytas = TextInput(name="rytas14", value="0", title="Rytas", width=60)
+slrpietus = TextInput(name="pietus14", value="0", title="Pietūs", width=60)
+slrvakaras = TextInput(name="vakaras14", value="0", title="Vakaras", width=60)
 
 
 def aprkvepdaz():
@@ -1928,9 +1776,9 @@ skaičių „8”, ir kvėpavimo dažnis bus KD = 2×8 = 16.</i>/div>
 	""", width=250)
 
 
-kdrytas = TextInput(name="rytas15", value="", title="Rytas", width=60)
-kdpietus = TextInput(name="pietus15", value="", title="Pietūs", width=60)
-kdvakaras = TextInput(name="vakaras15", value="", title="Vakaras", width=60)
+kdrytas = TextInput(name="rytas15", value="0", title="Rytas", width=60)
+kdpietus = TextInput(name="pietus15", value="0", title="Pietūs", width=60)
+kdvakaras = TextInput(name="vakaras15", value="0", title="Vakaras", width=60)
 
 
 def aprpulgul():
@@ -1965,9 +1813,9 @@ pajuntate po to, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašo
 	""", width=250)
 
 
-pgrytas = TextInput(name="rytas16", value="", title="Rytas", width=60)
-pgpietus = TextInput(name="pietus16", value="", title="Pietūs", width=60)
-pgvakaras = TextInput(name="vakaras16", value="", title="Vakaras", width=60)
+pgrytas = TextInput(name="rytas16", value="0", title="Rytas", width=60)
+pgpietus = TextInput(name="pietus16", value="0", title="Pietūs", width=60)
+pgvakaras = TextInput(name="vakaras16", value="0", title="Vakaras", width=60)
 
 
 def aprsiskraujgul():
@@ -1990,9 +1838,9 @@ pamatuojamas kraujospūdis. Sistolinis kraujospūdis (didesnis rodmuo ties užra
 	""", width=250)
 
 
-skgrytas = TextInput(name="rytas17", value="", title="Rytas", width=60)
-skgpietus = TextInput(name="pietus17", value="", title="Pietūs", width=60)
-skgvakaras = TextInput(name="vakaras17", value="", title="Vakaras", width=60)
+skgrytas = TextInput(name="rytas17", value="0", title="Rytas", width=60)
+skgpietus = TextInput(name="pietus17", value="0", title="Pietūs", width=60)
+skgvakaras = TextInput(name="vakaras17", value="0", title="Vakaras", width=60)
 
 
 def aprdiakraujgul():
@@ -2015,9 +1863,9 @@ gulint, Dia 1 “.
 	""", width=250)
 
 
-dkgrytas = TextInput(name="rytas18", value="", title="Rytas", width=60)
-dkgpietus = TextInput(name="pietus18", value="", title="Pietūs", width=60)
-dkgvakaras = TextInput(name="vakaras18", value="", title="Vakaras", width=60)
+dkgrytas = TextInput(name="rytas18", value="0", title="Rytas", width=60)
+dkgpietus = TextInput(name="pietus18", value="0", title="Pietūs", width=60)
+dkgvakaras = TextInput(name="vakaras18", value="0", title="Vakaras", width=60)
 
 
 def aprpulsatsi15():
@@ -2043,13 +1891,13 @@ pat įsimenamas arba garsiai pasakomas asistentui:
 	""", width=250)
 
 
-parytas = TextInput(name="rytas19", value="", title="Rytas", width=60)
-papietus = TextInput(name="pietus19", value="", title="Pietūs", width=60)
-pavakaras = TextInput(name="vakaras19", value="", title="Vakaras", width=60)
+parytas = TextInput(name="rytas19", value="0", title="Rytas", width=60)
+papietus = TextInput(name="pietus19", value="0", title="Pietūs", width=60)
+pavakaras = TextInput(name="vakaras19", value="0", title="Vakaras", width=60)
 
-pa15rytas = TextInput(name="rytas20", value="", title="Rytas", width=60)
-pa15pietus = TextInput(name="pietus20", value="", title="Pietūs", width=60)
-pa15vakaras = TextInput(name="vakaras20", value="", title="Vakaras", width=60)
+pa15rytas = TextInput(name="rytas20", value="0", title="Rytas", width=60)
+pa15pietus = TextInput(name="pietus20", value="0", title="Pietūs", width=60)
+pa15vakaras = TextInput(name="vakaras20", value="0", title="Vakaras", width=60)
 
 
 def aprkraujpulsatsi45():
@@ -2083,17 +1931,17 @@ kraujospūdis (mažesnis rodmuo ties užrašu „DIA“) įrašomas eilutėje 5.
 	""", width=250)
 
 
-skarytas = TextInput(name="rytas21", value="", title="Rytas", width=60)
-skapietus = TextInput(name="pietus21", value="", title="Pietūs", width=60)
-skavakaras = TextInput(name="vakaras21", value="", title="Vakaras", width=60)
+skarytas = TextInput(name="rytas21", value="0", title="Rytas", width=60)
+skapietus = TextInput(name="pietus21", value="0", title="Pietūs", width=60)
+skavakaras = TextInput(name="vakaras21", value="0", title="Vakaras", width=60)
 
-dkarytas = TextInput(name="rytas22", value="", title="Rytas", width=60)
-dkapietus = TextInput(name="pietus22", value="", title="Pietūs", width=60)
-dkavakaras = TextInput(name="vakaras22", value="", title="Vakaras", width=60)
+dkarytas = TextInput(name="rytas22", value="0", title="Rytas", width=60)
+dkapietus = TextInput(name="pietus22", value="0", title="Pietūs", width=60)
+dkavakaras = TextInput(name="vakaras22", value="0", title="Vakaras", width=60)
 
-pa45rytas = TextInput(name="rytas23", value="", title="Rytas", width=60)
-pa45pietus = TextInput(name="pietus23", value="", title="Pietūs", width=60)
-pa45vakaras = TextInput(name="vakaras23", value="", title="Vakaras", width=60)
+pa45rytas = TextInput(name="rytas23", value="0", title="Rytas", width=60)
+pa45pietus = TextInput(name="pietus23", value="0", title="Pietūs", width=60)
+pa45vakaras = TextInput(name="vakaras23", value="0", title="Vakaras", width=60)
 
 
 def aprkvepsu():
@@ -2121,9 +1969,9 @@ rodomas laikas sekundėmis įrašomas eilutėje 6.2 „Kvėpavimo sulaikymas įk
 	""", width=250)
 
 
-ksirytas = TextInput(name="rytas24", value="", title="Rytas", width=60)
-ksipietus = TextInput(name="pietus24", value="", title="Pietūs", width=60)
-ksivakaras = TextInput(name="vakaras24", value="", title="Vakaras", width=60)
+ksirytas = TextInput(name="rytas24", value="0", title="Rytas", width=60)
+ksipietus = TextInput(name="pietus24", value="0", title="Pietūs", width=60)
+ksivakaras = TextInput(name="vakaras24", value="0", title="Vakaras", width=60)
 
 # ši dalims tam, kad suvedus duomenis į atitinakmą TextInput, grafike atsispindėtų
 # simpatinis/parasimpatinis
@@ -2131,97 +1979,97 @@ sourceps1r = ColumnDataSource(data=dict(x=[], y=[]))
 sourceps1p = ColumnDataSource(data=dict(x=[], y=[]))
 sourceps1v = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp1 = p.line('x', 'y', source=sourceps1r, line_color="blue", line_width=5)
-sp2 = p.line('x', 'y', source=sourceps1p, line_color="blue", line_width=5)
-sp3 = p.line('x', 'y', source=sourceps1v, line_color="blue", line_width=5)
+sp1 = p1.line('x', 'y', source=sourceps1r, line_color="blue", line_width=5)
+sp2 = p1.line('x', 'y', source=sourceps1p, line_color="blue", line_width=5)
+sp3 = p1.line('x', 'y', source=sourceps1v, line_color="blue", line_width=5)
 
 sourcesdr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesdp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesdv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp4 = p.line('x', 'y', source=sourcesdr, line_color="blue", line_width=5)
-sp5 = p.line('x', 'y', source=sourcesdp, line_color="blue", line_width=5)
-sp6 = p.line('x', 'y', source=sourcesdv, line_color="blue", line_width=5)
+sp4 = p1.line('x', 'y', source=sourcesdr, line_color="blue", line_width=5)
+sp5 = p1.line('x', 'y', source=sourcesdp, line_color="blue", line_width=5)
+sp6 = p1.line('x', 'y', source=sourcesdv, line_color="blue", line_width=5)
 
 sourceppr = ColumnDataSource(data=dict(x=[], y=[]))
 sourceppp = ColumnDataSource(data=dict(x=[], y=[]))
 sourceppv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp7 = p.line('x', 'y', source=sourceppr, line_color="blue", line_width=5)
-sp8 = p.line('x', 'y', source=sourceppp, line_color="blue", line_width=5)
-sp9 = p.line('x', 'y', source=sourceppv, line_color="blue", line_width=5)
+sp7 = p1.line('x', 'y', source=sourceppr, line_color="blue", line_width=5)
+sp8 = p1.line('x', 'y', source=sourceppp, line_color="blue", line_width=5)
+sp9 = p1.line('x', 'y', source=sourceppv, line_color="blue", line_width=5)
 
 sourcekrir = ColumnDataSource(data=dict(x=[], y=[]))
 sourcekrip = ColumnDataSource(data=dict(x=[], y=[]))
 sourcekriv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp10 = p.line('x', 'y', source=sourcekrir, line_color="blue", line_width=5)
-sp11 = p.line('x', 'y', source=sourcekrip, line_color="blue", line_width=5)
-sp12 = p.line('x', 'y', source=sourcekriv, line_color="blue", line_width=5)
+sp10 = p1.line('x', 'y', source=sourcekrir, line_color="blue", line_width=5)
+sp11 = p1.line('x', 'y', source=sourcekrip, line_color="blue", line_width=5)
+sp12 = p1.line('x', 'y', source=sourcekriv, line_color="blue", line_width=5)
 
 sourcetempr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetempp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetempv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp13 = p.line('x', 'y', source=sourcetempr, line_color="blue", line_width=5)
-sp14 = p.line('x', 'y', source=sourcetempp, line_color="blue", line_width=5)
-sp15 = p.line('x', 'y', source=sourcetempv, line_color="blue", line_width=5)
+sp13 = p1.line('x', 'y', source=sourcetempr, line_color="blue", line_width=5)
+sp14 = p1.line('x', 'y', source=sourcetempp, line_color="blue", line_width=5)
+sp15 = p1.line('x', 'y', source=sourcetempv, line_color="blue", line_width=5)
 
 sourcedermr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcedermp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcedermv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp16 = p.line('x', 'y', source=sourcedermr, line_color="blue", line_width=5)
-sp17 = p.line('x', 'y', source=sourcedermp, line_color="blue", line_width=5)
-sp18 = p.line('x', 'y', source=sourcedermv, line_color="blue", line_width=5)
+sp16 = p1.line('x', 'y', source=sourcedermr, line_color="blue", line_width=5)
+sp17 = p1.line('x', 'y', source=sourcedermp, line_color="blue", line_width=5)
+sp18 = p1.line('x', 'y', source=sourcedermv, line_color="blue", line_width=5)
 
 sourcevasor = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevasop = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevasov = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp19 = p.line('x', 'y', source=sourcevasor, line_color="blue", line_width=5)
-sp20 = p.line('x', 'y', source=sourcevasop, line_color="blue", line_width=5)
-sp21 = p.line('x', 'y', source=sourcevasov, line_color="blue", line_width=5)
+sp19 = p1.line('x', 'y', source=sourcevasor, line_color="blue", line_width=5)
+sp20 = p1.line('x', 'y', source=sourcevasop, line_color="blue", line_width=5)
+sp21 = p1.line('x', 'y', source=sourcevasov, line_color="blue", line_width=5)
 
 sourcevyzdr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevyzdp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevyzdv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp22 = p.line('x', 'y', source=sourcevyzdr, line_color="blue", line_width=5)
-sp23 = p.line('x', 'y', source=sourcevyzdp, line_color="blue", line_width=5)
-sp24 = p.line('x', 'y', source=sourcevyzdv, line_color="blue", line_width=5)
+sp22 = p1.line('x', 'y', source=sourcevyzdr, line_color="blue", line_width=5)
+sp23 = p1.line('x', 'y', source=sourcevyzdp, line_color="blue", line_width=5)
+sp24 = p1.line('x', 'y', source=sourcevyzdv, line_color="blue", line_width=5)
 
 sourcetremr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetremp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetremv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp25 = p.line('x', 'y', source=sourcetremr, line_color="blue", line_width=5)
-sp26 = p.line('x', 'y', source=sourcetremp, line_color="blue", line_width=5)
-sp27 = p.line('x', 'y', source=sourcetremv, line_color="blue", line_width=5)
+sp25 = p1.line('x', 'y', source=sourcetremr, line_color="blue", line_width=5)
+sp26 = p1.line('x', 'y', source=sourcetremp, line_color="blue", line_width=5)
+sp27 = p1.line('x', 'y', source=sourcetremv, line_color="blue", line_width=5)
 
 sourcenosr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcenosp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcenosv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp28 = p.line('x', 'y', source=sourcenosr, line_color="blue", line_width=5)
-sp29 = p.line('x', 'y', source=sourcenosp, line_color="blue", line_width=5)
-sp30 = p.line('x', 'y', source=sourcenosv, line_color="blue", line_width=5)
+sp28 = p1.line('x', 'y', source=sourcenosr, line_color="blue", line_width=5)
+sp29 = p1.line('x', 'y', source=sourcenosp, line_color="blue", line_width=5)
+sp30 = p1.line('x', 'y', source=sourcenosv, line_color="blue", line_width=5)
 
 sourcesargr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesargp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesargv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp31 = p.line('x', 'y', source=sourcesargr, line_color="blue", line_width=5)
-sp32 = p.line('x', 'y', source=sourcesargp, line_color="blue", line_width=5)
-sp33 = p.line('x', 'y', source=sourcesargv, line_color="blue", line_width=5)
+sp31 = p1.line('x', 'y', source=sourcesargr, line_color="blue", line_width=5)
+sp32 = p1.line('x', 'y', source=sourcesargp, line_color="blue", line_width=5)
+sp33 = p1.line('x', 'y', source=sourcesargv, line_color="blue", line_width=5)
 
 sourcesklr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesklp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesklv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp34 = p.line('x', 'y', source=sourcesklr, line_color="blue", line_width=5)
-sp35 = p.line('x', 'y', source=sourcesklp, line_color="blue", line_width=5)
-sp36 = p.line('x', 'y', source=sourcesklv, line_color="blue", line_width=5)
+sp34 = p1.line('x', 'y', source=sourcesklr, line_color="blue", line_width=5)
+sp35 = p1.line('x', 'y', source=sourcesklp, line_color="blue", line_width=5)
+sp36 = p1.line('x', 'y', source=sourcesklv, line_color="blue", line_width=5)
 
 
 simparasim = {
@@ -2238,7 +2086,20 @@ lentele = lentele[["Norma K", "Norma A", "Balansas", "Kryptis", "Pagrindas"]]
 paramet = {
 	"ps1rytas": [[psrytas, pgrytas], "ps1r", sourceps1r.data, sp1, 0],
 	"ps1pietūs": [[pspietus, pgpietus], "ps1p", sourceps1p.data, sp2, 0],
-	"ps1vakaras": [[psvakaras, pgvakaras], "ps1v", sourceps1v.data, sp3, 0]}
+	"ps1vakaras": [[psvakaras, pgvakaras], "ps1v", sourceps1v.data, sp3, 0],
+
+	"sdrytas": [[skarytas, skgrytas, dkarytas, dkgrytas], "sdr", sourcesdr.data, sp4, 1],
+	"sdpietūs": [[skapietus, skgpietus, dkapietus, dkgpietus], "sdp", sourcesdp.data, sp5, 1],
+	"sdvakaras": [[skavakaras, skgvakaras, dkavakaras, dkgvakaras], "sdv", sourcesdv.data, sp6, 1],
+
+	"pprytas": [[pgrytas, parytas, pa15rytas, pa45rytas], "ppr", sourceppr.data, sp7, 2],
+	"pppietūs": [[pgpietus, papietus, pa15pietus, pa45pietus], "ppp", sourceppp.data, sp8, 2],
+	"ppvakaras": [[pgvakaras, pavakaras, pa15vakaras, pa45vakaras], "ppv", sourceppv.data, sp9, 2],
+
+	"krirytas": [[psrytas, kdrytas], "krir", sourcekrir.data, sp10, 3],
+	"kripietūs": [[pspietus, kdpietus], "krip", sourcekrip.data, sp11, 3],
+	"krivakaras": [[psvakaras, kdvakaras], "kriv", sourcekriv.data, sp12, 3]}
+
 paramet = collections.OrderedDict(paramet)
 
 
@@ -2249,17 +2110,17 @@ def verte(*reiksme):
 			L = []
 			L.append(r)
 	if len(L[0]) == 1:
-		verte1 = float(L[0][0].value.replace(",", "."))
+		verte1 = float(L[0][0].value)
 		return verte1
 	elif len(L[0]) == 2:
-		verte1 = float(L[0][0].value.replace(",", "."))
-		verte2 = float(L[0][-1].value.replace(",", "."))
+		verte1 = float(L[0][0].value)
+		verte2 = float(L[0][-1].value)
 		return verte1, verte2
 	else:
-		verte1 = float(L[0][0].value.replace(",", "."))
-		verte2 = float(L[0][1].value.replace(",", "."))
-		verte3 = float(L[0][2].value.replace(",", "."))
-		verte4 = float(L[0][-1].value.replace(",", "."))
+		verte1 = float(L[0][0].value)
+		verte2 = float(L[0][1].value)
+		verte3 = float(L[0][2].value)
+		verte4 = float(L[0][-1].value)
 		return verte1, verte2, verte3, verte4
 
 
@@ -2296,6 +2157,7 @@ def formulekara(skirtum, linija, ind):
 		linija.glyph.line_color = "blue"
 	else:
 		linija.glyph.line_color = "red"
+	logging.info(kara)
 
 # apribojama reikšmė iki 4 arba -4
 	if kara > 4:
@@ -2307,2280 +2169,2069 @@ def formulekara(skirtum, linija, ind):
 	return karariba
 
 
-def ps1r_update(attr, old, new):
+def ps1_update(attr, old, new):
 	for key in paramet.keys():
-		if "rytas" in str(key):
+		if "ps1" in str(key):
 			n, yreiksme, sourcedata, linijaps, indx = paramet[key]
 			v1, v2 = verte(n)
 			skirtumas = v1 - v2
 			karareiksme = formulekara(skirtumas, linijaps, indx)
 
-# atnaujinamas x ir y reikšmės atvaizdavimui grafike
+	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
 			sourcedata.update(ps1new_data)
 
 
-def ps1p_update(attr, old, new):
+def sd_update(attr, old, new):
 	for key in paramet.keys():
-		if "pietūs" in str(key):
+		if "sd" in str(key):
 			n, yreiksme, sourcedata, linijaps, indx = paramet[key]
-			v1, v2 = verte(n)
-			skirtumas = v1 - v2
+			v1, v2, v3, v4 = verte(n)
+			skirtumas = (v1 - v2) + (v3 - v4)
 			karareiksme = formulekara(skirtumas, linijaps, indx)
 
-# atnaujinamas x ir y reikšmės atvaizdavimui grafike
+	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
 			sourcedata.update(ps1new_data)
 
 
-def ps1v_update(attr, old, new):
-	for key in paramet.keys():
-		if "vakaras" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = paramet[key]
-			v1, v2 = verte(n)
-			skirtumas = v1 - v2
-			karareiksme = formulekara(skirtumas, linijaps, indx)
-
-# atnaujinamas x ir y reikšmsės atvaizdavimui grafike
-			ps1new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
-			sourcedata.update(ps1new_data)
-
-
-for w in [psrytas, pgrytas, pspietus, pgpietus, psvakaras, pgvakaras]:
-	w.on_change("value", ps1r_update, ps1p_update, ps1v_update)
-# for w in [pspietus, pgpietus]:
-# 	w.on_change("value", ps1p_update)
-# for w in [psvakaras, pgvakaras]:
-# 	w.on_change("value", ps1v_update)
-
-
-normaksd = 11
-normaasd = 6
-balansd = (normaasd+normaksd)/2
-pagrsd = 2
-
-
-def sdr_update(attr, old, new):
-	def zenklassdr():
-		def kryptissdr():
-			if normaksd-balansd < 0:
-				return 1
-			else:
-				return -1
-		skar = float(skarytas.value.replace(",", "."))
-		skgr = float(skgrytas.value.replace(",", "."))
-		dkar = float(dkarytas.value.replace(",", "."))
-		dkgr = float(dkgrytas.value.replace(",", "."))
-		vertesd = (skar-skgr)+(dkar-dkgr)
-		if (vertesd-balansd)*kryptissdr() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfasdr():
-		if zenklassdr() > 0:
-			return (1-pagrsd)/(balansd-normaasd)
-		else:
-			return (1-pagrsd)/(balansd-normaksd)
-
-
-	def betasdr():
-		if zenklassdr() > 0:
-			return (pagrsd*balansd-normaasd)/(balansd-normaasd)
-		else:
-			return (pagrsd*balansd-normaksd)/(balansd-normaksd)
-
-	def karareiksmesdr():
-		skar = float(skarytas.value.replace(",", "."))
-		skgr = float(skgrytas.value.replace(",", "."))
-		dkar = float(dkarytas.value.replace(",", "."))
-		dkgr = float(dkgrytas.value.replace(",", "."))
-		vertesd = skar-skgr+dkar-dkgr
-		if zenklassdr() < 0:
-			return zenklassdr()*math.log(alfasdr()*vertesd+betasdr(), pagrsd)
-		else:
-			return zenklassdr()*math.log(alfasdr()*vertesd+betasdr(), pagrsd)
-
-	def karareiksmesdrriba():
-		if karareiksmesdr() > 4:
-			return 4
-		elif karareiksmesdr() < -4:
-			return -4
-		else:
-			return karareiksmesdr()
-	sdrnew_data = {'x': [0, karareiksmesdrriba()], 'y': ["sdr", "sdr"]}
-	if karareiksmesdrriba() > 0:
-		sp4.glyph.line_color = "blue"
-	else:
-		sp4.glyph.line_color = "red"
-	sourcesdr.data.update(sdrnew_data)
-
-skarytas.on_change("value", sdr_update)
-skgrytas.on_change("value", sdr_update)
-dkarytas.on_change("value", sdr_update)
-dkgrytas.on_change("value", sdr_update)
-
-
-def sdp_update(attr, old, new):
-	def zenklassdp():
-		def kryptissdp():
-			if normaksd-balansd < 0:
-				return 1
-			else:
-				return -1
-		skap = float(skapietus.value.replace(",", "."))
-		skgp = float(skgpietus.value.replace(",", "."))
-		dkap = float(dkapietus.value.replace(",", "."))
-		dkgp = float(dkgpietus.value.replace(",", "."))
-		vertesd = (skap-skgp)+(dkap-dkgp)
-		if (vertesd-balansd)*kryptissdp() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfasdp():
-		if zenklassdp() > 0:
-			return (1-pagrsd)/(balansd-normaasd)
-		else:
-			return (1-pagrsd)/(balansd-normaksd)
-
-
-	def betasdp():
-		if zenklassdp() > 0:
-			return (pagrsd*balansd-normaasd)/(balansd-normaasd)
-		else:
-			return (pagrsd*balansd-normaksd)/(balansd-normaksd)
-
-
-	def karareiksmesdp():
-		skap = float(skapietus.value.replace(",", "."))
-		skgp = float(skgpietus.value.replace(",", "."))
-		dkap = float(dkapietus.value.replace(",", "."))
-		dkgp = float(dkgpietus.value.replace(",", "."))
-		vertesd = (skap-skgp)+(dkap-dkgp)
-		if zenklassdp() < 0:
-			return zenklassdp()*math.log(alfasdp()*vertesd+betasdp(), pagrsd)
-		else:
-			return zenklassdp()*math.log(alfasdp()*vertesd+betasdp(), pagrsd)
-
-	def karareiksmesdpriba():
-		if karareiksmesdp() > 4:
-			return 4
-		elif karareiksmesdp() < -4:
-			return -4
-		else:
-			return karareiksmesdp()
-	sdpnew_data = {'x': [0, karareiksmesdpriba()], 'y': ["sdp", "sdp"]}
-	if karareiksmesdpriba() > 0:
-		sp5.glyph.line_color = "blue"
-	else:
-		sp5.glyph.line_color = "red"
-	sourcesdp.data.update(sdpnew_data)
-
-skapietus.on_change("value", sdp_update)
-skgpietus.on_change("value", sdp_update)
-dkapietus.on_change("value", sdp_update)
-dkgpietus.on_change("value", sdp_update)
-
-
-def sdv_update(attr, old, new):
-	def zenklassdv():
-		def kryptissdv():
-			if normaksd-balansd < 0:
-				return 1
-			else:
-				return -1
-		skav = float(skavakaras.value.replace(",", "."))
-		skgv = float(skgvakaras.value.replace(",", "."))
-		dkav = float(dkavakaras.value.replace(",", "."))
-		dkgv = float(dkgvakaras.value.replace(",", "."))
-		vertesd = (skav-skgv)+(dkav-dkgv)
-		if (vertesd-balansd)*kryptissdv() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfasdv():
-		if zenklassdv() > 0:
-			return (1-pagrsd)/(balansd-normaasd)
-		else:
-			return (1-pagrsd)/(balansd-normaksd)
-
-
-	def betasdv():
-		if zenklassdv() > 0:
-			return (pagrsd*balansd-normaasd)/(balansd-normaasd)
-		else:
-			return (pagrsd*balansd-normaksd)/(balansd-normaksd)
-
-
-	def karareiksmesdv():
-		skav = float(skavakaras.value.replace(",", "."))
-		skgv = float(skgvakaras.value.replace(",", "."))
-		dkav = float(dkavakaras.value.replace(",", "."))
-		dkgv = float(dkgvakaras.value.replace(",", "."))
-		vertesd = (skav-skgv)+(dkav-dkgv)
-		if zenklassdv() < 0:
-			return zenklassdv()*math.log(alfasdv()*vertesd+betasdv(), pagrsd)
-		else:
-			return zenklassdv()*math.log(alfasdv()*vertesd+betasdv(), pagrsd)
-
-	def karareiksmesdvriba():
-		if karareiksmesdv() > 4:
-			return 4
-		elif karareiksmesdv() < -4:
-			return -4
-		else:
-			return karareiksmesdv()
-	sdvnew_data = {'x': [0, karareiksmesdvriba()], 'y': ["sdv", "sdv"]}
-	if karareiksmesdvriba() > 0:
-		sp6.glyph.line_color = "blue"
-	else:
-		sp6.glyph.line_color = "red"
-	sourcesdv.data.update(sdvnew_data)
-
-skavakaras.on_change("value", sdv_update)
-skgvakaras.on_change("value", sdv_update)
-dkavakaras.on_change("value", sdv_update)
-dkgvakaras.on_change("value", sdv_update)
-
-
-normakpp = 25
-normaapp = 22
-balanpp = (normaapp+normakpp)/2
-pagrpp = 2
-
-
-def ppr_update(attr, old, new):
-	def zenklasppr():
-		def kryptisppr():
-			if normakpp-balanpp < 0:
-				return 1
-			else:
-				return -1
-		pgr = float(pgrytas.value.replace(",", "."))
-		par = float(parytas.value.replace(",", "."))
-		pa15r = float(pa15rytas.value.replace(",", "."))
-		pa45r = float(pa45rytas.value.replace(",", "."))
-		pp1 = max(pgr, par, pa15r, pa45r)-pgr
-		pp2 = max(pgr, par, pa15r, pa45r)-pa45r
-		vertepp = pp1+pp2
-		if (vertepp-balanpp)*kryptisppr() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfappr():
-		if zenklasppr() > 0:
-			return (1-pagrpp)/(balanpp-normaapp)
-		else:
-			return (1-pagrpp)/(balanpp-normakpp)
-
-
-	def betappr():
-		if zenklasppr() > 0:
-			return (pagrpp*balanpp-normaapp)/(balanpp-normaapp)
-		else:
-			return (pagrpp*balanpp-normakpp)/(balanpp-normakpp)
-
-
-	def karareiksmeppr():
-		pgr = float(pgrytas.value.replace(",", "."))
-		par = float(parytas.value.replace(",", "."))
-		pa15r = float(pa15rytas.value.replace(",", "."))
-		pa45r = float(pa45rytas.value.replace(",", "."))
-		pp1 = max(pgr, par, pa15r, pa45r)-pgr
-		pp2 = max(pgr, par, pa15r, pa45r)-pa45r
-		vertepp = pp1+pp2
-		if zenklasppr() < 0:
-			return zenklasppr()*math.log(alfappr()*vertepp+betappr(), pagrpp)
-		else:
-			return zenklasppr()*math.log(alfappr()*vertepp+betappr(), pagrpp)
-
-	def karareiksmepprriba():
-		if karareiksmeppr() > 4:
-			return 4
-		elif karareiksmeppr() < -4:
-			return -4
-		else:
-			return karareiksmeppr()
-	pprnew_data = {'x': [0, karareiksmepprriba()], 'y': ["ppr", "ppr"]}
-	if karareiksmepprriba() > 0:
-		sp7.glyph.line_color = "blue"
-	else:
-		sp7.glyph.line_color = "red"
-	sourceppr.data.update(pprnew_data)
-
-pgrytas.on_change("value", ppr_update)
-parytas.on_change("value", ppr_update)
-pa15rytas.on_change("value", ppr_update)
-pa45rytas.on_change("value", ppr_update)
-
-
-def ppp_update(attr, old, new):
-	def zenklasppp():
-		def kryptisppp():
-			if normakpp-balanpp < 0:
-				return 1
-			else:
-				return -1
-		pgp = float(pgpietus.value.replace(",", "."))
-		pap = float(papietus.value.replace(",", "."))
-		pa15p = float(pa15pietus.value.replace(",", "."))
-		pa45p = float(pa45pietus.value.replace(",", "."))
-		pp1 = max(pgp, pap, pa15p, pa45p)-pgp
-		pp2 = max(pgp, pap, pa15p, pa45p)-pa45p
-		vertepp = pp1+pp2
-		if (vertepp-balanpp)*kryptisppp() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfappp():
-		if zenklasppp() > 0:
-			return (1-pagrpp)/(balanpp-normaapp)
-		else:
-			return (1-pagrpp)/(balanpp-normakpp)
-
-
-	def betappp():
-		if zenklasppp() > 0:
-			return (pagrpp*balanpp-normaapp)/(balanpp-normaapp)
-		else:
-			return (pagrpp*balanpp-normakpp)/(balanpp-normakpp)
-
-
-	def karareiksmeppp():
-		pgp = float(pgpietus.value.replace(",", "."))
-		pap = float(papietus.value.replace(",", "."))
-		pa15p = float(pa15pietus.value.replace(",", "."))
-		pa45p = float(pa45pietus.value.replace(",", "."))
-		pp1 = max(pgp, pap, pa15p, pa45p)-pgp
-		pp2 = max(pgp, pap, pa15p, pa45p)-pa45p
-		vertepp = pp1+pp2
-		if zenklasppp() < 0:
-			return zenklasppp()*math.log(alfappp()*vertepp+betappp(), pagrpp)
-		else:
-			return zenklasppp()*math.log(alfappp()*vertepp+betappp(), pagrpp)
-
-	def karareiksmepppriba():
-		if karareiksmeppp() > 4:
-			return 4
-		elif karareiksmeppp() < -4:
-			return -4
-		else:
-			return karareiksmeppp()
-	pppnew_data = {'x': [0, karareiksmepppriba()], 'y': ["ppp", "ppp"]}
-	if karareiksmepppriba() > 0:
-		sp8.glyph.line_color = "blue"
-	else:
-		sp8.glyph.line_color = "red"
-	sourceppp.data.update(pppnew_data)
-
-pgpietus.on_change("value", ppp_update)
-papietus.on_change("value", ppp_update)
-pa15pietus.on_change("value", ppp_update)
-pa45pietus.on_change("value", ppp_update)
-
-
-def ppv_update(attr, old, new):
-	def zenklasppv():
-		def kryptisppv():
-			if normakpp-balanpp < 0:
-				return 1
-			else:
-				return -1
-		pgv = float(pgvakaras.value.replace(",", "."))
-		pav = float(pavakaras.value.replace(",", "."))
-		pa15v = float(pa15vakaras.value.replace(",", "."))
-		pa45v = float(pa45vakaras.value.replace(",", "."))
-		pp1 = max(pgv, pav, pa15v, pa45v)-pgv
-		pp2 = max(pgv, pav, pa15v, pa45v)-pa45v
-		vertepp = pp1+pp2
-		if (vertepp-balanpp)*kryptisppv() >= 0:
-			return 1
-		else:
-			return -1
-
-	def alfappv():
-		if zenklasppv() > 0:
-			return (1-pagrpp)/(balanpp-normaapp)
-		else:
-			return (1-pagrpp)/(balanpp-normakpp)
-
-
-	def betappv():
-		if zenklasppv() > 0:
-			return (pagrpp*balanpp-normaapp)/(balanpp-normaapp)
-		else:
-			return (pagrpp*balanpp-normakpp)/(balanpp-normakpp)
-
-
-	def karareiksmeppv():
-		pgv = float(pgvakaras.value.replace(",", "."))
-		pav = float(pavakaras.value.replace(",", "."))
-		pa15v = float(pa15vakaras.value.replace(",", "."))
-		pa45v = float(pa45vakaras.value.replace(",", "."))
-		pp1 = max(pgv, pav, pa15v, pa45v)-pgv
-		pp2 = max(pgv, pav, pa15v, pa45v)-pa45v
-		vertepp = pp1+pp2
-		if zenklasppv() < 0:
-			return zenklasppv()*math.log(alfappv()*vertepp+betappv(), pagrpp)
-		else:
-			return zenklasppv()*math.log(alfappv()*vertepp+betappv(), pagrpp)
-
-	def karareiksmeppvriba():
-		if karareiksmeppv() > 4:
-			return 4
-		elif karareiksmeppv() < -4:
-			return -4
-		else:
-			return karareiksmeppv()
-	ppvnew_data = {'x': [0, karareiksmeppvriba()], 'y': ["ppv", "ppv"]}
-	if karareiksmeppvriba() > 0:
-		sp9.glyph.line_color = "blue"
-	else:
-		sp9.glyph.line_color = "red"
-	sourceppv.data.update(ppvnew_data)
-
-pgvakaras.on_change("value", ppv_update)
-pavakaras.on_change("value", ppv_update)
-pa15vakaras.on_change("value", ppv_update)
-pa45vakaras.on_change("value", ppv_update)
-
-
-normakkri = 6
-normaakri = 4
-balankri = (normaakri+normakkri)/2
-pagrkri = 1.001
-
-
-def krir_update(attr, old, new):
-	def zenklaskrir():
-		def kryptiskrir():
-			if normakkri-balankri < 0:
-				return 1
-			else:
-				return -1
-		psr = float(psrytas.value.replace(",", "."))
-		kdr = float(kdrytas.value.replace(",", "."))
-		vertekri = psr/kdr
-		if (vertekri-balankri)*kryptiskrir() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfakrir():
-		if zenklaskrir() > 0:
-			return (1-pagrkri)/(balankri-normaakri)
-		else:
-			return (1-pagrkri)/(balankri-normakkri)
-
-
-	def betakrir():
-		if zenklaskrir() > 0:
-			return (pagrkri*balankri-normaakri)/(balankri-normaakri)
-		else:
-			return (pagrkri*balankri-normakkri)/(balankri-normakkri)
-
-
-	def karareiksmekrir():
-		psr = float(psrytas.value.replace(",", "."))
-		kdr = float(kdrytas.value.replace(",", "."))
-		vertekri = psr/kdr
-		if zenklaskrir() < 0:
-			return zenklaskrir()*math.log(alfakrir()*vertekri+betakrir(), pagrkri)
-		else:
-			return zenklaskrir()*math.log(alfakrir()*vertekri+betakrir(), pagrkri)
-
-	def karareiksmekrirriba():
-		if karareiksmekrir() > 4:
-			return 4
-		elif karareiksmekrir() < -4:
-			return -4
-		else:
-			return karareiksmekrir()
-	krirnew_data = {'x': [0, karareiksmekrirriba()], 'y': ["krir", "krir"]}
-	if karareiksmekrirriba() > 0:
-		sp10.glyph.line_color = "blue"
-	else:
-		sp10.glyph.line_color = "red"
-	sourcekrir.data.update(krirnew_data)
-
-psrytas.on_change("value", krir_update)
-kdrytas.on_change("value", krir_update)
-
-
-def krip_update(attr, old, new):
-	def zenklaskrip():
-		def kryptiskrip():
-			if normakkri-balankri < 0:
-				return 1
-			else:
-				return -1
-		psp = float(pspietus.value.replace(",", "."))
-		kdp = float(kdpietus.value.replace(",", "."))
-		vertekri = psp/kdp
-		if (vertekri-balankri)*kryptiskrip() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfakrip():
-		if zenklaskrip() > 0:
-			return (1-pagrkri)/(balankri-normaakri)
-		else:
-			return (1-pagrkri)/(balankri-normakkri)
-
-
-	def betakrip():
-		if zenklaskrip() > 0:
-			return (pagrkri*balankri-normaakri)/(balankri-normaakri)
-		else:
-			return (pagrkri*balankri-normakkri)/(balankri-normakkri)
-
-
-	def karareiksmekrip():
-		psp = float(pspietus.value.replace(",", "."))
-		kdp = float(kdpietus.value.replace(",", "."))
-		vertekri = psp/kdp
-		if zenklaskrip() < 0:
-			return zenklaskrip()*math.log(alfakrip()*vertekri+betakrip(), pagrkri)
-		else:
-			return zenklaskrip()*math.log(alfakrip()*vertekri+betakrip(), pagrkri)
-
-	def karareiksmekripriba():
-		if karareiksmekrip() > 4:
-			return 4
-		elif karareiksmekrip() < -4:
-			return -4
-		else:
-			return karareiksmekrip()
-	kripnew_data = {'x': [0, karareiksmekripriba()], 'y': ["krip", "krip"]}
-	if karareiksmekripriba() > 0:
-		sp11.glyph.line_color = "blue"
-	else:
-		sp11.glyph.line_color = "red"
-	sourcekrip.data.update(kripnew_data)
-
-pspietus.on_change("value", krip_update)
-kdpietus.on_change("value", krip_update)
-
-
-def kriv_update(attr, old, new):
-	def zenklaskriv():
-		def kryptiskriv():
-			if normakkri-balankri < 0:
-				return 1
-			else:
-				return -1
-		psv = float(psvakaras.value.replace(",", "."))
-		kdv = float(kdvakaras.value.replace(",", "."))
-		vertekri = psv/kdv
-		if (vertekri-balankri)*kryptiskriv() >= 0:
-			return 1
-		else:
-			return -1
-
-	def alfakriv():
-		if zenklaskriv() > 0:
-			return (1-pagrkri)/(balankri-normaakri)
-		else:
-			return (1-pagrkri)/(balankri-normakkri)
-
-
-	def betakriv():
-		if zenklaskriv() > 0:
-			return (pagrkri*balankri-normaakri)/(balankri-normaakri)
-		else:
-			return (pagrkri*balankri-normakkri)/(balankri-normakkri)
-
-
-	def karareiksmekriv():
-		psv = float(psvakaras.value.replace(",", "."))
-		kdv = float(kdvakaras.value.replace(",", "."))
-		vertekri = psv/kdv
-		if zenklaskriv() < 0:
-			return zenklaskriv()*math.log(alfakriv()*vertekri+betakriv(), pagrkri)
-		else:
-			return zenklaskriv()*math.log(alfakriv()*vertekri+betakriv(), pagrkri)
-
-	def karareiksmekrivriba():
-		if karareiksmekriv() > 4:
-			return 4
-		elif karareiksmekriv() < -4:
-			return -4
-		else:
-			return karareiksmekriv()
-	krivnew_data = {'x': [0, karareiksmekrivriba()], 'y': ["kriv", "kriv"]}
-	if karareiksmekrivriba() > 0:
-		sp12.glyph.line_color = "blue"
-	else:
-		sp12.glyph.line_color = "red"
-	sourcekriv.data.update(krivnew_data)
-
-psvakaras.on_change("value", kriv_update)
-kdvakaras.on_change("value", kriv_update)
-
-
-normaktemp = 36.7
-normaatemp = 36.5
-balantemp = float((normaatemp+normaktemp)/2)
-pagrtemp = 2
-
-
-def tempr_update(attr, old, new):
-	def zenklastempr():
-		def kryptistempr():
-			if normaktemp-balantemp < 0:
-				return 1
-			else:
-				return -1
-		vertetemp = float(ktrytas.value.replace(",", "."))
-		if (vertetemp-balantemp)*kryptistempr() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfatempr():
-		if zenklastempr() > 0:
-			return (1-pagrtemp)/(balantemp-normaatemp)
-		else:
-			return (1-pagrtemp)/(balantemp-normaktemp)
-
-
-	def betatempr():
-		if zenklastempr() > 0:
-			return (pagrtemp*balantemp-normaatemp)/(balantemp-normaatemp)
-		else:
-			return (pagrtemp*balantemp-normaktemp)/(balantemp-normaktemp)
-
-
-	def karareiksmetempr():
-		vertetemp = float(ktrytas.value.replace(",", "."))
-		if zenklastempr() < 0:
-			return zenklastempr()*math.log(float(alfatempr())*float(vertetemp)+float(betatempr()), pagrtemp)
-		else:
-			return zenklastempr()*math.log(float(alfatempr())*float(vertetemp)+float(betatempr()), pagrtemp)
-
-	def karareiksmetemprriba():
-		if karareiksmetempr() > 4:
-			return 4
-		elif karareiksmetempr() < -4:
-			return -4
-		else:
-			return karareiksmetempr()
-	temprnew_data = {'x': [0, karareiksmetemprriba()], 'y': ["tempr", "tempr"]}
-	if karareiksmetemprriba() > 0:
-		sp13.glyph.line_color = "blue"
-	else:
-		sp13.glyph.line_color = "red"
-	sourcetempr.data.update(temprnew_data)
-
-ktrytas.on_change("value", tempr_update)
-
-
-def tempp_update(attr, old, new):
-	def zenklastempp():
-		def kryptistempp():
-			if normaktemp-balantemp < 0:
-				return 1
-			else:
-				return -1
-		vertetemp = float(ktpietus.value.replace(",", "."))
-		if (vertetemp-balantemp)*kryptistempp() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfatempp():
-		if zenklastempp() > 0:
-			return (1-pagrtemp)/(balantemp-normaatemp)
-		else:
-			return (1-pagrtemp)/(balantemp-normaktemp)
-
-	def betatempp():
-		if zenklastempp() > 0:
-			return (pagrtemp*balantemp-normaatemp)/(balantemp-normaatemp)
-		else:
-			return (pagrtemp*balantemp-normaktemp)/(balantemp-normaktemp)
-
-	def karareiksmetempp():
-		vertetemp = float(ktpietus.value.replace(",", "."))
-		if zenklastempp() < 0:
-			return zenklastempp()*math.log(float(alfatempp())*float(vertetemp)+float(betatempp()), pagrtemp)
-		else:
-			return zenklastempp()*math.log(float(alfatempp())*float(vertetemp)+float(betatempp()), pagrtemp)
-
-	def karareiksmetemppriba():
-		if karareiksmetempp() > 4:
-			return 4
-		elif karareiksmetempp() < -4:
-			return -4
-		else:
-			return karareiksmetempp()
-	temppnew_data = {'x': [0, karareiksmetemppriba()], 'y': ["tempp", "tempp"]}
-	if karareiksmetemppriba() > 0:
-		sp14.glyph.line_color = "blue"
-	else:
-		sp14.glyph.line_color = "red"
-	sourcetempp.data.update(temppnew_data)
-
-ktpietus.on_change("value", tempp_update)
-
-
-def tempv_update(attr, old, new):
-	def zenklastempv():
-		def kryptistempv():
-			if normaktemp-balantemp < 0:
-				return 1
-			else:
-				return -1
-		vertetemp = float(ktvakaras.value.replace(",", "."))
-		if (vertetemp-balantemp)*kryptistempv() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfatempv():
-		if zenklastempv() > 0:
-			return (1-pagrtemp)/(balantemp-normaatemp)
-		else:
-			return (1-pagrtemp)/(balantemp-normaktemp)
-
-
-	def betatempv():
-		if zenklastempv() > 0:
-			return (pagrtemp*balantemp-normaatemp)/(balantemp-normaatemp)
-		else:
-			return (pagrtemp*balantemp-normaktemp)/(balantemp-normaktemp)
-
-
-	def karareiksmetempv():
-		vertetemp = float(ktvakaras.value.replace(",", "."))
-		if zenklastempv() < 0:
-			return zenklastempv()*math.log(float(alfatempv())*float(vertetemp)+float(betatempv()), pagrtemp)
-		else:
-			return zenklastempv()*math.log(float(alfatempv())*float(vertetemp)+float(betatempv()), pagrtemp)
-
-	def karareiksmetempvriba():
-		if karareiksmetempv() > 4:
-			return 4
-		elif karareiksmetempv() < -4:
-			return -4
-		else:
-			return karareiksmetempv()
-	tempvnew_data = {'x': [0, karareiksmetempvriba()], 'y': ["tempv", "tempv"]}
-	if karareiksmetempvriba() > 0:
-		sp15.glyph.line_color = "blue"
-	else:
-		sp15.glyph.line_color = "red"
-	sourcetempv.data.update(tempvnew_data)
-
-ktvakaras.on_change("value", tempv_update)
-
-
-normakderm = 1
-normaaderm = 2
-balanderm = float((normaaderm+normakderm)/2)
-pagrderm = 1.2
-
-
-def dermr_update(attr, old, new):
-	def zenklasdermr():
-		def kryptisdermr():
-			if normakderm-balanderm < 0:
-				return 1
-			else:
-				return -1
-		vertederm = float(drrytas.value.replace(",", "."))
-		if (vertederm-balanderm)*kryptisdermr() >= 0:
-			return 1
-		else:
-			return -1
-
-	def alfadermr():
-		if zenklasdermr() > 0:
-			return (1-pagrderm)/(balanderm-normaaderm)
-		else:
-			return (1-pagrderm)/(balanderm-normakderm)
-
-
-	def betadermr():
-		if zenklasdermr() > 0:
-			return (pagrderm*balanderm-normaaderm)/(balanderm-normaaderm)
-		else:
-			return (pagrderm*balanderm-normakderm)/(balanderm-normakderm)
-
-
-	def karareiksmedermr():
-		vertederm = float(drrytas.value.replace(",", "."))
-		if zenklasdermr() < 0:
-			return zenklasdermr()*math.log(float(alfadermr())*float(vertederm)+float(betadermr()), pagrderm)
-		else:
-			return zenklasdermr()*math.log(float(alfadermr())*float(vertederm)+float(betadermr()), pagrderm)
-
-	def karareiksmedermrriba():
-		if karareiksmedermr() > 4:
-			return 4
-		elif karareiksmedermr() < -4:
-			return -4
-		else:
-			return karareiksmedermr()
-	dermrnew_data = {'x': [0, karareiksmedermrriba()], 'y': ["dermr", "dermr"]}
-	if karareiksmedermrriba() > 0:
-		sp16.glyph.line_color = "blue"
-	else:
-		sp16.glyph.line_color = "red"
-	sourcedermr.data.update(dermrnew_data)
-
-drrytas.on_change("value", dermr_update)
-
-
-def dermp_update(attr, old, new):
-	def zenklasdermp():
-		def kryptisdermp():
-			if normakderm-balanderm < 0:
-				return 1
-			else:
-				return -1
-		vertederm = float(drpietus.value.replace(",", "."))
-		if (vertederm-balanderm)*kryptisdermp() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfadermp():
-		if zenklasdermp() > 0:
-			return (1-pagrderm)/(balanderm-normaaderm)
-		else:
-			return (1-pagrderm)/(balanderm-normakderm)
-
-	def betadermp():
-		if zenklasdermp() > 0:
-			return (pagrderm*balanderm-normaaderm)/(balanderm-normaaderm)
-		else:
-			return (pagrderm*balanderm-normakderm)/(balanderm-normakderm)
-
-
-	def karareiksmedermp():
-		vertederm = float(drpietus.value.replace(",", "."))
-		if zenklasdermp() < 0:
-			return zenklasdermp()*math.log(float(alfadermp())*float(vertederm)+float(betadermp()), pagrderm)
-		else:
-			return zenklasdermp()*math.log(float(alfadermp())*float(vertederm)+float(betadermp()), pagrderm)
-
-	def karareiksmedermpriba():
-		if karareiksmedermp() > 4:
-			return 4
-		elif karareiksmedermp() < -4:
-			return -4
-		else:
-			return karareiksmedermp()
-	dermpnew_data = {'x': [0, karareiksmedermpriba()], 'y': ["dermp", "dermp"]}
-	if karareiksmedermpriba() > 0:
-		sp17.glyph.line_color = "blue"
-	else:
-		sp17.glyph.line_color = "red"
-	sourcedermp.data.update(dermpnew_data)
-
-drpietus.on_change("value", dermp_update)
-
-
-def dermv_update(attr, old, new):
-	def zenklasdermv():
-		def kryptisdermv():
-			if normakderm-balanderm < 0:
-				return 1
-			else:
-				return -1
-		vertederm = float(drvakaras.value.replace(",", "."))
-		if (vertederm-balanderm)*kryptisdermv() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfadermv():
-		if zenklasdermv() > 0:
-			return (1-pagrderm)/(balanderm-normaaderm)
-		else:
-			return (1-pagrderm)/(balanderm-normakderm)
-
-
-	def betadermv():
-		if zenklasdermv() > 0:
-			return (pagrderm*balanderm-normaaderm)/(balanderm-normaaderm)
-		else:
-			return (pagrderm*balanderm-normakderm)/(balanderm-normakderm)
-
-
-	def karareiksmedermv():
-		vertederm = float(drvakaras.value.replace(",", "."))
-		if zenklasdermv() < 0:
-			return zenklasdermv()*math.log(float(alfadermv())*float(vertederm)+float(betadermv()), pagrderm)
-		else:
-			return zenklasdermv()*math.log(float(alfadermv())*float(vertederm)+float(betadermv()), pagrderm)
-
-	def karareiksmedermvriba():
-		if karareiksmedermv() > 4:
-			return 4
-		elif karareiksmedermv() < -4:
-			return -4
-		else:
-			return karareiksmedermv()
-	dermvnew_data = {'x': [0, karareiksmedermvriba()], 'y': ["dermv", "dermv"]}
-	if karareiksmedermvriba() > 0:
-		sp18.glyph.line_color = "blue"
-	else:
-		sp18.glyph.line_color = "red"
-	sourcedermv.data.update(dermvnew_data)
-
-drvakaras.on_change("value", dermv_update)
-
-
-normakvaso = -1
-normaavaso = 1
-balanvaso = float((normaavaso+normakvaso)/2)
-pagrvaso = 1.001
-
-
-def vasor_update(attr, old, new):
-	def zenklasvasor():
-		def kryptisvasor():
-			if normakvaso-balanvaso < 0:
-				return 1
-			else:
-				return -1
-		vertevaso = float(vrrytas.value.replace(",", "."))
-		if (vertevaso-balanvaso)*kryptisvasor() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfavasor():
-		if zenklasvasor() > 0:
-			return (1-pagrvaso)/(balanvaso-normaavaso)
-		else:
-			return (1-pagrvaso)/(balanvaso-normakvaso)
-
-
-	def betavasor():
-		if zenklasvasor() > 0:
-			return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
-		else:
-			return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
-
-
-	def karareiksmevasor():
-		vertevaso = float(vrrytas.value.replace(",", "."))
-		if zenklasvasor() < 0:
-			return zenklasvasor()*math.log(float(alfavasor())*float(vertevaso)+float(betavasor()), pagrvaso)
-		else:
-			return zenklasvasor()*math.log(float(alfavasor())*float(vertevaso)+float(betavasor()), pagrvaso)
-
-	def karareiksmevasorriba():
-		if karareiksmevasor() > 4:
-			return 4
-		elif karareiksmevasor() < -4:
-			return -4
-		else:
-			return karareiksmevasor()
-	vasornew_data = {'x': [0, karareiksmevasorriba()], 'y': ["vasor", "vasor"]}
-	if karareiksmevasorriba() > 0:
-		sp19.glyph.line_color = "blue"
-	else:
-		sp19.glyph.line_color = "red"
-	sourcevasor.data.update(vasornew_data)
-
-vrrytas.on_change("value", vasor_update)
-
-
-def vasop_update(attr, old, new):
-	def zenklasvasop():
-		def kryptisvasop():
-			if normakvaso-balanvaso < 0:
-				return 1
-			else:
-				return -1
-		vertevaso = float(vrpietus.value.replace(",", "."))
-		if (vertevaso-balanvaso)*kryptisvasop() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfavasop():
-		if zenklasvasop() > 0:
-			return (1-pagrvaso)/(balanvaso-normaavaso)
-		else:
-			return (1-pagrvaso)/(balanvaso-normakvaso)
-
-
-	def betavasop():
-		if zenklasvasop() > 0:
-			return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
-		else:
-			return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
-
-
-	def karareiksmevasop():
-		vertevaso = float(vrpietus.value.replace(",", "."))
-		if zenklasvasop() < 0:
-			return zenklasvasop()*math.log(float(alfavasop())*float(vertevaso)+float(betavasop()), pagrvaso)
-		else:
-			return zenklasvasop()*math.log(float(alfavasop())*float(vertevaso)+float(betavasop()), pagrvaso)
-
-	def karareiksmevasopriba():
-		if karareiksmevasop() > 4:
-			return 4
-		elif karareiksmevasop() < -4:
-			return -4
-		else:
-			return karareiksmevasop()
-	vasopnew_data = {'x': [0, karareiksmevasopriba()], 'y': ["vasop", "vasop"]}
-	if karareiksmevasopriba() > 0:
-		sp20.glyph.line_color = "blue"
-	else:
-		sp20.glyph.line_color = "red"
-	sourcevasop.data.update(vasopnew_data)
-
-vrpietus.on_change("value", vasop_update)
-
-
-def vasov_update(attr, old, new):
-	def zenklasvasov():
-		def kryptisvasov():
-			if normakvaso-balanvaso < 0:
-				return 1
-			else:
-				return -1
-		vertevaso = float(vrvakaras.value.replace(",", "."))
-		if (vertevaso-balanvaso)*kryptisvasov() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfavasov():
-		if zenklasvasov() > 0:
-			return (1-pagrvaso)/(balanvaso-normaavaso)
-		else:
-			return (1-pagrvaso)/(balanvaso-normakvaso)
-
-
-	def betavasov():
-		if zenklasvasov() > 0:
-			return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
-		else:
-			return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
-
-
-	def karareiksmevasov():
-		vertevaso = float(vrvakaras.value.replace(",", "."))
-		if zenklasvasov() < 0:
-			return zenklasvasov()*math.log(float(alfavasov())*float(vertevaso)+float(betavasov()), pagrvaso)
-		else:
-			return zenklasvasov()*math.log(float(alfavasov())*float(vertevaso)+float(betavasov()), pagrvaso)
-
-	def karareiksmevasovriba():
-		if karareiksmevasov() > 4:
-			return 4
-		elif karareiksmevasov() < -4:
-			return -4
-		else:
-			return karareiksmevasov()
-	vasovnew_data = {'x': [0, karareiksmevasovriba()], 'y': ["vasov", "vasov"]}
-	if karareiksmevasovriba() > 0:
-		sp21.glyph.line_color = "blue"
-	else:
-		sp21.glyph.line_color = "red"
-	sourcevasov.data.update(vasovnew_data)
-
-vrvakaras.on_change("value", vasov_update)
-
-
-normakvyzd = 1
-normaavyzd = -1
-balanvyzd = float((normaavyzd+normakvyzd)/2)
-pagrvyzd = 1.001
-
-
-def vyzdr_update(attr, old, new):
-	def zenklasvyzdr():
-		def kryptisvyzdr():
-			if normakvyzd-balanvyzd < 0:
-				return 1
-			else:
-				return -1
-		vertevyzd = float(vdrytas.value.replace(",", "."))
-		if (vertevyzd-balanvyzd)*kryptisvyzdr() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfavyzdr():
-		if zenklasvyzdr() > 0:
-			return (1-pagrvyzd)/(balanvyzd-normaavyzd)
-		else:
-			return (1-pagrvyzd)/(balanvyzd-normakvyzd)
-
-
-	def betavyzdr():
-		if zenklasvyzdr() > 0:
-			return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
-		else:
-			return (pagrvyzd*balanvyzd-normakvyzd)/(balanvyzd-normakvyzd)
-
-
-	def karareiksmevyzdr():
-		vertevyzd = float(vdrytas.value.replace(",", "."))
-		if zenklasvyzdr() < 0:
-			return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertevyzd)+float(betavyzdr()), pagrvyzd)
-		else:
-			return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertevyzd)+float(betavyzdr()), pagrvyzd)
-
-	def karareiksmevyzdrriba():
-		if karareiksmevyzdr() > 4:
-			return 4
-		elif karareiksmevyzdr() < -4:
-			return -4
-		else:
-			return karareiksmevyzdr()
-	vyzdrnew_data = {'x': [0, karareiksmevyzdrriba()], 'y': ["vyzdr", "vyzdr"]}
-	if karareiksmevyzdrriba() > 0:
-		sp22.glyph.line_color = "blue"
-	else:
-		sp22.glyph.line_color = "red"
-	sourcevyzdr.data.update(vyzdrnew_data)
-
-vdrytas.on_change("value", vyzdr_update)
-
-
-def vyzdp_update(attr, old, new):
-	def zenklasvyzdp():
-		def kryptisvyzdp():
-			if normakvyzd-balanvyzd < 0:
-				return 1
-			else:
-				return -1
-		vertevyzd = float(vdpietus.value.replace(",", "."))
-		if (vertevyzd-balanvyzd)*kryptisvyzdp() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfavyzdp():
-		if zenklasvyzdp() > 0:
-			return (1-pagrvyzd)/(balanvyzd-normaavyzd)
-		else:
-			return (1-pagrvyzd)/(balanvyzd-normakvyzd)
-
-
-	def betavyzdp():
-		if zenklasvyzdp() > 0:
-			return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
-		else:
-			return (pagrvyzd*balanvyzd-normakvyzd)/(balanvyzd-normakvyzd)
-
-
-	def karareiksmevyzdp():
-		vertevyzd = float(vdpietus.value.replace(",", "."))
-		if zenklasvyzdp() < 0:
-			return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertevyzd)+float(betavyzdp()), pagrvyzd)
-		else:
-			return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertevyzd)+float(betavyzdp()), pagrvyzd)
-
-	def karareiksmevyzdpriba():
-		if karareiksmevyzdp() > 4:
-			return 4
-		elif karareiksmevyzdp() < -4:
-			return -4
-		else:
-			return karareiksmevyzdp()
-	vyzdpnew_data = {'x': [0, karareiksmevyzdpriba()], 'y': ["vyzdp", "vyzdp"]}
-	if karareiksmevyzdpriba() > 0:
-		sp23.glyph.line_color = "blue"
-	else:
-		sp23.glyph.line_color = "red"
-	sourcevyzdp.data.update(vyzdpnew_data)
-
-vdpietus.on_change("value", vyzdp_update)
-
-
-def vyzdv_update(attr, old, new):
-	def zenklasvyzdv():
-		def kryptisvyzdv():
-			if normakvyzd-balanvyzd < 0:
-				return 1
-			else:
-				return -1
-		vertevyzd = float(vdvakaras.value.replace(",", "."))
-		if (vertevyzd-balanvyzd)*kryptisvyzdv() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfavyzdv():
-		if zenklasvyzdv() > 0:
-			return (1-pagrvyzd)/(balanvyzd-normaavyzd)
-		else:
-			return (1-pagrvyzd)/(balanvyzd-normakvyzd)
-
-
-	def betavyzdv():
-		if zenklasvyzdv() > 0:
-			return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
-		else:
-			return (pagrvyzd*balanvyzd-normakvyzd)/(balanvyzd-normakvyzd)
-
-
-	def karareiksmevyzdv():
-		vertevyzd = float(vdvakaras.value.replace(",", "."))
-		if zenklasvyzdv() < 0:
-			return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertevyzd)+float(betavyzdv()), pagrvyzd)
-		else:
-			return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertevyzd)+float(betavyzdv()), pagrvyzd)
-
-	def karareiksmevyzdvriba():
-		if karareiksmevyzdv() > 4:
-			return 4
-		elif karareiksmevyzdv() < -4:
-			return -4
-		else:
-			return karareiksmevyzdv()
-	vyzdvnew_data = {'x': [0, karareiksmevyzdvriba()], 'y': ["vyzdv", "vyzdv"]}
-	if karareiksmevyzdvriba() > 0:
-		sp24.glyph.line_color = "blue"
-	else:
-		sp24.glyph.line_color = "red"
-	sourcevyzdv.data.update(vyzdvnew_data)
-
-vdvakaras.on_change("value", vyzdv_update)
-
-
-normaktrem = 1
-normaatrem = -1
-balantrem = float((normaatrem+normaktrem)/2)
-pagrtrem = 1.001
-
-
-def tremr_update(attr, old, new):
-	def zenklastremr():
-		def kryptistremr():
-			if normaktrem-balantrem < 0:
-				return 1
-			else:
-				return -1
-		vertetrem = float(trrytas.value.replace(",", "."))
-		if (vertetrem-balantrem)*kryptistremr() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfatremr():
-		if zenklastremr() > 0:
-			return (1-pagrtrem)/(balantrem-normaatrem)
-		else:
-			return (1-pagrtrem)/(balantrem-normaktrem)
-
-
-	def betatremr():
-		if zenklastremr() > 0:
-			return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
-		else:
-			return (pagrtrem*balantrem-normaktrem)/(balantrem-normaktrem)
-
-
-	def karareiksmetremr():
-		vertetrem = float(trrytas.value.replace(",", "."))
-		if zenklastremr() < 0:
-			return zenklastremr()*math.log(float(alfatremr())*float(vertetrem)+float(betatremr()), pagrtrem)
-		else:
-			return zenklastremr()*math.log(float(alfatremr())*float(vertetrem)+float(betatremr()), pagrtrem)
-
-	def karareiksmetremrriba():
-		if karareiksmetremr() > 4:
-			return 4
-		elif karareiksmetremr() < -4:
-			return -4
-		else:
-			return karareiksmetremr()
-	tremrnew_data = {'x': [0, karareiksmetremrriba()], 'y': ["tremr", "tremr"]}
-	if karareiksmetremrriba() > 0:
-		sp25.glyph.line_color = "blue"
-	else:
-		sp25.glyph.line_color = "red"
-	sourcetremr.data.update(tremrnew_data)
-
-trrytas.on_change("value", tremr_update)
-
-
-def tremp_update(attr, old, new):
-	def zenklastremp():
-		def kryptistremp():
-			if normaktrem-balantrem < 0:
-				return 1
-			else:
-				return -1
-		vertetrem = float(trpietus.value.replace(",", "."))
-		if (vertetrem-balantrem)*kryptistremp() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfatremp():
-		if zenklastremp() > 0:
-			return (1-pagrtrem)/(balantrem-normaatrem)
-		else:
-			return (1-pagrtrem)/(balantrem-normaktrem)
-
-
-	def betatremp():
-		if zenklastremp() > 0:
-			return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
-		else:
-			return (pagrtrem*balantrem-normaktrem)/(balantrem-normaktrem)
-
-
-	def karareiksmetremp():
-		vertetrem = float(trpietus.value.replace(",", "."))
-		if zenklastremp() < 0:
-			return zenklastremp()*math.log(float(alfatremp())*float(vertetrem)+float(betatremp()), pagrtrem)
-		else:
-			return zenklastremp()*math.log(float(alfatremp())*float(vertetrem)+float(betatremp()), pagrtrem)
-
-	def karareiksmetrempriba():
-		if karareiksmetremp() > 4:
-			return 4
-		elif karareiksmetremp() < -4:
-			return -4
-		else:
-			return karareiksmetremp()
-	trempnew_data = {'x': [0, karareiksmetrempriba()], 'y': ["tremp", "tremp"]}
-	if karareiksmetrempriba() > 0:
-		sp26.glyph.line_color = "blue"
-	else:
-		sp26.glyph.line_color = "red"
-	sourcetremp.data.update(trempnew_data)
-
-trpietus.on_change("value", tremp_update)
-
-
-def tremv_update(attr, old, new):
-	def zenklastremv():
-		def kryptistremv():
-			if normaktrem-balantrem < 0:
-				return 1
-			else:
-				return -1
-		vertetrem = float(trvakaras.value.replace(",", "."))
-		if (vertetrem-balantrem)*kryptistremv() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfatremv():
-		if zenklastremv() > 0:
-			return (1-pagrtrem)/(balantrem-normaatrem)
-		else:
-			return (1-pagrtrem)/(balantrem-normaktrem)
-
-
-	def betatremv():
-		if zenklastremv() > 0:
-			return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
-		else:
-			return (pagrtrem*balantrem-normaktrem)/(balantrem-normaktrem)
-
-
-	def karareiksmetremv():
-		vertetrem = float(trvakaras.value.replace(",", "."))
-		if zenklastremv() < 0:
-			return zenklastremv()*math.log(float(alfatremv())*float(vertetrem)+float(betatremv()), pagrtrem)
-		else:
-			return zenklastremv()*math.log(float(alfatremv())*float(vertetrem)+float(betatremv()), pagrtrem)
-
-	def karareiksmetremvriba():
-		if karareiksmetremv() > 4:
-			return 4
-		elif karareiksmetremv() < -4:
-			return -4
-		else:
-			return karareiksmetremv()
-	tremvnew_data = {'x': [0, karareiksmetremvriba()], 'y': ["tremv", "tremv"]}
-	if karareiksmetremvriba() > 0:
-		sp27.glyph.line_color = "blue"
-	else:
-		sp27.glyph.line_color = "red"
-	sourcetremv.data.update(tremvnew_data)
-
-trvakaras.on_change("value", tremv_update)
-
-
-normaknos = -1
-normaanos = 1
-balannos = float((normaanos+normaknos)/2)
-pagrnos = 1.001
-
-
-def nosr_update(attr, old, new):
-	def zenklasnosr():
-		def kryptisnosr():
-			if normaknos-balannos < 0:
-				return 1
-			else:
-				return -1
-		vertenos = float(surytas.value.replace(",", "."))
-		if (vertenos-balannos)*kryptisnosr() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfanosr():
-		if zenklasnosr() > 0:
-			return (1-pagrnos)/(balannos-normaanos)
-		else:
-			return (1-pagrnos)/(balannos-normaknos)
-
-
-	def betanosr():
-		if zenklasnosr() > 0:
-			return (pagrnos*balannos-normaanos)/(balannos-normaanos)
-		else:
-			return (pagrnos*balannos-normaknos)/(balannos-normaknos)
-
-
-	def karareiksmenosr():
-		vertenos = float(surytas.value.replace(",", "."))
-		if zenklasnosr() < 0:
-			return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
-		else:
-			return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
-
-	def karareiksmenosrriba():
-		if karareiksmenosr() > 4:
-			return 4
-		elif karareiksmenosr() < -4:
-			return -4
-		else:
-			return karareiksmenosr()
-	nosrnew_data = {'x': [0, karareiksmenosrriba()], 'y': ["nosr", "nosr"]}
-	if karareiksmenosrriba() > 0:
-		sp28.glyph.line_color = "blue"
-	else:
-		sp28.glyph.line_color = "red"
-	sourcenosr.data.update(nosrnew_data)
-
-surytas.on_change("value", nosr_update)
-
-
-def nosp_update(attr, old, new):
-	def zenklasnosp():
-		def kryptisnosp():
-			if normaknos-balannos < 0:
-				return 1
-			else:
-				return -1
-		vertenos = float(supietus.value.replace(",", "."))
-		if (vertenos-balannos)*kryptisnosp() >= 0:
-			return 1
-		else:
-			return -1
-
-	def alfanosp():
-		if zenklasnosp() > 0:
-			return (1-pagrnos)/(balannos-normaanos)
-		else:
-			return (1-pagrnos)/(balannos-normaknos)
-
-
-	def betanosp():
-		if zenklasnosp() > 0:
-			return (pagrnos*balannos-normaanos)/(balannos-normaanos)
-		else:
-			return (pagrnos*balannos-normaknos)/(balannos-normaknos)
-
-
-	def karareiksmenosp():
-		vertenos = float(supietus.value.replace(",", "."))
-		if zenklasnosp() < 0:
-			return zenklasnosp()*math.log(float(alfanosp())*float(vertenos)+float(betanosp()), pagrnos)
-		else:
-			return zenklasnosp()*math.log(float(alfanosp())*float(vertenos)+float(betanosp()), pagrnos)
-
-	def karareiksmenospriba():
-		if karareiksmenosp() > 4:
-			return 4
-		elif karareiksmenosp() < -4:
-			return -4
-		else:
-			return karareiksmenosp()
-	nospnew_data = {'x': [0, karareiksmenospriba()], 'y': ["nosp", "nosp"]}
-	if karareiksmenospriba() > 0:
-		sp29.glyph.line_color = "blue"
-	else:
-		sp29.glyph.line_color = "red"
-	sourcenosp.data.update(nospnew_data)
-
-supietus.on_change("value", nosp_update)
-
-
-def nosv_update(attr, old, new):
-	def zenklasnosv():
-		def kryptisnosv():
-			if normaknos-balannos < 0:
-				return 1
-			else:
-				return -1
-		vertenos = float(suvakaras.value.replace(",", "."))
-		if (vertenos-balannos)*kryptisnosv() >= 0:
-			return 1
-		else:
-			return -1
-
-	def alfanosv():
-		if zenklasnosv() > 0:
-			return (1-pagrnos)/(balannos-normaanos)
-		else:
-			return (1-pagrnos)/(balannos-normaknos)
-
-	def betanosv():
-		if zenklasnosv() > 0:
-			return (pagrnos*balannos-normaanos)/(balannos-normaanos)
-		else:
-			return (pagrnos*balannos-normaknos)/(balannos-normaknos)
-
-
-	def karareiksmenosv():
-		vertenos = float(suvakaras.value.replace(",", "."))
-		if zenklasnosv() < 0:
-			return zenklasnosv()*math.log(float(alfanosv())*float(vertenos)+float(betanosv()), pagrnos)
-		else:
-			return zenklasnosv()*math.log(float(alfanosv())*float(vertenos)+float(betanosv()), pagrnos)
-
-	def karareiksmenosvriba():
-		if karareiksmenosv() > 4:
-			return 4
-		elif karareiksmenosv() < -4:
-			return -4
-		else:
-			return karareiksmenosv()
-	nosvnew_data = {'x': [0, karareiksmenosvriba()], 'y': ["nosv", "nosv"]}
-	if karareiksmenosvriba() > 0:
-		sp30.glyph.line_color = "blue"
-	else:
-		sp30.glyph.line_color = "red"
-	sourcenosv.data.update(nosvnew_data)
-
-suvakaras.on_change("value", nosv_update)
-
-
-normaksarg = 1
-normaasarg = -1
-balansarg = float((normaasarg+normaksarg)/2)
-pagrsarg = 1.001
-
-
-def sargr_update(attr, old, new):
-	def zenklassargr():
-		def kryptissargr():
-			if normaksarg-balansarg < 0:
-				return 1
-			else:
-				return -1
-		vertesarg = float(slrrytas.value.replace(",", "."))
-		if (vertesarg-balansarg)*kryptissargr() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfasargr():
-		if zenklassargr() > 0:
-			return (1-pagrsarg)/(balansarg-normaasarg)
-		else:
-			return (1-pagrsarg)/(balansarg-normaksarg)
-
-
-	def betasargr():
-		if zenklassargr() > 0:
-			return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
-		else:
-			return (pagrsarg*balansarg-normaksarg)/(balansarg-normaksarg)
-
-
-	def karareiksmesargr():
-		vertesarg = float(slrrytas.value.replace(",", "."))
-		if zenklassargr() < 0:
-			return zenklassargr()*math.log(float(alfasargr())*float(vertesarg)+float(betasargr()), pagrsarg)
-		else:
-			return zenklassargr()*math.log(float(alfasargr())*float(vertesarg)+float(betasargr()), pagrsarg)
-
-	def karareiksmesargrriba():
-		if karareiksmesargr() > 4:
-			return 4
-		elif karareiksmesargr() < -4:
-			return -4
-		else:
-			return karareiksmesargr()
-	sargrnew_data = {'x': [0, karareiksmesargrriba()], 'y': ["sargr", "sargr"]}
-	if karareiksmesargrriba() > 0:
-		sp31.glyph.line_color = "blue"
-	else:
-		sp31.glyph.line_color = "red"
-	sourcesargr.data.update(sargrnew_data)
-
-slrrytas.on_change("value", sargr_update)
-
-
-def sargp_update(attr, old, new):
-	def zenklassargp():
-		def kryptissargp():
-			if normaksarg-balansarg < 0:
-				return 1
-			else:
-				return -1
-		vertesarg = float(slrpietus.value.replace(",", "."))
-		if (vertesarg-balansarg)*kryptissargp() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfasargp():
-		if zenklassargp() > 0:
-			return (1-pagrsarg)/(balansarg-normaasarg)
-		else:
-			return (1-pagrsarg)/(balansarg-normaksarg)
-
-
-	def betasargp():
-		if zenklassargp() > 0:
-			return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
-		else:
-			return (pagrsarg*balansarg-normaksarg)/(balansarg-normaksarg)
-
-
-	def karareiksmesargp():
-		vertesarg = float(slrpietus.value.replace(",", "."))
-		if zenklassargp() < 0:
-			return zenklassargp()*math.log(float(alfasargp())*float(vertesarg)+float(betasargp()), pagrsarg)
-		else:
-			return zenklassargp()*math.log(float(alfasargp())*float(vertesarg)+float(betasargp()), pagrsarg)
-
-	def karareiksmesargpriba():
-		if karareiksmesargp() > 4:
-			return 4
-		elif karareiksmesargp() < -4:
-			return -4
-		else:
-			return karareiksmesargp()
-	sargpnew_data = {'x': [0, karareiksmesargpriba()], 'y': ["sargp", "sargp"]}
-	if karareiksmesargpriba() > 0:
-		sp32.glyph.line_color = "blue"
-	else:
-		sp32.glyph.line_color = "red"
-	sourcesargp.data.update(sargpnew_data)
-
-slrpietus.on_change("value", sargp_update)
-
-
-def sargv_update(attr, old, new):
-	def zenklassargv():
-		def kryptissargv():
-			if normaksarg-balansarg < 0:
-				return 1
-			else:
-				return -1
-		vertesarg = float(slrvakaras.value.replace(",", "."))
-		if (vertesarg-balansarg)*kryptissargv() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfasargv():
-		if zenklassargv() > 0:
-			return (1-pagrsarg)/(balansarg-normaasarg)
-		else:
-			return (1-pagrsarg)/(balansarg-normaksarg)
-
-
-	def betasargv():
-		if zenklassargv() > 0:
-			return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
-		else:
-			return (pagrsarg*balansarg-normaksarg)/(balansarg-normaksarg)
-
-
-	def karareiksmesargv():
-		vertesarg = float(slrvakaras.value.replace(",", "."))
-		if zenklassargv() < 0:
-			return zenklassargv()*math.log(float(alfasargv())*float(vertesarg)+float(betasargv()), pagrsarg)
-		else:
-			return zenklassargv()*math.log(float(alfasargv())*float(vertesarg)+float(betasargv()), pagrsarg)
-
-	def karareiksmesargvriba():
-		if karareiksmesargv() > 4:
-			return 4
-		elif karareiksmesargv() < -4:
-			return -4
-		else:
-			return karareiksmesargv()
-	sargvnew_data = {'x': [0, karareiksmesargvriba()], 'y': ["sargv", "sargv"]}
-	if karareiksmesargvriba() > 0:
-		sp33.glyph.line_color = "blue"
-	else:
-		sp33.glyph.line_color = "red"
-	sourcesargv.data.update(sargvnew_data)
-
-slrvakaras.on_change("value", sargv_update)
-
-
-normakskl = 1
-normaaskl = -1
-balanskl = float((normaaskl+normakskl)/2)
-pagrskl = 1.001
-
-
-def sklr_update(attr, old, new):
-	def zenklassklr():
-		def kryptissklr():
-			if normakskl-balanskl < 0:
-				return 1
-			else:
-				return -1
-		verteskl = float(sekrytas.value.replace(",", "."))
-		if (verteskl-balanskl)*kryptissklr() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfasklr():
-		if zenklassklr() > 0:
-			return (1-pagrskl)/(balanskl-normaaskl)
-		else:
-			return (1-pagrskl)/(balanskl-normakskl)
-
-
-	def betasklr():
-		if zenklassklr() > 0:
-			return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
-		else:
-			return (pagrskl*balanskl-normakskl)/(balanskl-normakskl)
-
-
-	def karareiksmesklr():
-		verteskl = float(sekrytas.value.replace(",", "."))
-		if zenklassklr() < 0:
-			return zenklassklr()*math.log(float(alfasklr())*float(verteskl)+float(betasklr()), pagrskl)
-		else:
-			return zenklassklr()*math.log(float(alfasklr())*float(verteskl)+float(betasklr()), pagrskl)
-
-	def karareiksmesklrriba():
-		if karareiksmesklr() > 4:
-			return 4
-		elif karareiksmesklr() < -4:
-			return -4
-		else:
-			return karareiksmesklr()
-	sklrnew_data = {'x': [0, karareiksmesklrriba()], 'y': ["sklr", "sklr"]}
-	if karareiksmesklrriba() > 0:
-		sp34.glyph.line_color = "blue"
-	else:
-		sp34.glyph.line_color = "red"
-	sourcesklr.data.update(sklrnew_data)
-
-sekrytas.on_change("value", sklr_update)
-
-
-def sklp_update(attr, old, new):
-	def zenklassklp():
-		def kryptissklp():
-			if normakskl-balanskl < 0:
-				return 1
-			else:
-				return -1
-		verteskl = float(sekpietus.value.replace(",", "."))
-		if (verteskl-balanskl)*kryptissklp() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfasklp():
-		if zenklassklp() > 0:
-			return (1-pagrskl)/(balanskl-normaaskl)
-		else:
-			return (1-pagrskl)/(balanskl-normakskl)
-
-
-	def betasklp():
-		if zenklassklp() > 0:
-			return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
-		else:
-			return (pagrskl*balanskl-normakskl)/(balanskl-normakskl)
-
-
-	def karareiksmesklp():
-		verteskl = float(sekpietus.value.replace(",", "."))
-		if zenklassklp() < 0:
-			return zenklassklp()*math.log(float(alfasklp())*float(verteskl)+float(betasklp()), pagrskl)
-		else:
-			return zenklassklp()*math.log(float(alfasklp())*float(verteskl)+float(betasklp()), pagrskl)
-
-	def karareiksmesklpriba():
-		if karareiksmesklp() > 4:
-			return 4
-		elif karareiksmesklp() < -4:
-			return -4
-		else:
-			return karareiksmesklp()
-	sklpnew_data = {'x': [0, karareiksmesklpriba()], 'y': ["sklp", "sklp"]}
-	if karareiksmesklpriba() > 0:
-		sp35.glyph.line_color = "blue"
-	else:
-		sp35.glyph.line_color = "red"
-	sourcesklp.data.update(sklpnew_data)
-
-sekpietus.on_change("value", sklp_update)
-
-
-def sklv_update(attr, old, new):
-	def zenklassklv():
-		def kryptissklv():
-			if normakskl-balanskl < 0:
-				return 1
-			else:
-				return -1
-		verteskl = float(sekvakaras.value.replace(",", "."))
-		if (verteskl-balanskl)*kryptissklv() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfasklv():
-		if zenklassklv() > 0:
-			return (1-pagrskl)/(balanskl-normaaskl)
-		else:
-			return (1-pagrskl)/(balanskl-normakskl)
-
-
-	def betasklv():
-		if zenklassklv() > 0:
-			return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
-		else:
-			return (pagrskl*balanskl-normakskl)/(balanskl-normakskl)
-
-	def karareiksmesklv():
-		verteskl = float(sekvakaras.value.replace(",", "."))
-		if zenklassklv() < 0:
-			return zenklassklv()*math.log(float(alfasklv())*float(verteskl)+float(betasklv()), pagrskl)
-		else:
-			return zenklassklv()*math.log(float(alfasklv())*float(verteskl)+float(betasklv()), pagrskl)
-
-	def karareiksmesklvriba():
-		if karareiksmesklv() > 4:
-			return 4
-		elif karareiksmesklv() < -4:
-			return -4
-		else:
-			return karareiksmesklv()
-	sklvnew_data = {'x': [0, karareiksmesklvriba()], 'y': ["sklv", "sklv"]}
-	if karareiksmesklvriba() > 0:
-		sp36.glyph.line_color = "blue"
-	else:
-		sp36.glyph.line_color = "red"
-	sourcesklv.data.update(sklvnew_data)
-
-sekvakaras.on_change("value", sklv_update)
-
-# katogeninis/gliukogeninis
-# S-pHK
-# KD
-# t
-# P4
-# KpHi
-# D2-P4
-# U-šv
-# U-put
-
-sourcesphkr = ColumnDataSource(data=dict(x=[], y=[]))
-sourcesphkp = ColumnDataSource(data=dict(x=[], y=[]))
-sourcesphkv = ColumnDataSource(data=dict(x=[], y=[]))
-
-kg1 = p1.line('x', 'y', source=sourcesphkr, line_color="blue", line_width=5)
-kg2 = p1.line('x', 'y', source=sourcesphkp, line_color="blue", line_width=5)
-kg3 = p1.line('x', 'y', source=sourcesphkv, line_color="blue", line_width=5)
-
-sourcekdr = ColumnDataSource(data=dict(x=[], y=[]))
-sourcekdp = ColumnDataSource(data=dict(x=[], y=[]))
-sourcekdv = ColumnDataSource(data=dict(x=[], y=[]))
-
-kg4 = p1.line('x', 'y', source=sourcekdr, line_color="blue", line_width=5)
-kg5 = p1.line('x', 'y', source=sourcekdp, line_color="blue", line_width=5)
-kg6 = p1.line('x', 'y', source=sourcekdv, line_color="blue", line_width=5)
-
-sourcetankr = ColumnDataSource(data=dict(x=[], y=[]))
-sourcetankp = ColumnDataSource(data=dict(x=[], y=[]))
-sourcetankv = ColumnDataSource(data=dict(x=[], y=[]))
-
-kg7 = p1.line('x', 'y', source=sourcetankr, line_color="blue", line_width=5)
-kg8 = p1.line('x', 'y', source=sourcetankp, line_color="blue", line_width=5)
-kg9 = p1.line('x', 'y', source=sourcetankv, line_color="blue", line_width=5)
-
-
-def sphkr_update(attr, old, new):
-	def sphkr():
-		tank = float(strytas.value.replace(",", "."))
-		vertetank = tank*1000-1000
-		serug = float(serrytas.value.replace(",", "."))
-		return serug+0.033333*vertetank-0.533333
-
-	def sphkrriba():
-		if sphkr() > 4:
-			return 4
-		elif sphkr() < -4:
-			return -4
-		else:
-			return sphkr()
-	sphkrnew_data = {'x': [0, sphkrriba()], 'y': ["sphkr", "sphkr"]}
-	if sphkrriba() > 0:
-		kg1.glyph.line_color = "blue"
-	else:
-		kg1.glyph.line_color = "red"
-	sourcesphkr.data.update(sphkrnew_data)
-	return float(sphkrriba())
-strytas.on_change("value", sphkr_update)
-serrytas.on_change("value", sphkr_update)
-
-
-def sphkp_update(attr, old, new):
-	def sphkp():
-		tank = float(stpietus.value.replace(",", "."))
-		vertetank = tank*1000-1000
-		serug = float(serpietus.value.replace(",", "."))
-		return serug+0.033333*vertetank-0.533333
-
-	def sphkpriba():
-		if sphkp() > 4:
-			return 4
-		elif sphkp() < -4:
-			return -4
-		else:
-			return sphkp()
-	sphkpnew_data = {'x': [0, sphkpriba()], 'y': ["sphkp", "sphkp"]}
-	if sphkpriba() > 0:
-		kg2.glyph.line_color = "blue"
-	else:
-		kg2.glyph.line_color = "red"
-	sourcesphkp.data.update(sphkpnew_data)
-	return float(sphkpriba())
-stpietus.on_change("value", sphkp_update)
-serpietus.on_change("value", sphkp_update)
-
-
-def sphkv_update(attr, old, new):
-	def sphkv():
-		tank = float(stvakaras.value.replace(",", "."))
-		vertetank = tank*1000-1000
-		serug = float(servakaras.value.replace(",", "."))
-		return serug+0.033333*vertetank-0.533333
-
-	def sphkvriba():
-		if sphkv() > 4:
-			return 4
-		elif sphkv() < -4:
-			return -4
-		else:
-			return sphkv()
-	sphkvnew_data = {'x': [0, sphkvriba()], 'y': ["sphkv", "sphkv"]}
-	if sphkvriba() > 0:
-		kg3.glyph.line_color = "blue"
-	else:
-		kg3.glyph.line_color = "red"
-	sourcesphkv.data.update(sphkvnew_data)
-	return float(sphkvriba())
-stvakaras.on_change("value", sphkv_update)
-servakaras.on_change("value", sphkv_update)
-
-
-normakkd = 15
-pagrkd = 2
-
-
-def kdr_update(attr, old, new):
-	def normaakdr():
-		if sphkr_update(attr, old, new) >= 6.8 and sphkr_update(attr, old, new) < 7:
-			return 16
-		else:
-			return 17
-	balankd = float((normaakdr()+normakkd)/2)
-
-	def zenklaskdr():
-		def kryptiskdr():
-			if normakkd-balankd < 0:
-				return 1
-			else:
-				return -1
-		vertekd = float(kdrytas.value.replace(",", "."))
-		if (vertekd-balankd)*kryptiskdr() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfakdr():
-		if zenklaskdr() > 0:
-			return (1-pagrkd)/(balankd-normaakdr())
-		else:
-			return (1-pagrkd)/(balankd-normakkd)
-
-
-	def betakdr():
-		if zenklaskdr() > 0:
-			return (pagrkd*balankd-normaakdr())/(balankd-normaakdr())
-		else:
-			return (pagrkd*balankd-normakkd)/(balankd-normakkd)
-
-
-	def karareiksmekdr():
-		vertekd = float(kdrytas.value.replace(",", "."))
-		if zenklaskdr() < 0:
-			return zenklaskdr()*math.log(float(alfakdr())*float(vertekd)+float(betakdr()), pagrkd)
-		else:
-			return zenklaskdr()*math.log(float(alfakdr())*float(vertekd)+float(betakdr()), pagrkd)
-
-	def karareiksmekdrriba():
-		if karareiksmekdr() > 4:
-			return 4
-		elif karareiksmekdr() < -4:
-			return -4
-		else:
-			return karareiksmekdr()
-	kdrnew_data = {'x': [0, karareiksmekdrriba()], 'y': ["kdr", "kdr"]}
-	if karareiksmekdrriba() > 0:
-		kg4.glyph.line_color = "blue"
-	else:
-		kg4.glyph.line_color = "red"
-	sourcekdr.data.update(kdrnew_data)
-
-kdrytas.on_change("value", kdr_update)
-
-
-def kdp_update(attr, old, new):
-	def normaakdp():
-		if sphkp_update(attr, old, new) >= 6.8 and sphkp_update(attr, old, new) < 7:
-			return 16
-		else:
-			return 17
-
-	balankd = float((normaakdp()+normakkd)/2)
-
-	def zenklaskdp():
-		def kryptiskdp():
-			if normakkd-balankd < 0:
-				return 1
-			else:
-				return -1
-		vertekd = float(kdpietus.value.replace(",", "."))
-		if (vertekd-balankd)*kryptiskdp() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfakdp():
-		if zenklaskdp() > 0:
-			return (1-pagrkd)/(balankd-normaakdp())
-		else:
-			return (1-pagrkd)/(balankd-normakkd)
-
-
-	def betakdp():
-		if zenklaskdp() > 0:
-			return (pagrkd*balankd-normaakdp())/(balankd-normaakdp())
-		else:
-			return (pagrkd*balankd-normakkd)/(balankd-normakkd)
-
-
-	def karareiksmekdp():
-		vertekd = float(kdpietus.value.replace(",", "."))
-		if zenklaskdp() < 0:
-			return zenklaskdp()*math.log(float(alfakdp())*float(vertekd)+float(betakdp()), pagrkd)
-		else:
-			return zenklaskdp()*math.log(float(alfakdp())*float(vertekd)+float(betakdp()), pagrkd)
-
-	def karareiksmekdpriba():
-		if karareiksmekdp() > 4:
-			return 4
-		elif karareiksmekdp() < -4:
-			return -4
-		else:
-			return karareiksmekdp()
-	kdpnew_data = {'x': [0, karareiksmekdpriba()], 'y': ["kdp", "kdp"]}
-	if karareiksmekdpriba() > 0:
-		kg5.glyph.line_color = "blue"
-	else:
-		kg5.glyph.line_color = "red"
-	sourcekdp.data.update(kdpnew_data)
-
-kdpietus.on_change("value", kdp_update)
-
-
-def kdv_update(attr, old, new):
-	def normaakdv():
-		if sphkv_update(attr, old, new) >= 6.8 and sphkv_update(attr, old, new) < 7:
-			return 16
-		else:
-			return 17
-
-	balankd = float((normaakdv()+normakkd)/2)
-
-	def zenklaskdv():
-		def kryptiskdv():
-			if normakkd-balankd < 0:
-				return 1
-			else:
-				return -1
-		vertekd = float(kdvakaras.value.replace(",", "."))
-		if (vertekd-balankd)*kryptiskdv() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfakdv():
-		if zenklaskdv() > 0:
-			return (1-pagrkd)/(balankd-normaakdv())
-		else:
-			return (1-pagrkd)/(balankd-normakkd)
-
-
-	def betakdv():
-		if zenklaskdv() > 0:
-			return (pagrkd*balankd-normaakdv())/(balankd-normaakdv())
-		else:
-			return (pagrkd*balankd-normakkd)/(balankd-normakkd)
-
-
-	def karareiksmekdv():
-		vertekd = float(kdvakaras.value.replace(",", "."))
-		if zenklaskdv() < 0:
-			return zenklaskdv()*math.log(float(alfakdv())*float(vertekd)+float(betakdv()), pagrkd)
-		else:
-			return zenklaskdv()*math.log(float(alfakdv())*float(vertekd)+float(betakdv()), pagrkd)
-
-	def karareiksmekdvriba():
-		if karareiksmekdv() > 4:
-			return 4
-		elif karareiksmekdv() < -4:
-			return -4
-		else:
-			return karareiksmekdv()
-	kdvnew_data = {'x': [0, karareiksmekdvriba()], 'y': ["kdv", "kdv"]}
-	if karareiksmekdvriba() > 0:
-		kg6.glyph.line_color = "blue"
-	else:
-		kg6.glyph.line_color = "red"
-	sourcekdv.data.update(kdvnew_data)
-
-kdvakaras.on_change("value", kdv_update)
-
-
-pagrtank = 1.2
-
-
-def tankr_update(attr, old, new):
-	def normaktankr():
-		if sphkr_update(attr, old, new) < 6.4:
-			return 67
-		elif sphkr_update(attr, old, new) > 7.1:
-			return 46
-		else:
-			return float(sphkr_update(attr, old, new)*(-30)+259)
-
-	def normaatank():
-		if sphkr_update(attr, old, new) < 6.4:
-			return 52
-		elif sphkr_update(attr, old, new) > 7.1:
-			return 31
-		else:
-			return float(sphkr_update(attr, old, new)*(-30)+244)
-	balantank = float((normaatank()+normaktankr())/2)
-
-	def zenklastankr():
-		def kryptistankr():
-			if normaktankr()-balantank < 0:
-				return 1
-			else:
-				return -1
-		vertetank = float(ksirytas.value.replace(",", "."))
-		if (vertetank-balantank)*kryptistankr() >= 0:
-			return 1
-		else:
-			return -1
-
-
-	def alfatankr():
-		if zenklastankr() > 0:
-			return (1-pagrtank)/(balantank-normaatank())
-		else:
-			return (1-pagrtank)/(balantank-normaktankr())
-
-
-	def betatankr():
-		if zenklastankr() > 0:
-			return (pagrtank*balantank-normaatank())/(balantank-normaatank())
-		else:
-			return (pagrtank*balantank-normaktankr())/(balantank-normaktankr())
-
-
-	def karareiksmetankr():
-		vertetank = float(ksirytas.value.replace(",", "."))
-		if zenklastankr() < 0:
-			return zenklastankr()*math.log(float(alfatankr())*float(vertetank)+float(betatankr()), pagrtank)
-		else:
-			return zenklastankr()*math.log(float(alfatankr())*float(vertetank)+float(betatankr()), pagrtank)
-
-	def karareiksmetankrriba():
-		if karareiksmetankr() > 4:
-			return 4
-		elif karareiksmetankr() < -4:
-			return -4
-		else:
-			return karareiksmetankr()
-	tankrnew_data = {'x': [0, karareiksmetankrriba()], 'y': ["tankr", "tankr"]}
-	if karareiksmetankrriba() > 0:
-		kg7.glyph.line_color = "blue"
-	else:
-		kg7.glyph.line_color = "red"
-	sourcetankr.data.update(tankrnew_data)
-
-
-ksirytas.on_change("value", tankr_update)
+for w in list(itertools.chain.from_iterable([b[0] for b in [w for w in paramet.values()]])):
+	w.on_change("value", ps1_update, sd_update)
+
+
+# normakpp = 25
+# normaapp = 22
+# balanpp = (normaapp+normakpp)/2
+# pagrpp = 2
+
+
+# def ppr_update(attr, old, new):
+# 	def zenklasppr():
+# 		def kryptisppr():
+# 			if normakpp-balanpp < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		pgr = float(pgrytas.value.replace(",", "."))
+# 		par = float(parytas.value.replace(",", "."))
+# 		pa15r = float(pa15rytas.value.replace(",", "."))
+# 		pa45r = float(pa45rytas.value.replace(",", "."))
+# 		pp1 = max(pgr, par, pa15r, pa45r)-pgr
+# 		pp2 = max(pgr, par, pa15r, pa45r)-pa45r
+# 		vertepp = pp1+pp2
+# 		if (vertepp-balanpp)*kryptisppr() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfappr():
+# 		if zenklasppr() > 0:
+# 			return (1-pagrpp)/(balanpp-normaapp)
+# 		else:
+# 			return (1-pagrpp)/(balanpp-normakpp)
+
+
+# 	def betappr():
+# 		if zenklasppr() > 0:
+# 			return (pagrpp*balanpp-normaapp)/(balanpp-normaapp)
+# 		else:
+# 			return (pagrpp*balanpp-normakpp)/(balanpp-normakpp)
+
+
+# 	def karareiksmeppr():
+# 		pgr = float(pgrytas.value.replace(",", "."))
+# 		par = float(parytas.value.replace(",", "."))
+# 		pa15r = float(pa15rytas.value.replace(",", "."))
+# 		pa45r = float(pa45rytas.value.replace(",", "."))
+# 		pp1 = max(pgr, par, pa15r, pa45r)-pgr
+# 		pp2 = max(pgr, par, pa15r, pa45r)-pa45r
+# 		vertepp = pp1+pp2
+# 		if zenklasppr() < 0:
+# 			return zenklasppr()*math.log(alfappr()*vertepp+betappr(), pagrpp)
+# 		else:
+# 			return zenklasppr()*math.log(alfappr()*vertepp+betappr(), pagrpp)
+
+# 	def karareiksmepprriba():
+# 		if karareiksmeppr() > 4:
+# 			return 4
+# 		elif karareiksmeppr() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmeppr()
+# 	pprnew_data = {'x': [0, karareiksmepprriba()], 'y': ["ppr", "ppr"]}
+# 	if karareiksmepprriba() > 0:
+# 		sp7.glyph.line_color = "blue"
+# 	else:
+# 		sp7.glyph.line_color = "red"
+# 	sourceppr.data.update(pprnew_data)
+
+# pgrytas.on_change("value", ppr_update)
+# parytas.on_change("value", ppr_update)
+# pa15rytas.on_change("value", ppr_update)
+# pa45rytas.on_change("value", ppr_update)
+
+
+# def ppp_update(attr, old, new):
+# 	def zenklasppp():
+# 		def kryptisppp():
+# 			if normakpp-balanpp < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		pgp = float(pgpietus.value.replace(",", "."))
+# 		pap = float(papietus.value.replace(",", "."))
+# 		pa15p = float(pa15pietus.value.replace(",", "."))
+# 		pa45p = float(pa45pietus.value.replace(",", "."))
+# 		pp1 = max(pgp, pap, pa15p, pa45p)-pgp
+# 		pp2 = max(pgp, pap, pa15p, pa45p)-pa45p
+# 		vertepp = pp1+pp2
+# 		if (vertepp-balanpp)*kryptisppp() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfappp():
+# 		if zenklasppp() > 0:
+# 			return (1-pagrpp)/(balanpp-normaapp)
+# 		else:
+# 			return (1-pagrpp)/(balanpp-normakpp)
+
+
+# 	def betappp():
+# 		if zenklasppp() > 0:
+# 			return (pagrpp*balanpp-normaapp)/(balanpp-normaapp)
+# 		else:
+# 			return (pagrpp*balanpp-normakpp)/(balanpp-normakpp)
+
+
+# 	def karareiksmeppp():
+# 		pgp = float(pgpietus.value.replace(",", "."))
+# 		pap = float(papietus.value.replace(",", "."))
+# 		pa15p = float(pa15pietus.value.replace(",", "."))
+# 		pa45p = float(pa45pietus.value.replace(",", "."))
+# 		pp1 = max(pgp, pap, pa15p, pa45p)-pgp
+# 		pp2 = max(pgp, pap, pa15p, pa45p)-pa45p
+# 		vertepp = pp1+pp2
+# 		if zenklasppp() < 0:
+# 			return zenklasppp()*math.log(alfappp()*vertepp+betappp(), pagrpp)
+# 		else:
+# 			return zenklasppp()*math.log(alfappp()*vertepp+betappp(), pagrpp)
+
+# 	def karareiksmepppriba():
+# 		if karareiksmeppp() > 4:
+# 			return 4
+# 		elif karareiksmeppp() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmeppp()
+# 	pppnew_data = {'x': [0, karareiksmepppriba()], 'y': ["ppp", "ppp"]}
+# 	if karareiksmepppriba() > 0:
+# 		sp8.glyph.line_color = "blue"
+# 	else:
+# 		sp8.glyph.line_color = "red"
+# 	sourceppp.data.update(pppnew_data)
+
+# pgpietus.on_change("value", ppp_update)
+# papietus.on_change("value", ppp_update)
+# pa15pietus.on_change("value", ppp_update)
+# pa45pietus.on_change("value", ppp_update)
+
+
+# def ppv_update(attr, old, new):
+# 	def zenklasppv():
+# 		def kryptisppv():
+# 			if normakpp-balanpp < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		pgv = float(pgvakaras.value.replace(",", "."))
+# 		pav = float(pavakaras.value.replace(",", "."))
+# 		pa15v = float(pa15vakaras.value.replace(",", "."))
+# 		pa45v = float(pa45vakaras.value.replace(",", "."))
+# 		pp1 = max(pgv, pav, pa15v, pa45v)-pgv
+# 		pp2 = max(pgv, pav, pa15v, pa45v)-pa45v
+# 		vertepp = pp1+pp2
+# 		if (vertepp-balanpp)*kryptisppv() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+# 	def alfappv():
+# 		if zenklasppv() > 0:
+# 			return (1-pagrpp)/(balanpp-normaapp)
+# 		else:
+# 			return (1-pagrpp)/(balanpp-normakpp)
+
+
+# 	def betappv():
+# 		if zenklasppv() > 0:
+# 			return (pagrpp*balanpp-normaapp)/(balanpp-normaapp)
+# 		else:
+# 			return (pagrpp*balanpp-normakpp)/(balanpp-normakpp)
+
+
+# 	def karareiksmeppv():
+# 		pgv = float(pgvakaras.value.replace(",", "."))
+# 		pav = float(pavakaras.value.replace(",", "."))
+# 		pa15v = float(pa15vakaras.value.replace(",", "."))
+# 		pa45v = float(pa45vakaras.value.replace(",", "."))
+# 		pp1 = max(pgv, pav, pa15v, pa45v)-pgv
+# 		pp2 = max(pgv, pav, pa15v, pa45v)-pa45v
+# 		vertepp = pp1+pp2
+# 		if zenklasppv() < 0:
+# 			return zenklasppv()*math.log(alfappv()*vertepp+betappv(), pagrpp)
+# 		else:
+# 			return zenklasppv()*math.log(alfappv()*vertepp+betappv(), pagrpp)
+
+# 	def karareiksmeppvriba():
+# 		if karareiksmeppv() > 4:
+# 			return 4
+# 		elif karareiksmeppv() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmeppv()
+# 	ppvnew_data = {'x': [0, karareiksmeppvriba()], 'y': ["ppv", "ppv"]}
+# 	if karareiksmeppvriba() > 0:
+# 		sp9.glyph.line_color = "blue"
+# 	else:
+# 		sp9.glyph.line_color = "red"
+# 	sourceppv.data.update(ppvnew_data)
+
+# pgvakaras.on_change("value", ppv_update)
+# pavakaras.on_change("value", ppv_update)
+# pa15vakaras.on_change("value", ppv_update)
+# pa45vakaras.on_change("value", ppv_update)
+
+
+# normakkri = 6
+# normaakri = 4
+# balankri = (normaakri+normakkri)/2
+# pagrkri = 1.001
+
+
+# def krir_update(attr, old, new):
+# 	def zenklaskrir():
+# 		def kryptiskrir():
+# 			if normakkri-balankri < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		psr = float(psrytas.value.replace(",", "."))
+# 		kdr = float(kdrytas.value.replace(",", "."))
+# 		vertekri = psr/kdr
+# 		if (vertekri-balankri)*kryptiskrir() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfakrir():
+# 		if zenklaskrir() > 0:
+# 			return (1-pagrkri)/(balankri-normaakri)
+# 		else:
+# 			return (1-pagrkri)/(balankri-normakkri)
+
+
+# 	def betakrir():
+# 		if zenklaskrir() > 0:
+# 			return (pagrkri*balankri-normaakri)/(balankri-normaakri)
+# 		else:
+# 			return (pagrkri*balankri-normakkri)/(balankri-normakkri)
+
+
+# 	def karareiksmekrir():
+# 		psr = float(psrytas.value.replace(",", "."))
+# 		kdr = float(kdrytas.value.replace(",", "."))
+# 		vertekri = psr/kdr
+# 		if zenklaskrir() < 0:
+# 			return zenklaskrir()*math.log(alfakrir()*vertekri+betakrir(), pagrkri)
+# 		else:
+# 			return zenklaskrir()*math.log(alfakrir()*vertekri+betakrir(), pagrkri)
+
+# 	def karareiksmekrirriba():
+# 		if karareiksmekrir() > 4:
+# 			return 4
+# 		elif karareiksmekrir() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmekrir()
+# 	krirnew_data = {'x': [0, karareiksmekrirriba()], 'y': ["krir", "krir"]}
+# 	if karareiksmekrirriba() > 0:
+# 		sp10.glyph.line_color = "blue"
+# 	else:
+# 		sp10.glyph.line_color = "red"
+# 	sourcekrir.data.update(krirnew_data)
+
+# psrytas.on_change("value", krir_update)
+# kdrytas.on_change("value", krir_update)
+
+
+# def krip_update(attr, old, new):
+# 	def zenklaskrip():
+# 		def kryptiskrip():
+# 			if normakkri-balankri < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		psp = float(pspietus.value.replace(",", "."))
+# 		kdp = float(kdpietus.value.replace(",", "."))
+# 		vertekri = psp/kdp
+# 		if (vertekri-balankri)*kryptiskrip() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfakrip():
+# 		if zenklaskrip() > 0:
+# 			return (1-pagrkri)/(balankri-normaakri)
+# 		else:
+# 			return (1-pagrkri)/(balankri-normakkri)
+
+
+# 	def betakrip():
+# 		if zenklaskrip() > 0:
+# 			return (pagrkri*balankri-normaakri)/(balankri-normaakri)
+# 		else:
+# 			return (pagrkri*balankri-normakkri)/(balankri-normakkri)
+
+
+# 	def karareiksmekrip():
+# 		psp = float(pspietus.value.replace(",", "."))
+# 		kdp = float(kdpietus.value.replace(",", "."))
+# 		vertekri = psp/kdp
+# 		if zenklaskrip() < 0:
+# 			return zenklaskrip()*math.log(alfakrip()*vertekri+betakrip(), pagrkri)
+# 		else:
+# 			return zenklaskrip()*math.log(alfakrip()*vertekri+betakrip(), pagrkri)
+
+# 	def karareiksmekripriba():
+# 		if karareiksmekrip() > 4:
+# 			return 4
+# 		elif karareiksmekrip() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmekrip()
+# 	kripnew_data = {'x': [0, karareiksmekripriba()], 'y': ["krip", "krip"]}
+# 	if karareiksmekripriba() > 0:
+# 		sp11.glyph.line_color = "blue"
+# 	else:
+# 		sp11.glyph.line_color = "red"
+# 	sourcekrip.data.update(kripnew_data)
+
+# pspietus.on_change("value", krip_update)
+# kdpietus.on_change("value", krip_update)
+
+
+# def kriv_update(attr, old, new):
+# 	def zenklaskriv():
+# 		def kryptiskriv():
+# 			if normakkri-balankri < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		psv = float(psvakaras.value.replace(",", "."))
+# 		kdv = float(kdvakaras.value.replace(",", "."))
+# 		vertekri = psv/kdv
+# 		if (vertekri-balankri)*kryptiskriv() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+# 	def alfakriv():
+# 		if zenklaskriv() > 0:
+# 			return (1-pagrkri)/(balankri-normaakri)
+# 		else:
+# 			return (1-pagrkri)/(balankri-normakkri)
+
+
+# 	def betakriv():
+# 		if zenklaskriv() > 0:
+# 			return (pagrkri*balankri-normaakri)/(balankri-normaakri)
+# 		else:
+# 			return (pagrkri*balankri-normakkri)/(balankri-normakkri)
+
+
+# 	def karareiksmekriv():
+# 		psv = float(psvakaras.value.replace(",", "."))
+# 		kdv = float(kdvakaras.value.replace(",", "."))
+# 		vertekri = psv/kdv
+# 		if zenklaskriv() < 0:
+# 			return zenklaskriv()*math.log(alfakriv()*vertekri+betakriv(), pagrkri)
+# 		else:
+# 			return zenklaskriv()*math.log(alfakriv()*vertekri+betakriv(), pagrkri)
+
+# 	def karareiksmekrivriba():
+# 		if karareiksmekriv() > 4:
+# 			return 4
+# 		elif karareiksmekriv() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmekriv()
+# 	krivnew_data = {'x': [0, karareiksmekrivriba()], 'y': ["kriv", "kriv"]}
+# 	if karareiksmekrivriba() > 0:
+# 		sp12.glyph.line_color = "blue"
+# 	else:
+# 		sp12.glyph.line_color = "red"
+# 	sourcekriv.data.update(krivnew_data)
+
+# psvakaras.on_change("value", kriv_update)
+# kdvakaras.on_change("value", kriv_update)
+
+
+# normaktemp = 36.7
+# normaatemp = 36.5
+# balantemp = float((normaatemp+normaktemp)/2)
+# pagrtemp = 2
+
+
+# def tempr_update(attr, old, new):
+# 	def zenklastempr():
+# 		def kryptistempr():
+# 			if normaktemp-balantemp < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertetemp = float(ktrytas.value.replace(",", "."))
+# 		if (vertetemp-balantemp)*kryptistempr() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfatempr():
+# 		if zenklastempr() > 0:
+# 			return (1-pagrtemp)/(balantemp-normaatemp)
+# 		else:
+# 			return (1-pagrtemp)/(balantemp-normaktemp)
+
+
+# 	def betatempr():
+# 		if zenklastempr() > 0:
+# 			return (pagrtemp*balantemp-normaatemp)/(balantemp-normaatemp)
+# 		else:
+# 			return (pagrtemp*balantemp-normaktemp)/(balantemp-normaktemp)
+
+
+# 	def karareiksmetempr():
+# 		vertetemp = float(ktrytas.value.replace(",", "."))
+# 		if zenklastempr() < 0:
+# 			return zenklastempr()*math.log(float(alfatempr())*float(vertetemp)+float(betatempr()), pagrtemp)
+# 		else:
+# 			return zenklastempr()*math.log(float(alfatempr())*float(vertetemp)+float(betatempr()), pagrtemp)
+
+# 	def karareiksmetemprriba():
+# 		if karareiksmetempr() > 4:
+# 			return 4
+# 		elif karareiksmetempr() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmetempr()
+# 	temprnew_data = {'x': [0, karareiksmetemprriba()], 'y': ["tempr", "tempr"]}
+# 	if karareiksmetemprriba() > 0:
+# 		sp13.glyph.line_color = "blue"
+# 	else:
+# 		sp13.glyph.line_color = "red"
+# 	sourcetempr.data.update(temprnew_data)
+
+# ktrytas.on_change("value", tempr_update)
+
+
+# def tempp_update(attr, old, new):
+# 	def zenklastempp():
+# 		def kryptistempp():
+# 			if normaktemp-balantemp < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertetemp = float(ktpietus.value.replace(",", "."))
+# 		if (vertetemp-balantemp)*kryptistempp() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfatempp():
+# 		if zenklastempp() > 0:
+# 			return (1-pagrtemp)/(balantemp-normaatemp)
+# 		else:
+# 			return (1-pagrtemp)/(balantemp-normaktemp)
+
+# 	def betatempp():
+# 		if zenklastempp() > 0:
+# 			return (pagrtemp*balantemp-normaatemp)/(balantemp-normaatemp)
+# 		else:
+# 			return (pagrtemp*balantemp-normaktemp)/(balantemp-normaktemp)
+
+# 	def karareiksmetempp():
+# 		vertetemp = float(ktpietus.value.replace(",", "."))
+# 		if zenklastempp() < 0:
+# 			return zenklastempp()*math.log(float(alfatempp())*float(vertetemp)+float(betatempp()), pagrtemp)
+# 		else:
+# 			return zenklastempp()*math.log(float(alfatempp())*float(vertetemp)+float(betatempp()), pagrtemp)
+
+# 	def karareiksmetemppriba():
+# 		if karareiksmetempp() > 4:
+# 			return 4
+# 		elif karareiksmetempp() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmetempp()
+# 	temppnew_data = {'x': [0, karareiksmetemppriba()], 'y': ["tempp", "tempp"]}
+# 	if karareiksmetemppriba() > 0:
+# 		sp14.glyph.line_color = "blue"
+# 	else:
+# 		sp14.glyph.line_color = "red"
+# 	sourcetempp.data.update(temppnew_data)
+
+# ktpietus.on_change("value", tempp_update)
+
+
+# def tempv_update(attr, old, new):
+# 	def zenklastempv():
+# 		def kryptistempv():
+# 			if normaktemp-balantemp < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertetemp = float(ktvakaras.value.replace(",", "."))
+# 		if (vertetemp-balantemp)*kryptistempv() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfatempv():
+# 		if zenklastempv() > 0:
+# 			return (1-pagrtemp)/(balantemp-normaatemp)
+# 		else:
+# 			return (1-pagrtemp)/(balantemp-normaktemp)
+
+
+# 	def betatempv():
+# 		if zenklastempv() > 0:
+# 			return (pagrtemp*balantemp-normaatemp)/(balantemp-normaatemp)
+# 		else:
+# 			return (pagrtemp*balantemp-normaktemp)/(balantemp-normaktemp)
+
+
+# 	def karareiksmetempv():
+# 		vertetemp = float(ktvakaras.value.replace(",", "."))
+# 		if zenklastempv() < 0:
+# 			return zenklastempv()*math.log(float(alfatempv())*float(vertetemp)+float(betatempv()), pagrtemp)
+# 		else:
+# 			return zenklastempv()*math.log(float(alfatempv())*float(vertetemp)+float(betatempv()), pagrtemp)
+
+# 	def karareiksmetempvriba():
+# 		if karareiksmetempv() > 4:
+# 			return 4
+# 		elif karareiksmetempv() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmetempv()
+# 	tempvnew_data = {'x': [0, karareiksmetempvriba()], 'y': ["tempv", "tempv"]}
+# 	if karareiksmetempvriba() > 0:
+# 		sp15.glyph.line_color = "blue"
+# 	else:
+# 		sp15.glyph.line_color = "red"
+# 	sourcetempv.data.update(tempvnew_data)
+
+# ktvakaras.on_change("value", tempv_update)
+
+
+# normakderm = 1
+# normaaderm = 2
+# balanderm = float((normaaderm+normakderm)/2)
+# pagrderm = 1.2
+
+
+# def dermr_update(attr, old, new):
+# 	def zenklasdermr():
+# 		def kryptisdermr():
+# 			if normakderm-balanderm < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertederm = float(drrytas.value.replace(",", "."))
+# 		if (vertederm-balanderm)*kryptisdermr() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+# 	def alfadermr():
+# 		if zenklasdermr() > 0:
+# 			return (1-pagrderm)/(balanderm-normaaderm)
+# 		else:
+# 			return (1-pagrderm)/(balanderm-normakderm)
+
+
+# 	def betadermr():
+# 		if zenklasdermr() > 0:
+# 			return (pagrderm*balanderm-normaaderm)/(balanderm-normaaderm)
+# 		else:
+# 			return (pagrderm*balanderm-normakderm)/(balanderm-normakderm)
+
+
+# 	def karareiksmedermr():
+# 		vertederm = float(drrytas.value.replace(",", "."))
+# 		if zenklasdermr() < 0:
+# 			return zenklasdermr()*math.log(float(alfadermr())*float(vertederm)+float(betadermr()), pagrderm)
+# 		else:
+# 			return zenklasdermr()*math.log(float(alfadermr())*float(vertederm)+float(betadermr()), pagrderm)
+
+# 	def karareiksmedermrriba():
+# 		if karareiksmedermr() > 4:
+# 			return 4
+# 		elif karareiksmedermr() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmedermr()
+# 	dermrnew_data = {'x': [0, karareiksmedermrriba()], 'y': ["dermr", "dermr"]}
+# 	if karareiksmedermrriba() > 0:
+# 		sp16.glyph.line_color = "blue"
+# 	else:
+# 		sp16.glyph.line_color = "red"
+# 	sourcedermr.data.update(dermrnew_data)
+
+# drrytas.on_change("value", dermr_update)
+
+
+# def dermp_update(attr, old, new):
+# 	def zenklasdermp():
+# 		def kryptisdermp():
+# 			if normakderm-balanderm < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertederm = float(drpietus.value.replace(",", "."))
+# 		if (vertederm-balanderm)*kryptisdermp() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfadermp():
+# 		if zenklasdermp() > 0:
+# 			return (1-pagrderm)/(balanderm-normaaderm)
+# 		else:
+# 			return (1-pagrderm)/(balanderm-normakderm)
+
+# 	def betadermp():
+# 		if zenklasdermp() > 0:
+# 			return (pagrderm*balanderm-normaaderm)/(balanderm-normaaderm)
+# 		else:
+# 			return (pagrderm*balanderm-normakderm)/(balanderm-normakderm)
+
+
+# 	def karareiksmedermp():
+# 		vertederm = float(drpietus.value.replace(",", "."))
+# 		if zenklasdermp() < 0:
+# 			return zenklasdermp()*math.log(float(alfadermp())*float(vertederm)+float(betadermp()), pagrderm)
+# 		else:
+# 			return zenklasdermp()*math.log(float(alfadermp())*float(vertederm)+float(betadermp()), pagrderm)
+
+# 	def karareiksmedermpriba():
+# 		if karareiksmedermp() > 4:
+# 			return 4
+# 		elif karareiksmedermp() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmedermp()
+# 	dermpnew_data = {'x': [0, karareiksmedermpriba()], 'y': ["dermp", "dermp"]}
+# 	if karareiksmedermpriba() > 0:
+# 		sp17.glyph.line_color = "blue"
+# 	else:
+# 		sp17.glyph.line_color = "red"
+# 	sourcedermp.data.update(dermpnew_data)
+
+# drpietus.on_change("value", dermp_update)
+
+
+# def dermv_update(attr, old, new):
+# 	def zenklasdermv():
+# 		def kryptisdermv():
+# 			if normakderm-balanderm < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertederm = float(drvakaras.value.replace(",", "."))
+# 		if (vertederm-balanderm)*kryptisdermv() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfadermv():
+# 		if zenklasdermv() > 0:
+# 			return (1-pagrderm)/(balanderm-normaaderm)
+# 		else:
+# 			return (1-pagrderm)/(balanderm-normakderm)
+
+
+# 	def betadermv():
+# 		if zenklasdermv() > 0:
+# 			return (pagrderm*balanderm-normaaderm)/(balanderm-normaaderm)
+# 		else:
+# 			return (pagrderm*balanderm-normakderm)/(balanderm-normakderm)
+
+
+# 	def karareiksmedermv():
+# 		vertederm = float(drvakaras.value.replace(",", "."))
+# 		if zenklasdermv() < 0:
+# 			return zenklasdermv()*math.log(float(alfadermv())*float(vertederm)+float(betadermv()), pagrderm)
+# 		else:
+# 			return zenklasdermv()*math.log(float(alfadermv())*float(vertederm)+float(betadermv()), pagrderm)
+
+# 	def karareiksmedermvriba():
+# 		if karareiksmedermv() > 4:
+# 			return 4
+# 		elif karareiksmedermv() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmedermv()
+# 	dermvnew_data = {'x': [0, karareiksmedermvriba()], 'y': ["dermv", "dermv"]}
+# 	if karareiksmedermvriba() > 0:
+# 		sp18.glyph.line_color = "blue"
+# 	else:
+# 		sp18.glyph.line_color = "red"
+# 	sourcedermv.data.update(dermvnew_data)
+
+# drvakaras.on_change("value", dermv_update)
+
+
+# normakvaso = -1
+# normaavaso = 1
+# balanvaso = float((normaavaso+normakvaso)/2)
+# pagrvaso = 1.001
+
+
+# def vasor_update(attr, old, new):
+# 	def zenklasvasor():
+# 		def kryptisvasor():
+# 			if normakvaso-balanvaso < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertevaso = float(vrrytas.value.replace(",", "."))
+# 		if (vertevaso-balanvaso)*kryptisvasor() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfavasor():
+# 		if zenklasvasor() > 0:
+# 			return (1-pagrvaso)/(balanvaso-normaavaso)
+# 		else:
+# 			return (1-pagrvaso)/(balanvaso-normakvaso)
+
+
+# 	def betavasor():
+# 		if zenklasvasor() > 0:
+# 			return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
+# 		else:
+# 			return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
+
+
+# 	def karareiksmevasor():
+# 		vertevaso = float(vrrytas.value.replace(",", "."))
+# 		if zenklasvasor() < 0:
+# 			return zenklasvasor()*math.log(float(alfavasor())*float(vertevaso)+float(betavasor()), pagrvaso)
+# 		else:
+# 			return zenklasvasor()*math.log(float(alfavasor())*float(vertevaso)+float(betavasor()), pagrvaso)
+
+# 	def karareiksmevasorriba():
+# 		if karareiksmevasor() > 4:
+# 			return 4
+# 		elif karareiksmevasor() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmevasor()
+# 	vasornew_data = {'x': [0, karareiksmevasorriba()], 'y': ["vasor", "vasor"]}
+# 	if karareiksmevasorriba() > 0:
+# 		sp19.glyph.line_color = "blue"
+# 	else:
+# 		sp19.glyph.line_color = "red"
+# 	sourcevasor.data.update(vasornew_data)
+
+# vrrytas.on_change("value", vasor_update)
+
+
+# def vasop_update(attr, old, new):
+# 	def zenklasvasop():
+# 		def kryptisvasop():
+# 			if normakvaso-balanvaso < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertevaso = float(vrpietus.value.replace(",", "."))
+# 		if (vertevaso-balanvaso)*kryptisvasop() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfavasop():
+# 		if zenklasvasop() > 0:
+# 			return (1-pagrvaso)/(balanvaso-normaavaso)
+# 		else:
+# 			return (1-pagrvaso)/(balanvaso-normakvaso)
+
+
+# 	def betavasop():
+# 		if zenklasvasop() > 0:
+# 			return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
+# 		else:
+# 			return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
+
+
+# 	def karareiksmevasop():
+# 		vertevaso = float(vrpietus.value.replace(",", "."))
+# 		if zenklasvasop() < 0:
+# 			return zenklasvasop()*math.log(float(alfavasop())*float(vertevaso)+float(betavasop()), pagrvaso)
+# 		else:
+# 			return zenklasvasop()*math.log(float(alfavasop())*float(vertevaso)+float(betavasop()), pagrvaso)
+
+# 	def karareiksmevasopriba():
+# 		if karareiksmevasop() > 4:
+# 			return 4
+# 		elif karareiksmevasop() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmevasop()
+# 	vasopnew_data = {'x': [0, karareiksmevasopriba()], 'y': ["vasop", "vasop"]}
+# 	if karareiksmevasopriba() > 0:
+# 		sp20.glyph.line_color = "blue"
+# 	else:
+# 		sp20.glyph.line_color = "red"
+# 	sourcevasop.data.update(vasopnew_data)
+
+# vrpietus.on_change("value", vasop_update)
+
+
+# def vasov_update(attr, old, new):
+# 	def zenklasvasov():
+# 		def kryptisvasov():
+# 			if normakvaso-balanvaso < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertevaso = float(vrvakaras.value.replace(",", "."))
+# 		if (vertevaso-balanvaso)*kryptisvasov() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfavasov():
+# 		if zenklasvasov() > 0:
+# 			return (1-pagrvaso)/(balanvaso-normaavaso)
+# 		else:
+# 			return (1-pagrvaso)/(balanvaso-normakvaso)
+
+
+# 	def betavasov():
+# 		if zenklasvasov() > 0:
+# 			return (pagrvaso*balanvaso-normaavaso)/(balanvaso-normaavaso)
+# 		else:
+# 			return (pagrvaso*balanvaso-normakvaso)/(balanvaso-normakvaso)
+
+
+# 	def karareiksmevasov():
+# 		vertevaso = float(vrvakaras.value.replace(",", "."))
+# 		if zenklasvasov() < 0:
+# 			return zenklasvasov()*math.log(float(alfavasov())*float(vertevaso)+float(betavasov()), pagrvaso)
+# 		else:
+# 			return zenklasvasov()*math.log(float(alfavasov())*float(vertevaso)+float(betavasov()), pagrvaso)
+
+# 	def karareiksmevasovriba():
+# 		if karareiksmevasov() > 4:
+# 			return 4
+# 		elif karareiksmevasov() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmevasov()
+# 	vasovnew_data = {'x': [0, karareiksmevasovriba()], 'y': ["vasov", "vasov"]}
+# 	if karareiksmevasovriba() > 0:
+# 		sp21.glyph.line_color = "blue"
+# 	else:
+# 		sp21.glyph.line_color = "red"
+# 	sourcevasov.data.update(vasovnew_data)
+
+# vrvakaras.on_change("value", vasov_update)
+
+
+# normakvyzd = 1
+# normaavyzd = -1
+# balanvyzd = float((normaavyzd+normakvyzd)/2)
+# pagrvyzd = 1.001
+
+
+# def vyzdr_update(attr, old, new):
+# 	def zenklasvyzdr():
+# 		def kryptisvyzdr():
+# 			if normakvyzd-balanvyzd < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertevyzd = float(vdrytas.value.replace(",", "."))
+# 		if (vertevyzd-balanvyzd)*kryptisvyzdr() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfavyzdr():
+# 		if zenklasvyzdr() > 0:
+# 			return (1-pagrvyzd)/(balanvyzd-normaavyzd)
+# 		else:
+# 			return (1-pagrvyzd)/(balanvyzd-normakvyzd)
+
+
+# 	def betavyzdr():
+# 		if zenklasvyzdr() > 0:
+# 			return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
+# 		else:
+# 			return (pagrvyzd*balanvyzd-normakvyzd)/(balanvyzd-normakvyzd)
+
+
+# 	def karareiksmevyzdr():
+# 		vertevyzd = float(vdrytas.value.replace(",", "."))
+# 		if zenklasvyzdr() < 0:
+# 			return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertevyzd)+float(betavyzdr()), pagrvyzd)
+# 		else:
+# 			return zenklasvyzdr()*math.log(float(alfavyzdr())*float(vertevyzd)+float(betavyzdr()), pagrvyzd)
+
+# 	def karareiksmevyzdrriba():
+# 		if karareiksmevyzdr() > 4:
+# 			return 4
+# 		elif karareiksmevyzdr() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmevyzdr()
+# 	vyzdrnew_data = {'x': [0, karareiksmevyzdrriba()], 'y': ["vyzdr", "vyzdr"]}
+# 	if karareiksmevyzdrriba() > 0:
+# 		sp22.glyph.line_color = "blue"
+# 	else:
+# 		sp22.glyph.line_color = "red"
+# 	sourcevyzdr.data.update(vyzdrnew_data)
+
+# vdrytas.on_change("value", vyzdr_update)
+
+
+# def vyzdp_update(attr, old, new):
+# 	def zenklasvyzdp():
+# 		def kryptisvyzdp():
+# 			if normakvyzd-balanvyzd < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertevyzd = float(vdpietus.value.replace(",", "."))
+# 		if (vertevyzd-balanvyzd)*kryptisvyzdp() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfavyzdp():
+# 		if zenklasvyzdp() > 0:
+# 			return (1-pagrvyzd)/(balanvyzd-normaavyzd)
+# 		else:
+# 			return (1-pagrvyzd)/(balanvyzd-normakvyzd)
+
+
+# 	def betavyzdp():
+# 		if zenklasvyzdp() > 0:
+# 			return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
+# 		else:
+# 			return (pagrvyzd*balanvyzd-normakvyzd)/(balanvyzd-normakvyzd)
+
+
+# 	def karareiksmevyzdp():
+# 		vertevyzd = float(vdpietus.value.replace(",", "."))
+# 		if zenklasvyzdp() < 0:
+# 			return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertevyzd)+float(betavyzdp()), pagrvyzd)
+# 		else:
+# 			return zenklasvyzdp()*math.log(float(alfavyzdp())*float(vertevyzd)+float(betavyzdp()), pagrvyzd)
+
+# 	def karareiksmevyzdpriba():
+# 		if karareiksmevyzdp() > 4:
+# 			return 4
+# 		elif karareiksmevyzdp() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmevyzdp()
+# 	vyzdpnew_data = {'x': [0, karareiksmevyzdpriba()], 'y': ["vyzdp", "vyzdp"]}
+# 	if karareiksmevyzdpriba() > 0:
+# 		sp23.glyph.line_color = "blue"
+# 	else:
+# 		sp23.glyph.line_color = "red"
+# 	sourcevyzdp.data.update(vyzdpnew_data)
+
+# vdpietus.on_change("value", vyzdp_update)
+
+
+# def vyzdv_update(attr, old, new):
+# 	def zenklasvyzdv():
+# 		def kryptisvyzdv():
+# 			if normakvyzd-balanvyzd < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertevyzd = float(vdvakaras.value.replace(",", "."))
+# 		if (vertevyzd-balanvyzd)*kryptisvyzdv() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfavyzdv():
+# 		if zenklasvyzdv() > 0:
+# 			return (1-pagrvyzd)/(balanvyzd-normaavyzd)
+# 		else:
+# 			return (1-pagrvyzd)/(balanvyzd-normakvyzd)
+
+
+# 	def betavyzdv():
+# 		if zenklasvyzdv() > 0:
+# 			return (pagrvyzd*balanvyzd-normaavyzd)/(balanvyzd-normaavyzd)
+# 		else:
+# 			return (pagrvyzd*balanvyzd-normakvyzd)/(balanvyzd-normakvyzd)
+
+
+# 	def karareiksmevyzdv():
+# 		vertevyzd = float(vdvakaras.value.replace(",", "."))
+# 		if zenklasvyzdv() < 0:
+# 			return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertevyzd)+float(betavyzdv()), pagrvyzd)
+# 		else:
+# 			return zenklasvyzdv()*math.log(float(alfavyzdv())*float(vertevyzd)+float(betavyzdv()), pagrvyzd)
+
+# 	def karareiksmevyzdvriba():
+# 		if karareiksmevyzdv() > 4:
+# 			return 4
+# 		elif karareiksmevyzdv() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmevyzdv()
+# 	vyzdvnew_data = {'x': [0, karareiksmevyzdvriba()], 'y': ["vyzdv", "vyzdv"]}
+# 	if karareiksmevyzdvriba() > 0:
+# 		sp24.glyph.line_color = "blue"
+# 	else:
+# 		sp24.glyph.line_color = "red"
+# 	sourcevyzdv.data.update(vyzdvnew_data)
+
+# vdvakaras.on_change("value", vyzdv_update)
+
+
+# normaktrem = 1
+# normaatrem = -1
+# balantrem = float((normaatrem+normaktrem)/2)
+# pagrtrem = 1.001
+
+
+# def tremr_update(attr, old, new):
+# 	def zenklastremr():
+# 		def kryptistremr():
+# 			if normaktrem-balantrem < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertetrem = float(trrytas.value.replace(",", "."))
+# 		if (vertetrem-balantrem)*kryptistremr() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfatremr():
+# 		if zenklastremr() > 0:
+# 			return (1-pagrtrem)/(balantrem-normaatrem)
+# 		else:
+# 			return (1-pagrtrem)/(balantrem-normaktrem)
+
+
+# 	def betatremr():
+# 		if zenklastremr() > 0:
+# 			return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
+# 		else:
+# 			return (pagrtrem*balantrem-normaktrem)/(balantrem-normaktrem)
+
+
+# 	def karareiksmetremr():
+# 		vertetrem = float(trrytas.value.replace(",", "."))
+# 		if zenklastremr() < 0:
+# 			return zenklastremr()*math.log(float(alfatremr())*float(vertetrem)+float(betatremr()), pagrtrem)
+# 		else:
+# 			return zenklastremr()*math.log(float(alfatremr())*float(vertetrem)+float(betatremr()), pagrtrem)
+
+# 	def karareiksmetremrriba():
+# 		if karareiksmetremr() > 4:
+# 			return 4
+# 		elif karareiksmetremr() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmetremr()
+# 	tremrnew_data = {'x': [0, karareiksmetremrriba()], 'y': ["tremr", "tremr"]}
+# 	if karareiksmetremrriba() > 0:
+# 		sp25.glyph.line_color = "blue"
+# 	else:
+# 		sp25.glyph.line_color = "red"
+# 	sourcetremr.data.update(tremrnew_data)
+
+# trrytas.on_change("value", tremr_update)
+
+
+# def tremp_update(attr, old, new):
+# 	def zenklastremp():
+# 		def kryptistremp():
+# 			if normaktrem-balantrem < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertetrem = float(trpietus.value.replace(",", "."))
+# 		if (vertetrem-balantrem)*kryptistremp() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfatremp():
+# 		if zenklastremp() > 0:
+# 			return (1-pagrtrem)/(balantrem-normaatrem)
+# 		else:
+# 			return (1-pagrtrem)/(balantrem-normaktrem)
+
+
+# 	def betatremp():
+# 		if zenklastremp() > 0:
+# 			return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
+# 		else:
+# 			return (pagrtrem*balantrem-normaktrem)/(balantrem-normaktrem)
+
+
+# 	def karareiksmetremp():
+# 		vertetrem = float(trpietus.value.replace(",", "."))
+# 		if zenklastremp() < 0:
+# 			return zenklastremp()*math.log(float(alfatremp())*float(vertetrem)+float(betatremp()), pagrtrem)
+# 		else:
+# 			return zenklastremp()*math.log(float(alfatremp())*float(vertetrem)+float(betatremp()), pagrtrem)
+
+# 	def karareiksmetrempriba():
+# 		if karareiksmetremp() > 4:
+# 			return 4
+# 		elif karareiksmetremp() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmetremp()
+# 	trempnew_data = {'x': [0, karareiksmetrempriba()], 'y': ["tremp", "tremp"]}
+# 	if karareiksmetrempriba() > 0:
+# 		sp26.glyph.line_color = "blue"
+# 	else:
+# 		sp26.glyph.line_color = "red"
+# 	sourcetremp.data.update(trempnew_data)
+
+# trpietus.on_change("value", tremp_update)
+
+
+# def tremv_update(attr, old, new):
+# 	def zenklastremv():
+# 		def kryptistremv():
+# 			if normaktrem-balantrem < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertetrem = float(trvakaras.value.replace(",", "."))
+# 		if (vertetrem-balantrem)*kryptistremv() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfatremv():
+# 		if zenklastremv() > 0:
+# 			return (1-pagrtrem)/(balantrem-normaatrem)
+# 		else:
+# 			return (1-pagrtrem)/(balantrem-normaktrem)
+
+
+# 	def betatremv():
+# 		if zenklastremv() > 0:
+# 			return (pagrtrem*balantrem-normaatrem)/(balantrem-normaatrem)
+# 		else:
+# 			return (pagrtrem*balantrem-normaktrem)/(balantrem-normaktrem)
+
+
+# 	def karareiksmetremv():
+# 		vertetrem = float(trvakaras.value.replace(",", "."))
+# 		if zenklastremv() < 0:
+# 			return zenklastremv()*math.log(float(alfatremv())*float(vertetrem)+float(betatremv()), pagrtrem)
+# 		else:
+# 			return zenklastremv()*math.log(float(alfatremv())*float(vertetrem)+float(betatremv()), pagrtrem)
+
+# 	def karareiksmetremvriba():
+# 		if karareiksmetremv() > 4:
+# 			return 4
+# 		elif karareiksmetremv() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmetremv()
+# 	tremvnew_data = {'x': [0, karareiksmetremvriba()], 'y': ["tremv", "tremv"]}
+# 	if karareiksmetremvriba() > 0:
+# 		sp27.glyph.line_color = "blue"
+# 	else:
+# 		sp27.glyph.line_color = "red"
+# 	sourcetremv.data.update(tremvnew_data)
+
+# trvakaras.on_change("value", tremv_update)
+
+
+# normaknos = -1
+# normaanos = 1
+# balannos = float((normaanos+normaknos)/2)
+# pagrnos = 1.001
+
+
+# def nosr_update(attr, old, new):
+# 	def zenklasnosr():
+# 		def kryptisnosr():
+# 			if normaknos-balannos < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertenos = float(surytas.value.replace(",", "."))
+# 		if (vertenos-balannos)*kryptisnosr() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfanosr():
+# 		if zenklasnosr() > 0:
+# 			return (1-pagrnos)/(balannos-normaanos)
+# 		else:
+# 			return (1-pagrnos)/(balannos-normaknos)
+
+
+# 	def betanosr():
+# 		if zenklasnosr() > 0:
+# 			return (pagrnos*balannos-normaanos)/(balannos-normaanos)
+# 		else:
+# 			return (pagrnos*balannos-normaknos)/(balannos-normaknos)
+
+
+# 	def karareiksmenosr():
+# 		vertenos = float(surytas.value.replace(",", "."))
+# 		if zenklasnosr() < 0:
+# 			return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
+# 		else:
+# 			return zenklasnosr()*math.log(float(alfanosr())*float(vertenos)+float(betanosr()), pagrnos)
+
+# 	def karareiksmenosrriba():
+# 		if karareiksmenosr() > 4:
+# 			return 4
+# 		elif karareiksmenosr() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmenosr()
+# 	nosrnew_data = {'x': [0, karareiksmenosrriba()], 'y': ["nosr", "nosr"]}
+# 	if karareiksmenosrriba() > 0:
+# 		sp28.glyph.line_color = "blue"
+# 	else:
+# 		sp28.glyph.line_color = "red"
+# 	sourcenosr.data.update(nosrnew_data)
+
+# surytas.on_change("value", nosr_update)
+
+
+# def nosp_update(attr, old, new):
+# 	def zenklasnosp():
+# 		def kryptisnosp():
+# 			if normaknos-balannos < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertenos = float(supietus.value.replace(",", "."))
+# 		if (vertenos-balannos)*kryptisnosp() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+# 	def alfanosp():
+# 		if zenklasnosp() > 0:
+# 			return (1-pagrnos)/(balannos-normaanos)
+# 		else:
+# 			return (1-pagrnos)/(balannos-normaknos)
+
+
+# 	def betanosp():
+# 		if zenklasnosp() > 0:
+# 			return (pagrnos*balannos-normaanos)/(balannos-normaanos)
+# 		else:
+# 			return (pagrnos*balannos-normaknos)/(balannos-normaknos)
+
+
+# 	def karareiksmenosp():
+# 		vertenos = float(supietus.value.replace(",", "."))
+# 		if zenklasnosp() < 0:
+# 			return zenklasnosp()*math.log(float(alfanosp())*float(vertenos)+float(betanosp()), pagrnos)
+# 		else:
+# 			return zenklasnosp()*math.log(float(alfanosp())*float(vertenos)+float(betanosp()), pagrnos)
+
+# 	def karareiksmenospriba():
+# 		if karareiksmenosp() > 4:
+# 			return 4
+# 		elif karareiksmenosp() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmenosp()
+# 	nospnew_data = {'x': [0, karareiksmenospriba()], 'y': ["nosp", "nosp"]}
+# 	if karareiksmenospriba() > 0:
+# 		sp29.glyph.line_color = "blue"
+# 	else:
+# 		sp29.glyph.line_color = "red"
+# 	sourcenosp.data.update(nospnew_data)
+
+# supietus.on_change("value", nosp_update)
+
+
+# def nosv_update(attr, old, new):
+# 	def zenklasnosv():
+# 		def kryptisnosv():
+# 			if normaknos-balannos < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertenos = float(suvakaras.value.replace(",", "."))
+# 		if (vertenos-balannos)*kryptisnosv() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+# 	def alfanosv():
+# 		if zenklasnosv() > 0:
+# 			return (1-pagrnos)/(balannos-normaanos)
+# 		else:
+# 			return (1-pagrnos)/(balannos-normaknos)
+
+# 	def betanosv():
+# 		if zenklasnosv() > 0:
+# 			return (pagrnos*balannos-normaanos)/(balannos-normaanos)
+# 		else:
+# 			return (pagrnos*balannos-normaknos)/(balannos-normaknos)
+
+
+# 	def karareiksmenosv():
+# 		vertenos = float(suvakaras.value.replace(",", "."))
+# 		if zenklasnosv() < 0:
+# 			return zenklasnosv()*math.log(float(alfanosv())*float(vertenos)+float(betanosv()), pagrnos)
+# 		else:
+# 			return zenklasnosv()*math.log(float(alfanosv())*float(vertenos)+float(betanosv()), pagrnos)
+
+# 	def karareiksmenosvriba():
+# 		if karareiksmenosv() > 4:
+# 			return 4
+# 		elif karareiksmenosv() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmenosv()
+# 	nosvnew_data = {'x': [0, karareiksmenosvriba()], 'y': ["nosv", "nosv"]}
+# 	if karareiksmenosvriba() > 0:
+# 		sp30.glyph.line_color = "blue"
+# 	else:
+# 		sp30.glyph.line_color = "red"
+# 	sourcenosv.data.update(nosvnew_data)
+
+# suvakaras.on_change("value", nosv_update)
+
+
+# normaksarg = 1
+# normaasarg = -1
+# balansarg = float((normaasarg+normaksarg)/2)
+# pagrsarg = 1.001
+
+
+# def sargr_update(attr, old, new):
+# 	def zenklassargr():
+# 		def kryptissargr():
+# 			if normaksarg-balansarg < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertesarg = float(slrrytas.value.replace(",", "."))
+# 		if (vertesarg-balansarg)*kryptissargr() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfasargr():
+# 		if zenklassargr() > 0:
+# 			return (1-pagrsarg)/(balansarg-normaasarg)
+# 		else:
+# 			return (1-pagrsarg)/(balansarg-normaksarg)
+
+
+# 	def betasargr():
+# 		if zenklassargr() > 0:
+# 			return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
+# 		else:
+# 			return (pagrsarg*balansarg-normaksarg)/(balansarg-normaksarg)
+
+
+# 	def karareiksmesargr():
+# 		vertesarg = float(slrrytas.value.replace(",", "."))
+# 		if zenklassargr() < 0:
+# 			return zenklassargr()*math.log(float(alfasargr())*float(vertesarg)+float(betasargr()), pagrsarg)
+# 		else:
+# 			return zenklassargr()*math.log(float(alfasargr())*float(vertesarg)+float(betasargr()), pagrsarg)
+
+# 	def karareiksmesargrriba():
+# 		if karareiksmesargr() > 4:
+# 			return 4
+# 		elif karareiksmesargr() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmesargr()
+# 	sargrnew_data = {'x': [0, karareiksmesargrriba()], 'y': ["sargr", "sargr"]}
+# 	if karareiksmesargrriba() > 0:
+# 		sp31.glyph.line_color = "blue"
+# 	else:
+# 		sp31.glyph.line_color = "red"
+# 	sourcesargr.data.update(sargrnew_data)
+
+# slrrytas.on_change("value", sargr_update)
+
+
+# def sargp_update(attr, old, new):
+# 	def zenklassargp():
+# 		def kryptissargp():
+# 			if normaksarg-balansarg < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertesarg = float(slrpietus.value.replace(",", "."))
+# 		if (vertesarg-balansarg)*kryptissargp() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfasargp():
+# 		if zenklassargp() > 0:
+# 			return (1-pagrsarg)/(balansarg-normaasarg)
+# 		else:
+# 			return (1-pagrsarg)/(balansarg-normaksarg)
+
+
+# 	def betasargp():
+# 		if zenklassargp() > 0:
+# 			return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
+# 		else:
+# 			return (pagrsarg*balansarg-normaksarg)/(balansarg-normaksarg)
+
+
+# 	def karareiksmesargp():
+# 		vertesarg = float(slrpietus.value.replace(",", "."))
+# 		if zenklassargp() < 0:
+# 			return zenklassargp()*math.log(float(alfasargp())*float(vertesarg)+float(betasargp()), pagrsarg)
+# 		else:
+# 			return zenklassargp()*math.log(float(alfasargp())*float(vertesarg)+float(betasargp()), pagrsarg)
+
+# 	def karareiksmesargpriba():
+# 		if karareiksmesargp() > 4:
+# 			return 4
+# 		elif karareiksmesargp() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmesargp()
+# 	sargpnew_data = {'x': [0, karareiksmesargpriba()], 'y': ["sargp", "sargp"]}
+# 	if karareiksmesargpriba() > 0:
+# 		sp32.glyph.line_color = "blue"
+# 	else:
+# 		sp32.glyph.line_color = "red"
+# 	sourcesargp.data.update(sargpnew_data)
+
+# slrpietus.on_change("value", sargp_update)
+
+
+# def sargv_update(attr, old, new):
+# 	def zenklassargv():
+# 		def kryptissargv():
+# 			if normaksarg-balansarg < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertesarg = float(slrvakaras.value.replace(",", "."))
+# 		if (vertesarg-balansarg)*kryptissargv() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfasargv():
+# 		if zenklassargv() > 0:
+# 			return (1-pagrsarg)/(balansarg-normaasarg)
+# 		else:
+# 			return (1-pagrsarg)/(balansarg-normaksarg)
+
+
+# 	def betasargv():
+# 		if zenklassargv() > 0:
+# 			return (pagrsarg*balansarg-normaasarg)/(balansarg-normaasarg)
+# 		else:
+# 			return (pagrsarg*balansarg-normaksarg)/(balansarg-normaksarg)
+
+
+# 	def karareiksmesargv():
+# 		vertesarg = float(slrvakaras.value.replace(",", "."))
+# 		if zenklassargv() < 0:
+# 			return zenklassargv()*math.log(float(alfasargv())*float(vertesarg)+float(betasargv()), pagrsarg)
+# 		else:
+# 			return zenklassargv()*math.log(float(alfasargv())*float(vertesarg)+float(betasargv()), pagrsarg)
+
+# 	def karareiksmesargvriba():
+# 		if karareiksmesargv() > 4:
+# 			return 4
+# 		elif karareiksmesargv() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmesargv()
+# 	sargvnew_data = {'x': [0, karareiksmesargvriba()], 'y': ["sargv", "sargv"]}
+# 	if karareiksmesargvriba() > 0:
+# 		sp33.glyph.line_color = "blue"
+# 	else:
+# 		sp33.glyph.line_color = "red"
+# 	sourcesargv.data.update(sargvnew_data)
+
+# slrvakaras.on_change("value", sargv_update)
+
+
+# normakskl = 1
+# normaaskl = -1
+# balanskl = float((normaaskl+normakskl)/2)
+# pagrskl = 1.001
+
+
+# def sklr_update(attr, old, new):
+# 	def zenklassklr():
+# 		def kryptissklr():
+# 			if normakskl-balanskl < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		verteskl = float(sekrytas.value.replace(",", "."))
+# 		if (verteskl-balanskl)*kryptissklr() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfasklr():
+# 		if zenklassklr() > 0:
+# 			return (1-pagrskl)/(balanskl-normaaskl)
+# 		else:
+# 			return (1-pagrskl)/(balanskl-normakskl)
+
+
+# 	def betasklr():
+# 		if zenklassklr() > 0:
+# 			return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
+# 		else:
+# 			return (pagrskl*balanskl-normakskl)/(balanskl-normakskl)
+
+
+# 	def karareiksmesklr():
+# 		verteskl = float(sekrytas.value.replace(",", "."))
+# 		if zenklassklr() < 0:
+# 			return zenklassklr()*math.log(float(alfasklr())*float(verteskl)+float(betasklr()), pagrskl)
+# 		else:
+# 			return zenklassklr()*math.log(float(alfasklr())*float(verteskl)+float(betasklr()), pagrskl)
+
+# 	def karareiksmesklrriba():
+# 		if karareiksmesklr() > 4:
+# 			return 4
+# 		elif karareiksmesklr() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmesklr()
+# 	sklrnew_data = {'x': [0, karareiksmesklrriba()], 'y': ["sklr", "sklr"]}
+# 	if karareiksmesklrriba() > 0:
+# 		sp34.glyph.line_color = "blue"
+# 	else:
+# 		sp34.glyph.line_color = "red"
+# 	sourcesklr.data.update(sklrnew_data)
+
+# sekrytas.on_change("value", sklr_update)
+
+
+# def sklp_update(attr, old, new):
+# 	def zenklassklp():
+# 		def kryptissklp():
+# 			if normakskl-balanskl < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		verteskl = float(sekpietus.value.replace(",", "."))
+# 		if (verteskl-balanskl)*kryptissklp() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfasklp():
+# 		if zenklassklp() > 0:
+# 			return (1-pagrskl)/(balanskl-normaaskl)
+# 		else:
+# 			return (1-pagrskl)/(balanskl-normakskl)
+
+
+# 	def betasklp():
+# 		if zenklassklp() > 0:
+# 			return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
+# 		else:
+# 			return (pagrskl*balanskl-normakskl)/(balanskl-normakskl)
+
+
+# 	def karareiksmesklp():
+# 		verteskl = float(sekpietus.value.replace(",", "."))
+# 		if zenklassklp() < 0:
+# 			return zenklassklp()*math.log(float(alfasklp())*float(verteskl)+float(betasklp()), pagrskl)
+# 		else:
+# 			return zenklassklp()*math.log(float(alfasklp())*float(verteskl)+float(betasklp()), pagrskl)
+
+# 	def karareiksmesklpriba():
+# 		if karareiksmesklp() > 4:
+# 			return 4
+# 		elif karareiksmesklp() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmesklp()
+# 	sklpnew_data = {'x': [0, karareiksmesklpriba()], 'y': ["sklp", "sklp"]}
+# 	if karareiksmesklpriba() > 0:
+# 		sp35.glyph.line_color = "blue"
+# 	else:
+# 		sp35.glyph.line_color = "red"
+# 	sourcesklp.data.update(sklpnew_data)
+
+# sekpietus.on_change("value", sklp_update)
+
+
+# def sklv_update(attr, old, new):
+# 	def zenklassklv():
+# 		def kryptissklv():
+# 			if normakskl-balanskl < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		verteskl = float(sekvakaras.value.replace(",", "."))
+# 		if (verteskl-balanskl)*kryptissklv() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfasklv():
+# 		if zenklassklv() > 0:
+# 			return (1-pagrskl)/(balanskl-normaaskl)
+# 		else:
+# 			return (1-pagrskl)/(balanskl-normakskl)
+
+
+# 	def betasklv():
+# 		if zenklassklv() > 0:
+# 			return (pagrskl*balanskl-normaaskl)/(balanskl-normaaskl)
+# 		else:
+# 			return (pagrskl*balanskl-normakskl)/(balanskl-normakskl)
+
+# 	def karareiksmesklv():
+# 		verteskl = float(sekvakaras.value.replace(",", "."))
+# 		if zenklassklv() < 0:
+# 			return zenklassklv()*math.log(float(alfasklv())*float(verteskl)+float(betasklv()), pagrskl)
+# 		else:
+# 			return zenklassklv()*math.log(float(alfasklv())*float(verteskl)+float(betasklv()), pagrskl)
+
+# 	def karareiksmesklvriba():
+# 		if karareiksmesklv() > 4:
+# 			return 4
+# 		elif karareiksmesklv() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmesklv()
+# 	sklvnew_data = {'x': [0, karareiksmesklvriba()], 'y': ["sklv", "sklv"]}
+# 	if karareiksmesklvriba() > 0:
+# 		sp36.glyph.line_color = "blue"
+# 	else:
+# 		sp36.glyph.line_color = "red"
+# 	sourcesklv.data.update(sklvnew_data)
+
+# sekvakaras.on_change("value", sklv_update)
+
+# # katogeninis/gliukogeninis
+# # S-pHK
+# # KD
+# # t
+# # P4
+# # KpHi
+# # D2-P4
+# # U-šv
+# # U-put
+
+# sourcesphkr = ColumnDataSource(data=dict(x=[], y=[]))
+# sourcesphkp = ColumnDataSource(data=dict(x=[], y=[]))
+# sourcesphkv = ColumnDataSource(data=dict(x=[], y=[]))
+
+# kg1 = p2.line('x', 'y', source=sourcesphkr, line_color="blue", line_width=5)
+# kg2 = p2.line('x', 'y', source=sourcesphkp, line_color="blue", line_width=5)
+# kg3 = p2.line('x', 'y', source=sourcesphkv, line_color="blue", line_width=5)
+
+# sourcekdr = ColumnDataSource(data=dict(x=[], y=[]))
+# sourcekdp = ColumnDataSource(data=dict(x=[], y=[]))
+# sourcekdv = ColumnDataSource(data=dict(x=[], y=[]))
+
+# kg4 = p2.line('x', 'y', source=sourcekdr, line_color="blue", line_width=5)
+# kg5 = p2.line('x', 'y', source=sourcekdp, line_color="blue", line_width=5)
+# kg6 = p2.line('x', 'y', source=sourcekdv, line_color="blue", line_width=5)
+
+# sourcetankr = ColumnDataSource(data=dict(x=[], y=[]))
+# sourcetankp = ColumnDataSource(data=dict(x=[], y=[]))
+# sourcetankv = ColumnDataSource(data=dict(x=[], y=[]))
+
+# kg7 = p2.line('x', 'y', source=sourcetankr, line_color="blue", line_width=5)
+# kg8 = p2.line('x', 'y', source=sourcetankp, line_color="blue", line_width=5)
+# kg9 = p2.line('x', 'y', source=sourcetankv, line_color="blue", line_width=5)
+
+
+# def sphkr_update(attr, old, new):
+# 	def sphkr():
+# 		tank = float(strytas.value.replace(",", "."))
+# 		vertetank = tank*1000-1000
+# 		serug = float(serrytas.value.replace(",", "."))
+# 		return serug+0.033333*vertetank-0.533333
+
+# 	def sphkrriba():
+# 		if sphkr() > 4:
+# 			return 4
+# 		elif sphkr() < -4:
+# 			return -4
+# 		else:
+# 			return sphkr()
+# 	sphkrnew_data = {'x': [0, sphkrriba()], 'y': ["sphkr", "sphkr"]}
+# 	if sphkrriba() > 0:
+# 		kg1.glyph.line_color = "blue"
+# 	else:
+# 		kg1.glyph.line_color = "red"
+# 	sourcesphkr.data.update(sphkrnew_data)
+# 	return float(sphkrriba())
+# strytas.on_change("value", sphkr_update)
+# serrytas.on_change("value", sphkr_update)
+
+
+# def sphkp_update(attr, old, new):
+# 	def sphkp():
+# 		tank = float(stpietus.value.replace(",", "."))
+# 		vertetank = tank*1000-1000
+# 		serug = float(serpietus.value.replace(",", "."))
+# 		return serug+0.033333*vertetank-0.533333
+
+# 	def sphkpriba():
+# 		if sphkp() > 4:
+# 			return 4
+# 		elif sphkp() < -4:
+# 			return -4
+# 		else:
+# 			return sphkp()
+# 	sphkpnew_data = {'x': [0, sphkpriba()], 'y': ["sphkp", "sphkp"]}
+# 	if sphkpriba() > 0:
+# 		kg2.glyph.line_color = "blue"
+# 	else:
+# 		kg2.glyph.line_color = "red"
+# 	sourcesphkp.data.update(sphkpnew_data)
+# 	return float(sphkpriba())
+# stpietus.on_change("value", sphkp_update)
+# serpietus.on_change("value", sphkp_update)
+
+
+# def sphkv_update(attr, old, new):
+# 	def sphkv():
+# 		tank = float(stvakaras.value.replace(",", "."))
+# 		vertetank = tank*1000-1000
+# 		serug = float(servakaras.value.replace(",", "."))
+# 		return serug+0.033333*vertetank-0.533333
+
+# 	def sphkvriba():
+# 		if sphkv() > 4:
+# 			return 4
+# 		elif sphkv() < -4:
+# 			return -4
+# 		else:
+# 			return sphkv()
+# 	sphkvnew_data = {'x': [0, sphkvriba()], 'y': ["sphkv", "sphkv"]}
+# 	if sphkvriba() > 0:
+# 		kg3.glyph.line_color = "blue"
+# 	else:
+# 		kg3.glyph.line_color = "red"
+# 	sourcesphkv.data.update(sphkvnew_data)
+# 	return float(sphkvriba())
+# stvakaras.on_change("value", sphkv_update)
+# servakaras.on_change("value", sphkv_update)
+
+
+# normakkd = 15
+# pagrkd = 2
+
+
+# def kdr_update(attr, old, new):
+# 	def normaakdr():
+# 		if sphkr_update(attr, old, new) >= 6.8 and sphkr_update(attr, old, new) < 7:
+# 			return 16
+# 		else:
+# 			return 17
+# 	balankd = float((normaakdr()+normakkd)/2)
+
+# 	def zenklaskdr():
+# 		def kryptiskdr():
+# 			if normakkd-balankd < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertekd = float(kdrytas.value.replace(",", "."))
+# 		if (vertekd-balankd)*kryptiskdr() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfakdr():
+# 		if zenklaskdr() > 0:
+# 			return (1-pagrkd)/(balankd-normaakdr())
+# 		else:
+# 			return (1-pagrkd)/(balankd-normakkd)
+
+
+# 	def betakdr():
+# 		if zenklaskdr() > 0:
+# 			return (pagrkd*balankd-normaakdr())/(balankd-normaakdr())
+# 		else:
+# 			return (pagrkd*balankd-normakkd)/(balankd-normakkd)
+
+
+# 	def karareiksmekdr():
+# 		vertekd = float(kdrytas.value.replace(",", "."))
+# 		if zenklaskdr() < 0:
+# 			return zenklaskdr()*math.log(float(alfakdr())*float(vertekd)+float(betakdr()), pagrkd)
+# 		else:
+# 			return zenklaskdr()*math.log(float(alfakdr())*float(vertekd)+float(betakdr()), pagrkd)
+
+# 	def karareiksmekdrriba():
+# 		if karareiksmekdr() > 4:
+# 			return 4
+# 		elif karareiksmekdr() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmekdr()
+# 	kdrnew_data = {'x': [0, karareiksmekdrriba()], 'y': ["kdr", "kdr"]}
+# 	if karareiksmekdrriba() > 0:
+# 		kg4.glyph.line_color = "blue"
+# 	else:
+# 		kg4.glyph.line_color = "red"
+# 	sourcekdr.data.update(kdrnew_data)
+
+# kdrytas.on_change("value", kdr_update)
+
+
+# def kdp_update(attr, old, new):
+# 	def normaakdp():
+# 		if sphkp_update(attr, old, new) >= 6.8 and sphkp_update(attr, old, new) < 7:
+# 			return 16
+# 		else:
+# 			return 17
+
+# 	balankd = float((normaakdp()+normakkd)/2)
+
+# 	def zenklaskdp():
+# 		def kryptiskdp():
+# 			if normakkd-balankd < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertekd = float(kdpietus.value.replace(",", "."))
+# 		if (vertekd-balankd)*kryptiskdp() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfakdp():
+# 		if zenklaskdp() > 0:
+# 			return (1-pagrkd)/(balankd-normaakdp())
+# 		else:
+# 			return (1-pagrkd)/(balankd-normakkd)
+
+
+# 	def betakdp():
+# 		if zenklaskdp() > 0:
+# 			return (pagrkd*balankd-normaakdp())/(balankd-normaakdp())
+# 		else:
+# 			return (pagrkd*balankd-normakkd)/(balankd-normakkd)
+
+
+# 	def karareiksmekdp():
+# 		vertekd = float(kdpietus.value.replace(",", "."))
+# 		if zenklaskdp() < 0:
+# 			return zenklaskdp()*math.log(float(alfakdp())*float(vertekd)+float(betakdp()), pagrkd)
+# 		else:
+# 			return zenklaskdp()*math.log(float(alfakdp())*float(vertekd)+float(betakdp()), pagrkd)
+
+# 	def karareiksmekdpriba():
+# 		if karareiksmekdp() > 4:
+# 			return 4
+# 		elif karareiksmekdp() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmekdp()
+# 	kdpnew_data = {'x': [0, karareiksmekdpriba()], 'y': ["kdp", "kdp"]}
+# 	if karareiksmekdpriba() > 0:
+# 		kg5.glyph.line_color = "blue"
+# 	else:
+# 		kg5.glyph.line_color = "red"
+# 	sourcekdp.data.update(kdpnew_data)
+
+# kdpietus.on_change("value", kdp_update)
+
+
+# def kdv_update(attr, old, new):
+# 	def normaakdv():
+# 		if sphkv_update(attr, old, new) >= 6.8 and sphkv_update(attr, old, new) < 7:
+# 			return 16
+# 		else:
+# 			return 17
+
+# 	balankd = float((normaakdv()+normakkd)/2)
+
+# 	def zenklaskdv():
+# 		def kryptiskdv():
+# 			if normakkd-balankd < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertekd = float(kdvakaras.value.replace(",", "."))
+# 		if (vertekd-balankd)*kryptiskdv() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfakdv():
+# 		if zenklaskdv() > 0:
+# 			return (1-pagrkd)/(balankd-normaakdv())
+# 		else:
+# 			return (1-pagrkd)/(balankd-normakkd)
+
+
+# 	def betakdv():
+# 		if zenklaskdv() > 0:
+# 			return (pagrkd*balankd-normaakdv())/(balankd-normaakdv())
+# 		else:
+# 			return (pagrkd*balankd-normakkd)/(balankd-normakkd)
+
+
+# 	def karareiksmekdv():
+# 		vertekd = float(kdvakaras.value.replace(",", "."))
+# 		if zenklaskdv() < 0:
+# 			return zenklaskdv()*math.log(float(alfakdv())*float(vertekd)+float(betakdv()), pagrkd)
+# 		else:
+# 			return zenklaskdv()*math.log(float(alfakdv())*float(vertekd)+float(betakdv()), pagrkd)
+
+# 	def karareiksmekdvriba():
+# 		if karareiksmekdv() > 4:
+# 			return 4
+# 		elif karareiksmekdv() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmekdv()
+# 	kdvnew_data = {'x': [0, karareiksmekdvriba()], 'y': ["kdv", "kdv"]}
+# 	if karareiksmekdvriba() > 0:
+# 		kg6.glyph.line_color = "blue"
+# 	else:
+# 		kg6.glyph.line_color = "red"
+# 	sourcekdv.data.update(kdvnew_data)
+
+# kdvakaras.on_change("value", kdv_update)
+
+
+# pagrtank = 1.2
+
+
+# def tankr_update(attr, old, new):
+# 	def normaktankr():
+# 		if sphkr_update(attr, old, new) < 6.4:
+# 			return 67
+# 		elif sphkr_update(attr, old, new) > 7.1:
+# 			return 46
+# 		else:
+# 			return float(sphkr_update(attr, old, new)*(-30)+259)
+
+# 	def normaatank():
+# 		if sphkr_update(attr, old, new) < 6.4:
+# 			return 52
+# 		elif sphkr_update(attr, old, new) > 7.1:
+# 			return 31
+# 		else:
+# 			return float(sphkr_update(attr, old, new)*(-30)+244)
+# 	balantank = float((normaatank()+normaktankr())/2)
+
+# 	def zenklastankr():
+# 		def kryptistankr():
+# 			if normaktankr()-balantank < 0:
+# 				return 1
+# 			else:
+# 				return -1
+# 		vertetank = float(ksirytas.value.replace(",", "."))
+# 		if (vertetank-balantank)*kryptistankr() >= 0:
+# 			return 1
+# 		else:
+# 			return -1
+
+
+# 	def alfatankr():
+# 		if zenklastankr() > 0:
+# 			return (1-pagrtank)/(balantank-normaatank())
+# 		else:
+# 			return (1-pagrtank)/(balantank-normaktankr())
+
+
+# 	def betatankr():
+# 		if zenklastankr() > 0:
+# 			return (pagrtank*balantank-normaatank())/(balantank-normaatank())
+# 		else:
+# 			return (pagrtank*balantank-normaktankr())/(balantank-normaktankr())
+
+
+# 	def karareiksmetankr():
+# 		vertetank = float(ksirytas.value.replace(",", "."))
+# 		if zenklastankr() < 0:
+# 			return zenklastankr()*math.log(float(alfatankr())*float(vertetank)+float(betatankr()), pagrtank)
+# 		else:
+# 			return zenklastankr()*math.log(float(alfatankr())*float(vertetank)+float(betatankr()), pagrtank)
+
+# 	def karareiksmetankrriba():
+# 		if karareiksmetankr() > 4:
+# 			return 4
+# 		elif karareiksmetankr() < -4:
+# 			return -4
+# 		else:
+# 			return karareiksmetankr()
+# 	tankrnew_data = {'x': [0, karareiksmetankrriba()], 'y': ["tankr", "tankr"]}
+# 	if karareiksmetankrriba() > 0:
+# 		kg7.glyph.line_color = "blue"
+# 	else:
+# 		kg7.glyph.line_color = "red"
+# 	sourcetankr.data.update(tankrnew_data)
+
+
+# ksirytas.on_change("value", tankr_update)
 
 
 # visi elementai sujungiami į norimą layout
@@ -4632,8 +4283,8 @@ l = layout(
 	[tiriam4()],
 	[kvepparmat14()],
 	[aprkvepsu(), ksirytas, ksipietus, ksivakaras])
-l2 = column(p, p1)
-l1 = row(l, l2)
+l1 = column(p1, p2, p3, p4, p5, p6, p7)
+l2 = row(l, l1)
 
 # add the layout to curdoc
-curdoc().add_root(l1)
+curdoc().add_root(l2)
