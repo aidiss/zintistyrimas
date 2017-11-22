@@ -45,297 +45,301 @@ curdoc().template = jinja2.Template(source='''
 			min-width: 50px !important;
 			width: 130px !important;
 			}
+			.bk-root input[name$="lyt"] {
+			min-width: 50px !important;
+			width: 100px !important;
+			}
 			.bk-root input[name$="amz"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas1"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus1"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras1"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas2"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus2"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras2"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas3"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus3"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras3"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas4"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus4"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras4"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas5"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus5"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras5"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas6"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus6"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras6"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas7"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus7"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras7"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas8"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus8"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras8"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas9"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus9"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras9"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas10"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus10"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras10"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas11"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus11"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras11"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas12"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus12"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras12"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas13"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus13"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras13"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas14"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus14"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras14"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas15"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus15"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras15"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas16"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus16"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras16"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas17"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus17"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras17"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas18"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus18"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras18"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas19"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus19"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras19"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas20"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus20"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras20"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas21"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus21"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras21"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas22"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus22"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras22"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas23"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus23"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras23"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="rytas24"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="pietus24"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			.bk-root input[name$="vakaras24"] {
-			min-width: 25px !important;
-			width: 25px !important;
+			min-width: 34px !important;
+			width: 34px !important;
 			}
 			#outer-circle {
 			background: white;
@@ -626,76 +630,6 @@ curdoc().template = jinja2.Template(source='''
 	</html>
 ''')
 
-pavadin = [
-	"<-Simpatinis|Parasimpatinis->",
-	"<-Katogeniniss|Gliukogeninis->",
-	"<-Disaerobinis|Anaerobinis->",
-	"<-Rūgščių trūkumas|Rūgščių perteklius->",
-	"<-Elektrolitų trūkumas|Elektrolitų perteklius->",
-	"<-Kalio trūkumas|Kalio perteklius->",
-	"<-Anglies dvideginio trūkumas|Anglies dvideginio perteklius->"]
-
-plist = ["p1", "p2", "p3", "p4", "p5", "p6", "p7"]
-
-# categorical tipo duomenys, kad būtų galima atvaziduoti grafike, atitinaktys kiekvieno tyrimo ryto, pietų ir vakaro (kol kas tik 2)
-factorssp = [
-	"sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "ppv", "sdv", "ps1v", "bla1",
-	"sklp", "sargp", "nosp", "tremp", "vyzdp", "vasop", "dermp", "tempp", "krip", "ppp", "sdp", "ps1p", "bla2",
-	"sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "ppr", "sdr", "ps1r", "bla3"]
-
-factorskg = [
-	"uputv", "usvv", "d2p4v", "kphiv", "p4v", "tankv", "kdv", "sphkv", "bla1",
-	"uputp", "usvp", "d2p4p", "kphip", "p4p", "tankp", "kdp", "sphkp", "bla2",
-	"uputr", "usvr", "d2p4r", "kphir", "p4r", "tankr", "kdr", "sphkr", "bla3"]
-
-# skaičiuojam atitinakamų categorical skaičių, kad
-# 1) automatiškai grafike nusistatytų ribos tarp ryto, pietų ir vakaro
-# 2) tekstas atskiriantis juos
-# 3) y categorical axis range'as
-countsp = len(factorssp)
-countkg = len(factorskg)
-
-
-# grafikai
-def make_graf(p, pav, count, factor):
-	p = figure(x_range=[-5, 5], y_range=FactorRange(factors=factor), height=350, tools="")
-	p.title.text = "<-Katabolizmas|Anabolizmas->"
-	p.title.align = "center"
-	p.text(x=[-4.7], y=[(count - (count - 3) / 3 - 1)], text=["Rytas"], text_font_size='10pt', text_font_style="bold", angle=1.56)
-	p.text(x=[-4.7], y=[(count - (count - 3) / 3 * 2 - 2)], text=["Pietūs"], text_font_size='10pt', text_font_style="bold", angle=1.56)
-	p.text(x=[-4.7], y=[(count - (count - 1))], text=["Vakaras"], text_font_size='10pt', text_font_style="bold", angle=1.56)
-	p.x_range.bounds = 'auto'
-	p.y_range.bounds = 'auto'
-	p.xaxis.axis_label = pav
-	p.yaxis.visible = False
-	p.xaxis.ticker = FixedTicker(ticks=[-4, -3, -2, -1, 1, 2, 3, 4])
-	p.xaxis.formatter = FuncTickFormatter(code="""
-		data = {"-4": "Didelis", "-3": "Vidutinis", "-2": 'Mažas', "-1": "Norma", 1: 'Norma', 2: 'Mažas', 3: 'Vidutinis', 4: 'Didelis'}
-		return data[tick]
-	""")
-	p.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
-	p.add_layout(Span(location=1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-	p.add_layout(Span(location=-1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
-	p.add_layout(Span(location=2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-	p.add_layout(Span(location=-2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
-	p.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-	p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
-	p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-	p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
-	p.add_layout(BoxAnnotation(top=(count - 3) / 3 + 1, fill_alpha=0.1, fill_color='black'))
-	p.add_layout(BoxAnnotation(bottom=(count - 3) / 3 + 1, top=(count - 3) / 3 * 2 + 2, fill_alpha=0.1, fill_color='cyan'))
-	p.add_layout(BoxAnnotation(top=count, fill_alpha=0.1, fill_color='yellow'))
-	return p
-
-
-p1 = make_graf(plist[0], pavadin[0], countsp, factorssp)
-p2 = make_graf(plist[1], pavadin[1], countkg, factorskg)
-p3 = make_graf(plist[2], pavadin[2], countsp, factorssp)
-p4 = make_graf(plist[3], pavadin[3], countsp, factorssp)
-p5 = make_graf(plist[4], pavadin[4], countsp, factorssp)
-p6 = make_graf(plist[5], pavadin[5], countsp, factorssp)
-p7 = make_graf(plist[6], pavadin[6], countsp, factorssp)
-
 
 # viso tyrimo tekstinė dalis TextInput laukeliais, kuriuose reikia suvesti duomenis.
 def protok():
@@ -704,7 +638,7 @@ def protok():
 
 invard = TextInput(name="vard", value="", title="Vardas", width=130)
 inpavard = TextInput(name="pavard", value="", title="Pavardė", width=160)
-lytis = Select(title="Lytis:", value="", options=["Vyras", "Moteris"], width=130)
+lytis = Select(name="lyt", title="Lytis:", options=["Vyras", "Moteris"], width=130)
 inamz = TextInput(name="amz", value="", title="Amžius", width=80)
 
 
@@ -1617,6 +1551,7 @@ trrytas = TextInput(name="rytas12", value="0", title="Rytas", width=60)
 trpietus = TextInput(name="pietus12", value="0", title="Pietūs", width=60)
 trvakaras = TextInput(name="vakaras12", value="0", title="Vakaras", width=60)
 
+
 def aprsneruzgu():
 	return Div(text="""
 <div class="box">
@@ -1973,6 +1908,108 @@ ksirytas = TextInput(name="rytas24", value="0", title="Rytas", width=60)
 ksipietus = TextInput(name="pietus24", value="0", title="Pietūs", width=60)
 ksivakaras = TextInput(name="vakaras24", value="0", title="Vakaras", width=60)
 
+# grafikai
+pavadin = [
+	"<-Simpatinis|Parasimpatinis->",
+	"<-Katogeniniss|Gliukogeninis->",
+	"<-Disaerobinis|Anaerobinis->",
+	"<-Rūgščių trūkumas|Rūgščių perteklius->",
+	"<-Elektrolitų trūkumas|Elektrolitų perteklius->",
+	"<-Kalio trūkumas|Kalio perteklius->",
+	"<-Anglies dvideginio trūkumas|Anglies dvideginio perteklius->"]
+
+plist = ["p1", "p2", "p3", "p4", "p5", "p6", "p7"]
+
+# categorical tipo duomenys, kad būtų galima atvaziduoti grafike, atitinaktys kiekvieno tyrimo ryto, pietų ir vakaro (kol kas tik 2)
+factorssp = [
+	"sklv", "sargv", "nosv", "tremv", "vyzdv", "vasov", "dermv", "tempv", "kriv", "pm1pm4v", "s+dv", "ps1v", "bla1",
+	"sklp", "sargp", "nosp", "tremp", "vyzdp", "vasop", "dermp", "tempp", "krip", "pm1pm4p", "s+dp", "ps1p", "bla2",
+	"sklr", "sargr", "nosr", "tremr", "vyzdr", "vasor", "dermr", "tempr", "krir", "pm1pm4r", "s+dr", "ps1r", "bla3"]
+
+factorskg = [
+	"uputv", "usvv", "d2p4v", "kphiv", "p4v", "tankv", "kdv", "sphkv", "bla1",
+	"uputp", "usvp", "d2p4p", "kphip", "p4p", "tankp", "kdp", "sphkp", "bla2",
+	"uputr", "usvr", "d2p4r", "kphir", "p4r", "tankr", "kdr", "sphkr", "bla3"]
+
+factorsda = [
+	"uputv", "usvv", "dermv", "sphkv", "uphkv", "dv", "bla1",
+	"uputp", "usvp", "dermp", "sphkp", "uphkp", "dp", "bla2",
+	"uputr", "usvr", "dermr", "sphkr", "uphkr", "dr", "bla3"]
+
+factorsmalac = [
+	"p4p1v", "p1v", "sphkv", "uphkv", "kphiv", "tankv", "kdv", "bla1",
+	"p4p1p", "p1p", "sphkp", "uphkp", "kphip", "tankp", "kdp", "bla2",
+	"p4p1r", "p1r", "sphkr", "uphkr", "kphir", "tankr", "kdr", "bla3"]
+
+factorsetp = [
+	"s-dv", "smdmv", "pm1pm4v", "pm1+s21v", "pm1-s21v", "bla1",
+	"s-dp", "smdmp", "pm1pm4p", "pm1+s21p", "pm1-s21p", "bla2",
+	"s-dr", "smdmr", "pm1pm4r", "pm1+s21r", "pm1-s21r", "bla3"]
+
+factorsktp = [
+	"p4p1v", "dermv", "vyzdv", "sphkv", "uphkv", "kphiv", "tankv", "kdv", "bla1",
+	"p4p1p", "dermp", "vyzdp", "sphkp", "uphkp", "kphip", "tankp", "kdp", "bla2",
+	"p4p1r", "dermr", "vyzdr", "sphkr", "uphkr", "kphir", "tankr", "kdr", "bla3"]
+
+factorsralac = [
+	"p4p1p", "p1p", "sphkp", "uphkp", "kphip", "tankp", "kdp", "bla2",
+	"p4p1v", "p1v", "sphkv", "uphkv", "kphiv", "tankv", "kdv", "bla1",
+	"p4p1r", "p1r", "sphkr", "uphkr", "kphir", "tankr", "kdr", "bla3"]
+
+# skaičiuojam atitinakamų categorical skaičių, kad
+# 1) automatiškai grafike nusistatytų ribos tarp ryto, pietų ir vakaro
+# 2) tekstas atskiriantis juos
+# 3) y categorical axis range'as
+countsp = len(factorssp)
+countkg = len(factorskg)
+couutda = len(factorsda)
+couutmalac = len(factorsmalac)
+couutetp = len(factorsetp)
+couutktp = len(factorsktp)
+couutralac = len(factorsralac)
+
+
+def make_graf(p, pav, count, factor):
+	p = figure(x_range=[-5, 5], y_range=FactorRange(factors=factor), height=350, tools="")
+	p.title.text = "<-Katabolizmas|Anabolizmas->"
+	p.title.align = "center"
+	p.text(x=[-4.7], y=[(count - (count - 3) / 3 - 1)], text=["Rytas"], text_font_size='10pt', text_font_style="bold", angle=1.56)
+	p.text(x=[-4.7], y=[(count - (count - 3) / 3 * 2 - 2)], text=["Pietūs"], text_font_size='10pt', text_font_style="bold", angle=1.56)
+	p.text(x=[-4.7], y=[(count - (count - 1))], text=["Vakaras"], text_font_size='10pt', text_font_style="bold", angle=1.56)
+	p.x_range.bounds = 'auto'
+	p.y_range.bounds = 'auto'
+	p.xaxis.axis_label = pav
+	p.yaxis.visible = False
+	p.xaxis.ticker = FixedTicker(ticks=[-4, -3, -2, -1, 1, 2, 3, 4])
+	p.xaxis.formatter = FuncTickFormatter(code="""
+		data = {"-4": "Didelis", "-3": "Vidutinis", "-2": 'Mažas', "-1": "Norma", 1: 'Norma', 2: 'Mažas', 3: 'Vidutinis', 4: 'Didelis'}
+		return data[tick]
+	""")
+	p.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
+	p.add_layout(Span(location=1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=-1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=-2, dimension='height', line_color='orange', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=-3, dimension='height', line_color='red', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+	p.add_layout(Span(location=-4, dimension='height', line_color='darkred', line_dash='dashed', line_width=4))
+	p.add_layout(BoxAnnotation(top=(count - 3) / 3 + 1, fill_alpha=0.1, fill_color='black'))
+	p.add_layout(BoxAnnotation(bottom=(count - 3) / 3 + 1, top=(count - 3) / 3 * 2 + 2, fill_alpha=0.1, fill_color='cyan'))
+	p.add_layout(BoxAnnotation(top=count, fill_alpha=0.1, fill_color='yellow'))
+	return p
+
+
+p1 = make_graf(plist[0], pavadin[0], countsp, factorssp)
+p2 = make_graf(plist[1], pavadin[1], countkg, factorskg)
+p3 = make_graf(plist[2], pavadin[2], couutda, factorsda)
+p4 = make_graf(plist[3], pavadin[3], couutmalac, factorsmalac)
+p5 = make_graf(plist[4], pavadin[4], couutetp, factorsetp)
+p6 = make_graf(plist[5], pavadin[5], couutktp, factorsktp)
+p7 = make_graf(plist[6], pavadin[6], couutralac, factorsralac)
+
+prodomas = [p1]
+
 # ši dalims tam, kad suvedus duomenis į atitinakmą TextInput, grafike atsispindėtų
 # simpatinis/parasimpatinis
 sourceps1r = ColumnDataSource(data=dict(x=[], y=[]))
@@ -2088,13 +2125,13 @@ paramet = {
 	"ps1pietūs": [[pspietus, pgpietus], "ps1p", sourceps1p.data, sp2, 0],
 	"ps1vakaras": [[psvakaras, pgvakaras], "ps1v", sourceps1v.data, sp3, 0],
 
-	"sdrytas": [[skarytas, skgrytas, dkarytas, dkgrytas], "sdr", sourcesdr.data, sp4, 1],
-	"sdpietūs": [[skapietus, skgpietus, dkapietus, dkgpietus], "sdp", sourcesdp.data, sp5, 1],
-	"sdvakaras": [[skavakaras, skgvakaras, dkavakaras, dkgvakaras], "sdv", sourcesdv.data, sp6, 1],
+	"s+drytas": [[skarytas, skgrytas, dkarytas, dkgrytas], "s+dr", sourcesdr.data, sp4, 1],
+	"s+dpietūs": [[skapietus, skgpietus, dkapietus, dkgpietus], "s+dp", sourcesdp.data, sp5, 1],
+	"s+dvakaras": [[skavakaras, skgvakaras, dkavakaras, dkgvakaras], "s+dv", sourcesdv.data, sp6, 1],
 
-	"pprytas": [[pgrytas, parytas, pa15rytas, pa45rytas], "ppr", sourceppr.data, sp7, 2],
-	"pppietūs": [[pgpietus, papietus, pa15pietus, pa45pietus], "ppp", sourceppp.data, sp8, 2],
-	"ppvakaras": [[pgvakaras, pavakaras, pa15vakaras, pa45vakaras], "ppv", sourceppv.data, sp9, 2],
+	"pm1pm4rytas": [[pgrytas, parytas, pa15rytas, pa45rytas], "pm1pm4r", sourceppr.data, sp7, 2],
+	"pm1pm4pietūs": [[pgpietus, papietus, pa15pietus, pa45pietus], "pm1pm4p", sourceppp.data, sp8, 2],
+	"pm1pm4vakaras": [[pgvakaras, pavakaras, pa15vakaras, pa45vakaras], "pm1pm4v", sourceppv.data, sp9, 2],
 
 	"krirytas": [[psrytas, kdrytas], "krir", sourcekrir.data, sp10, 3],
 	"kripietūs": [[pspietus, kdpietus], "krip", sourcekrip.data, sp11, 3],
@@ -2184,7 +2221,7 @@ def ps1_update(attr, old, new):
 
 def sd_update(attr, old, new):
 	for key in paramet.keys():
-		if "sd" in str(key):
+		if "s+d" in str(key):
 			n, yreiksme, sourcedata, linijaps, indx = paramet[key]
 			v1, v2, v3, v4 = verte(n)
 			skirtumas = (v1 - v2) + (v3 - v4)
@@ -4283,7 +4320,7 @@ l = layout(
 	[tiriam4()],
 	[kvepparmat14()],
 	[aprkvepsu(), ksirytas, ksipietus, ksivakaras])
-l1 = column(p1, p2, p3, p4, p5, p6, p7)
+l1 = column(prodomas)
 l2 = row(l, l1)
 
 # add the layout to curdoc
