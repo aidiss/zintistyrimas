@@ -53,294 +53,19 @@ curdoc().template = jinja2.Template(source='''
 			min-width: 34px !important;
 			width: 34px !important;
 			}
-			.bk-root input[name$="rytas1"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus1"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras1"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas2"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus2"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras2"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas3"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus3"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras3"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas4"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus4"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras4"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas5"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus5"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras5"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas6"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus6"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras6"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas7"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus7"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras7"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas8"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus8"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras8"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas9"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus9"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras9"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas10"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus10"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras10"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas11"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus11"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras11"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas12"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus12"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras12"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas13"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus13"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras13"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas14"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus14"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras14"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas15"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus15"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras15"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas16"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus16"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras16"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas17"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus17"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras17"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas18"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus18"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras18"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas19"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus19"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras19"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas20"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus20"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras20"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas21"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus21"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras21"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas22"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus22"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras22"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas23"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus23"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras23"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="rytas24"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="pietus24"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
-			.bk-root input[name$="vakaras24"] {
-			min-width: 34px !important;
-			width: 34px !important;
-			}
+			.bk-root input[name$="rytas"] {
+			min-width: 33px !important;
+			width: 33px !important;
+			}
+			.bk-root input[name$="pietus"] {
+			min-width: 33px !important;
+			width: 33px !important;
+			}
+			.bk-root input[name$="vakaras"] {
+			min-width: 33px !important;
+			width: 33px !important;
+			}
+
 			#outer-circle {
 			background: white;
 			border-radius: 50%;
@@ -931,9 +656,9 @@ U-pH 2 “.<i>Jei naudojamas tik matuoklis, šis punktas praleidžiamas</i>.
 	""", width=250)
 
 
-srrytas = TextInput(name="rytas1", value="0", title="Rytas", width=60)
-srpietus = TextInput(name="pietus1", value="0", title="Pietūs", width=60)
-srvakaras = TextInput(name="vakaras1", value="0", title="Vakaras", width=60)
+srrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+srpietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+srvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprssvies():
@@ -1009,9 +734,9 @@ atitinkančio stulpelio numerį:
 	""", width=250)
 
 
-ssrytas = TextInput(name="rytas2", value="0", title="Rytas", width=60)
-sspietus = TextInput(name="pietus2", value="0", title="Pietūs", width=60)
-ssvakaras = TextInput(name="vakaras2", value="0", title="Vakaras", width=60)
+ssrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+sspietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+ssvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprstank():
@@ -1037,9 +762,9 @@ matavimą pakartoti.
 	""", width=250)
 
 
-strytas = TextInput(name="rytas3", value="0", title="Rytas", width=60)
-stpietus = TextInput(name="pietus3", value="0", title="Pietūs", width=60)
-stvakaras = TextInput(name="vakaras3", value="0", title="Vakaras", width=60)
+strytas = TextInput(name="rytas", value="0", title="rytas", width=60)
+stpietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+stvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprsputo():
@@ -1089,9 +814,9 @@ skalę ir įrašoma eilutėje 2.5 „Putojimas, U-put“:
 	""", width=250)
 
 
-sprytas = TextInput(name="rytas4", value="0", title="Rytas", width=60)
-sppietus = TextInput(name="pietus4", value="0", title="Pietūs", width=60)
-spvakaras = TextInput(name="vakaras4", value="0", title="Vakaras", width=60)
+sprytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+sppietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+spvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprserugst():
@@ -1125,7 +850,7 @@ naudojamas tik matuoklis, šis punktas praleidžiamas</i>.
 	""", width=250)
 
 
-serrytas = TextInput(name="rytas5", value="0", title="Rytas", width=60)
+serrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
 serpietus = TextInput(name="pietus5", value="0", title="Pietūs", width=60)
 servakaras = TextInput(name="vakaras5", value="0", title="Vakaras", width=60)
 
@@ -1214,9 +939,9 @@ pajuntate po to, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašo
 	""", width=250)
 
 
-psrytas = TextInput(name="rytas7", value="0", title="Rytas", width=60)
-pspietus = TextInput(name="pietus7", value="0", title="Pietūs", width=60)
-psvakaras = TextInput(name="vakaras7", value="0", title="Vakaras", width=60)
+psrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+pspietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+psvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprkunotemp():
@@ -1245,9 +970,9 @@ skaičiumi po kablelio įrašomas eilutėje 4.1 „Kūno temperatūra, Temp“.
 	""", width=250)
 
 
-ktrytas = TextInput(name="rytas8", value="0", title="Rytas", width=60)
-ktpietus = TextInput(name="pietus8", value="0", title="Pietūs", width=60)
-ktvakaras = TextInput(name="vakaras8", value="0", title="Vakaras", width=60)
+ktrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+ktpietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+ktvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprdermoref():
@@ -1308,9 +1033,9 @@ paciento reakcija po 1 min. ir po 6 min. Vertinama pagal skalę ir įrašoma eil
 	""", width=250)
 
 
-drrytas = TextInput(name="rytas9", value="0", title="Rytas", width=60)
-drpietus = TextInput(name="pietus9", value="0", title="Pietūs", width=60)
-drvakaras = TextInput(name="vakaras9", value="0", title="Vakaras", width=60)
+drrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+drpietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+drvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprvasomref():
@@ -1377,9 +1102,9 @@ skalę ir įrašoma eilutėje 4.3 „Vasomotorinis, Vaso“:
 	""", width=250)
 
 
-vrrytas = TextInput(name="rytas10", value="0", title="Rytas", width=60)
-vrpietus = TextInput(name="pietus10", value="0", title="Pietūs", width=60)
-vrvakaras = TextInput(name="vakaras10", value="0", title="Vakaras", width=60)
+vrrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+vrpietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+vrvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprvyzdyd():
@@ -1486,9 +1211,9 @@ stebima, apie kokį plotį svyruoja vyzdys. Vertinama pagal skalę ir įrašoma 
 	""", width=250)
 
 
-vdrytas = TextInput(name="rytas11", value="0", title="Rytas", width=60)
-vdpietus = TextInput(name="pietus11", value="0", title="Pietūs", width=60)
-vdvakaras = TextInput(name="vakaras11", value="0", title="Vakaras", width=60)
+vdrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+vdpietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+vdvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprtremoref():
@@ -1547,9 +1272,9 @@ plaštakos, kai tiriamasis žiūri tiesiai. Vertinama pagal skalę ir įrašoma 
 	""", width=250)
 
 
-trrytas = TextInput(name="rytas12", value="0", title="Rytas", width=60)
-trpietus = TextInput(name="pietus12", value="0", title="Pietūs", width=60)
-trvakaras = TextInput(name="vakaras12", value="0", title="Vakaras", width=60)
+trrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+trpietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+trvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprsneruzgu():
@@ -1616,9 +1341,9 @@ eilutę 4.6 „Šnervių užgulimas, Nos“:
 	""", width=250)
 
 
-surytas = TextInput(name="rytas13", value="0", title="Rytas", width=60)
-supietus = TextInput(name="pietus13", value="0", title="Pietūs", width=60)
-suvakaras = TextInput(name="vakaras13", value="0", title="Vakaras", width=60)
+surytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+supietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+suvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprsarglinref():
@@ -1669,9 +1394,9 @@ išryškėjimas. Vertinama pagal skalę ir įrašoma į eilutę 4.7 „Sargento 
 	""", width=250)
 
 
-slrytas = TextInput(name="rytas14", value="0", title="Rytas", width=60)
-slpietus = TextInput(name="pietus14", value="0", title="Pietūs", width=60)
-slvakaras = TextInput(name="vakaras14", value="0", title="Vakaras", width=60)
+slrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+slpietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+slvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprkvepdaz():
@@ -1711,9 +1436,9 @@ skaičių „8”, ir kvėpavimo dažnis bus KD = 2×8 = 16.</i>/div>
 	""", width=250)
 
 
-kdrytas = TextInput(name="rytas15", value="0", title="Rytas", width=60)
-kdpietus = TextInput(name="pietus15", value="0", title="Pietūs", width=60)
-kdvakaras = TextInput(name="vakaras15", value="0", title="Vakaras", width=60)
+kdrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+kdpietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+kdvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprpulgul():
@@ -1748,9 +1473,9 @@ pajuntate po to, kaip chronometras parodo 0:15. Tuomet į juodraštį užsirašo
 	""", width=250)
 
 
-pgrytas = TextInput(name="rytas16", value="0", title="Rytas", width=60)
-pgpietus = TextInput(name="pietus16", value="0", title="Pietūs", width=60)
-pgvakaras = TextInput(name="vakaras16", value="0", title="Vakaras", width=60)
+pgrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+pgpietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+pgvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprsiskraujgul():
@@ -1773,9 +1498,9 @@ pamatuojamas kraujospūdis. Sistolinis kraujospūdis (didesnis rodmuo ties užra
 	""", width=250)
 
 
-skgrytas = TextInput(name="rytas17", value="0", title="Rytas", width=60)
-skgpietus = TextInput(name="pietus17", value="0", title="Pietūs", width=60)
-skgvakaras = TextInput(name="vakaras17", value="0", title="Vakaras", width=60)
+skgrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+skgpietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+skgvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprdiakraujgul():
@@ -1798,9 +1523,9 @@ gulint, Dia 1 “.
 	""", width=250)
 
 
-dkgrytas = TextInput(name="rytas18", value="0", title="Rytas", width=60)
-dkgpietus = TextInput(name="pietus18", value="0", title="Pietūs", width=60)
-dkgvakaras = TextInput(name="vakaras18", value="0", title="Vakaras", width=60)
+dkgrytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+dkgpietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+dkgvakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprpulsatsi15():
@@ -1826,13 +1551,13 @@ pat įsimenamas arba garsiai pasakomas asistentui:
 	""", width=250)
 
 
-parytas = TextInput(name="rytas19", value="0", title="Rytas", width=60)
-papietus = TextInput(name="pietus19", value="0", title="Pietūs", width=60)
-pavakaras = TextInput(name="vakaras19", value="0", title="Vakaras", width=60)
+parytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+papietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+pavakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
-pa15rytas = TextInput(name="rytas20", value="0", title="Rytas", width=60)
-pa15pietus = TextInput(name="pietus20", value="0", title="Pietūs", width=60)
-pa15vakaras = TextInput(name="vakaras20", value="0", title="Vakaras", width=60)
+pa15rytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+pa15pietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+pa15vakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprkraujpulsatsi45():
@@ -1866,17 +1591,17 @@ kraujospūdis (mažesnis rodmuo ties užrašu „DIA“) įrašomas eilutėje 5.
 	""", width=250)
 
 
-skarytas = TextInput(name="rytas21", value="0", title="Rytas", width=60)
-skapietus = TextInput(name="pietus21", value="0", title="Pietūs", width=60)
-skavakaras = TextInput(name="vakaras21", value="0", title="Vakaras", width=60)
+skarytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+skapietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+skavakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
-dkarytas = TextInput(name="rytas22", value="0", title="Rytas", width=60)
-dkapietus = TextInput(name="pietus22", value="0", title="Pietūs", width=60)
-dkavakaras = TextInput(name="vakaras22", value="0", title="Vakaras", width=60)
+dkarytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+dkapietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+dkavakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
-pa45rytas = TextInput(name="rytas23", value="0", title="Rytas", width=60)
-pa45pietus = TextInput(name="pietus23", value="0", title="Pietūs", width=60)
-pa45vakaras = TextInput(name="vakaras23", value="0", title="Vakaras", width=60)
+pa45rytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+pa45pietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+pa45vakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 
 def aprkvepsu():
@@ -1904,9 +1629,9 @@ rodomas laikas sekundėmis įrašomas eilutėje 6.2 „Kvėpavimo sulaikymas įk
 	""", width=250)
 
 
-ksirytas = TextInput(name="rytas24", value="0", title="Rytas", width=60)
-ksipietus = TextInput(name="pietus24", value="0", title="Pietūs", width=60)
-ksivakaras = TextInput(name="vakaras24", value="0", title="Vakaras", width=60)
+ksirytas = TextInput(name="rytas", value="0", title="Rytas", width=60)
+ksipietus = TextInput(name="pietus", value="0", title="Pietūs", width=60)
+ksivakaras = TextInput(name="vakaras", value="0", title="Vakaras", width=60)
 
 # grafikai
 pavadin = [
@@ -1975,16 +1700,18 @@ def make_graf(p, pav, count, factor):
 	p.title.align = "center"
 	p.text(x=[-4.7], y=[(count - (count - 3) / 3 - 1)], text=["Rytas"], text_font_size='10pt', text_font_style="bold", angle=1.56)
 	p.text(x=[-4.7], y=[(count - (count - 3) / 3 * 2 - 2)], text=["Pietūs"], text_font_size='10pt', text_font_style="bold", angle=1.56)
-	p.text(x=[-4.7], y=[(count - (count - 1))], text=["Vakaras"], text_font_size='10pt', text_font_style="bold", angle=1.56)
+	p.text(x=[-4.7], y=[(count - count)], text=["Vakaras"], text_font_size='10pt', text_font_style="bold", angle=1.56)
 	p.x_range.bounds = 'auto'
 	p.y_range.bounds = 'auto'
 	p.xaxis.axis_label = pav
 	p.yaxis.visible = False
-	p.xaxis.ticker = FixedTicker(ticks=[-4, -3, -2, -1, 1, 2, 3, 4])
+	p.xaxis.ticker = FixedTicker(ticks=[-3.5, -2.5, -1.5, -0.5, 0.5, 1.5, 2.5, 3.5])
 	p.xaxis.formatter = FuncTickFormatter(code="""
-		data = {"-4": "Didelis", "-3": "Vidutinis", "-2": 'Mažas', "-1": "Norma", 1: 'Norma', 2: 'Mažas', 3: 'Vidutinis', 4: 'Didelis'}
+		data = {"-3.5": "Didelis", "-2.5": "Vidutinis", "-1.5": 'Mažas', "-0.5": "Norma", 0.5: 'Norma', 1.5: 'Mažas', 2.5: 'Vidutinis', 3.5: 'Didelis'}
 		return data[tick]
 	""")
+	p.xaxis.major_tick_line_color = None
+
 	p.add_layout(Span(location=0, dimension='height', line_color='black', line_dash='solid', line_width=4))
 	p.add_layout(Span(location=1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
 	p.add_layout(Span(location=-1, dimension='height', line_color='green', line_dash='dashed', line_width=4))
@@ -2012,101 +1739,59 @@ prodomas = [p1, p2, p3, p4, p5, p6, p7]
 
 # ši dalims tam, kad suvedus duomenis į atitinakmą TextInput, grafike atsispindėtų
 # simpatinis/parasimpatinis
+
 sourceps1r = ColumnDataSource(data=dict(x=[], y=[]))
 sourceps1p = ColumnDataSource(data=dict(x=[], y=[]))
 sourceps1v = ColumnDataSource(data=dict(x=[], y=[]))
-
-sp1 = p1.line('x', 'y', source=sourceps1r, line_color="blue", line_width=5)
-sp2 = p1.line('x', 'y', source=sourceps1p, line_color="blue", line_width=5)
-sp3 = p1.line('x', 'y', source=sourceps1v, line_color="blue", line_width=5)
 
 sourcesdr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesdp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesdv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp4 = p1.line('x', 'y', source=sourcesdr, line_color="blue", line_width=5)
-sp5 = p1.line('x', 'y', source=sourcesdp, line_color="blue", line_width=5)
-sp6 = p1.line('x', 'y', source=sourcesdv, line_color="blue", line_width=5)
-
 sourceppr = ColumnDataSource(data=dict(x=[], y=[]))
 sourceppp = ColumnDataSource(data=dict(x=[], y=[]))
 sourceppv = ColumnDataSource(data=dict(x=[], y=[]))
-
-sp7 = p1.line('x', 'y', source=sourceppr, line_color="blue", line_width=5)
-sp8 = p1.line('x', 'y', source=sourceppp, line_color="blue", line_width=5)
-sp9 = p1.line('x', 'y', source=sourceppv, line_color="blue", line_width=5)
 
 sourcekrir = ColumnDataSource(data=dict(x=[], y=[]))
 sourcekrip = ColumnDataSource(data=dict(x=[], y=[]))
 sourcekriv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp10 = p1.line('x', 'y', source=sourcekrir, line_color="blue", line_width=5)
-sp11 = p1.line('x', 'y', source=sourcekrip, line_color="blue", line_width=5)
-sp12 = p1.line('x', 'y', source=sourcekriv, line_color="blue", line_width=5)
-
 sourcetempr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetempp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetempv = ColumnDataSource(data=dict(x=[], y=[]))
-
-sp13 = p1.line('x', 'y', source=sourcetempr, line_color="blue", line_width=5)
-sp14 = p1.line('x', 'y', source=sourcetempp, line_color="blue", line_width=5)
-sp15 = p1.line('x', 'y', source=sourcetempv, line_color="blue", line_width=5)
 
 sourcedermr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcedermp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcedermv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp16 = p1.line('x', 'y', source=sourcedermr, line_color="blue", line_width=5)
-sp17 = p1.line('x', 'y', source=sourcedermp, line_color="blue", line_width=5)
-sp18 = p1.line('x', 'y', source=sourcedermv, line_color="blue", line_width=5)
-
 sourcevasor = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevasop = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevasov = ColumnDataSource(data=dict(x=[], y=[]))
-
-sp19 = p1.line('x', 'y', source=sourcevasor, line_color="blue", line_width=5)
-sp20 = p1.line('x', 'y', source=sourcevasop, line_color="blue", line_width=5)
-sp21 = p1.line('x', 'y', source=sourcevasov, line_color="blue", line_width=5)
 
 sourcevyzdr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevyzdp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcevyzdv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp22 = p1.line('x', 'y', source=sourcevyzdr, line_color="blue", line_width=5)
-sp23 = p1.line('x', 'y', source=sourcevyzdp, line_color="blue", line_width=5)
-sp24 = p1.line('x', 'y', source=sourcevyzdv, line_color="blue", line_width=5)
-
 sourcetremr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetremp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcetremv = ColumnDataSource(data=dict(x=[], y=[]))
-
-sp25 = p1.line('x', 'y', source=sourcetremr, line_color="blue", line_width=5)
-sp26 = p1.line('x', 'y', source=sourcetremp, line_color="blue", line_width=5)
-sp27 = p1.line('x', 'y', source=sourcetremv, line_color="blue", line_width=5)
 
 sourcenosr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcenosp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcenosv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp28 = p1.line('x', 'y', source=sourcenosr, line_color="blue", line_width=5)
-sp29 = p1.line('x', 'y', source=sourcenosp, line_color="blue", line_width=5)
-sp30 = p1.line('x', 'y', source=sourcenosv, line_color="blue", line_width=5)
-
 sourcesargr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesargp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesargv = ColumnDataSource(data=dict(x=[], y=[]))
-
-sp31 = p1.line('x', 'y', source=sourcesargr, line_color="blue", line_width=5)
-sp32 = p1.line('x', 'y', source=sourcesargp, line_color="blue", line_width=5)
-sp33 = p1.line('x', 'y', source=sourcesargv, line_color="blue", line_width=5)
 
 sourcesklr = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesklp = ColumnDataSource(data=dict(x=[], y=[]))
 sourcesklv = ColumnDataSource(data=dict(x=[], y=[]))
 
-sp34 = p1.line('x', 'y', source=sourcesklr, line_color="blue", line_width=5)
-sp35 = p1.line('x', 'y', source=sourcesklp, line_color="blue", line_width=5)
-sp36 = p1.line('x', 'y', source=sourcesklv, line_color="blue", line_width=5)
+
+def make_lin(pav, src):
+	linij = pav.line('x', 'y', source=src, line_color="blue", line_width=5)
+	return linij
 
 
 simparasim = {
@@ -2121,55 +1806,53 @@ lentelesp = pd.DataFrame(simparasim, index=parametrupavsp)
 lentelesp = lentelesp[["Norma K", "Norma A", "Balansas", "Kryptis", "Pagrindas"]]
 
 parametsp = {
-	"ps1rytas": [[psrytas, pgrytas], "ps1r", sourceps1r.data, sp1, parametrupavsp.index("Ps-1")],
-	"ps1pietūs": [[pspietus, pgpietus], "ps1p", sourceps1p.data, sp2, parametrupavsp.index("Ps-1")],
-	"ps1vakaras": [[psvakaras, pgvakaras], "ps1v", sourceps1v.data, sp3, parametrupavsp.index("Ps-1")],
+	"ps1rytas": [[psrytas, pgrytas], "ps1r", sourceps1r.data, make_lin(p1, sourceps1r), parametrupavsp.index("Ps-1")],
+	"ps1pietūs": [[pspietus, pgpietus], "ps1p", sourceps1p.data, make_lin(p1, sourceps1p), parametrupavsp.index("Ps-1")],
+	"ps1vakaras": [[psvakaras, pgvakaras], "ps1v", sourceps1v.data, make_lin(p1, sourceps1v), parametrupavsp.index("Ps-1")],
 
-	"s+drytas": [[skarytas, skgrytas, dkarytas, dkgrytas], "s+dr", sourcesdr.data, sp4, parametrupavsp.index("S+D")],
-	"s+dpietūs": [[skapietus, skgpietus, dkapietus, dkgpietus], "s+dp", sourcesdp.data, sp5, parametrupavsp.index("S+D")],
-	"s+dvakaras": [[skavakaras, skgvakaras, dkavakaras, dkgvakaras], "s+dv", sourcesdv.data, sp6, parametrupavsp.index("S+D")],
+	"s+drytas": [[skarytas, skgrytas, dkarytas, dkgrytas], "s+dr", sourcesdr.data, make_lin(p1, sourcesdr), parametrupavsp.index("S+D")],
+	"s+dpietūs": [[skapietus, skgpietus, dkapietus, dkgpietus], "s+dp", sourcesdp.data, make_lin(p1, sourcesdp), parametrupavsp.index("S+D")],
+	"s+dvakaras": [[skavakaras, skgvakaras, dkavakaras, dkgvakaras], "s+dv", sourcesdv.data, make_lin(p1, sourcesdv), parametrupavsp.index("S+D")],
 
-	"pm1pm4rytas": [[pgrytas, parytas, pa15rytas, pa45rytas], "pm1pm4r", sourceppr.data, sp7, parametrupavsp.index("Pm-1+Pm-4")],
-	"pm1pm4pietūs": [[pgpietus, papietus, pa15pietus, pa45pietus], "pm1pm4p", sourceppp.data, sp8, parametrupavsp.index("Pm-1+Pm-4")],
-	"pm1pm4vakaras": [[pgvakaras, pavakaras, pa15vakaras, pa45vakaras], "pm1pm4v", sourceppv.data, sp9, parametrupavsp.index("Pm-1+Pm-4")],
+	"pm1pm4rytas": [[pgrytas, parytas, pa15rytas, pa45rytas], "pm1pm4r", sourceppr.data, make_lin(p1, sourceppr), parametrupavsp.index("Pm-1+Pm-4")],
+	"pm1pm4pietūs": [[pgpietus, papietus, pa15pietus, pa45pietus], "pm1pm4p", sourceppp.data, make_lin(p1, sourceppp), parametrupavsp.index("Pm-1+Pm-4")],
+	"pm1pm4vakaras": [[pgvakaras, pavakaras, pa15vakaras, pa45vakaras], "pm1pm4v", sourceppv.data, make_lin(p1, sourceppv), parametrupavsp.index("Pm-1+Pm-4")],
 
-	"krirytas": [[psrytas, kdrytas], "krir", sourcekrir.data, sp10, parametrupavsp.index("KRi")],
-	"kripietūs": [[pspietus, kdpietus], "krip", sourcekrip.data, sp11, parametrupavsp.index("KRi")],
-	"krivakaras": [[psvakaras, kdvakaras], "kriv", sourcekriv.data, sp12, parametrupavsp.index("KRi")],
+	"krirytas": [[psrytas, kdrytas], "krir", sourcekrir.data, make_lin(p1, sourcekrir), parametrupavsp.index("KRi")],
+	"kripietūs": [[pspietus, kdpietus], "krip", sourcekrip.data, make_lin(p1, sourcekrip), parametrupavsp.index("KRi")],
+	"krivakaras": [[psvakaras, kdvakaras], "kriv", sourcekriv.data, make_lin(p1, sourcekriv), parametrupavsp.index("KRi")],
 
-	"temprytas": [[ktrytas], "tempr", sourcetempr.data, sp13, parametrupavsp.index("Temp")],
-	"temppietūs": [[ktpietus], "tempp", sourcetempp.data, sp14, parametrupavsp.index("Temp")],
-	"tempvakaras": [[ktvakaras], "tempv", sourcetempv.data, sp15, parametrupavsp.index("Temp")],
+	"temprytas": [[ktrytas], "tempr", sourcetempr.data, make_lin(p1, sourcetempr), parametrupavsp.index("Temp")],
+	"temppietūs": [[ktpietus], "tempp", sourcetempp.data, make_lin(p1, sourcetempp), parametrupavsp.index("Temp")],
+	"tempvakaras": [[ktvakaras], "tempv", sourcetempv.data, make_lin(p1, sourcetempv), parametrupavsp.index("Temp")],
 
-	"dermrytas": [[drrytas], "dermr", sourcedermr.data, sp16, parametrupavsp.index("Derm")],
-	"dermpietūs": [[drpietus], "dermp", sourcedermp.data, sp17, parametrupavsp.index("Derm")],
-	"dermvakaras": [[drvakaras], "dermv", sourcedermv.data, sp18, parametrupavsp.index("Derm")],
+	"dermrytas": [[drrytas], "dermr", sourcedermr.data, make_lin(p1, sourcedermr), parametrupavsp.index("Derm")],
+	"dermpietūs": [[drpietus], "dermp", sourcedermp.data, make_lin(p1, sourcedermp), parametrupavsp.index("Derm")],
+	"dermvakaras": [[drvakaras], "dermv", sourcedermv.data, make_lin(p1, sourcedermv), parametrupavsp.index("Derm")],
 
-	"vasorytas": [[vrrytas], "vasor", sourcevasor.data, sp19, parametrupavsp.index("Vaso")],
-	"vasopietūs": [[vrpietus], "vasop", sourcevasop.data, sp20, parametrupavsp.index("Vaso")],
-	"vasovakaras": [[vrvakaras], "vasov", sourcevasov.data, sp21, parametrupavsp.index("Vaso")],
+	"vasorytas": [[vrrytas], "vasor", sourcevasor.data, make_lin(p1, sourcevasor), parametrupavsp.index("Vaso")],
+	"vasopietūs": [[vrpietus], "vasop", sourcevasop.data, make_lin(p1, sourcevasop), parametrupavsp.index("Vaso")],
+	"vasovakaras": [[vrvakaras], "vasov", sourcevasov.data, make_lin(p1, sourcevasov), parametrupavsp.index("Vaso")],
 
-	"vyzdrytas": [[vdrytas], "vyzdr", sourcevyzdr.data, sp22, parametrupavsp.index("Vyzd")],
-	"vyzdpietūs": [[vdpietus], "vyzdp", sourcevyzdp.data, sp23, parametrupavsp.index("Vyzd")],
-	"vyzdvakaras": [[vdvakaras], "vyzdv", sourcevyzdv.data, sp24, parametrupavsp.index("Vyzd")],
+	"vyzdrytas": [[vdrytas], "vyzdr", sourcevyzdr.data, make_lin(p1, sourcevyzdr), parametrupavsp.index("Vyzd")],
+	"vyzdpietūs": [[vdpietus], "vyzdp", sourcevyzdp.data, make_lin(p1, sourcevyzdp), parametrupavsp.index("Vyzd")],
+	"vyzdvakaras": [[vdvakaras], "vyzdv", sourcevyzdv.data, make_lin(p1, sourcevyzdv), parametrupavsp.index("Vyzd")],
 
-	"tremrytas": [[trrytas], "tremr", sourcetremr.data, sp25, parametrupavsp.index("Trem")],
-	"trempietūs": [[trpietus], "tremp", sourcetremp.data, sp26, parametrupavsp.index("Trem")],
-	"tremvakaras": [[trvakaras], "tremv", sourcetremv.data, sp27, parametrupavsp.index("Trem")],
+	"tremrytas": [[trrytas], "tremr", sourcetremr.data, make_lin(p1, sourcetremr), parametrupavsp.index("Trem")],
+	"trempietūs": [[trpietus], "tremp", sourcetremp.data, make_lin(p1, sourcetremp), parametrupavsp.index("Trem")],
+	"tremvakaras": [[trvakaras], "tremv", sourcetremv.data, make_lin(p1, sourcetremv), parametrupavsp.index("Trem")],
 
-	"nosrytas": [[surytas], "nosr", sourcenosr.data, sp28, parametrupavsp.index("Nos")],
-	"nospietūs": [[supietus], "nosp", sourcenosp.data, sp29, parametrupavsp.index("Nos")],
-	"nosvakaras": [[suvakaras], "nosv", sourcenosv.data, sp30, parametrupavsp.index("Nos")],
+	"nosrytas": [[surytas], "nosr", sourcenosr.data, make_lin(p1, sourcenosr), parametrupavsp.index("Nos")],
+	"nospietūs": [[supietus], "nosp", sourcenosp.data, make_lin(p1, sourcenosp), parametrupavsp.index("Nos")],
+	"nosvakaras": [[suvakaras], "nosv", sourcenosv.data, make_lin(p1, sourcenosv), parametrupavsp.index("Nos")],
 
-	"sargrytas": [[slrytas], "sargr", sourcesargr.data, sp31, parametrupavsp.index("Sarg")],
-	"sargpietūs": [[slpietus], "sargp", sourcesargp.data, sp32, parametrupavsp.index("Sarg")],
-	"sargvakaras": [[slvakaras], "sargv", sourcesargv.data, sp33, parametrupavsp.index("Sarg")],
+	"sargrytas": [[slrytas], "sargr", sourcesargr.data, make_lin(p1, sourcesargr), parametrupavsp.index("Sarg")],
+	"sargpietūs": [[slpietus], "sargp", sourcesargp.data, make_lin(p1, sourcesargp), parametrupavsp.index("Sarg")],
+	"sargvakaras": [[slvakaras], "sargv", sourcesargv.data, make_lin(p1, sourcesargv), parametrupavsp.index("Sarg")],
 
-	"sklrytas": [[sekrytas], "sklr", sourcesklr.data, sp34, parametrupavsp.index("S-kl")],
-	"sklpietūs": [[sekpietus], "sklp", sourcesklp.data, sp35, parametrupavsp.index("S-kl")],
-	"sklvakaras": [[sekvakaras], "sklv", sourcesklv.data, sp36, parametrupavsp.index("S-kl")]}
-
-parametsp = collections.OrderedDict(parametsp)
+	"sklrytas": [[sekrytas], "sklr", sourcesklr.data, make_lin(p1, sourcesklr), parametrupavsp.index("S-kl")],
+	"sklpietūs": [[sekpietus], "sklp", sourcesklp.data, make_lin(p1, sourcesklp), parametrupavsp.index("S-kl")],
+	"sklvakaras": [[sekvakaras], "sklv", sourcesklv.data, make_lin(p1, sourcesklv), parametrupavsp.index("S-kl")]}
 
 
 def verte(*reiksme):
@@ -2193,7 +1876,7 @@ def verte(*reiksme):
 		return verte1, verte2, verte3, verte4
 
 
-def formulekara(skirtum, linija, ind):
+def formulekara(skirtum, lin, ind):
 	if (skirtum - lentelesp.ix[ind, "Balansas"]) * lentelesp.ix[ind, "Kryptis"] >= 0:
 		zenklas = 1
 	else:
@@ -2223,9 +1906,9 @@ def formulekara(skirtum, linija, ind):
 
 # nurodomos skirtingos spalvos
 	if kara > 0:
-		linija.glyph.line_color = "blue"
+		lin.glyph.line_color = "blue"
 	else:
-		linija.glyph.line_color = "red"
+		lin.glyph.line_color = "red"
 	logging.info(kara)
 
 # apribojama reikšmė iki 4 arba -4
@@ -2241,10 +1924,10 @@ def formulekara(skirtum, linija, ind):
 def ps1_update(attr, old, new):
 	for key in parametsp.keys():
 		if "ps1" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = parametsp[key]
+			n, yreiksme, sourcedata, linija, indx = parametsp[key]
 			v1, v2 = verte(n)
 			formule = (v1 - v2)
-			karareiksme = formulekara(formule, linijaps, indx)
+			karareiksme = formulekara(formule, linija, indx)
 
 	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
@@ -2254,10 +1937,10 @@ def ps1_update(attr, old, new):
 def sd_update(attr, old, new):
 	for key in parametsp.keys():
 		if "s+d" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = parametsp[key]
+			n, yreiksme, sourcedata, linija, indx = parametsp[key]
 			v1, v2, v3, v4 = verte(n)
 			formule = (v1 - v2) + (v3 - v4)
-			karareiksme = formulekara(formule, linijaps, indx)
+			karareiksme = formulekara(formule, linija, indx)
 
 	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
@@ -2267,12 +1950,12 @@ def sd_update(attr, old, new):
 def pm1pm4_update(attr, old, new):
 	for key in parametsp.keys():
 		if "pm1pm4" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = parametsp[key]
+			n, yreiksme, sourcedata, linija, indx = parametsp[key]
 			v1, v2, v3, v4 = verte(n)
 			r1 = max(v1, v2, v3, v4) - v1
 			r2 = max(v1, v2, v3, v4) - v4
 			formule = (r1 + r2)
-			karareiksme = formulekara(formule, linijaps, indx)
+			karareiksme = formulekara(formule, linija, indx)
 
 	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
@@ -2282,11 +1965,11 @@ def pm1pm4_update(attr, old, new):
 def kri_update(attr, old, new):
 	for key in parametsp.keys():
 		if "kri" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = parametsp[key]
+			n, yreiksme, sourcedata, linija, indx = parametsp[key]
 			v1, v2 = verte(n)
 			if v2 != 0:
 				formule = (v1 / v2)
-				karareiksme = formulekara(formule, linijaps, indx)
+				karareiksme = formulekara(formule, linija, indx)
 
 	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 				new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
@@ -2296,10 +1979,10 @@ def kri_update(attr, old, new):
 def temp_update(attr, old, new):
 	for key in parametsp.keys():
 		if "temp" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = parametsp[key]
+			n, yreiksme, sourcedata, linija, indx = parametsp[key]
 			v1 = verte(n)
 			formule = v1
-			karareiksme = formulekara(formule, linijaps, indx)
+			karareiksme = formulekara(formule, linija, indx)
 
 	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
@@ -2309,10 +1992,10 @@ def temp_update(attr, old, new):
 def derm_update(attr, old, new):
 	for key in parametsp.keys():
 		if "derm" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = parametsp[key]
+			n, yreiksme, sourcedata, linija, indx = parametsp[key]
 			v1 = verte(n)
 			formule = v1
-			karareiksme = formulekara(formule, linijaps, indx)
+			karareiksme = formulekara(formule, linija, indx)
 
 	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
@@ -2322,10 +2005,10 @@ def derm_update(attr, old, new):
 def vaso_update(attr, old, new):
 	for key in parametsp.keys():
 		if "vaso" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = parametsp[key]
+			n, yreiksme, sourcedata, linija, indx = parametsp[key]
 			v1 = verte(n)
 			formule = v1
-			karareiksme = formulekara(formule, linijaps, indx)
+			karareiksme = formulekara(formule, linija, indx)
 
 	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
@@ -2335,10 +2018,10 @@ def vaso_update(attr, old, new):
 def vyzd_update(attr, old, new):
 	for key in parametsp.keys():
 		if "vyzd" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = parametsp[key]
+			n, yreiksme, sourcedata, linija, indx = parametsp[key]
 			v1 = verte(n)
 			formule = v1
-			karareiksme = formulekara(formule, linijaps, indx)
+			karareiksme = formulekara(formule, linija, indx)
 
 	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
@@ -2348,10 +2031,10 @@ def vyzd_update(attr, old, new):
 def trem_update(attr, old, new):
 	for key in parametsp.keys():
 		if "trem" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = parametsp[key]
+			n, yreiksme, sourcedata, linija, indx = parametsp[key]
 			v1 = verte(n)
 			formule = v1
-			karareiksme = formulekara(formule, linijaps, indx)
+			karareiksme = formulekara(formule, linija, indx)
 
 	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
@@ -2361,10 +2044,10 @@ def trem_update(attr, old, new):
 def nos_update(attr, old, new):
 	for key in parametsp.keys():
 		if "nos" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = parametsp[key]
+			n, yreiksme, sourcedata, linija, indx = parametsp[key]
 			v1 = verte(n)
 			formule = v1
-			karareiksme = formulekara(formule, linijaps, indx)
+			karareiksme = formulekara(formule, linija, indx)
 
 	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
@@ -2374,10 +2057,10 @@ def nos_update(attr, old, new):
 def sarg_update(attr, old, new):
 	for key in parametsp.keys():
 		if "sarg" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = parametsp[key]
+			n, yreiksme, sourcedata, linija, indx = parametsp[key]
 			v1 = verte(n)
 			formule = v1
-			karareiksme = formulekara(formule, linijaps, indx)
+			karareiksme = formulekara(formule, linija, indx)
 
 	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
@@ -2387,10 +2070,10 @@ def sarg_update(attr, old, new):
 def skl_update(attr, old, new):
 	for key in parametsp.keys():
 		if "skl" in str(key):
-			n, yreiksme, sourcedata, linijaps, indx = parametsp[key]
+			n, yreiksme, sourcedata, linija, indx = parametsp[key]
 			v1 = verte(n)
 			formule = v1
-			karareiksme = formulekara(formule, linijaps, indx)
+			karareiksme = formulekara(formule, linija, indx)
 
 	# atnaujinamas x ir y reikšmės atvaizdavimui grafike
 			new_data = {'x': [0, karareiksme], 'y': [yreiksme, yreiksme]}
