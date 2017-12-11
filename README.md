@@ -3,5 +3,5 @@
 Reikalavimai (žiūrėti requirements.txt):  
 Jinja2==2.9.6  
 bokeh==0.12.11  
-Paleidimas (komandinė eilutė): bokeh serve --show main.py. Turi atsidaryti naršyklės langas ir reikia kantriai palaukti.
+Paleidimas (komandinė eilutė): bokeh serve --show main1.py. Turi atsidaryti naršyklės langas ir reikia kantriai palaukti.
   
