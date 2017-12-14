@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 from bokeh.io import curdoc
 from bokeh.plotting import ColumnDataSource
@@ -1761,6 +1760,7 @@ parametsp = {
 
 
 def verte(*reiksme):
+	"""Neaiskuas pavadinimas"""
 	L = []
 	for r in reiksme:
 		if L is not None:
@@ -1782,6 +1782,7 @@ def verte(*reiksme):
 
 
 def formulekara(skirtum, lin, ind):
+	"""Truksta _ tarp zodziu"""
 	if (skirtum - lentelesp.ix[ind, "Balansas"]) * lentelesp.ix[ind, "Kryptis"] >= 0:
 		zenklas = 1
 	else:
@@ -1827,6 +1828,7 @@ def formulekara(skirtum, lin, ind):
 
 
 def ps1_update(attr, old, new):
+	"""Kas yra ps"""
 	for key in parametsp.keys():
 		if "ps1" in str(key):
 			n, yreiksme, sourcedata, linija, indx = parametsp[key]
@@ -1840,6 +1842,7 @@ def ps1_update(attr, old, new):
 
 
 def sd_update(attr, old, new):
+	"""SD?"""
 	for key in parametsp.keys():
 		if "s+d" in str(key):
 			n, yreiksme, sourcedata, linija, indx = parametsp[key]
